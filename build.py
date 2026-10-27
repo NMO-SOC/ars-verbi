@@ -355,17 +355,17 @@ for pg in all_pages:
     lines = [ _clean(x) for x in pg["chapter"]["sec"].get_text("\n").split("\n") ]
     out, cur = [], None
     for ln in lines:
-        m = re.match(r"^(\d+)\.\s+(.*)", ln)
+        m = re.match(r"^(\d+)\.(?:\s+(.*))?$", ln)
         if m:
             if cur: out.append(_clean(cur))
-            cur = m.group(2)
+            cur = m.group(2) or ""
         elif cur is not None and ln and not ln.lower().startswith(("topics from", "practice analytical")):
             if len(ln) < 120: cur += " " + ln
             else:
                 out.append(_clean(cur)); cur = None
     if cur: out.append(_clean(cur))
     topics_data.setdefault(tname, [])
-    topics_data[tname] += [t for t in out if len(t) > 25]
+    topics_data[tname] += [re.sub(r"\s+([?,.!:;])", r"\1", t) for t in out if len(t) > 25]
 
 glossary = []
 for pg in all_pages:
