@@ -1,0 +1,1913 @@
+#!/usr/bin/env python3
+"""Build a multi-page static website (part hubs + chapter subpages) from the VCE booklet."""
+import os, re, shutil, json, html, urllib.parse
+from bs4 import BeautifulSoup
+
+SRC = r"C:\Users\NMO\Claude\Projects\VCE Textbook\2027 Yr12 Booklet\12 Booklet 2027"
+BUILD = r"C:\Users\NMO\Claude\Projects\VCE Textbook\ars-verbi"
+PUBLIC = os.path.join(BUILD, "public")
+IMG_DIR = os.path.join(PUBLIC, "assets", "img")
+PDF_DIR = os.path.join(PUBLIC, "assets", "pdf")
+FILES_DIR = os.path.join(PUBLIC, "assets", "files")
+def copy_if_changed(a, b):
+    try:
+        if os.path.exists(b) and os.path.getsize(b) == os.path.getsize(a): return
+    except OSError: pass
+    shutil.copy(a, b)
+
+SITE_TITLE = "VCE English Exam Preparation Guide"
+
+for d in (PUBLIC, IMG_DIR, PDF_DIR, FILES_DIR):
+    os.makedirs(d, exist_ok=True)
+
+# ---------------- preprocess LaTeX ----------------
+tex = open(os.path.join(SRC, "main.tex"), encoding="utf-8").read()
+# replace the exe-download generator text with a pointer to the web tool
+tex = re.sub(r"(\\section\{English Exam Generator\}).*?(?=\\clearpage)",
+             r"\1\nThe exam generator now runs directly on this site. It assembles a complete three-section practice paper from the question banks and downloads it as a Word document in the authentic task-book format.\n\n\\href{ZZFILE::__EXAMGEN__}{Open the Exam Generator}\n\n", tex, flags=re.S)
+
+# Th.E.S.A.M.L body paragraph method: replace with styled layout
+tex = re.sub(r"\\paragraph\{Th\}.*?Link back to your contention\.", "\n\nZZSAML\n\n", tex, count=1, flags=re.S)
+
+# script section: link out instead of hosting the PDF
+tex = tex.replace("Click the link below to open the Script:\\\\  \n\\textattachfile{SBScript.pdf}{Open SBScript.pdf}",
+                  "The full script is available online:\n\n\\href{https://www.dailyscript.com/scripts/sunset_bld_3_21_49.html}{Read the Sunset Boulevard script at Daily Script}")
+tex = re.sub(r"\\textattachfile\{SBScript\.pdf\}\{[^}]*\}",
+             r"\\href{https://www.dailyscript.com/scripts/sunset_bld_3_21_49.html}{Read the Sunset Boulevard script at Daily Script}", tex)
+
+tex = tex.replace("\\subsection{Stimuli List II}", "")
+
+# unwrap \resizebox so pandoc keeps the tables inside
+tex = re.sub(r"\\resizebox\{\\textwidth\}\{!\}\{\s*(\\begin\{tabular\}.*?\\end\{tabular\})\s*\}",
+             r"\1", tex, flags=re.S)
+
+# refresh the practice exams intro to match the web version
+tex = tex.replace("This section of the book contains practice exams. These are not the previous VCAA exams which one may find on the official website. These exams have been specially made in order to assist you with better preparation for the exam.",
+                  "This section gathers everything you need for timed practice: links to official VCAA past examinations, externally hosted practice papers, the school's purchased trial exams, and a generator that assembles a fresh exam on demand.")
+
+# remove the seven copyrighted practice exam sections (site keeps the generator instead)
+tex = re.sub(r"\\section\{Practice Exam I\}.*?(?=\\section\{English Exam Generator\})", "", tex, flags=re.S)
+
+tex = re.sub(r"\\includepdf(\[[^\]]*\])?\s*\{([^}]+)\}",
+             lambda m: "\n\nZZPDFEMBED %s ZZEND\n\n" % (m.group(2).strip() if m.group(2).strip().lower().endswith(".pdf") else m.group(2).strip() + ".pdf"), tex)
+tex = re.sub(r"\\textattachfile\{([^}]+)\}\{([^}]+)\}",
+             lambda m: r"\href{ZZFILE::%s}{%s}" % (m.group(1).strip(), m.group(2).strip()), tex)
+tex = re.sub(r"\\addcontentsline\{exp\}\{examples\}\{([^}]+)\}",
+             lambda m: "\n\nZZEXP %s ZZEXPEND\n\n" % m.group(1), tex)
+open(os.path.join(BUILD, "_pre.tex"), "w", encoding="utf-8").write(tex)
+os.system('cd "%s" && pandoc "%s/_pre.tex" -f latex -t html5 --section-divs --wrap=none -o "%s/_body.html"' % (SRC, BUILD, BUILD))
+try:
+    import lxml  # noqa
+    _PARSER = "lxml"
+except ImportError:
+    _PARSER = "html.parser"
+soup = BeautifulSoup(open(os.path.join(BUILD, "_body.html"), encoding="utf-8").read(), _PARSER)
+
+# ---------------- assets ----------------
+copied = set()
+for img in soup.find_all("img"):
+    base = os.path.basename(img.get("src", ""))
+    sp = os.path.join(SRC, base)
+    if os.path.exists(sp):
+        if base not in copied:
+            copy_if_changed(sp, os.path.join(IMG_DIR, base)); copied.add(base)
+        img["src"] = "assets/img/" + urllib.parse.quote(base)
+        img["loading"] = "lazy"; img["class"] = ["content-img"]
+n_imgs = len(copied)
+# favicon + social logo (no-space filename)
+try:
+    from PIL import Image
+    _logo = Image.open(os.path.join(SRC, "SOC LOGO_VERTICAL.png")).convert("RGBA")
+    _bgw = Image.new("RGBA", _logo.size, (255, 255, 255, 255))
+    _bgw.paste(_logo, (0, 0), _logo)
+    _sq = _bgw.convert("RGB")
+    _w, _h = _sq.size
+    _side = max(_w, _h)
+    _canvas = Image.new("RGB", (_side, _side), (255, 255, 255))
+    _canvas.paste(_sq, ((_side - _w) // 2, (_side - _h) // 2))
+    _canvas.resize((48, 48)).save(os.path.join(PUBLIC, "assets", "favicon.png"))
+    _canvas.resize((180, 180)).save(os.path.join(PUBLIC, "assets", "apple-touch-icon.png"))
+    _canvas.resize((512, 512)).save(os.path.join(IMG_DIR, "soc-logo.png"))
+except Exception as _e:
+    print("icon generation skipped:", _e)
+
+for a in soup.find_all("a", href=True):
+    if a["href"] == "ZZFILE::__EXAMGEN__":
+        a["href"] = "exam-generator.html"
+        a["class"] = ["btn-inline"]
+        continue
+    if a["href"].startswith("ZZFILE::"):
+        fn = a["href"].split("::", 1)[1]
+        if os.path.exists(os.path.join(SRC, fn)):
+            copy_if_changed(os.path.join(SRC, fn), os.path.join(FILES_DIR, fn))
+        a["href"] = "assets/files/" + urllib.parse.quote(fn)
+        a["class"] = ["file-dl"]; a["download"] = ""
+
+pdf_pat = re.compile(r"ZZPDFEMBED\s+(\S+?\.pdf)\s+ZZEND", re.I)
+copied_pdfs = set()
+for p in soup.find_all(["p", "div"]):
+    m = pdf_pat.search(p.get_text())
+    if not m: continue
+    fname = m.group(1)
+    INLINE_FRAGS = {"QuoteTableSummary.pdf": "quotetable.html",
+                    "Tracker.pdf": "tracker.html",
+                    "SymbolTable.pdf": "symboltable.html",
+                    "ShotAnalysis.pdf": "shotanalysis.html",
+                    "SS.pdf": "ss.html",
+                    "PJ1.pdf": "pj1.html",
+                    "PJ2.pdf": "pj2.html"}
+    if fname in INLINE_FRAGS and os.path.exists(os.path.join(BUILD, "snippets", INLINE_FRAGS[fname])):
+        frag = open(os.path.join(BUILD, "snippets", INLINE_FRAGS[fname]), encoding="utf-8").read()
+        p.replace_with(BeautifulSoup(frag, "html.parser"))
+        copied_pdfs.add(fname)
+        continue
+    if os.path.exists(os.path.join(SRC, fname)) and fname not in copied_pdfs:
+        copy_if_changed(os.path.join(SRC, fname), os.path.join(PDF_DIR, fname)); copied_pdfs.add(fname)
+    enc = urllib.parse.quote(fname)
+    p.replace_with(BeautifulSoup(
+        '<div class="pdf-embed"><div class="pdf-embed-bar"><span class="pdf-name">%s</span>'
+        '<a class="pdf-open" href="assets/pdf/%s" target="_blank" rel="noopener">Open in new tab &#8599;</a>'
+        '<a class="pdf-dl" href="assets/pdf/%s" download>Download &#8595;</a></div>'
+        '<iframe class="pdf-frame" src="assets/pdf/%s#view=FitH" loading="lazy" title="%s"></iframe></div>'
+        % (html.escape(fname), enc, enc, enc, html.escape(fname)), "html.parser"))
+
+for _t in soup.find_all("table"):
+    if not _t.find("thead") and "qt-table" not in (_t.get("class") or []):
+        _t["class"] = _t.get("class", []) + ["no-thead"]
+
+# paragraph breaks: LaTeX \\ inside paragraphs became <br>; give them real spacing
+for _br in soup.find_all("br"):
+    if _br.parent and _br.parent.name == "p":
+        _sp = soup.new_tag("span"); _sp["class"] = "pbr"
+        _br.replace_with(_sp)
+
+# strip duplicate auto-generated figure label ids
+_seen_ids = set()
+for _el in soup.find_all(id=True):
+    if _el["id"] in _seen_ids:
+        del _el["id"]
+    else:
+        _seen_ids.add(_el["id"])
+
+# de-duplicate longtable header rows (LaTeX firsthead + continuation head)
+for _t in soup.find_all("table"):
+    _rows = _t.find_all("tr")
+    while len(_rows) >= 2 and _rows[0].get_text("|", strip=True) and \
+          _rows[0].get_text("|", strip=True) == _rows[1].get_text("|", strip=True):
+        _rows[1].decompose()
+        _rows = _t.find_all("tr")
+
+SAML_HTML = """<div class="saml">
+<div class="saml-item"><span class="saml-badge">Th</span><div class="saml-body"><b>Thematic-based topic sentence</b>
+<p>Your topic sentence needs to be based upon a theme in the text, not a character.</p>
+<div class="saml-ex"><span class="saml-no">&#10007;</span> &lsquo;Norma Desmond&rsquo;s obsession with herself ultimately leads to her downfall.&rsquo;<br>
+<span class="saml-yes">&#10003;</span> &lsquo;Obsession with self is what ultimately leads to the downfall of characters.&rsquo;</div></div></div>
+<div class="saml-item"><span class="saml-badge">E</span><div class="saml-body"><b>Evidence</b>
+<p>Quotes and scenes from the text that support the theme.</p></div></div>
+<div class="saml-item"><span class="saml-badge">S</span><div class="saml-body"><b>Symbols</b>
+<p>Symbols that relate to this theme &mdash; including historical and social context, and setting.</p></div></div>
+<div class="saml-item"><span class="saml-badge">A</span><div class="saml-body"><b>Authorial intention</b>
+<p>What was the author intending?</p></div></div>
+<div class="saml-item"><span class="saml-badge">M</span><div class="saml-body"><b>Metalanguage</b>
+<p>Discuss the metalanguage the author uses around this theme.</p></div></div>
+<div class="saml-item"><span class="saml-badge">L</span><div class="saml-body"><b>Linking sentence</b>
+<p>Link back to your contention.</p></div></div>
+<p class="saml-note">Only the <b>Th</b> and <b>L</b> elements need to appear in this order &mdash; the middle elements can be woven through the paragraph.</p>
+</div>"""
+
+exp_pat = re.compile(r"ZZEXP\s+(.+?)\s+ZZEXPEND")
+for _p in soup.find_all("p"):
+    if "ZZSAML" in _p.get_text():
+        _p.replace_with(BeautifulSoup(SAML_HTML, "html.parser"))
+        break
+
+exemplars = []
+for _p in soup.find_all("p"):
+    _m = exp_pat.search(_p.get_text())
+    if _m:
+        _s = _p.find_parent("section")
+        exemplars.append({"title": _m.group(1).strip(), "id": _s.get("id") if _s else None})
+        _p.decompose()
+
+# ---------------- structure: parts -> chapters ----------------
+def slugify(t):
+    return re.sub(r"[^a-z0-9]+", "-", t.lower()).strip("-") or "section"
+
+parts = [s for s in soup.find_all("section", class_="level1") if s.find_parent("section") is None]
+
+HOWTO = open(os.path.join(BUILD, "snippets/howto.html"), encoding="utf-8").read()
+R2025 = open(os.path.join(BUILD, "snippets/report2025.html"), encoding="utf-8").read()
+
+nav_items = []   # {num,title,file,chapters:[{title,file}],pages:[page dicts in order]}
+all_pages = []   # linear order for prev/next: {file,title,content_fn,nav_key,chapter_file_or_None}
+id_to_page = {}
+
+part_meta = []
+for i, sec in enumerate(parts, 1):
+    h1 = sec.find("h1")
+    title = h1.get_text(" ", strip=True) if h1 else "Part %d" % i
+    part_meta.append({"idx": i, "title": title, "slug": slugify(title),
+                      "file": "part-%02d-%s.html" % (i, slugify(title)), "sec": sec})
+
+display_num = 0
+for pm in part_meta:
+    display_num += 1
+    sec = pm["sec"]; hub = pm["file"]
+    if pm["idx"] == 1:
+        nav_items.append({"num": display_num, "title": "How to Use This Site", "file": hub, "chapters": []})
+        all_pages.append({"file": hub, "title": "How to Use This Site", "html": HOWTO, "nav": hub})
+        id_to_page[sec.get("id", "preface")] = hub
+        continue
+    children = sec.find_all("section", recursive=False)
+    chapters = []
+    used_cf = set()
+    if len(children) >= 2:
+        for j, ch in enumerate(children, 1):
+            hh = ch.find(["h2", "h3", "h4"])
+            ct = hh.get_text(" ", strip=True) if hh else "Section %d" % j
+            cf = "p%02d-%s.html" % (pm["idx"], slugify(ct)[:60])
+            if cf in used_cf:
+                k = 2
+                while "p%02d-%s-%d.html" % (pm["idx"], slugify(ct)[:60], k) in used_cf: k += 1
+                cf = "p%02d-%s-%d.html" % (pm["idx"], slugify(ct)[:60], k)
+            used_cf.add(cf)
+            chapters.append({"title": ct, "file": cf, "sec": ch})
+            for el in ch.find_all(id=True): id_to_page[el["id"]] = cf
+            if ch.get("id"): id_to_page[ch["id"]] = cf
+        for el in sec.find_all(id=True):
+            if el["id"] not in id_to_page: id_to_page[el["id"]] = hub
+        if sec.get("id"): id_to_page[sec["id"]] = hub
+    else:
+        for el in sec.find_all(id=True): id_to_page[el["id"]] = hub
+        if sec.get("id"): id_to_page[sec["id"]] = hub
+    nav_items.append({"num": display_num, "title": pm["title"], "file": hub,
+                      "chapters": [{"title": c["title"], "file": c["file"]} for c in chapters]})
+    all_pages.append({"file": hub, "title": pm["title"], "part": pm, "chapters": chapters, "nav": hub})
+    for _ci, c in enumerate(chapters, 1):
+        all_pages.append({"file": c["file"], "title": c["title"], "chapter": c,
+                          "part": pm, "nav": hub, "chidx": _ci, "chtotal": len(chapters)})
+    if pm["title"].startswith("Key Takeaways from the 2024"):
+        display_num += 1
+        f25 = "part-13-key-takeaways-from-the-2025-assessment-report.html"
+        chs25 = [("General Exam Advice", "r25-general"),
+                 ("Section A: Analytical Response to a Text", "r25-section-a"),
+                 ("Section B: Creating a Text", "r25-section-b"),
+                 ("Section C: Analysis of Argument and Language", "r25-section-c"),
+                 ("Priority Checklist for 2026", "r25-checklist")]
+        ch_pages = [{"title": t, "file": sn + ".html",
+                     "html": open(os.path.join(BUILD, "snippets", sn + ".html"), encoding="utf-8").read()}
+                    for t, sn in chs25]
+        hub_html = open(os.path.join(BUILD, "snippets", "r25-hub.html"), encoding="utf-8").read()
+        hub_html += '<h2 class="in-part-head">In this part</h2><div class="ch-list">%s</div>' % "".join(
+            '<a class="ch-card" href="%s"><span class="ch-num">%d</span><span>%s</span></a>'
+            % (c["file"], j + 1, html.escape(c["title"])) for j, c in enumerate(ch_pages))
+        nav_items.append({"num": display_num, "title": "Key Takeaways from the 2025 Assessment Report",
+                          "file": f25, "chapters": [{"title": c["title"], "file": c["file"]} for c in ch_pages]})
+        all_pages.append({"file": f25, "title": "Key Takeaways from the 2025 Assessment Report",
+                          "html": hub_html, "nav": f25})
+        for c in ch_pages:
+            all_pages.append({"file": c["file"], "title": c["title"], "html": c["html"], "nav": f25})
+
+PROMPT_HTML = open(os.path.join(BUILD, "snippets", "prompt-types.html"), encoding="utf-8").read()
+REV_HTML = open(os.path.join(BUILD, "snippets", "revision-program.html"), encoding="utf-8").read()
+WATCH_HTML = open(os.path.join(BUILD, "snippets", "watch-film.html"), encoding="utf-8").read()
+for _pf, _cf, _ct, _ch in [
+    # 2027: Sunset Boulevard ClickView page removed — re-add for Picnic at Hanging Rock
+    # ("part-02-sunset-boulevard.html", "watch-film.html", "Watch the Film (ClickView)", WATCH_HTML),
+    ("part-12-effectively-studying-for-exams.html", "revision-program.html", "Week-by-Week Revision Program", REV_HTML)]:
+    for _it in nav_items:
+        if _it["file"] == _pf:
+            _it["chapters"].append({"title": _ct, "file": _cf})
+    for _pg in all_pages:
+        if _pg["file"] == _pf and "chapters" in _pg:
+            _pg["chapters"].append({"title": _ct, "file": _cf})
+    _li = max(i for i, p in enumerate(all_pages) if p.get("nav") == _pf)
+    all_pages.insert(_li + 1, {"file": _cf, "title": _ct, "html": _ch, "nav": _pf})
+
+P04 = "part-04-analytical-text-response-essays.html"
+for _it in nav_items:
+    if _it["file"] == P04:
+        _it["chapters"].append({"title": "Prompt Types: Discuss, To What Extent, How Does\u2026", "file": "prompt-types.html"})
+for _pg in all_pages:
+    if _pg["file"] == P04 and "chapters" in _pg:
+        _pg["chapters"].append({"title": "Prompt Types: Discuss, To What Extent, How Does\u2026", "file": "prompt-types.html"})
+_last4 = max(i for i, p in enumerate(all_pages) if p.get("nav") == P04)
+all_pages.insert(_last4 + 1, {"file": "prompt-types.html", "title": "Prompt Types: Discuss, To What Extent, How Does\u2026",
+                              "html": PROMPT_HTML, "nav": P04})
+
+VOCAB_HTML = open(os.path.join(BUILD, "snippets", "vocab.html"), encoding="utf-8").read()
+P06 = "part-06-analysing-argument.html"
+for _it in nav_items:
+    if _it["file"] == P06:
+        _it["chapters"].append({"title": "High-Scoring Vocabulary Bank", "file": "vocabulary.html"})
+for _pg in all_pages:
+    if _pg["file"] == P06 and "chapters" in _pg:
+        _pg["chapters"].append({"title": "High-Scoring Vocabulary Bank", "file": "vocabulary.html"})
+_last6 = max(i for i, p in enumerate(all_pages) if p.get("nav") == P06)
+all_pages.insert(_last6 + 1, {"file": "vocabulary.html", "title": "High-Scoring Vocabulary Bank",
+                              "html": VOCAB_HTML, "nav": P06})
+
+SST_HTML = open(os.path.join(BUILD, "snippets", "sentence-starters.html"), encoding="utf-8").read()
+for _it in nav_items:
+    if _it["file"] == P06:
+        _it["chapters"].append({"title": "Sentence Starters for Analytical Writing", "file": "sentence-starters.html"})
+for _pg in all_pages:
+    if _pg["file"] == P06 and "chapters" in _pg:
+        _pg["chapters"].append({"title": "Sentence Starters for Analytical Writing", "file": "sentence-starters.html"})
+_last6b = max(i for i, p in enumerate(all_pages) if p.get("nav") == P06)
+all_pages.insert(_last6b + 1, {"file": "sentence-starters.html", "title": "Sentence Starters for Analytical Writing",
+                              "html": SST_HTML, "nav": P06})
+
+for e in exemplars:
+    e["url"] = (id_to_page.get(e["id"], "index.html") + "#" + e["id"]) if e["id"] else "index.html"
+
+
+# ================= study tools =================
+def _clean(t): return re.sub(r"\s+", " ", t).strip()
+
+def _heading_chain(el, stop):
+    chain = []
+    sec = el.find_parent("section")
+    while sec is not None and sec is not stop.parent:
+        hh = sec.find(["h1","h2","h3","h4","h5"], recursive=False) or sec.find(["h2","h3","h4","h5"])
+        if hh: chain.append(_clean(hh.get_text()))
+        if sec is stop: break
+        sec = sec.find_parent("section")
+    return list(reversed(chain))
+
+flashcards = []
+for pg in all_pages:
+    if "chapter" not in pg or "quote-bank" not in pg["file"]: continue
+    text_name = pg["part"]["title"]
+    root = pg["chapter"]["sec"]
+    for li in root.find_all("li"):
+        q = _clean(li.get_text(" "))
+        if len(q) < 20 or li.find("ul"): continue
+        chain = _heading_chain(li, root)
+        cat = " \u00b7 ".join(c for c in chain[1:] if c) or chain[0] if chain else pg["title"]
+        flashcards.append({"q": q, "cat": (chain[0] + " \u00b7 " + cat) if len(chain) > 1 else pg["title"],
+                           "text": text_name})
+
+topics_data = {}
+for pg in all_pages:
+    if "chapter" not in pg or "practice-analytical-text-response-topics" not in pg["file"]: continue
+    tname = pg["part"]["title"]
+    lines = [ _clean(x) for x in pg["chapter"]["sec"].get_text("\n").split("\n") ]
+    out, cur = [], None
+    for ln in lines:
+        m = re.match(r"^(\d+)\.\s+(.*)", ln)
+        if m:
+            if cur: out.append(_clean(cur))
+            cur = m.group(2)
+        elif cur is not None and ln and not ln.lower().startswith(("topics from", "practice analytical")):
+            if len(ln) < 120: cur += " " + ln
+            else:
+                out.append(_clean(cur)); cur = None
+    if cur: out.append(_clean(cur))
+    topics_data.setdefault(tname, [])
+    topics_data[tname] += [t for t in out if len(t) > 25]
+
+glossary = []
+for pg in all_pages:
+    if "chapter" not in pg: continue
+    if pg["file"] == "p02-film-techniques.html": srcname = "Film technique"
+    elif pg["file"] == "p06-analysing-written-language.html": srcname = "Persuasive technique"
+    else: continue
+    tbl = pg["chapter"]["sec"].find("table")
+    if not tbl: continue
+    for tr in tbl.find_all("tr")[1:]:
+        cells = [_clean(c.get_text(" ")) for c in tr.find_all(["td","th"])]
+        if len(cells) >= 2 and cells[0] and len(cells[0]) < 60:
+            d = cells[1] + ((" \u2014 " + cells[2]) if len(cells) > 2 and cells[2] else "")
+            glossary.append({"term": cells[0], "def": d, "src": srcname})
+EXTRA_GLOSSARY = [
+ ("Allusion", "An indirect reference to another text, event or figure that imports its associations into the work."),
+ ("Characterisation", "The methods an author uses to construct a character: dialogue, actions, appearance, others' reactions."),
+ ("Connotation", "The emotional or cultural associations a word carries beyond its literal meaning."),
+ ("Contention", "The central argument a writer or speaker advances; in your essay, the position your paragraphs prove."),
+ ("Dramatic irony", "When the audience knows something a character does not, creating tension or poignancy."),
+ ("Emotive language", "Word choices designed to provoke an emotional response and position the audience."),
+ ("Flashback", "A scene set earlier than the main narrative, used to reveal context or motive."),
+ ("Foreshadowing", "Hints or clues that prepare the audience for later events."),
+ ("Framing device", "A narrative structure that encloses the main story, shaping how it is read."),
+ ("Hyperbole", "Deliberate exaggeration for emphasis or effect."),
+ ("Imagery", "Language appealing to the senses to create vivid impressions."),
+ ("Inclusive language", "Pronouns like 'we' and 'our' that position the audience as sharing the writer's view."),
+ ("Juxtaposition", "Placing contrasting elements side by side so each sharpens the other."),
+ ("Metaphor", "A direct comparison describing one thing as another to transfer its qualities."),
+ ("Motif", "A recurring image, phrase or idea that accumulates meaning across a text."),
+ ("Narrative voice", "The perspective and personality through which a story is told."),
+ ("Pathos", "An appeal to the audience's emotions."),
+ ("Personification", "Giving human qualities to non-human things."),
+ ("Rebuttal", "Directly addressing and dismantling an opposing argument."),
+ ("Rhetorical question", "A question posed for effect, leading the audience toward an implied answer."),
+ ("Satire", "Humour, irony or exaggeration used to criticise people, institutions or ideas."),
+ ("Simile", "A comparison using 'like' or 'as'."),
+ ("Stage directions", "A playwright's instructions for action, delivery and staging \u2014 key evidence when analysing drama."),
+ ("Symbolism", "Objects, settings or images that carry meaning beyond their literal presence."),
+ ("Tone", "The attitude a writer or speaker conveys toward their subject or audience."),
+ ("Vernacular", "Everyday or regional language that grounds characters in place, class or community."),
+ ("Ad hominem", "Attacking the person making an argument rather than the argument itself."),
+ ("Allegory", "A narrative whose characters and events stand for a parallel moral, political or historical meaning."),
+ ("Anaphora", "Deliberate repetition of a word or phrase at the start of successive clauses to build rhythm and force."),
+ ("Antithesis", "Setting opposing ideas in balanced phrasing to sharpen the contrast between them."),
+ ("Appeal to authority", "Citing experts, credentials or institutions so the audience defers to the position."),
+ ("Appeal to fear", "Raising threatening consequences so the audience feels the risk of not agreeing."),
+ ("Appeal to hip-pocket", "Framing an issue around cost and personal finances to engage self-interest."),
+ ("Appeal to patriotism", "Invoking national identity and pride so agreement feels loyal and dissent disloyal."),
+ ("Archetype", "A character type or pattern recurring across literature that carries instant associations."),
+ ("Aside", "A short remark delivered to the audience that other characters do not hear."),
+ ("Bandwagon", "Suggesting most people already agree, pressuring the audience to join the majority."),
+ ("Call to action", "A direct instruction telling the audience what to do next."),
+ ("Chiaroscuro", "Strong contrast of light and shadow in a frame, often signalling moral ambiguity or noir style."),
+ ("Clich\u00e9", "A worn expression whose overuse signals lazy or manipulative reasoning \u2014 or is deployed knowingly."),
+ ("Colloquial language", "Informal, conversational wording that builds rapport and an ordinary, relatable persona."),
+ ("Cumulative listing", "Piling up examples or details so the sheer accumulation feels like proof."),
+ ("Diegetic sound", "Sound that belongs to the world of the film, heard by its characters."),
+ ("Epigraph", "A quotation placed at the start of a text that frames how it should be read."),
+ ("Euphemism", "A softened expression that makes something unpleasant more palatable \u2014 or hides it."),
+ ("Expert opinion", "Quoting a specialist to lend borrowed credibility to a claim."),
+ ("Generalisation", "A sweeping claim about a whole group from limited cases; persuasive but vulnerable to rebuttal."),
+ ("Intertextuality", "Meaning created through a text's references to or echoes of other texts."),
+ ("Irony", "A gap between what is said and what is meant, or between expectation and outcome."),
+ ("Jargon", "Specialised technical vocabulary that can build authority or exclude an audience."),
+ ("Loaded language", "Words carrying strong connotations that smuggle judgement into apparent description."),
+ ("Montage", "A sequence of shots compressed together to convey time passing or accumulating meaning."),
+ ("Non-diegetic sound", "Sound outside the film's world \u2014 score, narration \u2014 shaping audience response directly."),
+ ("Oxymoron", "Two contradictory terms fused together to provoke thought."),
+ ("Paradox", "A statement that seems self-contradictory yet reveals an underlying truth."),
+ ("Pun", "Wordplay exploiting double meanings, often to disarm or mock."),
+ ("Repetition", "Repeating words or structures so an idea lodges in the audience's memory."),
+ ("Sarcasm", "Bitter, mocking irony directed at a target."),
+ ("Soliloquy", "A speech delivered alone on stage, giving direct access to a character's inner thoughts."),
+ ("Statistics", "Numerical evidence that lends an argument an air of objectivity and precision."),
+ ("Straw man", "Misrepresenting an opposing view in a weakened form so it is easier to knock down."),
+ ("Tone shift", "A deliberate change in tone mid-text that redirects the audience's response."),
+ ("Tricolon", "A three-part list whose rhythm makes a point feel complete and memorable."),
+ ("Understatement", "Deliberately downplaying something so its true scale lands harder."),
+]
+_existing = set(g["term"].lower() for g in glossary)
+for _t, _d in EXTRA_GLOSSARY:
+    if _t.lower() not in _existing:
+        glossary.append({"term": _t, "def": _d, "src": "Metalanguage"})
+glossary.sort(key=lambda g: g["term"].lower())
+
+TOOL_LABEL = '<div class="part-label">Study Tools</div>'
+fc_page = TOOL_LABEL + """<h1>Quote Flashcards</h1>
+<p class="lede">Test yourself on the quote banks. Read the quote, recall who says it and which theme it serves, then flip.</p>
+<div class="tool-bar">
+  <select id="fc-text"><option value="">Both texts</option></select>
+  <button id="fc-shuffle">Shuffle</button>
+  <span class="tool-count" id="fc-count"></span>
+</div>
+<div class="fc-card" id="fc-card" tabindex="0">
+  <div class="fc-inner">
+    <div class="fc-face"><div class="fc-front" id="fc-front"></div><div class="fc-hint">Click card to flip</div></div>
+    <div class="fc-face fc-back-face"><div class="fc-back" id="fc-back"></div></div>
+  </div>
+</div>
+<div class="tool-bar">
+  <button id="fc-prev">&#8592; Previous</button>
+  <button id="fc-flip">Flip</button>
+  <button id="fc-next">Next &#8594;</button>
+</div>
+<script>window.FLASHCARDS = %s;</script>
+<script>
+(function(){
+  var all = window.FLASHCARDS, deck = [], i = 0, flipped = false;
+  var texts = {}; all.forEach(function(c){ texts[c.text] = 1; });
+  var sel = document.getElementById('fc-text');
+  Object.keys(texts).forEach(function(t){ var o = document.createElement('option'); o.value = t; o.textContent = t; sel.appendChild(o); });
+  function shuffle(a){ for (var j = a.length - 1; j > 0; j--){ var k = Math.floor(Math.random() * (j + 1)); var tmp = a[j]; a[j] = a[k]; a[k] = tmp; } }
+  function rebuild(){ deck = all.filter(function(c){ return !sel.value || c.text === sel.value; }); shuffle(deck); i = 0; show(); }
+  function show(){
+    if (!deck.length) return;
+    flipped = false;
+    document.getElementById('fc-card').classList.remove('flipped');
+    document.getElementById('fc-front').textContent = deck[i].q;
+    document.getElementById('fc-back').textContent = deck[i].text + ' \u2014 ' + deck[i].cat;
+    document.getElementById('fc-count').textContent = (i + 1) + ' / ' + deck.length;
+  }
+  function flip(){ flipped = !flipped; document.getElementById('fc-card').classList.toggle('flipped', flipped); }
+  document.getElementById('fc-card').addEventListener('click', flip);
+  document.getElementById('fc-flip').addEventListener('click', flip);
+  document.getElementById('fc-next').addEventListener('click', function(){ i = (i + 1) %% deck.length; show(); });
+  document.getElementById('fc-prev').addEventListener('click', function(){ i = (i - 1 + deck.length) %% deck.length; show(); });
+  document.getElementById('fc-shuffle').addEventListener('click', rebuild);
+  sel.addEventListener('change', rebuild);
+  rebuild();
+})();
+</script>""" % json.dumps(flashcards, ensure_ascii=False)
+
+tp_page = TOOL_LABEL + """<h1>Practice Topics &amp; Essay Timer</h1>
+<p class="lede">Draw a random analytical topic and write against the clock, exam-style.</p>
+<div class="tool-bar">
+  <select id="tp-text"></select>
+  <button id="tp-draw">Draw a topic</button>
+  <a id="tp-mark" href="#" style="display:none;font-family:var(--sans);font-weight:700;background:var(--accent);color:#fff;padding:9px 16px;border-radius:9px">Mark my essay &#8594;</a>
+</div>
+<div class="tp-topic" id="tp-topic">Press &ldquo;Draw a topic&rdquo; to begin.</div>
+<div class="timer-wrap">
+  <div class="timer" id="timer">60:00</div>
+  <div class="tool-bar">
+    <select id="t-mins"><option value="60">60 min (exam section)</option><option value="45">45 min</option><option value="30">30 min</option><option value="20">20 min (plan only)</option></select>
+    <button id="t-start">Start</button>
+    <button id="t-pause" disabled>Pause</button>
+    <button id="t-reset">Reset</button>
+  </div>
+</div>
+<script>window.TOPICS = %s;</script>
+<script>
+(function(){
+  var T = window.TOPICS, sel = document.getElementById('tp-text');
+  var names = Object.keys(T);
+  var o0 = document.createElement('option'); o0.value = ''; o0.textContent = 'Either text'; sel.appendChild(o0);
+  names.forEach(function(n){ var o = document.createElement('option'); o.value = n; o.textContent = n + ' (' + T[n].length + ' topics)'; sel.appendChild(o); });
+  document.getElementById('tp-draw').addEventListener('click', function(){
+    var pool = [];
+    names.forEach(function(n){ if (!sel.value || sel.value === n) T[n].forEach(function(t){ pool.push({n: n, t: t}); }); });
+    var pick = pool[Math.floor(Math.random() * pool.length)];
+    document.getElementById('tp-topic').textContent = '[' + pick.n + '] ' + pick.t;
+    var mk = document.getElementById('tp-mark');
+    mk.href = 'marker.html?section=a&topic=' + encodeURIComponent(pick.t);
+    mk.style.display = '';
+  });
+  var total = 3600, left = 3600, iv = null;
+  var disp = document.getElementById('timer'), start = document.getElementById('t-start'),
+      pause = document.getElementById('t-pause'), reset = document.getElementById('t-reset'),
+      mins = document.getElementById('t-mins');
+  function fmt(s){ var m = Math.floor(s / 60), x = s %% 60; return m + ':' + (x < 10 ? '0' : '') + x; }
+  function draw(){ disp.textContent = fmt(left); disp.classList.toggle('t-low', left <= 300 && left > 0); }
+  function done(){ clearInterval(iv); iv = null; disp.textContent = "Time's up!"; disp.classList.add('t-done'); start.disabled = false; pause.disabled = true; }
+  start.addEventListener('click', function(){
+    if (iv) return;
+    if (left <= 0){ left = total; }
+    disp.classList.remove('t-done');
+    iv = setInterval(function(){ left--; if (left <= 0){ done(); return; } draw(); }, 1000);
+    start.disabled = true; pause.disabled = false;
+  });
+  pause.addEventListener('click', function(){ clearInterval(iv); iv = null; start.disabled = false; pause.disabled = true; });
+  reset.addEventListener('click', function(){ clearInterval(iv); iv = null; total = left = parseInt(mins.value, 10) * 60; disp.classList.remove('t-done'); draw(); start.disabled = false; pause.disabled = true; });
+  mins.addEventListener('change', function(){ if (!iv){ total = left = parseInt(mins.value, 10) * 60; draw(); } });
+  draw();
+})();
+</script>""" % json.dumps(topics_data, ensure_ascii=False)
+
+gl_items = "".join('<div class="gl-item" data-term="%s"><b>%s</b> <span class="gl-src">%s</span><p>%s</p></div>'
+                   % (html.escape(g["term"].lower()), html.escape(g["term"]), html.escape(g["src"]), html.escape(g["def"]))
+                   for g in glossary)
+gl_page = TOOL_LABEL + """<h1>Glossary of Techniques</h1>
+<p class="lede">Every film and persuasive technique from the guide in one alphabetical reference.</p>
+<div class="tool-bar"><input id="gl-filter" type="search" placeholder="Filter terms&hellip;" style="flex:1;max-width:340px"></div>
+<div class="gl-list" id="gl-list">%s</div>
+<script>
+(function(){
+  var inp = document.getElementById('gl-filter'), items = document.querySelectorAll('.gl-item');
+  inp.addEventListener('input', function(){
+    var q = inp.value.trim().toLowerCase();
+    items.forEach(function(it){ it.style.display = !q || it.textContent.toLowerCase().indexOf(q) > -1 ? '' : 'none'; });
+  });
+})();
+</script>""" % gl_items
+
+qz_page = TOOL_LABEL + """<h1>Technique Quiz</h1>
+<p class="lede">A definition appears &mdash; pick the technique it describes. Ten questions per round, drawn from the glossary.</p>
+<div class="tool-bar">
+  <span class="tool-count" id="qz-progress" style="margin-left:0"></span>
+  <span class="tool-count" id="qz-score"></span>
+</div>
+<div class="qz-box">
+  <div class="qz-def" id="qz-def"></div>
+  <div class="qz-opts" id="qz-opts"></div>
+  <div class="qz-feedback" id="qz-feedback"></div>
+</div>
+<div class="tool-bar">
+  <button id="qz-next" style="display:none">Next question &#8594;</button>
+  <button id="qz-restart" style="display:none">New round</button>
+</div>
+<script>window.QUIZ = %s;</script>
+<script>
+(function(){
+  var all = window.QUIZ, round = [], qi = 0, score = 0, answered = false;
+  function shuffle(a){ for (var j = a.length - 1; j > 0; j--){ var k = Math.floor(Math.random() * (j + 1)); var t = a[j]; a[j] = a[k]; a[k] = t; } return a; }
+  function start(){
+    round = shuffle(all.slice()).slice(0, 10); qi = 0; score = 0;
+    document.getElementById('qz-restart').style.display = 'none';
+    ask();
+  }
+  function ask(){
+    answered = false;
+    var q = round[qi];
+    var pool = shuffle(all.filter(function(g){ return g.term !== q.term; })).slice(0, 3);
+    var opts = shuffle(pool.concat([q]));
+    document.getElementById('qz-progress').textContent = 'Question ' + (qi + 1) + ' of ' + round.length;
+    document.getElementById('qz-score').textContent = 'Score: ' + score;
+    document.getElementById('qz-def').textContent = q.def;
+    document.getElementById('qz-feedback').textContent = '';
+    document.getElementById('qz-next').style.display = 'none';
+    var box = document.getElementById('qz-opts'); box.innerHTML = '';
+    opts.forEach(function(o){
+      var b = document.createElement('button'); b.className = 'qz-opt'; b.textContent = o.term;
+      b.addEventListener('click', function(){ pick(b, o, q); });
+      box.appendChild(b);
+    });
+  }
+  function pick(btn, o, q){
+    if (answered) return;
+    answered = true;
+    var btns = document.querySelectorAll('.qz-opt');
+    btns.forEach(function(b){ b.disabled = true; if (b.textContent === q.term) b.classList.add('qz-right'); });
+    if (o.term === q.term){ score++; document.getElementById('qz-feedback').textContent = 'Correct.'; }
+    else { btn.classList.add('qz-wrong'); document.getElementById('qz-feedback').textContent = 'Not quite \u2014 this one is \u201c' + q.term + '\u201d.'; }
+    document.getElementById('qz-score').textContent = 'Score: ' + score;
+    if (qi < round.length - 1){ document.getElementById('qz-next').style.display = ''; }
+    else {
+      document.getElementById('qz-feedback').textContent += ' Round over: ' + score + ' / ' + round.length + '.';
+      document.getElementById('qz-restart').style.display = '';
+    }
+  }
+  document.getElementById('qz-next').addEventListener('click', function(){ qi++; ask(); });
+  document.getElementById('qz-restart').addEventListener('click', start);
+  start();
+})();
+</script>""" % json.dumps([{"term": g["term"], "def": g["def"]} for g in glossary], ensure_ascii=False)
+
+EXAMGEN = json.load(open(os.path.join(BUILD, "examgen", "examgen.json"), encoding="utf-8"))
+EXAMGEN["sb"] = topics_data.get("Sunset Boulevard", EXAMGEN["sb"])
+EXAMGEN["re"] = topics_data.get("Rainbow\u2019s End", EXAMGEN["re"])
+SLOTCFG = json.load(open(os.path.join(BUILD, "examgen", "slots.json"), encoding="utf-8"))
+eg_page = TOOL_LABEL + """<h1>Exam Generator</h1>
+<p class="lede">Generate a unique three-section practice examination on the spot &mdash; the complete task book as a Word document, identical in format to the real paper: cover page, instructions, Section A topics for both texts, a Creating Texts prompt with stimulus material, Section C source material and the assessment criteria.</p>
+<div class="tool-bar">
+  <button id="eg-go">Generate exam &#8595;</button>
+  <span class="tool-count" id="eg-note"></span>
+</div>
+<p style="font-family:var(--sans);font-size:13.5px;color:var(--muted)">Every exam is assembled fresh from the question banks the moment you click. Print it and sit it under timed conditions &mdash; then mark it against the <a href="part-09-exam-assessment-criteria.html">assessment criteria</a> or with the <a href="marker.html">Essay Marker</a>.</p>
+<script src="assets/vendor/jszip.min.js"></script>
+<script>window.EG_DATA = %s; window.EG_SLOTS = %s;</script>
+<script>
+(function(){
+  var D = window.EG_DATA, S = window.EG_SLOTS, note = document.getElementById('eg-note');
+  function pick(a){ return a[Math.floor(Math.random() * a.length)]; }
+  function two(a){ var x = pick(a), y = pick(a), t = 0;
+    while (y === x && a.length > 1 && t++ < 12) y = pick(a);
+    return [x, y]; }
+  function xesc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  function fill(s){ return s.split(String.fromCharCode(10)).map(xesc)
+    .join('</w:t><w:br/><w:t xml:space="preserve">'); }
+  function loadImg(url){ return new Promise(function(res, rej){
+    var im = new Image(); im.onload = function(){ res(im); }; im.onerror = rej; im.src = url; }); }
+  function slotPng(im, px){ var c = document.createElement('canvas');
+    c.width = px[0]; c.height = px[1];
+    var g = c.getContext('2d');
+    g.fillStyle = '#ffffff'; g.fillRect(0, 0, c.width, c.height);
+    if (im){ var r = Math.min(c.width / im.width, c.height / im.height);
+      var w = im.width * r, h = im.height * r;
+      g.drawImage(im, (c.width - w) / 2, (c.height - h) / 2, w, h); }
+    return c.toDataURL('image/png').split(',')[1]; }
+  document.getElementById('eg-go').addEventListener('click', function(){
+    note.textContent = 'Assembling exam\u2026';
+    fetch('assets/exam/web-template.docx').then(function(r){
+      if (!r.ok) throw new Error('template fetch failed');
+      return r.arrayBuffer();
+    }).then(function(buf){ return JSZip.loadAsync(buf); }).then(function(zip){
+      return zip.file('word/document.xml').async('string').then(function(xml){
+        var sb = two(D.sb), re = two(D.re), b = pick(D.b),
+            c = pick(D.c.filter(function(x){ return x.imgs.length; }));
+        var repl = { '{A7}': sb[0], '{A8}': sb[1], '{A10}': re[0], '{A11}': re[1],
+                     '{G9}': b.title || '', '{G11}': b.s1 || '', '{G15}': b.s3 || '' };
+        Object.keys(repl).forEach(function(k){ xml = xml.split(k).join(fill(repl[k])); });
+        zip.file('word/document.xml', xml);
+        var jobs = [];
+        function put(slot, url){
+          jobs.push((url ? loadImg(url) : Promise.resolve(null)).then(function(im){
+            zip.file(S.slots[slot], slotPng(im, S.px[slot]), { base64: true });
+          }));
+        }
+        put('g13', b.img ? 'assets/exam/b/' + b.img : null);
+        ['n13', 'n16', 'n17'].forEach(function(slot, k){
+          put(slot, c.imgs[k] ? 'assets/exam/c/' + encodeURIComponent(c.imgs[k]) : null);
+        });
+        return Promise.all(jobs).then(function(){
+          return zip.generateAsync({ type: 'blob',
+            mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+        });
+      });
+    }).then(function(blob){
+      var id = Math.random().toString(36).slice(2, 7).toUpperCase();
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'Practice-Exam-' + id + '.docx';
+      document.body.appendChild(a); a.click(); a.remove();
+      note.textContent = 'Downloaded Practice-Exam-' + id + '.docx';
+    }).catch(function(e){ note.textContent = 'Generation failed: ' + e; });
+  });
+})();
+</script>""" % (json.dumps(EXAMGEN, ensure_ascii=False), json.dumps(SLOTCFG))
+
+# ---------- outline builder (static page, no % formatting) ----------
+ob_page = TOOL_LABEL + """<h1>Essay Outline Builder</h1>
+<p class="lede">Plan body paragraphs with the right scaffold for the task: <b>Th.E.S.A.M.L.</b> for a Section A text response, <b>What &middot; How &middot; Why</b> for Section C analysing argument. (Section B pieces are not built from a formula &mdash; see <a href="part-05-creating-texts.html">Creating Texts</a>.) Everything autosaves on this device.</p>
+<div class="tool-bar" id="ob-modes">
+  <button type="button" class="ob-mode" data-m="a">Section A &mdash; Th.E.S.A.M.L.</button>
+  <button type="button" class="ob-mode" data-m="c">Section C &mdash; What &middot; How &middot; Why</button>
+</div>
+<div class="ob-field"><label id="ob-cont-label">Contention (your essay&rsquo;s overall argument)</label><textarea id="ob-contention" rows="2" placeholder="e.g. Obsession with self is what ultimately leads to the downfall of characters."></textarea></div>
+<div id="ob-paras"></div>
+<div class="tool-bar">
+  <button id="ob-add">+ Add paragraph</button>
+  <span style="flex:1"></span>
+  <button id="ob-copy">Copy plan</button>
+  <button id="ob-print">Print plan</button>
+  <button id="ob-clear">Clear all</button>
+</div>
+<div id="ob-preview" class="ob-preview"></div>
+<script>
+(function(){
+  var FIELDSETS = {
+    a: [
+      ['th', 'Th \u2014 Thematic topic sentence', 'A sentence based on a theme, not a character.'],
+      ['e', 'E \u2014 Evidence', 'Quotes and scenes that support the theme.'],
+      ['s', 'S \u2014 Symbols', 'Symbols, context and setting that relate to the theme.'],
+      ['a', 'A \u2014 Authorial intention', 'What was the author intending?'],
+      ['m', 'M \u2014 Metalanguage', 'The techniques you will name and analyse.'],
+      ['l', 'L \u2014 Linking sentence', 'Link back to your contention.']
+    ],
+    c: [
+      ['what', 'What \u2014 The argument', 'What is the author arguing at this point of the piece?'],
+      ['how', 'How \u2014 Technique and evidence', 'Which persuasive technique or language choice, with a short embedded quote?'],
+      ['why', 'Why \u2014 Effect on the audience', 'How does this position the specific target audience to think, feel or act?']
+    ]
+  };
+  var CONT = {
+    a: ['Contention (your essay\u2019s overall argument)', 'e.g. Obsession with self is what ultimately leads to the downfall of characters.'],
+    c: ['Opening overview \u2014 author, form, contention, tone, audience', 'e.g. In her opinion piece, [author] contends that\u2026 in a [tone] tone, targeting\u2026']
+  };
+  var FIELDS;
+  var state = { mode: 'a', a: { contention: '', paras: [{}] }, c: { contention: '', paras: [{}] } };
+  try {
+    var sv = JSON.parse(localStorage.getItem('obState') || 'null');
+    if (sv && sv.a && sv.c) state = sv;
+    else if (sv && sv.paras) state.a = sv;
+  } catch(e){}
+  function cur(){ return state[state.mode]; }
+  function setMode(m){
+    state.mode = m;
+    FIELDS = FIELDSETS[m];
+    document.getElementById('ob-cont-label').textContent = CONT[m][0];
+    document.getElementById('ob-contention').placeholder = CONT[m][1];
+    var mb = document.querySelectorAll('.ob-mode');
+    for (var i = 0; i < mb.length; i++){ mb[i].classList.toggle('ob-mode-on', mb[i].getAttribute('data-m') === m); }
+    save(); render(); preview();
+  }
+  function save(){ try { localStorage.setItem('obState', JSON.stringify(state)); } catch(e){} }
+  function render(){
+    document.getElementById('ob-contention').value = cur().contention || '';
+    var host = document.getElementById('ob-paras'); host.innerHTML = '';
+    cur().paras.forEach(function(p, pi){
+      var box = document.createElement('div'); box.className = 'ob-para';
+      var head = document.createElement('div'); head.className = 'ob-para-head';
+      head.innerHTML = '<b>Body paragraph ' + (pi + 1) + '</b>';
+      if (cur().paras.length > 1){
+        var rm = document.createElement('button'); rm.textContent = 'Remove'; rm.className = 'ob-rm';
+        rm.addEventListener('click', function(){ cur().paras.splice(pi, 1); save(); render(); preview(); });
+        head.appendChild(rm);
+      }
+      box.appendChild(head);
+      FIELDS.forEach(function(f){
+        var w = document.createElement('div'); w.className = 'ob-field';
+        var lb = document.createElement('label'); lb.textContent = f[1]; w.appendChild(lb);
+        var ta = document.createElement('textarea'); ta.rows = 2; ta.placeholder = f[2]; ta.value = p[f[0]] || '';
+        ta.addEventListener('input', function(){ p[f[0]] = ta.value; save(); preview(); });
+        w.appendChild(ta); box.appendChild(w);
+      });
+      host.appendChild(box);
+    });
+  }
+  function planText(){
+    var out = 'ESSAY PLAN (' + (state.mode === 'a' ? 'Section A - Th.E.S.A.M.L.' : 'Section C - What/How/Why') + ')' + String.fromCharCode(10) + (state.mode === 'a' ? 'Contention: ' : 'Overview: ') + (cur().contention || '') + String.fromCharCode(10);
+    cur().paras.forEach(function(p, pi){
+      out += String.fromCharCode(10) + 'BODY PARAGRAPH ' + (pi + 1) + String.fromCharCode(10);
+      FIELDS.forEach(function(f){ if (p[f[0]]) out += '  ' + f[1] + ': ' + p[f[0]] + String.fromCharCode(10); });
+    });
+    return out;
+  }
+  function esc(s){ return s.replace(/[&<>]/g, function(c){ return { '&':'&amp;','<':'&lt;','>':'&gt;' }[c]; }); }
+  function preview(){
+    var h = '<h2>Your plan</h2>';
+    if (cur().contention) h += '<p><b>' + (state.mode === 'a' ? 'Contention' : 'Overview') + ':</b> ' + esc(cur().contention) + '</p>';
+    cur().paras.forEach(function(p, pi){
+      var rows = FIELDS.filter(function(f){ return p[f[0]]; });
+      if (!rows.length) return;
+      h += '<h3>Body paragraph ' + (pi + 1) + '</h3><ul>';
+      rows.forEach(function(f){ h += '<li><b>' + f[1].split(' \u2014 ')[0] + ':</b> ' + esc(p[f[0]]) + '</li>'; });
+      h += '</ul>';
+    });
+    document.getElementById('ob-preview').innerHTML = h;
+  }
+  document.getElementById('ob-contention').addEventListener('input', function(e){ cur().contention = e.target.value; save(); preview(); });
+  document.getElementById('ob-add').addEventListener('click', function(){ if (cur().paras.length < 5){ cur().paras.push({}); save(); render(); } });
+  document.getElementById('ob-copy').addEventListener('click', function(){ navigator.clipboard.writeText(planText()).then(function(){ document.getElementById('ob-copy').textContent = 'Copied \u2713'; setTimeout(function(){ document.getElementById('ob-copy').textContent = 'Copy plan'; }, 1500); }); });
+  document.getElementById('ob-print').addEventListener('click', function(){ window.print(); });
+  document.getElementById('ob-clear').addEventListener('click', function(){ if (confirm('Clear this plan?')){ state[state.mode] = { contention: '', paras: [{}] }; save(); render(); preview(); } });
+  var mbs = document.querySelectorAll('.ob-mode');
+  for (var mi = 0; mi < mbs.length; mi++){
+    (function(b){ b.addEventListener('click', function(){ setMode(b.getAttribute('data-m')); }); })(mbs[mi]);
+  }
+  setMode(state.mode || 'a');
+})();
+</script>"""
+
+# ---------- vocabulary upgrader ----------
+VOCAB_SWAPS = {
+  "shows": ["demonstrates", "illustrates", "reveals", "highlights", "conveys", "depicts", "exposes", "emphasises", "underscores"],
+  "show": ["demonstrate", "illustrate", "reveal", "highlight", "convey", "depict", "expose", "emphasise"],
+  "showed": ["demonstrated", "illustrated", "revealed", "highlighted", "conveyed", "depicted"],
+  "shown": ["demonstrated", "illustrated", "revealed", "conveyed"],
+  "says": ["asserts", "contends", "argues", "maintains", "suggests", "posits", "claims", "declares", "implies"],
+  "say": ["assert", "contend", "argue", "maintain", "suggest", "claim"],
+  "said": ["asserted", "contended", "argued", "maintained", "suggested", "claimed"],
+  "does": ["constructs", "orchestrates", "positions", "cultivates", "reinforces", "subverts", "foregrounds", "amplifies"],
+  "did": ["constructed", "orchestrated", "positioned", "reinforced", "subverted"],
+  "likes": ["favours", "endorses", "embraces", "advocates for"],
+  "liked": ["favoured", "endorsed", "embraced"],
+  "doesn't like": ["rejects", "condemns", "critiques", "denounces", "repudiates"],
+  "good": ["effective", "compelling", "powerful", "persuasive"],
+  "bad": ["destructive", "corrosive", "damaging", "flawed"],
+  "gets": ["compels", "positions", "prompts", "invites"],
+  "thing": ["element", "idea", "notion", "concern"],
+  "things": ["elements", "ideas", "notions", "concerns"],
+  "a lot": ["considerably", "extensively", "markedly"],
+  "very": ["profoundly", "distinctly", "markedly"],
+}
+vu_page = TOOL_LABEL + """<h1>Vocabulary Upgrader</h1>
+<p class="lede">Paste a paragraph and it flags the words that flatten analytical writing &mdash; <em>shows, says, does, very, thing</em> and friends &mdash; with stronger swaps from the vocabulary bank. Pick a suggestion to replace it.</p>
+<textarea id="vu-text" rows="8" style="width:100%%;font-family:var(--serif);font-size:16.5px;line-height:1.6;padding:16px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink)" placeholder="Paste your paragraph here&hellip;"></textarea>
+<div class="tool-bar">
+  <button id="vu-check">Check my writing</button>
+  <span class="tool-count" id="vu-count"></span>
+</div>
+<div id="vu-out" class="vu-out"></div>
+<p style="font-family:var(--sans);font-size:13.5px;color:var(--muted)">See the full <a href="vocabulary.html">Vocabulary Bank</a> for the complete lists.</p>
+<script>window.VU = %s;</script>
+<script>
+(function(){
+  var SW = window.VU, out = document.getElementById('vu-out'), ta = document.getElementById('vu-text');
+  var keys = Object.keys(SW).sort(function(a, b){ return b.length - a.length; });
+  function esc(s){ return s.replace(/[&<>]/g, function(c){ return { '&':'&amp;','<':'&lt;','>':'&gt;' }[c]; }); }
+  function check(){
+    var text = ta.value;
+    if (!text.trim()){ out.innerHTML = ''; document.getElementById('vu-count').textContent = ''; return; }
+    var pattern = new RegExp('\\\\b(' + keys.map(function(k){ return k.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&'); }).join('|') + ')\\\\b', 'gi');
+    var n = 0, html = '';
+    var last = 0, m;
+    while ((m = pattern.exec(text)) !== null){
+      html += esc(text.slice(last, m.index));
+      var word = m[0], sugg = SW[word.toLowerCase()] || [];
+      n++;
+      html += '<span class="vu-flag" tabindex="0">' + esc(word) + '<span class="vu-pop">' +
+        sugg.map(function(s){ return '<button class="vu-sw" data-i="' + m.index + '" data-len="' + word.length + '">' + esc(s) + '</button>'; }).join('') +
+        '</span></span>';
+      last = m.index + word.length;
+    }
+    html += esc(text.slice(last));
+    out.innerHTML = '<div class="vu-render">' + html.replace(/\\n/g, '<br>') + '</div>';
+    document.getElementById('vu-count').textContent = n ? n + ' word' + (n > 1 ? 's' : '') + ' to strengthen' : 'Nothing flagged \u2014 strong vocabulary throughout.';
+    out.querySelectorAll('.vu-sw').forEach(function(b){
+      b.addEventListener('click', function(){
+        var i = parseInt(b.dataset.i, 10), len = parseInt(b.dataset.len, 10);
+        ta.value = ta.value.slice(0, i) + b.textContent + ta.value.slice(i + len);
+        check();
+      });
+    });
+  }
+  document.getElementById('vu-check').addEventListener('click', check);
+})();
+</script>""" % json.dumps(VOCAB_SWAPS, ensure_ascii=False)
+
+# ---------- timed micro-drills ----------
+dr_page = TOOL_LABEL + """<h1>Micro-Drills</h1>
+<p class="lede">Five-minute bursts that build one skill at a time. Draw a drill, write against the clock.</p>
+<div class="tool-bar">
+  <select id="dr-type">
+    <option value="topics">Three topic sentences (5 min)</option>
+    <option value="plan">Plan an essay \u2014 no prose (5 min)</option>
+    <option value="contention">Contention in one sentence (2 min)</option>
+    <option value="link">Linking sentence back to contention (2 min)</option>
+  </select>
+  <button id="dr-go">Draw a drill</button>
+  <span class="tool-count timer" id="dr-timer" style="font-size:28px"></span>
+</div>
+<div class="tp-topic" id="dr-topic" style="display:none"></div>
+<textarea id="dr-pad" style="display:none;width:100%%;min-height:200px;font-family:var(--serif);font-size:16.5px;line-height:1.6;padding:16px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);margin-top:10px" placeholder="Write here&hellip;"></textarea>
+<div class="tool-bar"><span class="tool-count" id="dr-wc" style="margin-left:0"></span></div>
+<script>window.DRT = %s;</script>
+<script>
+(function(){
+  var T = window.DRT, iv = null;
+  var TASKS = {
+    topics: ['Write THREE different thematic topic sentences for this topic:', 300],
+    plan: ['Plan a full essay for this topic \u2014 contention plus three Th.E.S.A.M.L. skeletons. Dot points only:', 300],
+    contention: ['Write your contention for this topic in ONE sentence:', 120],
+    link: ['Write a linking sentence that ends a body paragraph and returns to your contention for this topic:', 120]
+  };
+  function pick(){ var names = Object.keys(T), n = names[Math.floor(Math.random() * names.length)];
+    return '[' + n + '] ' + T[n][Math.floor(Math.random() * T[n].length)]; }
+  function fmt(s){ return Math.floor(s / 60) + ':' + (s %% 60 < 10 ? '0' : '') + (s %% 60); }
+  document.getElementById('dr-go').addEventListener('click', function(){
+    var t = TASKS[document.getElementById('dr-type').value];
+    document.getElementById('dr-topic').style.display = '';
+    document.getElementById('dr-topic').innerHTML = '<b>' + t[0] + '</b><br><br>' + pick();
+    var pad = document.getElementById('dr-pad'); pad.style.display = ''; pad.value = ''; pad.focus();
+    var left = t[1], el = document.getElementById('dr-timer');
+    clearInterval(iv); el.classList.remove('t-done'); el.textContent = fmt(left);
+    iv = setInterval(function(){ left--;
+      if (left <= 0){ clearInterval(iv); el.textContent = "Time!"; el.classList.add('t-done'); return; }
+      el.textContent = fmt(left); el.classList.toggle('t-low', left <= 30);
+    }, 1000);
+  });
+  document.getElementById('dr-pad').addEventListener('input', function(e){
+    var w = e.target.value.trim() ? e.target.value.trim().split(/\\s+/).length : 0;
+    document.getElementById('dr-wc').textContent = w + ' words';
+  });
+})();
+</script>""" % json.dumps(topics_data, ensure_ascii=False)
+
+em_page = TOOL_LABEL + """<h1>Essay Marker</h1>
+<p class="lede">An AI marker calibrated on the official VCE English assessment criteria, the expected qualities, and real high- and low-scoring scripts. Paste an essay from any section of the exam and receive a score out of 10 with criteria-based feedback in minutes.</p>
+<p><a class="btn-inline" href="marker.html">Open the Essay Marker &#8594;</a></p>
+
+<h2>What it does</h2>
+<ul>
+<li><b>Section A &mdash; Analytical response:</b> select your text, enter the topic, paste your essay. Marked against the published criteria: quality of reading, structure and substantiation, and expression &mdash; always in relation to the topic.</li>
+<li><b>Section B &mdash; Creating a text:</b> nominate your Framework, title and stimulus. Judged on framework connection, voice and purpose, and control of language &mdash; with persuasive and expository forms treated on their own terms, as VCAA's samples require.</li>
+<li><b>Section C &mdash; Analysing argument:</b> provide the source material and your analysis. Rewards sequencing and audience-effect analysis over technique-spotting, exactly as the assessors&rsquo; reports describe.</li>
+</ul>
+
+<h2>How it was calibrated</h2>
+<p>The marker&rsquo;s judgement is anchored to benchmark scripts with known scores &mdash; including perfect-score and deliberately weak responses across all three sections &mdash; and tuned so that every benchmark marks within one point of its true score, the same tolerance VCAA accepts between its own trained assessors. It carries the expected-qualities ladders, the topic-relevance principle, and the guidance from the 2024 and 2025 assessment reports.</p>
+
+<h2>Setting it up (once, about two minutes)</h2>
+<ul>
+<li>Open the marker and click <b>AI Settings</b> (top right).</li>
+<li><b>Free option:</b> anyone with a GitHub account can create a fine-grained token with only the &ldquo;Models: Read-only&rdquo; permission &mdash; step-by-step instructions are inside the settings panel. Free-tier rate limits apply.</li>
+<li><b>Alternative:</b> an Anthropic API key (paid) marks with Claude, the engine the marker was calibrated on.</li>
+<li>Your token is stored only in your own browser and sent only to the provider you choose &mdash; never to the school or anyone else.</li>
+</ul>
+
+<h2>Features worth knowing</h2>
+<ul>
+<li><b>Precision mode</b> marks your essay three times independently and reports the median &mdash; if the three marks spread widely, it tells you the script is borderline and worth a human read.</li>
+<li><b>Second opinion</b> re-marks blind, without seeing the first result, for moderation.</li>
+<li><b>Handwriting transcription</b> &mdash; photograph a handwritten essay and the marker types it up for you, preserving your errors so the mark stays honest.</li>
+</ul>
+
+<h2>Getting the most from it</h2>
+<p>Mark work written under timed conditions &mdash; the <a href="practice-topics.html">topic timer</a> can send your essay straight here. Read the criterion feedback before the score, act on the single tip it gives you, then rewrite and re-mark. And treat it as a training partner, not an oracle: for anything borderline or high-stakes, your teacher&rsquo;s judgement is the real thing.</p>
+
+<p><a class="btn-inline" href="marker.html">Open the Essay Marker &#8594;</a></p>"""
+
+ac_page = TOOL_LABEL + """<div class="max-head"><img class="max-avatar" src="assets/img/max.jpg" alt="Max, the butler from Sunset Boulevard, answering the telephone"><div><h1>Ask Max</h1>
+<p class="lede">Max has read every page of this guide, and answers to no one but the text. Ask about essay structure, quotes, techniques, the assessors&rsquo; advice &mdash; and he&rsquo;ll reply from the site&rsquo;s own pages, with links to read more.</p></div></div>
+<div id="ac-chips" class="ac-chips"></div>
+<div class="ac-toolrow"><button type="button" id="ac-clear" title="Clear this conversation">Clear chat</button></div>
+<div id="ac-log" class="ac-log"></div>
+<div class="tool-bar" id="ac-bar" style="align-items:stretch">
+  <input id="ac-q" type="text" placeholder="Ask Max &mdash; e.g. How should I structure a Section C introduction?" style="flex:1;padding:12px 16px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);font-family:var(--serif);font-size:16px">
+  <button id="ac-send">Ask</button>
+</div>
+<p style="font-family:var(--sans);font-size:12.5px;color:var(--muted)">Answers are generated by AI from this site&rsquo;s content and can still make mistakes &mdash; check the linked pages, and ask your teacher when it matters. Shared class service: please keep questions study-related. <strong>Questions and network address are logged</strong> to improve the guide and keep the service healthy.</p>
+<script>window.AC_INDEX_URL = 'assets/search.json?v=36'; window.AC_EMB_URL = 'assets/embeddings.json?v=36'; window.AC_WORKER = 'https://jolly-waterfall-d01a.nicholas-morlin.workers.dev/';</script>
+<script>
+(function(){
+  var log = document.getElementById('ac-log'), q = document.getElementById('ac-q'), btn = document.getElementById('ac-send');
+  var INDEX = null, busy = false;
+  var HIST = [];
+  function workerFetch(payload){
+    return fetch(window.AC_WORKER, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+  }
+  function saveChat(){
+    try{ localStorage.setItem('maxChat', JSON.stringify({ h: log.innerHTML.slice(0, 200000), hist: HIST.slice(-2) })); }catch(e){}
+  }
+  function clearChat(){
+    try{ localStorage.removeItem('maxChat'); }catch(e){}
+    log.innerHTML = ''; HIST = [];
+    var cb = document.getElementById('ac-chips');
+    if (cb) cb.style.display = '';
+  }
+  var urlq = new URLSearchParams(location.search);
+  var FROM_PAGE = urlq.get('from') || null;
+  var PRE_Q = urlq.get('q') || null;
+  var EMB = null, EMB_TRIED = false;
+  function decodeVec(b64){
+    var raw = atob(b64), n = raw.length, a = new Float32Array(n);
+    for (var i = 0; i < n; i++){ var v = raw.charCodeAt(i); a[i] = v > 127 ? v - 256 : v; }
+    return a;
+  }
+  function esc(s){ return s.replace(/[&<>]/g, function(c){ return { '&':'&amp;','<':'&lt;','>':'&gt;' }[c]; }); }
+  function add(cls, html){
+    var d = document.createElement('div'); d.className = 'ac-msg ' + cls; d.innerHTML = html;
+    log.appendChild(d); log.scrollTop = log.scrollHeight;
+    try{ d.scrollIntoView({ block: 'nearest' }); }catch(sie){}
+    return d;
+  }
+  function norm(s){
+    return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9 ]/g, '');
+  }
+  var VOCAB = null;
+  function buildVocab(){
+    VOCAB = {};
+    INDEX.forEach(function(e){
+      ((e.NB || '') + ' ' + (e.NT || '')).split(' ').forEach(function(w){
+        if (w.length > 3) VOCAB[w] = (VOCAB[w] || 0) + 1;
+      });
+    });
+  }
+  function editDist(a, b){
+    var la = a.length, lb = b.length, row = [], i, j;
+    for (j = 0; j <= lb; j++) row[j] = j;
+    for (i = 1; i <= la; i++){
+      var prev = row[0]; row[0] = i;
+      for (j = 1; j <= lb; j++){
+        var cur = row[j];
+        row[j] = Math.min(row[j] + 1, row[j - 1] + 1, prev + (a[i - 1] === b[j - 1] ? 0 : 1));
+        prev = cur;
+      }
+    }
+    return row[lb];
+  }
+  function correctWord(w){
+    if (!VOCAB) buildVocab();
+    var best = null, bd = 3, bc = 0;
+    for (var v in VOCAB){
+      if (Math.abs(v.length - w.length) > 2) continue;
+      var d = editDist(w, v);
+      if (d < bd || (d === bd && VOCAB[v] > bc)){ best = v; bd = d; bc = VOCAB[v]; }
+    }
+    return bd <= 2 ? best : null;
+  }
+  function dfOf(s){
+    var n = 0;
+    for (var m = 0; m < INDEX.length; m++){ if ((INDEX[m].NB || '').indexOf(s) > -1) n++; }
+    return n;
+  }
+  function stemOf(w){ return (w.length > 6 && w.length <= 9) ? w.slice(0, 6) : w; }
+  function retrieve(question, qvec){
+    var ql = question.toLowerCase();
+    var extra = [];
+    var textMention = /sunset|boulevard|rainbow|norma|desmond|joe gillis|betty|max|nan dear|gladys|dolly|errol/.test(ql);
+    var essayish = /essay|structure|introduction|intro |conclusion|paragraph|contention|topic sentence|plan|writing about/.test(ql);
+    if (/section\s*c|argument|persuasi|language analysis|analysing language/.test(ql)) extra = ['analysing', 'argument', 'language', 'persuade'];
+    else if (/section\s*b|creating|framework|stimul|personal journey|imaginative|creative/.test(ql)) extra = ['creating', 'texts', 'framework', 'stimulus'];
+    else if (/section\s*a|text response|analytical/.test(ql) || (textMention && essayish)) extra = ['analytical', 'text', 'response', 'essay', 'structure'];
+    var STOP = {the:1,and:1,that:1,this:1,with:1,for:1,from:1,was:1,are:1,were:1,have:1,has:1,had:1,
+      what:1,when:1,where:1,which:1,who:1,whom:1,why:1,how:1,does:1,did:1,can:1,could:1,should:1,
+      would:1,will:1,you:1,your:1,about:1,tell:1,give:1,show:1,quickly:1,please:1,need:1,want:1,
+      know:1,some:1,any:1,all:1,not:1,but:1,into:1,out:1,use:1,used:1,using:1,mean:1,means:1};
+    var terms = ql.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, ' ')
+      .split(/\s+/).filter(function(w){ return w.length > 2 && !STOP[w]; }).concat(extra)
+      .map(function(w){ return norm(w).replace(/ /g, ''); });
+    // typo tolerance: a word that appears nowhere on the site is corrected against site vocabulary
+    terms = terms.map(function(w){
+      if (w.length > 3 && dfOf(w) === 0){ var c = correctWord(w); if (c) return c; }
+      return w;
+    });
+    // IDF: rare words are worth far more than common ones
+    var tWeight = terms.map(function(w){
+      var dfw = dfOf(w), df = dfw > 0 ? dfw : dfOf(stemOf(w));
+      return Math.max(0.2, Math.log((INDEX.length + 1) / (df + 1)));
+    });
+    var yearMatch = ql.match(/20\d\d/);
+    var year = yearMatch ? yearMatch[0] : null;
+    var numWords = {one:'1',two:'2',three:'3',four:'4',five:'5',six:'6',seven:'7',eight:'8',nine:'9',ten:'10'};
+    function numOf(m){ return m ? (numWords[m[1]] || m[1]) : null; }
+    var actNum = numOf(ql.match(/act\s*(\d+|one|two|three)/));
+    var sceneNum = numOf(ql.match(/scene\s*(\d+|one|two|three|four|five|six|seven|eight|nine|ten)/));
+    function hasNum(t, label, n){ return (' ' + t + ' ').indexOf(' ' + label + ' ' + n + ' ') > -1; }
+    var sceneExists = true;
+    if (actNum || sceneNum){
+      sceneExists = INDEX.some(function(e){
+        var tt = e.NT || '';
+        return (!actNum || hasNum(tt, 'act', actNum)) && (!sceneNum || hasNum(tt, 'scene', sceneNum));
+      });
+    }
+    var scored = INDEX.map(function(e, idx){
+      var t = e.NT || '', p = e.NP || '', b = e.NB || '', s = 0;
+      var tSq = t.replace(/ /g, ''), bSq = b.replace(/ /g, '');
+      terms.forEach(function(w, ti){
+        var stem = stemOf(w), wgt = tWeight[ti];
+        if (t.indexOf(w) > -1 || tSq.indexOf(w) > -1) s += 4 * wgt;
+        else if (t.indexOf(stem) > -1) s += 3 * wgt;
+        if (p.indexOf(w) > -1) s += 2 * wgt; else if (p.indexOf(stem) > -1) s += 2 * wgt;
+        var i2 = -1, n = 0;
+        while ((i2 = b.indexOf(stem, i2 + 1)) > -1 && n < 5){ n++; }
+        if (n === 0 && w.length > 5){
+          i2 = -1;
+          while ((i2 = bSq.indexOf(w, i2 + 1)) > -1 && n < 5){ n++; }
+        }
+        s += n * wgt;
+      });
+      if (year && (t.indexOf(year) > -1 || p.indexOf(year) > -1)) s += 25;
+      if (typeof FROM_PAGE !== 'undefined' && FROM_PAGE && e.u.indexOf(FROM_PAGE) === 0) s += 6;
+      if (actNum || sceneNum){
+        var hitA = actNum && hasNum(t, 'act', actNum);
+        var hitS = sceneNum && hasNum(t, 'scene', sceneNum);
+        if (actNum && sceneNum){ if (hitA && hitS) s += 25; }
+        else if (hitA || hitS) s += 12;
+        if (!sceneExists && e.u.indexOf('scene-summar') > -1) s += 20;
+      }
+      if (qvec && EMB && EMB.vecs[idx]){
+        var vv = EMB.vecs[idx], dot = 0;
+        for (var z = 0; z < qvec.length; z++){ dot += qvec[z] * vv[z]; }
+        var cos = dot / 127;
+        if (cos > 0.2) s += Math.round((cos - 0.2) * 100);
+      }
+      return [s, e, idx];
+    });
+    var scoreByIdx = {};
+    scored.forEach(function(x){ scoreByIdx[x[2]] = x[0]; });
+    scored = scored.filter(function(x){ return x[0] > 0; }).sort(function(a, b){ return b[0] - a[0]; });
+    var seen = {}, picked = [], out = [];
+    for (var k = 0; k < scored.length && picked.length < 3; k++){
+      var e = scored[k][1], pg = e.u.split('#')[0];
+      if (!seen[pg]){ seen[pg] = 1; picked.push({ e: e, i: scored[k][2] }); out.push(e); }
+    }
+    // pull the sibling sections ADJACENT to each match (a heading's content lives in
+    // the Summary/Analysis chunks that follow it, not at the top of the page)
+    picked.forEach(function(pe){
+      var page = pe.e.u.split('#')[0], cands = [];
+      for (var m = 0; m < INDEX.length; m++){
+        if (INDEX[m].u.split('#')[0] === page && out.indexOf(INDEX[m]) === -1 && (INDEX[m].b || '').length > 40){
+          // rank siblings by their own relevance, tiebreak by closeness (after preferred)
+          var dist = m > pe.i ? m - pe.i : (pe.i - m) * 3;
+          cands.push([-(scoreByIdx[m] || 0), dist, m]);
+        }
+      }
+      cands.sort(function(a, b){ return a[0] - b[0] || a[1] - b[1]; });
+      var quota = picked.indexOf(pe) === 0 ? 10 : 5;
+      cands.slice(0, quota).map(function(c){ return c[2]; }).sort(function(a, b){ return a - b; })
+        .forEach(function(m){ out.push(INDEX[m]); });
+    });
+    out = out.slice(0, 17);
+    // guarantee: every rare query word gets its best chunk into the excerpts
+    var added = 0;
+    terms.forEach(function(w, ti){
+      if (tWeight[ti] < 3.5 || added >= 3) return;
+      var have = out.some(function(e){ return ((e.NB || '') + ' ' + (e.NT || '')).indexOf(w) > -1; });
+      if (have) return;
+      for (var k2 = 0; k2 < scored.length; k2++){
+        var e2 = scored[k2][1];
+        if (((e2.NB || '') + ' ' + (e2.NT || '')).indexOf(w) > -1 && out.indexOf(e2) === -1){
+          out.push(e2); added++; break;
+        }
+      }
+    });
+    return out.slice(0, 20);
+  }
+  function ask(){
+    var question = q.value.trim();
+    if (!question || busy) return;
+    q.value = '';
+    add('ac-user', esc(question.length > 400 ? question.slice(0, 400) + '\u2026' : question));
+    var chipsEl = document.getElementById('ac-chips');
+    if (chipsEl) chipsEl.style.display = 'none';
+    if (question.length > 1200){
+      add('ac-bot', 'That reads like a full essay \u2014 and marking essays is the <a href="marker.html">Essay Marker</a>\u2019s department; it will score it against the criteria properly. If you would like my help, ask me about one paragraph, one technique or one quote at a time.');
+      saveChat(); return;
+    }
+    var wait = add('ac-bot', '<em>Max is consulting the guide</em><span class="ac-dots"><i></i><i></i><i></i></span>');
+    busy = true; btn.disabled = true;
+    var pIdx = INDEX ? Promise.resolve() : fetch(window.AC_INDEX_URL).then(function(r){ return r.json(); }).then(function(d){
+      d.forEach(function(e){
+        e.NT = norm(e.t || ''); e.NP = norm(e.p || ''); e.NB = norm(e.b || '');
+      });
+      INDEX = d;
+    });
+    var pEmb = EMB_TRIED ? Promise.resolve() : fetch(window.AC_EMB_URL)
+      .then(function(r){ if (!r.ok) throw 0; return r.json(); })
+      .then(function(d){ EMB = { dim: d.dim, vecs: d.v.map(decodeVec) }; })
+      .catch(function(){ EMB = null; })
+      .then(function(){ EMB_TRIED = true; });
+    var pQvec = workerFetch({ embed: true, input: [question] }).then(function(r){ return r.json(); })
+      .then(function(j){ return (j.data && j.data[0] && j.data[0].embedding) || null; })
+      .catch(function(){ return null; });
+    Promise.all([pIdx, pEmb, pQvec])
+    .then(function(res){
+      var qvec = null;
+      if (res[2] && EMB){
+        var dm = EMB.dim, v = res[2].slice(0, dm), nn = 0;
+        for (var i = 0; i < dm; i++){ nn += v[i] * v[i]; }
+        nn = Math.sqrt(nn) || 1;
+        qvec = v.map(function(x){ return x / nn; });
+      }
+      var rq = question;
+      if (question.length < 30 && HIST.length){
+        var lastH = HIST[HIST.length - 1];
+        rq = question + ' ' + lastH.q + ' ' + lastH.a.slice(0, 150);
+      }
+      var chunks = retrieve(rq, qvec);
+      if (!chunks.length){
+        wait.innerHTML = "I couldn't find anything in the guide about that. Try different words, or browse the sidebar \u2014 and if it's a real gap, tell your teacher.";
+        busy = false; btn.disabled = false; return;
+      }
+      var context = chunks.map(function(c, i){
+        return '[' + (i + 1) + '] From ' + c.t + ' (page: ' + c.p + '):' + String.fromCharCode(10) + (c.b || c.t);
+      }).join(String.fromCharCode(10) + String.fromCharCode(10));
+      var NL = String.fromCharCode(10);
+      var examDate = new Date(2026, 9, 27, 9, 0, 0), today = new Date();
+      var daysLeft = Math.max(0, Math.ceil((examDate - today) / 86400000));
+      var hr = today.getHours();
+      var partOfDay = hr < 12 ? 'morning' : (hr < 18 ? 'afternoon' : 'evening');
+      var dateNote = ' Today is ' + today.toDateString() + ' and it is currently ' + partOfDay + ' for the student (greet accordingly, if you greet at all); the English exam is on Tuesday 27 October 2026 at 9am, ' + daysLeft + ' days from now - use this when asked about revision timing.';
+      var ctxNote = '';
+      if (FROM_PAGE){
+        for (var fi = 0; fi < INDEX.length; fi++){
+          if (INDEX[fi].u.indexOf(FROM_PAGE) === 0){
+            ctxNote = " The student clicked Ask Max while reading the page '" + INDEX[fi].t + "' (" + INDEX[fi].p + "), so vague questions probably refer to that page.";
+            break;
+          }
+        }
+      }
+      var convo = '';
+      if (HIST.length){
+        convo = NL + NL + 'RECENT CONVERSATION (for context):';
+        HIST.slice(-2).forEach(function(h){
+          convo += NL + 'Student: ' + h.q.slice(0, 400) + NL + 'Max: ' + h.a.slice(0, 600);
+        });
+      }
+      var prompt = "You are 'Max', the study assistant of a VCE English exam preparation " +
+        "website (texts: Sunset Boulevard and Rainbow's End), named after Max von Mayerling - " +
+        "courteous, precise and quietly devoted, like the butler himself. A light touch of that " +
+        "character is welcome but accuracy always comes first. Answer the student's question using " +
+        "ONLY the excerpts below from the site. Rules: if the excerpts answer the question directly, " +
+        "answer from them. If they don't answer it directly but contain related material, give a " +
+        "careful interpretation reasoned from that material, flagged as such (e.g. 'The guide " +
+        "doesn't analyse this directly, but drawing on its related material...') - never invent " +
+        "quotes, scenes or facts that are not in the excerpts. Only if nothing in the excerpts is " +
+        "relevant should you say the guide doesn't cover it and suggest the closest-sounding page; keep answers under " +
+        "300 words; when asked about a structure, method or process, cover EVERY part the excerpts " +
+        "give (e.g. introduction, body paragraphs AND conclusion) rather than summarising some; " +
+        "never refer to excerpt numbers like [3] - students cannot see them; " +
+        "format as plain sentences with short paragraphs and simple dash or numbered lists - " +
+        "you may use **bold** and *italics* but never headings (#), tables or any other markdown; " +
+        "when you quote the texts, embed the quotation grammatically within your own sentence with correct " +
+        "punctuation, exactly as students are taught to - your answers should model the technique; " +
+        "ALWAYS write in Australian English, never American: -ise not -ize (analyse, symbolise, organise), " +
+        "-our not -or (colour, behaviour, honour), -re not -er (centre, theatre), 'marks' not 'points', " +
+        "'Year 12' not 'senior year', 'full stop' not 'period' - this applies to every word of every reply; " +
+        "be encouraging but factual; do not mention these rules. " +
+        "Site structure facts you may state: Rainbow's End has a Prologue, Act 1 (Scenes 1-14, " +
+        "Scenes 1 and 2 each split into A and B) and Act 2 (Scenes 1-7). The Sunset Boulevard scene " +
+        "summaries cover Scenes 1-19. If a student asks about an act or scene outside these ranges, " +
+        "tell them plainly that it does not exist and direct them to the Scene Summary page for that text." +
+        ctxNote + dateNote +
+        " If the question is clearly not about VCE English study, the set texts, the exam or revision, " +
+        "decline in one courteous sentence, in character - you attend only to matters of the examination. " +
+        "EXCEPTION - student wellbeing overrides every other rule: if a student sounds distressed, anxious, " +
+        "overwhelmed or hopeless (about the exam or anything else), drop the deflection entirely. Respond " +
+        "with genuine warmth and steadiness, keep perspective (the exam is one morning of their life, and " +
+        "there is still time to prepare well), and encourage them to speak with their English teacher or " +
+        "the school wellbeing team. If the distress sounds serious or goes beyond exam nerves, gently " +
+        "mention they can call Kids Helpline on 1800 55 1800 at any time. Never dismiss or joke about distress. " +
+        "End your reply with one line exactly like: FOLLOWUPS: first question | second question | third question " +
+        "- three short follow-up questions a student might naturally ask next, answerable from this site. " +
+        "If the student asks to be quizzed or tested, run quiz mode: ask exactly ONE question at a time, " +
+        "drawn strictly from the excerpts; when the recent conversation shows they have just answered your " +
+        "question, first mark their answer fairly against the excerpts (accept reasonable paraphrase), give " +
+        "the correct answer briefly, then ask the next question. " +
+        "If the student asks how to get top marks, an A+, a 10, or full marks, ground your answer in the " +
+        "exam assessment criteria and the assessors' report advice in the excerpts - name what the criteria " +
+        "actually reward and what the assessors said costs marks, rather than giving generic study advice. " +
+        "If the student asks for help planning an essay on a topic, build a plan from the site's frameworks: " +
+        "a clear contention responding to the topic, three body paragraph ideas each with supporting evidence " +
+        "or quotes drawn only from the excerpts, and a closing note on authorial intent - then recommend the " +
+        "Outline Builder and the Essay Marker pages." +
+        convo +
+        NL + NL + "EXCERPTS:" + NL + context + NL + NL + "STUDENT QUESTION: " + question;
+      function renderFinal(ans){
+        var fu = [];
+        var lines = ans.split(NL).filter(function(ln){
+          var m = ln.match(/^ *FOLLOWUPS: ?(.*)$/);
+          if (m){ fu = m[1].split('|').map(function(s2){ return s2.trim(); }).filter(Boolean); return false; }
+          return true;
+        });
+        var body = lines.join(NL).replace(/ +$/, '');
+        var srcs = chunks.slice(0, 3).map(function(c){
+          return '<a href="' + c.u + '">' + esc(c.t) + '</a>';
+        }).join(' &middot; ');
+        var fmt = esc(body)
+          .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+          .replace(/\*([^*]+)\*/g, '<em>$1</em>');
+        var fuHtml = fu.length ? '<div class="ac-fu">' + fu.slice(0, 3).map(function(f){
+          return '<button type="button" class="ac-chip ac-fu-btn">' + esc(f) + '</button>';
+        }).join('') + '</div>' : '';
+        wait.innerHTML = fmt.split(NL).map(function(ln){
+          var m = ln.match(/^#+ ?(.*)$/);
+          return m ? '<strong>' + m[1] + '</strong>' : ln;
+        }).join('<br>') + fuHtml +
+          '<div class="ac-src"><button type="button" class="ac-copy" title="Copy this answer">Copy</button> Read more: ' + srcs + '</div>';
+        HIST.push({ q: question, a: body });
+        if (HIST.length > 2) HIST = HIST.slice(-2);
+        saveChat();
+        try{
+          var topPage = chunks[0] ? chunks[0].u.split('#')[0] : 'none';
+          if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: 'max-cite/' + topPage, event: true });
+          else (new Image()).src = 'https://nmo.goatcounter.com/count?p=' + encodeURIComponent('max-cite/' + topPage) + '&e=true';
+        }catch(gcErr){}
+      }
+      var chatPayload = { messages: [{ role: 'user', content: prompt }], max_tokens: 700 };
+      return workerFetch(chatPayload).then(function(r){ return r.json(); }).then(function(j){
+        if (j.error){ throw new Error(j.error.message || j.error); }
+        var ans = j.choices && j.choices[0] ? j.choices[0].message.content : 'No answer returned.';
+        renderFinal(ans);
+      });
+    })['catch'](function(e){
+      wait.innerHTML = 'Something went wrong: ' + esc(String(e.message || e)) + '<br>If the day\u2019s shared allowance is spent, it renews overnight \u2014 and the guide itself is always here.';
+      saveChat();
+    }).then(function(){ busy = false; btn.disabled = false; });
+  }
+  btn.addEventListener('click', ask);
+  q.addEventListener('keydown', function(e){ if (e.key === 'Enter') ask(); });
+  log.addEventListener('click', function(e){
+    var t = e.target;
+    if (t.classList && t.classList.contains('ac-fu-btn')){ q.value = t.textContent; ask(); return; }
+    if (t.classList && t.classList.contains('ac-copy')){
+      var bubble = t.closest('.ac-bot');
+      if (!bubble) return;
+      var cl = bubble.cloneNode(true);
+      var rm = cl.querySelectorAll('.ac-src, .ac-fu');
+      for (var ri = 0; ri < rm.length; ri++){ rm[ri].parentNode.removeChild(rm[ri]); }
+      var txt = cl.innerText;
+      if (navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(txt).then(function(){
+          t.textContent = 'Copied'; setTimeout(function(){ t.textContent = 'Copy'; }, 1600);
+        });
+      }
+    }
+  });
+  var clr = document.getElementById('ac-clear');
+  if (clr) clr.addEventListener('click', clearChat);
+  try{
+    var savedChat = JSON.parse(localStorage.getItem('maxChat') || 'null');
+    if (savedChat && savedChat.h){
+      log.innerHTML = savedChat.h;
+      HIST = savedChat.hist || [];
+      var cb2 = document.getElementById('ac-chips');
+      if (cb2) cb2.style.display = 'none';
+      log.scrollTop = log.scrollHeight;
+    }
+  }catch(restoreErr){}
+  var CHIP_POOL = [
+    'How do I structure a Section A essay?',
+    'What does the monkey symbolise in Sunset Boulevard?',
+    'What happens in Act 2, Scene 5 of Rainbow\u2019s End?',
+    'What did the assessors say about Section C?',
+    'Give me quotes about reality and illusion',
+    'How should I revise this week?',
+    'Who is Norma Desmond?',
+    'How are Gladys and Dolly different?',
+    'What does the staircase symbolise?',
+    'What is mise-en-sc\u00e8ne?',
+    'How do I write a strong contention?',
+    'What should go in a Section B piece?',
+    'What are hinge sentences?',
+    'What quotes show Nan Dear\u2019s resilience?',
+    'How is the Hollywood dream criticised in Sunset Boulevard?',
+    'What happened at the New Year\u2019s Eve party?',
+    'What does the flood mean in Rainbow\u2019s End?',
+    'What did the 2025 assessors warn about?',
+    'How do I analyse a persuasive article?',
+    'What film techniques should I mention in an essay?',
+    'How do I use topic sentences well?',
+    'What is the exam format?'
+  ];
+  var chipBox = document.getElementById('ac-chips');
+  if (chipBox){
+    var pool = CHIP_POOL.slice();
+    for (var si = pool.length - 1; si > 0; si--){
+      var sj = Math.floor(Math.random() * (si + 1));
+      var tmp = pool[si]; pool[si] = pool[sj]; pool[sj] = tmp;
+    }
+    pool.slice(0, 6).forEach(function(txt){
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'ac-chip'; b.textContent = txt;
+      b.addEventListener('click', function(){ q.value = txt; ask(); });
+      chipBox.appendChild(b);
+    });
+  }
+  if (PRE_Q){ q.value = PRE_Q; ask(); }
+})();
+</script>"""
+
+hub_tools = TOOL_LABEL + """<h1>Study Tools</h1>
+<p class="lede">Interactive revision tools built from the guide&rsquo;s own content.</p>
+<h2 class="in-part-head">Tools</h2>
+<div class="ch-list">
+  <a class="ch-card" href="flashcards.html"><span class="ch-num">1</span><span>Quote Flashcards</span></a>
+  <a class="ch-card" href="practice-topics.html"><span class="ch-num">2</span><span>Practice Topics &amp; Essay Timer</span></a>
+  <a class="ch-card" href="glossary.html"><span class="ch-num">3</span><span>Glossary of Techniques</span></a>
+  <a class="ch-card" href="essay-marker.html"><span class="ch-num">4</span><span>Essay Marker</span></a>
+  <a class="ch-card" href="technique-quiz.html"><span class="ch-num">5</span><span>Technique Quiz</span></a>
+  <a class="ch-card" href="exam-generator.html"><span class="ch-num">6</span><span>Exam Generator</span></a>
+  <a class="ch-card" href="outline-builder.html"><span class="ch-num">7</span><span>Essay Outline Builder</span></a>
+  <a class="ch-card" href="vocab-upgrader.html"><span class="ch-num">8</span><span>Vocabulary Upgrader</span></a>
+  <a class="ch-card" href="micro-drills.html"><span class="ch-num">9</span><span>Micro-Drills</span></a>
+  <a class="ch-card" href="ask-max.html"><span class="ch-num">10</span><span>Ask Max</span></a>
+  <a class="ch-card" href="scavenger-hunt.html"><span class="ch-num">11</span><span>The Director&rsquo;s Cut</span></a>
+</div>
+<p style="font-family:var(--sans);font-size:14px;color:var(--muted)">The Essay Marker gives a calibrated score out of 10 with criteria-based feedback for Sections A, B and C. It needs an AI connection: a free GitHub Models token or an Anthropic API key (set up inside the tool; stored only in your browser).</p>"""
+
+display_num += 1
+tools_num = display_num
+nav_items.append({"num": tools_num, "title": "Study Tools", "file": "study-tools.html",
+                  "chapters": [{"title": "Quote Flashcards", "file": "flashcards.html"},
+                               {"title": "Practice Topics & Essay Timer", "file": "practice-topics.html"},
+                               {"title": "Glossary of Techniques", "file": "glossary.html"},
+                               {"title": "Essay Marker", "file": "essay-marker.html"},
+                               {"title": "Technique Quiz", "file": "technique-quiz.html"},
+                               {"title": "Exam Generator", "file": "exam-generator.html"},
+                               {"title": "Essay Outline Builder", "file": "outline-builder.html"},
+                               {"title": "Vocabulary Upgrader", "file": "vocab-upgrader.html"},
+                               {"title": "Micro-Drills", "file": "micro-drills.html"},
+                               {"title": "Ask Max", "file": "ask-max.html"},
+                               {"title": "The Director's Cut", "file": "scavenger-hunt.html"}]})
+all_pages.append({"file": "study-tools.html", "title": "Study Tools", "html": hub_tools, "nav": "study-tools.html"})
+all_pages.append({"file": "flashcards.html", "title": "Quote Flashcards", "html": fc_page, "nav": "study-tools.html"})
+all_pages.append({"file": "practice-topics.html", "title": "Practice Topics & Essay Timer", "html": tp_page, "nav": "study-tools.html"})
+all_pages.append({"file": "glossary.html", "title": "Glossary of Techniques", "html": gl_page, "nav": "study-tools.html"})
+hunt_page = TOOL_LABEL + """<h1>The Director’s Cut</h1>
+<p class="lede">A thirty-stage scavenger hunt through this guide. Every answer is buried in these pages — in the scenes, the quote banks, the glossary, the exemplars. No answer is typed anywhere in this page’s code, so there is only one way through: read like a top-scoring student. Progress saves on this device. Finish, and bring what you find to Mr Morlin.</p>
+<div id="hunt-dots" class="hunt-dots"></div>
+<div id="hunt-card" class="hunt-card"></div>
+<p style="font-family:var(--sans);font-size:12px;color:var(--muted)"><button type="button" id="hunt-reset" class="hunt-reset">Start over</button></p>
+<script>
+(function(){
+  var ST = [{n:'I',q:'Norma buys Joe a coat he calls \u2018a little too dressy\u2019 for the copy desk he once sat behind. In which city did that desk stand?',h:'Joe Gillis\u2019s own words, in the quote banks \u2014 where fame is the subject.',a:['c746359b','f00aec40']},{n:'II',q:'The finance company finally catches up, and Joe\u2019s car is taken while former silent stars play cards. Give the NUMBER of the scene in which this happens.',h:'The Scene Summaries \u2014 count carefully; the bridge table is the tell.',a:['a37e2a65','b02c793f','c12ceda']},{n:'III',q:'An Italian-derived word for painting with light and shadow \u2014 the extreme contrast that marks film noir\u2019s whole visual temperament. Name the term.',h:'Film Techniques \u2014 the guide\u2019s treatment of noir itself.',a:['fca37f46']},{n:'IV',q:'The policeman gives his word that the family\u2019s encyclopaedias will be kept \u2018____ ____\u2019 (two words) \u2014 then abandons them to the flood, p.174. Complete his broken promise.',h:'Character analysis \u2014 the minor character in uniform.',a:['4d7e81eb']},{n:'V',q:'\u2018First in the family\u2019 with her Leaving Certificate and top of her class in algebra \u2014 yet the position Gladys seeks for Dolly is refused. Name that position.',h:'Gladys Banks \u2014 her proudest scene, and her most humiliating.',a:['2d39e6b4','f9264b45','7a5283ce','e1712b8a','f033f3c3','ae9cb559']},{n:'VI',q:'Founded 1888 on Yorta Yorta Country \u2014 refuge, resistance, and the site of the walk-off that shadows Nan Dear\u2019s memories of being \u2018at the mercy of the manager\u2019. Name it.',h:'The historical context of Rainbow\u2019s End \u2014 before the Flats.',a:['e2295c18','952e2b46','21ad03a9']},{n:'VII',q:'The stage directions grant one household object a miracle: \u2018celestial music is heard\u2019 around it, p.133. Name the object.',h:'The Stage Devices Quote Bank.',a:['bc254096','3200c40b','13a5287f','2f3548e8','9970d271']},{n:'VIII',q:'Section B craft: published pieces you studied may shape your writing and need no referencing. The examiners\u2019 two-word name for such a piece?',h:'What the 2025 report says about Creating a Text.',a:['27e5e8fb','56ed0e18','64f85716']},{n:'IX',q:'Apply, don\u2019t search: \u2018We march for justice. We vote for justice. We die for justice.\u2019 Anaphora\u2019s mirror-twin is at work \u2014 repetition at the END of successive clauses. Name the technique.',h:'Analysing Argument keeps its repetition terms in one place \u2014 twins together.',a:['d5b6803']},{n:'X',q:'Synthesis: one word names the artifice Norma\u2019s cinema sustains AND the false promise waiting at a rainbow\u2019s end \u2014 the Overview lists it beside fame and morality as Hollywood\u2019s obsession. Name it.',h:'The Sunset Boulevard Overview \u2014 then think about what a pot of gold really is.',a:['3e8482bb','3299e0d8','256df104']},{n:'XI',q:'All hand-made, twenty-eight thousand dollars, and paraded to Paramount as proudly as its owner. Name the marque of Norma\u2019s motor car.',h:'Norma\u2019s quote bank \u2014 fame and opulence.',a:['a01a1e98','c2d37999','be078a89','f41eabf1']},{n:'XII',q:'Betty Schaefer was born two blocks from the studio, but she refuses to stay in her current job \u2014 \u2018all my life\u2019, she says. What is that job, in one word?',h:'Betty\u2019s own words, in her character quotes.',a:['7a40a551','adb8cc8e','7b69664e']},{n:'XIII',q:'In Joe\u2019s \u2018mixed-up dream\u2019, a faceless man grinds away at an instrument draped all in black while a chimp dances for pennies. Name the instrument.',h:'The theme where isolation meets decay.',a:['54d9db74','dc4bb999','47852d6b','fa257f45']},{n:'XIV',q:'One word completes the guide\u2019s judgement twice over: \u2018The Queen\u2019s non-______ language mirrors the nation\u2019s non-______ identity at mid-century.\u2019 The same word is a persuasive technique you must know for Section C.',h:'The Royals\u2019 analysis in Rainbow\u2019s End \u2014 and the terms and strategies of Analysing Argument.',a:['16ae5382','4462071b','c8ab4450']},{n:'XV',q:'Apply, don\u2019t search: a writer covering the same event swaps \u2018killed\u2019 for \u2018slaughtered\u2019. Analysts name this choice of emotionally weighted wording word ______. Give the term.',h:'Terms and strategies \u2014 specific word choice.',a:['9e6ba521','b5754016','3f10ae9','57eafbb8','31ea6091']},{n:'XVI',q:'Norma despises one word above all: \u2018I hate that word. It\u2019s a ______\u2019 \u2014 complete her correction.',h:'Her relationship with ambition, in the theme analyses.',a:['132087ac','26c98123']},{n:'XVII',q:'She sits very close, and a scent follows that Joe admits is \u2018not my favorite perfume, not by a long shot\u2019. Name the flower.',h:'Where isolation meets decay.',a:['c4d6ece7','74d2cbae']},{n:'XVIII',q:'The butler\u2019s confession, the film\u2019s cruellest devotion: \u2018You see, I was her first ______.\u2019',h:'Max von Mayerling, in his own words.',a:['c928cb7','3d4cf266','eb3a44a']},{n:'XIX',q:'Joe\u2019s cruel museum-piece nickname for Norma\u2019s bridge guests \u2014 the discarded stars of the silent era. One word.',h:'Scene 8 \u2014 or the example contention that borrows the same word.',a:['7ff96a97','d5e9526e','f357a51e']},{n:'XX',q:'Betty Schaefer was born two blocks from the studio \u2014 name the avenue.',h:'Betty\u2019s character quotes.',a:['73824127','9b9c0581','8cde3f4b']},{n:'XXI',q:'At her height, how many fan letters reached Norma in a single week? Words or digits.',h:'Fame and opulence \u2014 Max keeps the count.',a:['4961ff3f','999c7b4','a42f1aba']},{n:'XXII',q:'Complete Nan Dear\u2019s quiet defiance, p.159: \u2018At least here we ______ __ ______ on our own. Not like the Cummeragunja days\u2026\u2019 Three little words.',h:'The thematic quote banks of Rainbow\u2019s End \u2014 under trauma.',a:['9cdd8c4d','2ec02895','347ebf24']},{n:'XXIII',q:'His visit is \u2018not a casual or friendly one\u2019 \u2014 the official whose judgement could take everything from Nan and Gladys. His title?',h:'The minor characters of Rainbow\u2019s End.',a:['5e263aa3','e8da6f9a','1e1bd9b3']},{n:'XXIV',q:'Harrison anchors her fiction with a real historical figure: Pastor Doug ______. Surname.',h:'Historical awareness, in the language analyses of Rainbow\u2019s End.',a:['c924ed15','12fb6051','c1b7729e']},{n:'XXV',q:'Rumbalara \u2014 the First Nations housing estate of Harrison\u2019s own family story \u2014 stands in which town?',h:'The author\u2019s background.',a:['4fa5bb20']},{n:'XXVI',q:'Section B craft: the assessors name four purposes a response could take \u2014 \u2018explain, express, ______ or argue\u2019. The missing verb.',h:'What the 2025 report says about Creating a Text.',a:['380a3610']},{n:'XXVII',q:'Section B craft: besides the given title, your piece must respond to at least one piece of ______ ______. Two words.',h:'The exam format pages \u2014 Section B\u2019s requirements.',a:['a067e6d3','5743958e','4e2d3e3d']},{n:'XXVIII',q:'Apply, don\u2019t search: \u2018As a surgeon of thirty years, I can assure you this policy will cost lives.\u2019 Name the persuasive technique.',h:'Terms and strategies \u2014 who gets believed, and why.',a:['5d06f7e9','d79a7c68','c7a8e048']},{n:'XXIX',q:'Apply, don\u2019t search: a careful writer softens \u2018all students\u2019 to \u2018most students\u2019. Name the class of words that tune a claim\u2019s level of impact \u2014 the guide names two, either will do.',h:'Particular language structures, in Analysing Argument.',a:['8c13d956','9f99e3bd','47fd0492','54276f61','6ad7171c']},{n:'XXX',q:'Apply, to close: \u2018I\u2019d rather cut off my arm than sit through another formulaic essay.\u2019 Name the technique \u2014 then never let Max catch you using its subject matter.',h:'Exaggeration has its own entry in the terms and strategies.',a:['4146ed94','789f995c','650f1786']}];
+  var CIPHER = 'MHZkc2FwGSM0d3JFH0F7eD47N3o=';
+  var card = document.getElementById('hunt-card'), dots = document.getElementById('hunt-dots');
+  var REBUFF = ['Not quite \u2014 the house rewards closer reading.',
+    'Max shakes his head. Consult the guide again.',
+    'The reel keeps spinning. Look once more.'];
+  function nrm(s){ return s.toLowerCase().replace(/[^a-z0-9]/g, ''); }
+  function fnv(s){
+    var h = 2166136261 >>> 0;
+    for (var i = 0; i < s.length; i++){ h ^= s.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; }
+    return h.toString(16);
+  }
+  function state(){ try{ return JSON.parse(localStorage.getItem('huntState') || '{"n":0,"w":0}'); }catch(e){ return { n: 0, w: 0 }; } }
+  function save(st){ try{ localStorage.setItem('huntState', JSON.stringify(st)); }catch(e){} }
+  function renderDots(n){
+    var out = '';
+    for (var i = 0; i < ST.length; i++){
+      out += '<span class="hunt-dot' + (i < n ? ' done' : (i === n ? ' now' : '')) + '">' + ST[i].n + '</span>';
+    }
+    dots.innerHTML = out;
+  }
+  function finish(){
+    var key = '';
+    for (var i = 0; i < ST.length; i++){ key += ST[i].a[0]; }
+    var raw = atob(CIPHER), out = '';
+    for (var j = 0; j < raw.length; j++){ out += String.fromCharCode(raw.charCodeAt(j) ^ key.charCodeAt(j % key.length)); }
+    card.innerHTML = '<div class="hunt-done"><div class="hunt-code">' + out + '</div>' +
+      '<p>All thirty locks opened. You have crossed both texts, walked a personal journey and named the machinery of persuasion \u2014 that is a revision session most students never do. Show the words above to Mr Morlin.</p></div>';
+    renderDots(ST.length);
+  }
+  function render(){
+    var st = state();
+    renderDots(st.n);
+    if (st.n >= ST.length){ finish(); return; }
+    var s = ST[st.n];
+    card.innerHTML = '<div class="hunt-stage"><div class="hunt-num">Stage ' + s.n + ' of X</div>' +
+      '<p class="hunt-q">' + s.q + '</p>' +
+      '<div class="tool-bar" style="margin:.6em 0"><input id="hunt-a" type="text" autocomplete="off" placeholder="Your answer\u2026" style="flex:1;padding:11px 14px;border:1px solid var(--line);border-radius:9px;background:var(--card);color:var(--ink);font-family:var(--serif);font-size:15.5px"><button id="hunt-go">Unlock</button></div>' +
+      '<div id="hunt-msg" class="hunt-msg"></div>' +
+      (st.w >= 2 ? '<details class="hunt-hint"><summary>Where to look</summary><p>' + s.h + '</p></details>' : '<p class="hunt-small">A hint appears after two wrong tries.</p>') +
+      '</div>';
+    var inp = document.getElementById('hunt-a'), go = document.getElementById('hunt-go'), msg = document.getElementById('hunt-msg');
+    function attempt(){
+      var v = nrm(inp.value);
+      if (!v) return;
+      var hv = fnv('h' + (st.n + 1) + ':' + v);
+      if (s.a.indexOf(hv) > -1){
+        var ns = state(); ns.n += 1; ns.w = 0; save(ns); render();
+        window.scrollTo({ top: 0 });
+      } else {
+        var ns2 = state(); ns2.w += 1; save(ns2);
+        msg.textContent = REBUFF[ns2.w % REBUFF.length];
+        card.querySelector('.hunt-stage').classList.remove('hunt-shake');
+        void card.offsetWidth;
+        card.querySelector('.hunt-stage').classList.add('hunt-shake');
+        if (ns2.w === 2) render();
+      }
+    }
+    go.addEventListener('click', attempt);
+    inp.addEventListener('keydown', function(e){ if (e.key === 'Enter') attempt(); });
+    inp.focus();
+  }
+  document.getElementById('hunt-reset').addEventListener('click', function(){
+    try{ localStorage.removeItem('huntState'); }catch(e){}
+    render();
+  });
+  render();
+})();
+</script>"""
+
+all_pages.append({"file": "essay-marker.html", "title": "Essay Marker", "html": em_page, "nav": "study-tools.html"})
+all_pages.append({"file": "technique-quiz.html", "title": "Technique Quiz", "html": qz_page, "nav": "study-tools.html"})
+all_pages.append({"file": "exam-generator.html", "title": "Exam Generator", "html": eg_page, "nav": "study-tools.html"})
+all_pages.append({"file": "outline-builder.html", "title": "Essay Outline Builder", "html": ob_page, "nav": "study-tools.html"})
+all_pages.append({"file": "vocab-upgrader.html", "title": "Vocabulary Upgrader", "html": vu_page, "nav": "study-tools.html"})
+all_pages.append({"file": "micro-drills.html", "title": "Micro-Drills", "html": dr_page, "nav": "study-tools.html"})
+all_pages.append({"file": "ask-max.html", "title": "Ask Max", "html": ac_page, "nav": "study-tools.html"})
+all_pages.append({"file": "scavenger-hunt.html", "title": "The Director's Cut", "html": hunt_page, "nav": "study-tools.html", "nosearch": True})
+_ed = os.path.join(PUBLIC, "assets", "exam")
+for _sub in ("b", "c"):
+    os.makedirs(os.path.join(_ed, _sub), exist_ok=True)
+    for _f in os.listdir(os.path.join(BUILD, "examgen", _sub)):
+        copy_if_changed(os.path.join(BUILD, "examgen", _sub, _f), os.path.join(_ed, _sub, _f))
+_fi = os.path.join(PUBLIC, "assets", "img", "pdffrag")
+os.makedirs(_fi, exist_ok=True)
+for _f in os.listdir(os.path.join(BUILD, "pdffrag", "img")):
+    copy_if_changed(os.path.join(BUILD, "pdffrag", "img", _f), os.path.join(_fi, _f))
+os.makedirs(os.path.join(PUBLIC, "assets", "pdf"), exist_ok=True)
+copy_if_changed(os.path.join(BUILD, "localpdf", "persuasive-techniques-reference.pdf"),
+                os.path.join(PUBLIC, "assets", "pdf", "persuasive-techniques-reference.pdf"))
+copy_if_changed(os.path.join(BUILD, "examgen", "web-template.docx"), os.path.join(_ed, "web-template.docx"))
+print("TOOLS: flashcards=%d topics=%s glossary=%d" % (len(flashcards), {k: len(v) for k, v in topics_data.items()}, len(glossary)))
+
+def rewrite_anchors(scope, current):
+    for a in scope.find_all("a", href=True):
+        if a["href"].startswith("#"):
+            pg = id_to_page.get(a["href"][1:])
+            if pg and pg != current: a["href"] = pg + a["href"]
+
+# ---------------- nav / shell ----------------
+NAV_SHORT = {"Key Takeaways from the 2024 Assessment Report": "2024 Assessment Report",
+             "Key Takeaways from the 2025 Assessment Report": "2025 Assessment Report"}
+def nav_html(active_nav, active_file):
+    out = []
+    for it in nav_items:
+        num = "%02d" % it["num"]
+        if it["chapters"]:
+            is_open = " open" if it["file"] == active_nav else ""
+            cls = ' class="active"' if active_file == it["file"] else ""
+            subs = "".join('<li%s><a href="%s">%s</a></li>' %
+                           (' class="active"' if c["file"] == active_file else "", c["file"], html.escape(c["title"]))
+                           for c in it["chapters"])
+            out.append('<li class="grp"><details%s><summary><a%s href="%s"><span class="num">%s</span>%s</a></summary>'
+                       '<ul class="subnav">%s</ul></details></li>'
+                       % (is_open, cls, it["file"], num, html.escape(NAV_SHORT.get(it["title"], it["title"])), subs))
+        else:
+            cls = ' class="active"' if it["file"] == active_file else ""
+            out.append('<li%s><a href="%s"><span class="num">%s</span>%s</a></li>'
+                       % (cls, it["file"], num, html.escape(NAV_SHORT.get(it["title"], it["title"]))))
+    return "\n".join(out)
+
+ANNOTATIONS = json.load(open(os.path.join(BUILD, "annotations.json"), encoding="utf-8"))
+def apply_annotations(page_file, body):
+    notes = ANNOTATIONS.get(page_file)
+    if not notes:
+        return body, 0
+    CAT_LABEL = {"ideas": "Ideas &amp; interpretation", "structure": "Structure &amp; evidence",
+                 "language": "Language &amp; technique", "audience": "Audience positioning",
+                 "voice": "Voice &amp; craft"}
+    hit = 0
+    used = []
+    for a in notes:
+        q, n, c = a["q"], a["n"], a.get("c", "ideas")
+        if q in body:
+            body = body.replace(q, '<mark class="anno anno-%s" tabindex="0">%s<span class="anno-tip"><b class="anno-cat">%s</b>%s</span></mark>'
+                                % (c, q, CAT_LABEL.get(c, ""), n), 1)
+            hit += 1
+            if c not in used: used.append(c)
+    if hit:
+        legend = "".join('<button class="lg lg-%s" data-cat="%s">%s</button>' % (c, c, CAT_LABEL[c]) for c in used)
+        body = ('<div class="anno-hint">Hover over a highlighted passage (or tap, on touch screens) to see '
+                'what earns marks in that moment.<div class="anno-legend">%s</div></div>' % legend) + body
+    return body, hit
+
+QUOTE_FIX = re.compile(r"(^|[\s\(\[\u2014\u2013>])\u2019(?=\S)")
+def fix_quotes(html_str):
+    return QUOTE_FIX.sub("\\1\u2018", html_str)
+
+def shell(title, active_nav, active_file, main_html, prevnext=""):
+    return """<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>%s &middot; %s</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta property="og:site_name" content="VCE English Exam Preparation Guide">
+<meta property="og:title" content="%s">
+<meta property="og:description" content="South Oakleigh College Units 3/4 English exam preparation guide - texts, essays, practice exams and study tools.">
+<meta property="og:image" content="https://nmo-soc.github.io/VCE-English-Guide/assets/img/soc-logo.png">
+<script>try{if(localStorage.getItem('siteTheme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}</script>
+<link rel="stylesheet" href="assets/style.css?v=45">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="exam-banner" id="countdown" data-target="2026-10-27T09:00:00+11:00">
+  <span class="eb-label">English exam &middot; Tue 27 October, 9:00 am</span>
+  <span class="eb-time"><b id="cd-d">&ndash;</b> days <b id="cd-h">&ndash;</b> hrs <b id="cd-m">&ndash;</b> min <b id="cd-s">&ndash;</b> sec</span>
+</div>
+<button id="menu-toggle" aria-label="Menu">&#9776;</button>
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="index.html">
+      <img class="brand-logo" src="assets/img/soc-logo.png" alt="South Oakleigh College">
+      <span class="brand-title">VCE English</span>
+      <span class="brand-sub">Exam Prep Guide</span>
+    </a>
+    <div class="search-wrap">
+      <input id="search" type="search" placeholder="Search the guide&hellip;" autocomplete="off">
+      <div id="search-results"></div>
+    </div>
+    <nav class="toc"><ol>%s</ol></nav>
+    <div class="side-foot">South Oakleigh College &middot; 2026</div>
+  </aside>
+  <main class="content" id="main">
+    %s
+    %s
+  </main>
+</div>
+%s
+<script src="assets/site.js?v=45"></script>
+<script data-goatcounter="https://nmo.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>""" % (html.escape(title), SITE_TITLE, html.escape(title), nav_html(active_nav, active_file), fix_quotes(main_html), fix_quotes(prevnext),
+       '' if active_file == 'ask-max.html' else '<a id="max-fab" href="ask-max.html?from=' + active_file + '" aria-label="Ask Max a question"><img src="assets/img/max.jpg" alt=""><span>Ask Max</span></a>')
+
+def page_toc(scope):
+    lis = []
+    heads = scope.find_all(["h2", "h3", "h4", "h5"])
+    for h in heads[1:] if heads else []:
+        anc = h.find_parent("section")
+        if anc and anc.get("id"):
+            lis.append('<li class="lvl%s"><a href="#%s">%s</a></li>'
+                       % (h.name[1], anc["id"], html.escape(h.get_text(" ", strip=True))))
+    return ('<details class="page-toc" open><summary>On this page</summary><ul>%s</ul></details>' % "".join(lis)) if lis else ""
+
+# ---------------- search index ----------------
+search = []
+for pg in all_pages:
+    if pg.get("nosearch"): continue
+    if "chapter" in pg:
+        scope, part_title = pg["chapter"]["sec"], pg["part"]["title"]
+    elif "part" in pg:
+        scope, part_title = pg["part"]["sec"], pg["part"]["title"]
+    else:
+        _txt = re.sub(r"\s+", " ", BeautifulSoup(pg["html"], "html.parser").get_text(" "))[:1500]
+        search.append({"t": pg["title"], "p": pg["title"], "u": pg["file"], "b": _txt.strip()})
+        continue
+    if "chapters" in pg and pg["chapters"]:
+        search.append({"t": pg["title"], "p": pg["title"], "u": pg["file"]})
+        continue
+    for h in scope.find_all(["h1", "h2", "h3", "h4", "h5"]):
+        anc = h.find_parent("section")
+        hid = anc.get("id") if anc else None
+        body = ""
+        if anc:
+            import copy as _copy
+            _cl = _copy.copy(anc)
+            for _sub in _cl.find_all("section"): _sub.decompose()
+            body = re.sub(r"\s+", " ", _cl.get_text(" "))[:1500].strip()
+        _t = h.get_text(" ", strip=True)
+        _par = anc.find_parent("section") if anc else None
+        if _par is not None:
+            _ph = _par.find(["h1", "h2", "h3", "h4", "h5"])
+            _pt = _ph.get_text(" ", strip=True) if _ph else ""
+            if _pt and _pt != _t and _pt != pg["title"] and _pt != part_title and len(_pt) < 60:
+                _t = _pt + " - " + _t
+        search.append({"t": _t, "p": part_title,
+                       "u": pg["file"] + ("#" + hid if hid else ""), "b": body})
+search.append({"t": "Essay Marker", "p": "Study Tools", "u": "marker.html",
+               "b": "ai essay marker score feedback section a b c criteria calibrated marking precision mode second opinion handwriting transcription"})
+copy_if_changed(os.path.join(BUILD, "marker.html"), os.path.join(PUBLIC, "marker.html"))
+json.dump(search, open(os.path.join(PUBLIC, "assets", "search.json"), "w", encoding="utf-8"), ensure_ascii=False)
+
+# ---------------- write pages ----------------
+PRACTICE_LINKS = """
+<p>Official past VCE English examinations and examiner reports are published by the VCAA:</p>
+<p><a class="btn-inline" href="https://www.vcaa.vic.edu.au/assessment/vce/examination-specifications-past-examinations-and-examination-reports/english" target="_blank" rel="noopener">Past VCE English examinations (VCAA)</a></p>
+<h2>Practice exams</h2>
+<p>The following practice exams are hosted externally (a free account may be required to view them). They open in a new tab.</p>
+<ul class="exp-list exam-links">
+<li><a href="https://www.studocu.com/en-au/document/hillcrest-christian-college/english/vce-english-section-c-exam-practice-2024-insight-publications/144053159" target="_blank" rel="noopener">Practice Exam I</a></li>
+<li><a href="https://www.studocu.com/en-au/document/kew-high-school/vce-english/vce-english-practice-exam-analyzing-boxing-risks-vs-ama-credibility/127292037" target="_blank" rel="noopener">Practice Exam II</a></li>
+<li><a href="https://www.studocu.com/en-au/document/john-monash-science-school/chemistry-unit-4/vce-english-year-12-trial-exam-paper-2024-comprehensive-task-book/163993956" target="_blank" rel="noopener">Practice Exam III</a></li>
+<li><a href="https://www.studocu.com/en-au/document/melbourne-high-school/english/2025-tssm-vce-english-trial-exam-question-answer-book/142530772" target="_blank" rel="noopener">Practice Exam IV</a></li>
+<li><a href="https://www.studocu.com/en-au/document/melbourne-high-school/english/2025-vce-english-year-12-trial-exam-task-book/143045324" target="_blank" rel="noopener">Practice Exam V</a></li>
+<li><a href="https://www.studocu.com/en-au/document/loreto-mandeville-hall-toorak/english/2025-vce-english-year-12-trial-exam-task-book/141298123" target="_blank" rel="noopener">Practice Exam VI</a></li>
+<li><a href="https://www.studocu.com/en-au/document/loreto-mandeville-hall-toorak/english/2025-vce-english-trial-examination-comprehensive-study-guide/141298120" target="_blank" rel="noopener">Practice Exam VII</a></li>
+</ul>
+<h2>School-purchased trial exams</h2>
+<p>The following trial exams were purchased by South Oakleigh College under licence for the exclusive use of its students. They are available only through the school&rsquo;s SharePoint &mdash; sign in with your school account to view them. Please do not share, repost or distribute them outside the school.</p>
+<ul class="exp-list exam-links">
+<li><a href="https://eduvic.sharepoint.com/:b:/r/sites/EDUVIC_SOC_26_EN34A_NMO/Shared%20Documents/General/Practice%20Exams/Practice%20Exam%20VIII%20with%20Model%20Section%20C.pdf?csf=1&web=1&e=icqicL" target="_blank" rel="noopener">Practice Exam VIII with Model Section C</a></li>
+<li><a href="https://eduvic.sharepoint.com/:b:/r/sites/EDUVIC_SOC_26_EN34A_NMO/Shared%20Documents/General/Practice%20Exams/practice-exam-ix.pdf?csf=1&web=1&e=mycdzw" target="_blank" rel="noopener">Practice Exam IX</a></li>
+</ul>
+"""
+
+for k, pg in enumerate(all_pages):
+    prev_a = ('<a class="pn prev" href="%s"><span>&#8592; Previous</span><b>%s</b></a>'
+              % (all_pages[k-1]["file"], html.escape(all_pages[k-1]["title"]))) if k else "<span></span>"
+    next_a = ('<a class="pn next" href="%s"><span>Next &#8594;</span><b>%s</b></a>'
+              % (all_pages[k+1]["file"], html.escape(all_pages[k+1]["title"]))) if k < len(all_pages)-1 else "<span></span>"
+    pn = '<nav class="prevnext">%s%s</nav>' % (prev_a, next_a)
+    num = next(it["num"] for it in nav_items if it["file"] == pg["nav"])
+
+    if "html" in pg:
+        body = pg["html"]
+        body = re.sub(r'<div class="part-label">Part \d+</div>', '<div class="part-label">Part %02d</div>' % num, body)
+    elif "chapters" in pg and pg["chapters"]:
+        sec = pg["part"]["sec"]
+        for c in pg["chapters"]:
+            if "sec" in c: c["sec"].extract()
+        rewrite_anchors(sec, pg["file"])
+        h1 = sec.find("h1")
+        if h1: h1.insert_before(BeautifulSoup('<div class="part-label">Part %02d</div>' % num, "html.parser"))
+        cards = "".join('<a class="ch-card" href="%s"><span class="ch-num">%d</span><span>%s</span></a>'
+                        % (c["file"], j+1, html.escape(c["title"])) for j, c in enumerate(pg["chapters"]))
+        body = sec.decode() + '<h2 class="in-part-head">In this part</h2><div class="ch-list">%s</div>' % cards
+    elif pg["file"] == "p08-english-exam-generator.html":
+        crumb = ('<div class="part-label"><a href="%s">Part %02d &middot; %s</a>'
+                 '<span class="ch-pos">Chapter %d of %d</span></div>'
+                 % (pg["part"]["file"], num, html.escape(pg["part"]["title"]),
+                    pg.get("chidx", 8), pg.get("chtotal", 8)))
+        body = crumb + """<h1>English Exam Generator</h1>
+<p>The exam generator now runs directly on this site &mdash; no download needed. It assembles a full three-section practice paper from the question banks: a random analytical topic for your text, a Creating Texts prompt with stimulus material, and an Analysing Argument source. Each generated paper downloads as a Word document identical in format to the real exam task book.</p>
+<p><a class="btn" style="background:var(--accent);color:#fff" href="exam-generator.html">Open the Exam Generator &#8594;</a></p>
+<p style="font-family:var(--sans);font-size:13.5px;color:var(--muted)">The original desktop version (Windows) is still available:
+<a class="file-dl" href="assets/files/ExamGenerator.exe" download>ExamGenerator.exe</a></p>"""
+    elif "chapter" in pg:
+        sec = pg["chapter"]["sec"]
+        if "quote-bank" in pg["file"]:
+            sec["class"] = sec.get("class", []) + ["quotes-page"]
+        if "exemplar" in pg["file"] or "sample-" in pg["file"]:
+            sec["class"] = sec.get("class", []) + ["exemplar-page"]
+        if pg["file"] == "p02-symbols.html":
+            _ul = sec.find("ul")
+            if _ul:
+                _rows = []
+                for _li in _ul.find_all("li", recursive=False):
+                    _sub = _li.find("ul")
+                    _name = _li.get_text("\n").split("\n")[0].strip()
+                    _pts = [x.get_text(" ", strip=True) for x in (_sub.find_all("li") if _sub else [])]
+                    _cell = "<br>".join("&ndash; " + html.escape(p) for p in _pts)
+                    _rows.append("<tr><td><b>%s</b></td><td>%s</td></tr>" % (html.escape(_name), _cell))
+                _tbl = BeautifulSoup('<table class="qt-table"><thead><tr><th>Symbol</th>'
+                                     '<th>Meaning and significance</th></tr></thead><tbody>%s</tbody></table>'
+                                     % "".join(_rows), "html.parser")
+                _ul.replace_with(_tbl)
+        rewrite_anchors(sec, pg["file"])
+        hh = sec.find(["h2", "h3", "h4"])
+        if hh: hh.name = "h1"
+        pos = ('<span class="ch-pos">Chapter %d of %d</span>' % (pg["chidx"], pg["chtotal"])) if pg.get("chidx") else ""
+        crumb = ('<div class="part-label"><a href="%s">Part %02d &middot; %s</a>%s</div>'
+                 % (pg["part"]["file"], num, html.escape(pg["part"]["title"]), pos))
+        _toc = page_toc(sec)
+        _h1 = sec.find("h1")
+        if _h1 and _toc:
+            _h1.insert_after(BeautifulSoup(_toc, "html.parser"))
+            body = crumb + sec.decode()
+        else:
+            body = crumb + _toc + sec.decode()
+    else:
+        sec = pg["part"]["sec"]
+        rewrite_anchors(sec, pg["file"])
+        h1 = sec.find("h1")
+        if h1: h1.insert_before(BeautifulSoup('<div class="part-label">Part %02d</div>' % num, "html.parser"))
+        body = page_toc(sec) + sec.decode()
+
+    if pg["file"] == "p06-analysing-written-language.html":
+        body += """<h2>Persuasive Techniques Reference (printable)</h2>
+<p>The full reference table &mdash; techniques, definitions, examples and intended effects &mdash; as a document you can view or print.</p>
+<div class="pdf-embed">
+  <div class="pdf-embed-bar"><span class="pdf-name">Analysing Argument: Persuasive Techniques</span>
+  <a class="pdf-open" href="assets/pdf/persuasive-techniques-reference.pdf" target="_blank" rel="noopener">Open in new tab &#8599;</a>
+  <a class="pdf-dl" href="assets/pdf/persuasive-techniques-reference.pdf" download>Download &#8595;</a></div>
+  <iframe class="pdf-frame" src="assets/pdf/persuasive-techniques-reference.pdf#view=FitH" loading="lazy" title="Persuasive Techniques Reference"></iframe>
+</div>"""
+    body = fix_quotes(body)
+    body, _ah = apply_annotations(pg["file"], body)
+    if pg["file"] == "part-08-practice-exams.html":
+        _g = re.search(r'(<section[^>]*id="english-exam-generator".*?</section>)', body, re.S)
+        if _g:
+            body = body.replace(_g.group(1), "", 1) + PRACTICE_LINKS + _g.group(1)
+        else:
+            body += PRACTICE_LINKS
+    open(os.path.join(PUBLIC, pg["file"]), "w", encoding="utf-8").write(
+        shell(pg["title"], pg["nav"], pg["file"], body, pn))
+
+# ---------------- landing ----------------
+def exemplar_groups_html(exemplars):
+    GROUPS = [("Section A \u00b7 Picnic at Hanging Rock", "p02-"),
+              ("Section A \u00b7 The Lottery and Other Stories", "p03-"),
+              ("Section B \u00b7 Creating Texts", "p05-"),
+              ("Section C \u00b7 Analysing Argument", "p06-")]
+    out = []
+    used = set()
+    for label, prefix in GROUPS:
+        items = [e for e in exemplars if e["url"].startswith(prefix)]
+        if not items: continue
+        used.update(id(e) for e in items)
+        out.append('<div class="group-head">%s</div><ul class="exp-list">%s</ul>'
+                   % (label, "".join('<li><a href="%s">%s</a></li>' % (e["url"], html.escape(e["title"])) for e in items)))
+    rest = [e for e in exemplars if id(e) not in used]
+    if rest:
+        out.append('<div class="group-head">Other</div><ul class="exp-list">%s</ul>'
+                   % "".join('<li><a href="%s">%s</a></li>' % (e["url"], html.escape(e["title"])) for e in rest))
+    return "".join(out)
+
+ICONS = {
+ "How to Use This Site": '<circle cx="12" cy="12" r="9"/><path d="M12 8l3 7-7-3z"/>',
+ "Picnic at Hanging Rock": '<rect x="3" y="8" width="18" height="12" rx="2"/><path d="M3 8l3-4 4 3 4-3 4 3 3-2v3"/>',
+ "The Lottery and Other Stories": '<path d="M4 17a8 8 0 0 1 16 0"/><path d="M8 17a4 4 0 0 1 8 0"/>',
+ "Analytical Text Response Essays": '<path d="M14 3l7 7-11 11H3v-7z"/><path d="M12 5l7 7"/>',
+ "Creating Texts": '<path d="M4 20l1-5L16 4l4 4L9 19z"/><path d="M14 6l4 4"/>',
+ "Analysing Argument": '<path d="M21 12a8 7 0 0 1-8 7 9 9 0 0 1-4-1l-5 2 2-4a7 7 0 0 1-1-4 8 7 0 0 1 8-7 8 7 0 0 1 8 7z"/>',
+ "The Exam": '<circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/>',
+ "Practice Exams": '<rect x="7" y="3" width="13" height="16" rx="2"/><path d="M4 7v12a2 2 0 0 0 2 2h10"/>',
+ "Exam Assessment Criteria": '<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 9l2 2 4-4M8 16h8"/>',
+ "Exam Checklists": '<rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 12l3 3 5-6"/>',
+ "Key Takeaways from the 2024 Assessment Report": '<path d="M4 20V10M10 20V4M16 20v-8M21 20H3"/>',
+ "Key Takeaways from the 2025 Assessment Report": '<path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/>',
+ "Effectively Studying For Exams": '<path d="M12 5c-2-2-6-2-8 0v13c2-2 6-2 8 0 2-2 6-2 8 0V5c-2-2-6-2-8 0z"/><path d="M12 5v13"/>',
+ "Study Tools": '<path d="M13 2L4 14h6l-1 8 9-12h-6z"/>',
+}
+def icon_svg(title):
+    body = ICONS.get(title, '<circle cx="12" cy="12" r="9"/>')
+    return ('<span class="card-ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" '
+            'stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">%s</svg></span>' % body)
+
+BLURB = {
+ "How to Use This Site": "Quick orientation: search, sections, practice exams and suggested study routes.",
+ "Picnic at Hanging Rock": "Peter Weir's film — content coming for 2027.",
+ "The Lottery and Other Stories": "Shirley Jackson's short stories — content coming for 2027.",
+ "Analytical Text Response Essays": "Planning, structure, and proofreading a text-response essay.",
+ "Creating Texts": "Audience, purpose, personal journeys and practice stimuli.",
+ "Analysing Argument": "Language analysis — written & visual, sample articles and essays.",
+ "The Exam": "Format and strategies for addressing the requirements.",
+ "Practice Exams": "Full practice papers and past exams.",
+ "Exam Assessment Criteria": "How Sections A, B and C are marked.",
+ "Exam Checklists": "Ready-reference checklists for exam day.",
+ "Key Takeaways from the 2024 Assessment Report": "What VCAA assessors flagged in 2024, section by section.",
+ "Key Takeaways from the 2025 Assessment Report": "What VCAA assessors flagged in 2025 — topic verbs, Framework choices and the interplay discriminator.",
+ "Effectively Studying For Exams": "Study habits, schedules, recall and wellbeing.",
+}
+cards = "".join('<a class="card %s" href="%s">%s<div class="card-num">%02d</div><div class="card-body"><h3>%s</h3><p>%s</p></div></a>'
+                % ("card-gold" if it["num"] >= 11 or it["num"] == 1 else "card-maroon",
+                   it["file"], icon_svg(it["title"]), it["num"], html.escape(it["title"]), html.escape(BLURB.get(it["title"], "")))
+                for it in nav_items)
+
+landing = """
+<section class="hero">
+  <div class="hero-inner">
+    <img class="hero-logo" src="assets/img/SOC%%20LOGO_VERTICAL.png" alt="South Oakleigh College logo">
+    <div class="hero-badge">South Oakleigh College</div>
+    <h1>VCE English<br>Exam Preparation Guide</h1>
+    <p class="hero-sub">Units 3/4 English &middot; For the VCE English Cohort of 2026</p>
+    <p class="hero-sub hero-sub2">Compiled by Mr. Morlin &middot; Version Invicta 7.9</p>
+    <p class="hero-lede">Annotated exemplar essays, thematic and character quote banks, scene-by-scene analyses, frameworks for every section of the examination, the assessors&rsquo; own insights from 2024 and 2025, and a suite of interactive study tools &mdash; from flashcards to a full exam generator. The complete guide to Units 3/4 English, refined for the web.</p>
+    <div class="hero-cta"><a class="btn" href="%s">Start reading &#8594;</a><a class="btn btn-max" href="ask-max.html"><img src="assets/img/max.jpg" alt="">Ask Max</a></div>
+  </div>
+</section>
+<div class="contents-row"><h2 class="section-head">Contents</h2><span id="resume-slot"></span></div>
+<div class="cards">%s</div>
+<h2 class="section-head">Examples of high marking responses</h2>
+%s
+<div class="site-foot">
+  <div class="sf-motto">Sapere Aude</div>
+  <div class="sf-sub">This site is provided free and as-is for study purposes, without warranty of any kind. Content is offered in good faith but may contain errors &mdash; verify anything high-stakes with your teacher. External links lead to sites not controlled by the author, and no liability is accepted for their content or for any loss arising from use of this site.</div>
+</div>
+""" % (nav_items[0]["file"], cards,
+       exemplar_groups_html(exemplars))
+open(os.path.join(PUBLIC, "index.html"), "w", encoding="utf-8").write(shell("Home", "", "index.html", landing))
+
+# redirect stub: ask-the-guide.html -> ask-max.html
+open(os.path.join(PUBLIC, "ask-the-guide.html"), "w", encoding="utf-8").write(
+    '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">'
+    '<meta http-equiv="refresh" content="0;url=ask-max.html">'
+    '<link rel="canonical" href="ask-max.html"><title>Ask Max</title></head>'
+    '<body><p>Max has moved: <a href="ask-max.html">ask-max.html</a></p></body></html>')
+
+nf = """
+<div class="nf-wrap">
+  <div class="nf-code">404</div>
+  <h1>Page not found</h1>
+  <p>That page doesn&rsquo;t exist &mdash; it may have moved when the site was reorganised.</p>
+  <p><a class="btn" style="background:var(--accent);color:#fff" href="index.html">Back to the guide</a></p>
+  <p style="font-family:var(--sans);font-size:14px;color:var(--muted)">Or use the search box in the sidebar &mdash; it covers every page.</p>
+</div>
+"""
+open(os.path.join(PUBLIC, "404.html"), "w", encoding="utf-8").write(shell("Page not found", "", "404.html", nf))
+
+print("PAGES:", len(all_pages) + 1, "| PARTS:", len(nav_items), "| IMGS:", n_imgs, "| PDFS:", len(copied_pdfs),
+      "| SEARCH:", len(search), "| EXEMPLARS:", len(exemplars))
+for it in nav_items:
+    print(" %02d %-46s %d chapters" % (it["num"], it["title"][:46], len(it["chapters"])))

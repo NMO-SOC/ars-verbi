@@ -1,0 +1,19 @@
+# LaTeX build artifacts (if you keep the source alongside the site)
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.synctex.gz
+*.atfi
+*.exp
+
+# stray rsync temp file
+.*.uNCYW1
+.ExamGenerator.exe.*
+localpdf/practice-exam-viii.pdf
+localpdf/practice-exam-ix.pdf
+
+_body.html
+_pre.tex

@@ -1,0 +1,2716 @@
+{
+  "nodes": [
+    {
+      "id": "build",
+      "label": "build.py",
+      "file_type": "code",
+      "source_file": "build.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "build_copy_if_changed",
+      "label": "copy_if_changed()",
+      "file_type": "code",
+      "source_file": "build.py",
+      "source_location": "L12",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "build_slugify",
+      "label": "slugify()",
+      "file_type": "code",
+      "source_file": "build.py",
+      "source_location": "L193",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "build_clean",
+      "label": "_clean()",
+      "file_type": "code",
+      "source_file": "build.py",
+      "source_location": "L325",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "build_heading_chain",
+      "label": "_heading_chain()",
+      "file_type": "code",
+      "source_file": "build.py",
+      "source_location": "L327",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "build_rewrite_anchors",
+      "label": "rewrite_anchors()",
+      "file_type": "code",
+      "source_file": "build.py",
+      "source_location": "L1537",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "build_nav_html",
+      "label": "nav_html()",
+      "file_type": "code",
+      "source_file": "build.py",
+      "source_location": "L1546",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "build_apply_annotations",
+      "label": "apply_annotations()",
+      "file_type": "code",
+      "source_file": "build.py",
+      "source_location": "L1566",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "build_fix_quotes",
+      "label": "fix_quotes()",
+      "file_type": "code",
+      "source_file": "build.py",
+      "source_location": "L1589",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "build_shell",
+      "label": "shell()",
+      "file_type": "code",
+      "source_file": "build.py",
+      "source_location": "L1592",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "build_page_toc",
+      "label": "page_toc()",
+      "file_type": "code",
+      "source_file": "build.py",
+      "source_location": "L1644",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "build_exemplar_groups_html",
+      "label": "exemplar_groups_html()",
+      "file_type": "code",
+      "source_file": "build.py",
+      "source_location": "L1807",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "build_icon_svg",
+      "label": "icon_svg()",
+      "file_type": "code",
+      "source_file": "build.py",
+      "source_location": "L1842",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "make_embeddings",
+      "label": "make-embeddings.ps1",
+      "file_type": "code",
+      "source_file": "make-embeddings.ps1",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "make_web_template",
+      "label": "make_web_template.py",
+      "file_type": "code",
+      "source_file": "make_web_template.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "make_web_template_iter_paras",
+      "label": "iter_paras()",
+      "file_type": "code",
+      "source_file": "make_web_template.py",
+      "source_location": "L31",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "public_assets_site",
+      "label": "site.js",
+      "file_type": "code",
+      "source_file": "public/assets/site.js",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "public_assets_site_load",
+      "label": "load()",
+      "file_type": "code",
+      "source_file": "public/assets/site.js",
+      "source_location": "L8",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "public_assets_site_esc",
+      "label": "esc()",
+      "file_type": "code",
+      "source_file": "public/assets/site.js",
+      "source_location": "L10",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "public_assets_site_run",
+      "label": "run()",
+      "file_type": "code",
+      "source_file": "public/assets/site.js",
+      "source_location": "L11",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "public_assets_site_pad",
+      "label": "pad()",
+      "file_type": "code",
+      "source_file": "public/assets/site.js",
+      "source_location": "L45",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "public_assets_site_tick",
+      "label": "tick()",
+      "file_type": "code",
+      "source_file": "public/assets/site.js",
+      "source_location": "L46",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "public_assets_site_upd",
+      "label": "upd()",
+      "file_type": "code",
+      "source_file": "public/assets/site.js",
+      "source_location": "L86",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "public_assets_site_toast",
+      "label": "toast()",
+      "file_type": "code",
+      "source_file": "public/assets/site.js",
+      "source_location": "L153",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "public_assets_site_hide",
+      "label": "hide()",
+      "file_type": "code",
+      "source_file": "public/assets/site.js",
+      "source_location": "L195",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "public_assets_vendor_jszip_min",
+      "label": "jszip.min.js",
+      "file_type": "code",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "public_assets_vendor_jszip_min_u",
+      "label": "u()",
+      "file_type": "code",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "public_assets_vendor_jszip_min_o",
+      "label": "o()",
+      "file_type": "code",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "public_assets_vendor_jszip_min_h",
+      "label": "h()",
+      "file_type": "code",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "public_assets_vendor_jszip_min_a",
+      "label": "A()",
+      "file_type": "code",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "public_assets_vendor_jszip_min_n",
+      "label": "n()",
+      "file_type": "code",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "public_assets_vendor_jszip_min_s",
+      "label": "s()",
+      "file_type": "code",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "public_assets_vendor_jszip_min_f",
+      "label": "f()",
+      "file_type": "code",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "public_assets_vendor_jszip_min_i",
+      "label": "i()",
+      "file_type": "code",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "public_assets_vendor_jszip_min_l",
+      "label": "l()",
+      "file_type": "code",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "public_assets_vendor_jszip_min_r",
+      "label": "r()",
+      "file_type": "code",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "public_assets_vendor_jszip_min_c",
+      "label": "c()",
+      "file_type": "code",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "public_assets_vendor_jszip_min_d",
+      "label": "d()",
+      "file_type": "code",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "public_assets_vendor_jszip_min_p",
+      "label": "p()",
+      "file_type": "code",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "public_assets_vendor_jszip_min_t",
+      "label": "T()",
+      "file_type": "code",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "public_assets_vendor_jszip_min_j",
+      "label": "j()",
+      "file_type": "code",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "public_assets_vendor_jszip_min_z",
+      "label": "Z()",
+      "file_type": "code",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "public_assets_vendor_jszip_min_w",
+      "label": "W()",
+      "file_type": "code",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "public_assets_vendor_jszip_min_m",
+      "label": "M()",
+      "file_type": "code",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "public_assets_vendor_jszip_min_g",
+      "label": "G()",
+      "file_type": "code",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "public_assets_vendor_jszip_min_k",
+      "label": "K()",
+      "file_type": "code",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "public_assets_vendor_jszip_min_y",
+      "label": "Y()",
+      "file_type": "code",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "public_assets_vendor_jszip_min_x",
+      "label": "X()",
+      "file_type": "code",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "public_assets_vendor_jszip_min_v",
+      "label": "V()",
+      "file_type": "code",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "site",
+      "label": "site.js",
+      "file_type": "code",
+      "source_file": "site.js",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "site_load",
+      "label": "load()",
+      "file_type": "code",
+      "source_file": "site.js",
+      "source_location": "L8",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "site_esc",
+      "label": "esc()",
+      "file_type": "code",
+      "source_file": "site.js",
+      "source_location": "L10",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "site_run",
+      "label": "run()",
+      "file_type": "code",
+      "source_file": "site.js",
+      "source_location": "L11",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "site_pad",
+      "label": "pad()",
+      "file_type": "code",
+      "source_file": "site.js",
+      "source_location": "L45",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "site_tick",
+      "label": "tick()",
+      "file_type": "code",
+      "source_file": "site.js",
+      "source_location": "L46",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "site_upd",
+      "label": "upd()",
+      "file_type": "code",
+      "source_file": "site.js",
+      "source_location": "L86",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "site_toast",
+      "label": "toast()",
+      "file_type": "code",
+      "source_file": "site.js",
+      "source_location": "L153",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "site_hide",
+      "label": "hide()",
+      "file_type": "code",
+      "source_file": "site.js",
+      "source_location": "L195",
+      "_callable": true,
+      "_origin": "ast"
+    }
+  ],
+  "edges": [
+    {
+      "source": "build",
+      "target": "os",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "build.py",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "build",
+      "target": "re",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "build.py",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "build",
+      "target": "shutil",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "build.py",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "build",
+      "target": "json",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "build.py",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "build",
+      "target": "html",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "build.py",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "build",
+      "target": "urllib_parse",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "build.py",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "build",
+      "target": "bs4",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "build.py",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "build",
+      "target": "build_copy_if_changed",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "build.py",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "build",
+      "target": "lxml",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "build.py",
+      "source_location": "L60",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "build",
+      "target": "pil",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "build.py",
+      "source_location": "L79",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "build",
+      "target": "build_slugify",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "build.py",
+      "source_location": "L193",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "build",
+      "target": "build_clean",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "build.py",
+      "source_location": "L325",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "build",
+      "target": "build_heading_chain",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "build.py",
+      "source_location": "L327",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "build",
+      "target": "build_rewrite_anchors",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "build.py",
+      "source_location": "L1537",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "build",
+      "target": "build_nav_html",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "build.py",
+      "source_location": "L1546",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "build",
+      "target": "build_apply_annotations",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "build.py",
+      "source_location": "L1566",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "build",
+      "target": "build_fix_quotes",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "build.py",
+      "source_location": "L1589",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "build",
+      "target": "build_shell",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "build.py",
+      "source_location": "L1592",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "build",
+      "target": "build_page_toc",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "build.py",
+      "source_location": "L1644",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "build",
+      "target": "copy",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "build.py",
+      "source_location": "L1674",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "build",
+      "target": "build_exemplar_groups_html",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "build.py",
+      "source_location": "L1807",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "build",
+      "target": "build_icon_svg",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "build.py",
+      "source_location": "L1842",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "build_heading_chain",
+      "target": "build_clean",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "build.py",
+      "source_location": "L332",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "build_shell",
+      "target": "build_nav_html",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "build.py",
+      "source_location": "L1641",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "build_shell",
+      "target": "build_fix_quotes",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "build.py",
+      "source_location": "L1641",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "make_web_template",
+      "target": "os",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "make_web_template.py",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "make_web_template",
+      "target": "re",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "make_web_template.py",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "make_web_template",
+      "target": "json",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "make_web_template.py",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "make_web_template",
+      "target": "zipfile",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "make_web_template.py",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "make_web_template",
+      "target": "docx",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "make_web_template.py",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "make_web_template",
+      "target": "docx_shared",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "make_web_template.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "make_web_template",
+      "target": "pil",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "make_web_template.py",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "make_web_template",
+      "target": "make_web_template_iter_paras",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "make_web_template.py",
+      "source_location": "L31",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_site",
+      "target": "public_assets_site_load",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/site.js",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_site",
+      "target": "public_assets_site_esc",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/site.js",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_site",
+      "target": "public_assets_site_run",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/site.js",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_site",
+      "target": "public_assets_site_pad",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/site.js",
+      "source_location": "L45",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_site",
+      "target": "public_assets_site_tick",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/site.js",
+      "source_location": "L46",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_site",
+      "target": "public_assets_site_upd",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/site.js",
+      "source_location": "L86",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_site",
+      "target": "public_assets_site_toast",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/site.js",
+      "source_location": "L153",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_site",
+      "target": "public_assets_site_hide",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/site.js",
+      "source_location": "L195",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_site_run",
+      "target": "public_assets_site_load",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/site.js",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_site_run",
+      "target": "public_assets_site_esc",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/site.js",
+      "source_location": "L24",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_site_tick",
+      "target": "public_assets_site_pad",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/site.js",
+      "source_location": "L56",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_u",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_o",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_h",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_a",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_n",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_s",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_n",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_f",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_s",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_n",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_s",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_h",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_i",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_i",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_i",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_i",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_i",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_s",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_s",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_s",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_s",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_n",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_l",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_f",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_a",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_l",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_n",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_l",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_s",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_f",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_r",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_h",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_l",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_n",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_u",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_u",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_o",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_h",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_f",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_c",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_d",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_p",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_h",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_p",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_n",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_a",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_o",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_l",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_r",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_t",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_d",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_f",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_n",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_u",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_p",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_l",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_j",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_z",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_w",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_m",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_h",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_g",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_k",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_y",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_l",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_s",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_a",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_o",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_h",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_u",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_j",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_z",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_n",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_d",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_f",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_n",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_u",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_p",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_l",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_j",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_z",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_w",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_m",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_h",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_g",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_k",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_y",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_x",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_v",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_j",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_f",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_c",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min",
+      "target": "public_assets_vendor_jszip_min_d",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min_u",
+      "target": "public_assets_vendor_jszip_min_r",
+      "relation": "indirect_call",
+      "context": "argument",
+      "confidence": "INFERRED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min_u",
+      "target": "public_assets_vendor_jszip_min_l",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min_u",
+      "target": "public_assets_vendor_jszip_min_i",
+      "relation": "indirect_call",
+      "context": "argument",
+      "confidence": "INFERRED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min_u",
+      "target": "public_assets_vendor_jszip_min_s",
+      "relation": "indirect_call",
+      "context": "argument",
+      "confidence": "INFERRED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min_u",
+      "target": "public_assets_vendor_jszip_min_o",
+      "relation": "indirect_call",
+      "context": "argument",
+      "confidence": "INFERRED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min_u",
+      "target": "public_assets_vendor_jszip_min_h",
+      "relation": "indirect_call",
+      "context": "argument",
+      "confidence": "INFERRED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min_n",
+      "target": "public_assets_vendor_jszip_min_s",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min_n",
+      "target": "public_assets_vendor_jszip_min_d",
+      "relation": "indirect_call",
+      "context": "argument",
+      "confidence": "INFERRED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min_n",
+      "target": "public_assets_vendor_jszip_min_a",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min_n",
+      "target": "public_assets_vendor_jszip_min_f",
+      "relation": "indirect_call",
+      "context": "argument",
+      "confidence": "INFERRED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min_n",
+      "target": "public_assets_vendor_jszip_min_p",
+      "relation": "indirect_call",
+      "context": "argument",
+      "confidence": "INFERRED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min_n",
+      "target": "public_assets_vendor_jszip_min_o",
+      "relation": "indirect_call",
+      "context": "argument",
+      "confidence": "INFERRED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min_n",
+      "target": "public_assets_vendor_jszip_min_r",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min_s",
+      "target": "public_assets_vendor_jszip_min_f",
+      "relation": "indirect_call",
+      "context": "argument",
+      "confidence": "INFERRED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min_s",
+      "target": "public_assets_vendor_jszip_min_n",
+      "relation": "indirect_call",
+      "context": "argument",
+      "confidence": "INFERRED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min_s",
+      "target": "public_assets_vendor_jszip_min_o",
+      "relation": "indirect_call",
+      "context": "argument",
+      "confidence": "INFERRED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min_l",
+      "target": "public_assets_vendor_jszip_min_o",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min_l",
+      "target": "public_assets_vendor_jszip_min_r",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min_l",
+      "target": "public_assets_vendor_jszip_min_s",
+      "relation": "indirect_call",
+      "context": "argument",
+      "confidence": "INFERRED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min_l",
+      "target": "public_assets_vendor_jszip_min_i",
+      "relation": "indirect_call",
+      "context": "argument",
+      "confidence": "INFERRED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min_l",
+      "target": "public_assets_vendor_jszip_min_n",
+      "relation": "indirect_call",
+      "context": "argument",
+      "confidence": "INFERRED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min_f",
+      "target": "public_assets_vendor_jszip_min_n",
+      "relation": "indirect_call",
+      "context": "argument",
+      "confidence": "INFERRED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min_s",
+      "target": "public_assets_vendor_jszip_min_r",
+      "relation": "indirect_call",
+      "context": "argument",
+      "confidence": "INFERRED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min_o",
+      "target": "public_assets_vendor_jszip_min_d",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min_f",
+      "target": "public_assets_vendor_jszip_min_i",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min_f",
+      "target": "public_assets_vendor_jszip_min_r",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min_d",
+      "target": "public_assets_vendor_jszip_min_p",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min_d",
+      "target": "public_assets_vendor_jszip_min_i",
+      "relation": "indirect_call",
+      "context": "argument",
+      "confidence": "INFERRED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min_d",
+      "target": "public_assets_vendor_jszip_min_n",
+      "relation": "indirect_call",
+      "context": "argument",
+      "confidence": "INFERRED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min_d",
+      "target": "public_assets_vendor_jszip_min_n",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min_h",
+      "target": "public_assets_vendor_jszip_min_o",
+      "relation": "indirect_call",
+      "context": "argument",
+      "confidence": "INFERRED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min_p",
+      "target": "public_assets_vendor_jszip_min_f",
+      "relation": "indirect_call",
+      "context": "collection",
+      "confidence": "INFERRED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min_p",
+      "target": "public_assets_vendor_jszip_min_d",
+      "relation": "indirect_call",
+      "context": "collection",
+      "confidence": "INFERRED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min_p",
+      "target": "public_assets_vendor_jszip_min_c",
+      "relation": "indirect_call",
+      "context": "collection",
+      "confidence": "INFERRED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min_p",
+      "target": "public_assets_vendor_jszip_min_n",
+      "relation": "indirect_call",
+      "context": "argument",
+      "confidence": "INFERRED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min_j",
+      "target": "public_assets_vendor_jszip_min_f",
+      "relation": "indirect_call",
+      "context": "argument",
+      "confidence": "INFERRED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min_j",
+      "target": "public_assets_vendor_jszip_min_o",
+      "relation": "indirect_call",
+      "context": "argument",
+      "confidence": "INFERRED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min_j",
+      "target": "public_assets_vendor_jszip_min_l",
+      "relation": "indirect_call",
+      "context": "argument",
+      "confidence": "INFERRED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min_j",
+      "target": "public_assets_vendor_jszip_min_h",
+      "relation": "indirect_call",
+      "context": "argument",
+      "confidence": "INFERRED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min_j",
+      "target": "public_assets_vendor_jszip_min_d",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min_j",
+      "target": "public_assets_vendor_jszip_min_p",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min_z",
+      "target": "public_assets_vendor_jszip_min_j",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min_w",
+      "target": "public_assets_vendor_jszip_min_j",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min_w",
+      "target": "public_assets_vendor_jszip_min_r",
+      "relation": "indirect_call",
+      "context": "argument",
+      "confidence": "INFERRED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min_k",
+      "target": "public_assets_vendor_jszip_min_g",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min_y",
+      "target": "public_assets_vendor_jszip_min_k",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min_a",
+      "target": "public_assets_vendor_jszip_min_n",
+      "relation": "indirect_call",
+      "context": "argument",
+      "confidence": "INFERRED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min_a",
+      "target": "public_assets_vendor_jszip_min_i",
+      "relation": "indirect_call",
+      "context": "argument",
+      "confidence": "INFERRED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min_h",
+      "target": "public_assets_vendor_jszip_min_o",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min_u",
+      "target": "public_assets_vendor_jszip_min_h",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min_j",
+      "target": "public_assets_vendor_jszip_min_t",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min_y",
+      "target": "public_assets_vendor_jszip_min_g",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min_y",
+      "target": "public_assets_vendor_jszip_min_z",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min_j",
+      "target": "public_assets_vendor_jszip_min_m",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min_c",
+      "target": "public_assets_vendor_jszip_min_n",
+      "relation": "indirect_call",
+      "context": "argument",
+      "confidence": "INFERRED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min_c",
+      "target": "public_assets_vendor_jszip_min_r",
+      "relation": "indirect_call",
+      "context": "argument",
+      "confidence": "INFERRED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min_c",
+      "target": "public_assets_vendor_jszip_min_f",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_vendor_jszip_min_d",
+      "target": "public_assets_vendor_jszip_min_c",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/vendor/jszip.min.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "site",
+      "target": "site_load",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "site.js",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "site",
+      "target": "site_esc",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "site.js",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "site",
+      "target": "site_run",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "site.js",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "site",
+      "target": "site_pad",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "site.js",
+      "source_location": "L45",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "site",
+      "target": "site_tick",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "site.js",
+      "source_location": "L46",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "site",
+      "target": "site_upd",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "site.js",
+      "source_location": "L86",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "site",
+      "target": "site_toast",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "site.js",
+      "source_location": "L153",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "site",
+      "target": "site_hide",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "site.js",
+      "source_location": "L195",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "site_run",
+      "target": "site_load",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "site.js",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "site_run",
+      "target": "site_esc",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "site.js",
+      "source_location": "L24",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "site_tick",
+      "target": "site_pad",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "site.js",
+      "source_location": "L56",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_site_run",
+      "target": "public_assets_vendor_jszip_min_r",
+      "relation": "indirect_call",
+      "context": "argument",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "public/assets/site.js",
+      "source_location": "L22",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "public_assets_site_tick",
+      "target": "public_assets_vendor_jszip_min_c",
+      "relation": "indirect_call",
+      "context": "argument",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "public/assets/site.js",
+      "source_location": "L60",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "site_run",
+      "target": "public_assets_vendor_jszip_min_r",
+      "relation": "indirect_call",
+      "context": "argument",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "site.js",
+      "source_location": "L22",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "site_tick",
+      "target": "public_assets_vendor_jszip_min_c",
+      "relation": "indirect_call",
+      "context": "argument",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "site.js",
+      "source_location": "L60",
+      "weight": 1.0,
+      "_origin": "ast"
+    }
+  ],
+  "input_tokens": 0,
+  "output_tokens": 0
+}
