@@ -20,30 +20,12 @@ HTML/CSS/JS and can be served by any web server (IIS, Apache, nginx).
 5. Relative paths are used throughout — the site works from a subdirectory
    (e.g. `https://intranet/english/`) as long as files keep their structure.
 
-## One required follow-up after deployment (Mr Morlin, with IT's answer)
-
-The "Ask Max" AI assistant calls an API hosted on Cloudflare:
-`https://jolly-waterfall-d01a.nicholas-morlin.workers.dev/`
-
-Two things gate it working on the school network:
-
-1. **The final intranet URL must be added to the API's allowed-origins list.**
-   Tell Mr Morlin the exact origin students will use
-   (e.g. `https://intranet.school.vic.edu.au`) and he will add it — one line,
-   two minutes.
-2. **The school web filter currently blocks `workers.dev`.** Until the API is
-   reachable from the school network (whitelist entry, or relocation to an
-   unblocked address), Ask Max will show a connection error on campus while
-   working normally from home. The rest of the site is unaffected either way.
-
-## External services the site touches (all optional except Ask Max)
+## External services the site touches (all optional)
 
 | Service | Used for | If blocked/offline |
 |---|---|---|
 | fonts.googleapis.com / gstatic.com | Typefaces | Site falls back to system fonts, fully functional |
 | nmo.goatcounter.com | Anonymous page-view counts | Silently does nothing |
-| jolly-waterfall-…workers.dev | Ask Max AI assistant | Chat shows an error; all other pages/tools unaffected |
-| api.anthropic.com | Essay Marker (teacher-supplied key) | Marker shows an error; rest unaffected |
 
 The Exam Generator's JSZip library is bundled locally (`assets/vendor/`) — no
 CDN dependency.
@@ -53,15 +35,11 @@ CDN dependency.
 The HTML is generated from a LaTeX/Python build pipeline maintained by
 Mr Morlin — do not hand-edit the HTML files, as changes would be overwritten
 by the next build. For content corrections, contact Mr Morlin; he rebuilds and
-supplies a fresh zip. (After any content change he also regenerates
-`assets/embeddings.json`, which powers Ask Max's retrieval.)
+supplies a fresh zip.
 
 ## Privacy notes
 
 - The site sets no cookies and collects no personal data itself.
-- Ask Max questions (with network address) are logged to a teacher-controlled
-  Cloudflare store, disclosed on the chat page, for service health and
-  curriculum improvement.
 - GoatCounter records anonymous page-view counts only.
 
 Contact: Mr Morlin, English faculty.

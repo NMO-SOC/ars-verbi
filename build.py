@@ -111,8 +111,6 @@ for p in soup.find_all(["p", "div"]):
     fname = m.group(1)
     INLINE_FRAGS = {"QuoteTableSummary.pdf": "quotetable.html",
                     "Tracker.pdf": "tracker.html",
-                    "SymbolTable.pdf": "symboltable.html",
-                    "ShotAnalysis.pdf": "shotanalysis.html",
                     "SS.pdf": "ss.html",
                     "PJ1.pdf": "pj1.html",
                     "PJ2.pdf": "pj2.html"}
@@ -209,6 +207,10 @@ for i, sec in enumerate(parts, 1):
     part_meta.append({"idx": i, "title": title, "slug": slugify(title),
                       "file": "part-%02d-%s.html" % (i, slugify(title)), "sec": sec})
 
+# chapters left out of the site: their worked examples are built on the 2026 texts
+DROP_CHAPTERS = {"p04-planning.html", "p04-the-dynamics-of-a-text.html",
+                 "p04-analytical-text-response-structure.html"}
+
 display_num = 0
 for pm in part_meta:
     display_num += 1
@@ -231,6 +233,7 @@ for pm in part_meta:
                 while "p%02d-%s-%d.html" % (pm["idx"], slugify(ct)[:60], k) in used_cf: k += 1
                 cf = "p%02d-%s-%d.html" % (pm["idx"], slugify(ct)[:60], k)
             used_cf.add(cf)
+            if cf in DROP_CHAPTERS: continue
             chapters.append({"title": ct, "file": cf, "sec": ch})
             for el in ch.find_all(id=True): id_to_page[el["id"]] = cf
             if ch.get("id"): id_to_page[ch["id"]] = cf
@@ -268,12 +271,8 @@ for pm in part_meta:
         for c in ch_pages:
             all_pages.append({"file": c["file"], "title": c["title"], "html": c["html"], "nav": f25})
 
-PROMPT_HTML = open(os.path.join(BUILD, "snippets", "prompt-types.html"), encoding="utf-8").read()
 REV_HTML = open(os.path.join(BUILD, "snippets", "revision-program.html"), encoding="utf-8").read()
-WATCH_HTML = open(os.path.join(BUILD, "snippets", "watch-film.html"), encoding="utf-8").read()
 for _pf, _cf, _ct, _ch in [
-    # 2027: Sunset Boulevard ClickView page removed — re-add for Picnic at Hanging Rock
-    # ("part-02-sunset-boulevard.html", "watch-film.html", "Watch the Film (ClickView)", WATCH_HTML),
     ("part-12-effectively-studying-for-exams.html", "revision-program.html", "Week-by-Week Revision Program", REV_HTML)]:
     for _it in nav_items:
         if _it["file"] == _pf:
@@ -283,17 +282,6 @@ for _pf, _cf, _ct, _ch in [
             _pg["chapters"].append({"title": _ct, "file": _cf})
     _li = max(i for i, p in enumerate(all_pages) if p.get("nav") == _pf)
     all_pages.insert(_li + 1, {"file": _cf, "title": _ct, "html": _ch, "nav": _pf})
-
-P04 = "part-04-analytical-text-response-essays.html"
-for _it in nav_items:
-    if _it["file"] == P04:
-        _it["chapters"].append({"title": "Prompt Types: Discuss, To What Extent, How Does\u2026", "file": "prompt-types.html"})
-for _pg in all_pages:
-    if _pg["file"] == P04 and "chapters" in _pg:
-        _pg["chapters"].append({"title": "Prompt Types: Discuss, To What Extent, How Does\u2026", "file": "prompt-types.html"})
-_last4 = max(i for i, p in enumerate(all_pages) if p.get("nav") == P04)
-all_pages.insert(_last4 + 1, {"file": "prompt-types.html", "title": "Prompt Types: Discuss, To What Extent, How Does\u2026",
-                              "html": PROMPT_HTML, "nav": P04})
 
 VOCAB_HTML = open(os.path.join(BUILD, "snippets", "vocab.html"), encoding="utf-8").read()
 P06 = "part-06-analysing-argument.html"
@@ -504,7 +492,6 @@ tp_page = TOOL_LABEL + """<h1>Practice Topics &amp; Essay Timer</h1>
 <div class="tool-bar">
   <select id="tp-text"></select>
   <button id="tp-draw">Draw a topic</button>
-  <a id="tp-mark" href="#" style="display:none;font-family:var(--sans);font-weight:700;background:var(--accent);color:#fff;padding:9px 16px;border-radius:9px">Mark my essay &#8594;</a>
 </div>
 <div class="tp-topic" id="tp-topic">Press &ldquo;Draw a topic&rdquo; to begin.</div>
 <div class="timer-wrap">
@@ -528,9 +515,6 @@ tp_page = TOOL_LABEL + """<h1>Practice Topics &amp; Essay Timer</h1>
     names.forEach(function(n){ if (!sel.value || sel.value === n) T[n].forEach(function(t){ pool.push({n: n, t: t}); }); });
     var pick = pool[Math.floor(Math.random() * pool.length)];
     document.getElementById('tp-topic').textContent = '[' + pick.n + '] ' + pick.t;
-    var mk = document.getElementById('tp-mark');
-    mk.href = 'marker.html?section=a&topic=' + encodeURIComponent(pick.t);
-    mk.style.display = '';
   });
   var total = 3600, left = 3600, iv = null;
   var disp = document.getElementById('timer'), start = document.getElementById('t-start'),
@@ -643,7 +627,7 @@ eg_page = TOOL_LABEL + """<h1>Exam Generator</h1>
   <button id="eg-go">Generate exam &#8595;</button>
   <span class="tool-count" id="eg-note"></span>
 </div>
-<p style="font-family:var(--sans);font-size:13.5px;color:var(--muted)">Every exam is assembled fresh from the question banks the moment you click. Print it and sit it under timed conditions &mdash; then mark it against the <a href="part-09-exam-assessment-criteria.html">assessment criteria</a> or with the <a href="marker.html">Essay Marker</a>.</p>
+<p style="font-family:var(--sans);font-size:13.5px;color:var(--muted)">Every exam is assembled fresh from the question banks the moment you click. Print it and sit it under timed conditions &mdash; then mark it against the <a href="part-09-exam-assessment-criteria.html">assessment criteria</a>.</p>
 <script src="assets/vendor/jszip.min.js"></script>
 <script>window.EG_DATA = %s; window.EG_SLOTS = %s;</script>
 <script>
@@ -934,472 +918,6 @@ dr_page = TOOL_LABEL + """<h1>Micro-Drills</h1>
 })();
 </script>""" % json.dumps(topics_data, ensure_ascii=False)
 
-em_page = TOOL_LABEL + """<h1>Essay Marker</h1>
-<p class="lede">An AI marker calibrated on the official VCE English assessment criteria, the expected qualities, and real high- and low-scoring scripts. Paste an essay from any section of the exam and receive a score out of 10 with criteria-based feedback in minutes.</p>
-<p><a class="btn-inline" href="marker.html">Open the Essay Marker &#8594;</a></p>
-
-<h2>What it does</h2>
-<ul>
-<li><b>Section A &mdash; Analytical response:</b> select your text, enter the topic, paste your essay. Marked against the published criteria: quality of reading, structure and substantiation, and expression &mdash; always in relation to the topic.</li>
-<li><b>Section B &mdash; Creating a text:</b> nominate your Framework, title and stimulus. Judged on framework connection, voice and purpose, and control of language &mdash; with persuasive and expository forms treated on their own terms, as VCAA's samples require.</li>
-<li><b>Section C &mdash; Analysing argument:</b> provide the source material and your analysis. Rewards sequencing and audience-effect analysis over technique-spotting, exactly as the assessors&rsquo; reports describe.</li>
-</ul>
-
-<h2>How it was calibrated</h2>
-<p>The marker&rsquo;s judgement is anchored to benchmark scripts with known scores &mdash; including perfect-score and deliberately weak responses across all three sections &mdash; and tuned so that every benchmark marks within one point of its true score, the same tolerance VCAA accepts between its own trained assessors. It carries the expected-qualities ladders, the topic-relevance principle, and the guidance from the 2024 and 2025 assessment reports.</p>
-
-<h2>Setting it up (once, about two minutes)</h2>
-<ul>
-<li>Open the marker and click <b>AI Settings</b> (top right).</li>
-<li><b>Free option:</b> anyone with a GitHub account can create a fine-grained token with only the &ldquo;Models: Read-only&rdquo; permission &mdash; step-by-step instructions are inside the settings panel. Free-tier rate limits apply.</li>
-<li><b>Alternative:</b> an Anthropic API key (paid) marks with Claude, the engine the marker was calibrated on.</li>
-<li>Your token is stored only in your own browser and sent only to the provider you choose &mdash; never to the school or anyone else.</li>
-</ul>
-
-<h2>Features worth knowing</h2>
-<ul>
-<li><b>Precision mode</b> marks your essay three times independently and reports the median &mdash; if the three marks spread widely, it tells you the script is borderline and worth a human read.</li>
-<li><b>Second opinion</b> re-marks blind, without seeing the first result, for moderation.</li>
-<li><b>Handwriting transcription</b> &mdash; photograph a handwritten essay and the marker types it up for you, preserving your errors so the mark stays honest.</li>
-</ul>
-
-<h2>Getting the most from it</h2>
-<p>Mark work written under timed conditions &mdash; the <a href="practice-topics.html">topic timer</a> can send your essay straight here. Read the criterion feedback before the score, act on the single tip it gives you, then rewrite and re-mark. And treat it as a training partner, not an oracle: for anything borderline or high-stakes, your teacher&rsquo;s judgement is the real thing.</p>
-
-<p><a class="btn-inline" href="marker.html">Open the Essay Marker &#8594;</a></p>"""
-
-ac_page = TOOL_LABEL + """<div class="max-head"><img class="max-avatar" src="assets/img/max.jpg" alt="Max, the butler from Sunset Boulevard, answering the telephone"><div><h1>Ask Max</h1>
-<p class="lede">Max has read every page of this guide, and answers to no one but the text. Ask about essay structure, quotes, techniques, the assessors&rsquo; advice &mdash; and he&rsquo;ll reply from the site&rsquo;s own pages, with links to read more.</p></div></div>
-<div id="ac-chips" class="ac-chips"></div>
-<div class="ac-toolrow"><button type="button" id="ac-clear" title="Clear this conversation">Clear chat</button></div>
-<div id="ac-log" class="ac-log"></div>
-<div class="tool-bar" id="ac-bar" style="align-items:stretch">
-  <input id="ac-q" type="text" placeholder="Ask Max &mdash; e.g. How should I structure a Section C introduction?" style="flex:1;padding:12px 16px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);font-family:var(--serif);font-size:16px">
-  <button id="ac-send">Ask</button>
-</div>
-<p style="font-family:var(--sans);font-size:12.5px;color:var(--muted)">Answers are generated by AI from this site&rsquo;s content and can still make mistakes &mdash; check the linked pages, and ask your teacher when it matters. Shared class service: please keep questions study-related. <strong>Questions and network address are logged</strong> to improve the guide and keep the service healthy.</p>
-<script>window.AC_INDEX_URL = 'assets/search.json?v=36'; window.AC_EMB_URL = 'assets/embeddings.json?v=36'; window.AC_WORKER = 'https://jolly-waterfall-d01a.nicholas-morlin.workers.dev/';</script>
-<script>
-(function(){
-  var log = document.getElementById('ac-log'), q = document.getElementById('ac-q'), btn = document.getElementById('ac-send');
-  var INDEX = null, busy = false;
-  var HIST = [];
-  function workerFetch(payload){
-    return fetch(window.AC_WORKER, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-  }
-  function saveChat(){
-    try{ localStorage.setItem('maxChat', JSON.stringify({ h: log.innerHTML.slice(0, 200000), hist: HIST.slice(-2) })); }catch(e){}
-  }
-  function clearChat(){
-    try{ localStorage.removeItem('maxChat'); }catch(e){}
-    log.innerHTML = ''; HIST = [];
-    var cb = document.getElementById('ac-chips');
-    if (cb) cb.style.display = '';
-  }
-  var urlq = new URLSearchParams(location.search);
-  var FROM_PAGE = urlq.get('from') || null;
-  var PRE_Q = urlq.get('q') || null;
-  var EMB = null, EMB_TRIED = false;
-  function decodeVec(b64){
-    var raw = atob(b64), n = raw.length, a = new Float32Array(n);
-    for (var i = 0; i < n; i++){ var v = raw.charCodeAt(i); a[i] = v > 127 ? v - 256 : v; }
-    return a;
-  }
-  function esc(s){ return s.replace(/[&<>]/g, function(c){ return { '&':'&amp;','<':'&lt;','>':'&gt;' }[c]; }); }
-  function add(cls, html){
-    var d = document.createElement('div'); d.className = 'ac-msg ' + cls; d.innerHTML = html;
-    log.appendChild(d); log.scrollTop = log.scrollHeight;
-    try{ d.scrollIntoView({ block: 'nearest' }); }catch(sie){}
-    return d;
-  }
-  function norm(s){
-    return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9 ]/g, '');
-  }
-  var VOCAB = null;
-  function buildVocab(){
-    VOCAB = {};
-    INDEX.forEach(function(e){
-      ((e.NB || '') + ' ' + (e.NT || '')).split(' ').forEach(function(w){
-        if (w.length > 3) VOCAB[w] = (VOCAB[w] || 0) + 1;
-      });
-    });
-  }
-  function editDist(a, b){
-    var la = a.length, lb = b.length, row = [], i, j;
-    for (j = 0; j <= lb; j++) row[j] = j;
-    for (i = 1; i <= la; i++){
-      var prev = row[0]; row[0] = i;
-      for (j = 1; j <= lb; j++){
-        var cur = row[j];
-        row[j] = Math.min(row[j] + 1, row[j - 1] + 1, prev + (a[i - 1] === b[j - 1] ? 0 : 1));
-        prev = cur;
-      }
-    }
-    return row[lb];
-  }
-  function correctWord(w){
-    if (!VOCAB) buildVocab();
-    var best = null, bd = 3, bc = 0;
-    for (var v in VOCAB){
-      if (Math.abs(v.length - w.length) > 2) continue;
-      var d = editDist(w, v);
-      if (d < bd || (d === bd && VOCAB[v] > bc)){ best = v; bd = d; bc = VOCAB[v]; }
-    }
-    return bd <= 2 ? best : null;
-  }
-  function dfOf(s){
-    var n = 0;
-    for (var m = 0; m < INDEX.length; m++){ if ((INDEX[m].NB || '').indexOf(s) > -1) n++; }
-    return n;
-  }
-  function stemOf(w){ return (w.length > 6 && w.length <= 9) ? w.slice(0, 6) : w; }
-  function retrieve(question, qvec){
-    var ql = question.toLowerCase();
-    var extra = [];
-    var textMention = /sunset|boulevard|rainbow|norma|desmond|joe gillis|betty|max|nan dear|gladys|dolly|errol/.test(ql);
-    var essayish = /essay|structure|introduction|intro |conclusion|paragraph|contention|topic sentence|plan|writing about/.test(ql);
-    if (/section\s*c|argument|persuasi|language analysis|analysing language/.test(ql)) extra = ['analysing', 'argument', 'language', 'persuade'];
-    else if (/section\s*b|creating|framework|stimul|personal journey|imaginative|creative/.test(ql)) extra = ['creating', 'texts', 'framework', 'stimulus'];
-    else if (/section\s*a|text response|analytical/.test(ql) || (textMention && essayish)) extra = ['analytical', 'text', 'response', 'essay', 'structure'];
-    var STOP = {the:1,and:1,that:1,this:1,with:1,for:1,from:1,was:1,are:1,were:1,have:1,has:1,had:1,
-      what:1,when:1,where:1,which:1,who:1,whom:1,why:1,how:1,does:1,did:1,can:1,could:1,should:1,
-      would:1,will:1,you:1,your:1,about:1,tell:1,give:1,show:1,quickly:1,please:1,need:1,want:1,
-      know:1,some:1,any:1,all:1,not:1,but:1,into:1,out:1,use:1,used:1,using:1,mean:1,means:1};
-    var terms = ql.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, ' ')
-      .split(/\s+/).filter(function(w){ return w.length > 2 && !STOP[w]; }).concat(extra)
-      .map(function(w){ return norm(w).replace(/ /g, ''); });
-    // typo tolerance: a word that appears nowhere on the site is corrected against site vocabulary
-    terms = terms.map(function(w){
-      if (w.length > 3 && dfOf(w) === 0){ var c = correctWord(w); if (c) return c; }
-      return w;
-    });
-    // IDF: rare words are worth far more than common ones
-    var tWeight = terms.map(function(w){
-      var dfw = dfOf(w), df = dfw > 0 ? dfw : dfOf(stemOf(w));
-      return Math.max(0.2, Math.log((INDEX.length + 1) / (df + 1)));
-    });
-    var yearMatch = ql.match(/20\d\d/);
-    var year = yearMatch ? yearMatch[0] : null;
-    var numWords = {one:'1',two:'2',three:'3',four:'4',five:'5',six:'6',seven:'7',eight:'8',nine:'9',ten:'10'};
-    function numOf(m){ return m ? (numWords[m[1]] || m[1]) : null; }
-    var actNum = numOf(ql.match(/act\s*(\d+|one|two|three)/));
-    var sceneNum = numOf(ql.match(/scene\s*(\d+|one|two|three|four|five|six|seven|eight|nine|ten)/));
-    function hasNum(t, label, n){ return (' ' + t + ' ').indexOf(' ' + label + ' ' + n + ' ') > -1; }
-    var sceneExists = true;
-    if (actNum || sceneNum){
-      sceneExists = INDEX.some(function(e){
-        var tt = e.NT || '';
-        return (!actNum || hasNum(tt, 'act', actNum)) && (!sceneNum || hasNum(tt, 'scene', sceneNum));
-      });
-    }
-    var scored = INDEX.map(function(e, idx){
-      var t = e.NT || '', p = e.NP || '', b = e.NB || '', s = 0;
-      var tSq = t.replace(/ /g, ''), bSq = b.replace(/ /g, '');
-      terms.forEach(function(w, ti){
-        var stem = stemOf(w), wgt = tWeight[ti];
-        if (t.indexOf(w) > -1 || tSq.indexOf(w) > -1) s += 4 * wgt;
-        else if (t.indexOf(stem) > -1) s += 3 * wgt;
-        if (p.indexOf(w) > -1) s += 2 * wgt; else if (p.indexOf(stem) > -1) s += 2 * wgt;
-        var i2 = -1, n = 0;
-        while ((i2 = b.indexOf(stem, i2 + 1)) > -1 && n < 5){ n++; }
-        if (n === 0 && w.length > 5){
-          i2 = -1;
-          while ((i2 = bSq.indexOf(w, i2 + 1)) > -1 && n < 5){ n++; }
-        }
-        s += n * wgt;
-      });
-      if (year && (t.indexOf(year) > -1 || p.indexOf(year) > -1)) s += 25;
-      if (typeof FROM_PAGE !== 'undefined' && FROM_PAGE && e.u.indexOf(FROM_PAGE) === 0) s += 6;
-      if (actNum || sceneNum){
-        var hitA = actNum && hasNum(t, 'act', actNum);
-        var hitS = sceneNum && hasNum(t, 'scene', sceneNum);
-        if (actNum && sceneNum){ if (hitA && hitS) s += 25; }
-        else if (hitA || hitS) s += 12;
-        if (!sceneExists && e.u.indexOf('scene-summar') > -1) s += 20;
-      }
-      if (qvec && EMB && EMB.vecs[idx]){
-        var vv = EMB.vecs[idx], dot = 0;
-        for (var z = 0; z < qvec.length; z++){ dot += qvec[z] * vv[z]; }
-        var cos = dot / 127;
-        if (cos > 0.2) s += Math.round((cos - 0.2) * 100);
-      }
-      return [s, e, idx];
-    });
-    var scoreByIdx = {};
-    scored.forEach(function(x){ scoreByIdx[x[2]] = x[0]; });
-    scored = scored.filter(function(x){ return x[0] > 0; }).sort(function(a, b){ return b[0] - a[0]; });
-    var seen = {}, picked = [], out = [];
-    for (var k = 0; k < scored.length && picked.length < 3; k++){
-      var e = scored[k][1], pg = e.u.split('#')[0];
-      if (!seen[pg]){ seen[pg] = 1; picked.push({ e: e, i: scored[k][2] }); out.push(e); }
-    }
-    // pull the sibling sections ADJACENT to each match (a heading's content lives in
-    // the Summary/Analysis chunks that follow it, not at the top of the page)
-    picked.forEach(function(pe){
-      var page = pe.e.u.split('#')[0], cands = [];
-      for (var m = 0; m < INDEX.length; m++){
-        if (INDEX[m].u.split('#')[0] === page && out.indexOf(INDEX[m]) === -1 && (INDEX[m].b || '').length > 40){
-          // rank siblings by their own relevance, tiebreak by closeness (after preferred)
-          var dist = m > pe.i ? m - pe.i : (pe.i - m) * 3;
-          cands.push([-(scoreByIdx[m] || 0), dist, m]);
-        }
-      }
-      cands.sort(function(a, b){ return a[0] - b[0] || a[1] - b[1]; });
-      var quota = picked.indexOf(pe) === 0 ? 10 : 5;
-      cands.slice(0, quota).map(function(c){ return c[2]; }).sort(function(a, b){ return a - b; })
-        .forEach(function(m){ out.push(INDEX[m]); });
-    });
-    out = out.slice(0, 17);
-    // guarantee: every rare query word gets its best chunk into the excerpts
-    var added = 0;
-    terms.forEach(function(w, ti){
-      if (tWeight[ti] < 3.5 || added >= 3) return;
-      var have = out.some(function(e){ return ((e.NB || '') + ' ' + (e.NT || '')).indexOf(w) > -1; });
-      if (have) return;
-      for (var k2 = 0; k2 < scored.length; k2++){
-        var e2 = scored[k2][1];
-        if (((e2.NB || '') + ' ' + (e2.NT || '')).indexOf(w) > -1 && out.indexOf(e2) === -1){
-          out.push(e2); added++; break;
-        }
-      }
-    });
-    return out.slice(0, 20);
-  }
-  function ask(){
-    var question = q.value.trim();
-    if (!question || busy) return;
-    q.value = '';
-    add('ac-user', esc(question.length > 400 ? question.slice(0, 400) + '\u2026' : question));
-    var chipsEl = document.getElementById('ac-chips');
-    if (chipsEl) chipsEl.style.display = 'none';
-    if (question.length > 1200){
-      add('ac-bot', 'That reads like a full essay \u2014 and marking essays is the <a href="marker.html">Essay Marker</a>\u2019s department; it will score it against the criteria properly. If you would like my help, ask me about one paragraph, one technique or one quote at a time.');
-      saveChat(); return;
-    }
-    var wait = add('ac-bot', '<em>Max is consulting the guide</em><span class="ac-dots"><i></i><i></i><i></i></span>');
-    busy = true; btn.disabled = true;
-    var pIdx = INDEX ? Promise.resolve() : fetch(window.AC_INDEX_URL).then(function(r){ return r.json(); }).then(function(d){
-      d.forEach(function(e){
-        e.NT = norm(e.t || ''); e.NP = norm(e.p || ''); e.NB = norm(e.b || '');
-      });
-      INDEX = d;
-    });
-    var pEmb = EMB_TRIED ? Promise.resolve() : fetch(window.AC_EMB_URL)
-      .then(function(r){ if (!r.ok) throw 0; return r.json(); })
-      .then(function(d){ EMB = { dim: d.dim, vecs: d.v.map(decodeVec) }; })
-      .catch(function(){ EMB = null; })
-      .then(function(){ EMB_TRIED = true; });
-    var pQvec = workerFetch({ embed: true, input: [question] }).then(function(r){ return r.json(); })
-      .then(function(j){ return (j.data && j.data[0] && j.data[0].embedding) || null; })
-      .catch(function(){ return null; });
-    Promise.all([pIdx, pEmb, pQvec])
-    .then(function(res){
-      var qvec = null;
-      if (res[2] && EMB){
-        var dm = EMB.dim, v = res[2].slice(0, dm), nn = 0;
-        for (var i = 0; i < dm; i++){ nn += v[i] * v[i]; }
-        nn = Math.sqrt(nn) || 1;
-        qvec = v.map(function(x){ return x / nn; });
-      }
-      var rq = question;
-      if (question.length < 30 && HIST.length){
-        var lastH = HIST[HIST.length - 1];
-        rq = question + ' ' + lastH.q + ' ' + lastH.a.slice(0, 150);
-      }
-      var chunks = retrieve(rq, qvec);
-      if (!chunks.length){
-        wait.innerHTML = "I couldn't find anything in the guide about that. Try different words, or browse the sidebar \u2014 and if it's a real gap, tell your teacher.";
-        busy = false; btn.disabled = false; return;
-      }
-      var context = chunks.map(function(c, i){
-        return '[' + (i + 1) + '] From ' + c.t + ' (page: ' + c.p + '):' + String.fromCharCode(10) + (c.b || c.t);
-      }).join(String.fromCharCode(10) + String.fromCharCode(10));
-      var NL = String.fromCharCode(10);
-      var examDate = new Date(2026, 9, 27, 9, 0, 0), today = new Date();
-      var daysLeft = Math.max(0, Math.ceil((examDate - today) / 86400000));
-      var hr = today.getHours();
-      var partOfDay = hr < 12 ? 'morning' : (hr < 18 ? 'afternoon' : 'evening');
-      var dateNote = ' Today is ' + today.toDateString() + ' and it is currently ' + partOfDay + ' for the student (greet accordingly, if you greet at all); the English exam is on Tuesday 27 October 2026 at 9am, ' + daysLeft + ' days from now - use this when asked about revision timing.';
-      var ctxNote = '';
-      if (FROM_PAGE){
-        for (var fi = 0; fi < INDEX.length; fi++){
-          if (INDEX[fi].u.indexOf(FROM_PAGE) === 0){
-            ctxNote = " The student clicked Ask Max while reading the page '" + INDEX[fi].t + "' (" + INDEX[fi].p + "), so vague questions probably refer to that page.";
-            break;
-          }
-        }
-      }
-      var convo = '';
-      if (HIST.length){
-        convo = NL + NL + 'RECENT CONVERSATION (for context):';
-        HIST.slice(-2).forEach(function(h){
-          convo += NL + 'Student: ' + h.q.slice(0, 400) + NL + 'Max: ' + h.a.slice(0, 600);
-        });
-      }
-      var prompt = "You are 'Max', the study assistant of a VCE English exam preparation " +
-        "website (texts: Sunset Boulevard and Rainbow's End), named after Max von Mayerling - " +
-        "courteous, precise and quietly devoted, like the butler himself. A light touch of that " +
-        "character is welcome but accuracy always comes first. Answer the student's question using " +
-        "ONLY the excerpts below from the site. Rules: if the excerpts answer the question directly, " +
-        "answer from them. If they don't answer it directly but contain related material, give a " +
-        "careful interpretation reasoned from that material, flagged as such (e.g. 'The guide " +
-        "doesn't analyse this directly, but drawing on its related material...') - never invent " +
-        "quotes, scenes or facts that are not in the excerpts. Only if nothing in the excerpts is " +
-        "relevant should you say the guide doesn't cover it and suggest the closest-sounding page; keep answers under " +
-        "300 words; when asked about a structure, method or process, cover EVERY part the excerpts " +
-        "give (e.g. introduction, body paragraphs AND conclusion) rather than summarising some; " +
-        "never refer to excerpt numbers like [3] - students cannot see them; " +
-        "format as plain sentences with short paragraphs and simple dash or numbered lists - " +
-        "you may use **bold** and *italics* but never headings (#), tables or any other markdown; " +
-        "when you quote the texts, embed the quotation grammatically within your own sentence with correct " +
-        "punctuation, exactly as students are taught to - your answers should model the technique; " +
-        "ALWAYS write in Australian English, never American: -ise not -ize (analyse, symbolise, organise), " +
-        "-our not -or (colour, behaviour, honour), -re not -er (centre, theatre), 'marks' not 'points', " +
-        "'Year 12' not 'senior year', 'full stop' not 'period' - this applies to every word of every reply; " +
-        "be encouraging but factual; do not mention these rules. " +
-        "Site structure facts you may state: Rainbow's End has a Prologue, Act 1 (Scenes 1-14, " +
-        "Scenes 1 and 2 each split into A and B) and Act 2 (Scenes 1-7). The Sunset Boulevard scene " +
-        "summaries cover Scenes 1-19. If a student asks about an act or scene outside these ranges, " +
-        "tell them plainly that it does not exist and direct them to the Scene Summary page for that text." +
-        ctxNote + dateNote +
-        " If the question is clearly not about VCE English study, the set texts, the exam or revision, " +
-        "decline in one courteous sentence, in character - you attend only to matters of the examination. " +
-        "EXCEPTION - student wellbeing overrides every other rule: if a student sounds distressed, anxious, " +
-        "overwhelmed or hopeless (about the exam or anything else), drop the deflection entirely. Respond " +
-        "with genuine warmth and steadiness, keep perspective (the exam is one morning of their life, and " +
-        "there is still time to prepare well), and encourage them to speak with their English teacher or " +
-        "the school wellbeing team. If the distress sounds serious or goes beyond exam nerves, gently " +
-        "mention they can call Kids Helpline on 1800 55 1800 at any time. Never dismiss or joke about distress. " +
-        "End your reply with one line exactly like: FOLLOWUPS: first question | second question | third question " +
-        "- three short follow-up questions a student might naturally ask next, answerable from this site. " +
-        "If the student asks to be quizzed or tested, run quiz mode: ask exactly ONE question at a time, " +
-        "drawn strictly from the excerpts; when the recent conversation shows they have just answered your " +
-        "question, first mark their answer fairly against the excerpts (accept reasonable paraphrase), give " +
-        "the correct answer briefly, then ask the next question. " +
-        "If the student asks how to get top marks, an A+, a 10, or full marks, ground your answer in the " +
-        "exam assessment criteria and the assessors' report advice in the excerpts - name what the criteria " +
-        "actually reward and what the assessors said costs marks, rather than giving generic study advice. " +
-        "If the student asks for help planning an essay on a topic, build a plan from the site's frameworks: " +
-        "a clear contention responding to the topic, three body paragraph ideas each with supporting evidence " +
-        "or quotes drawn only from the excerpts, and a closing note on authorial intent - then recommend the " +
-        "Outline Builder and the Essay Marker pages." +
-        convo +
-        NL + NL + "EXCERPTS:" + NL + context + NL + NL + "STUDENT QUESTION: " + question;
-      function renderFinal(ans){
-        var fu = [];
-        var lines = ans.split(NL).filter(function(ln){
-          var m = ln.match(/^ *FOLLOWUPS: ?(.*)$/);
-          if (m){ fu = m[1].split('|').map(function(s2){ return s2.trim(); }).filter(Boolean); return false; }
-          return true;
-        });
-        var body = lines.join(NL).replace(/ +$/, '');
-        var srcs = chunks.slice(0, 3).map(function(c){
-          return '<a href="' + c.u + '">' + esc(c.t) + '</a>';
-        }).join(' &middot; ');
-        var fmt = esc(body)
-          .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
-          .replace(/\*([^*]+)\*/g, '<em>$1</em>');
-        var fuHtml = fu.length ? '<div class="ac-fu">' + fu.slice(0, 3).map(function(f){
-          return '<button type="button" class="ac-chip ac-fu-btn">' + esc(f) + '</button>';
-        }).join('') + '</div>' : '';
-        wait.innerHTML = fmt.split(NL).map(function(ln){
-          var m = ln.match(/^#+ ?(.*)$/);
-          return m ? '<strong>' + m[1] + '</strong>' : ln;
-        }).join('<br>') + fuHtml +
-          '<div class="ac-src"><button type="button" class="ac-copy" title="Copy this answer">Copy</button> Read more: ' + srcs + '</div>';
-        HIST.push({ q: question, a: body });
-        if (HIST.length > 2) HIST = HIST.slice(-2);
-        saveChat();
-        try{
-          var topPage = chunks[0] ? chunks[0].u.split('#')[0] : 'none';
-          if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: 'max-cite/' + topPage, event: true });
-          else (new Image()).src = 'https://nmo.goatcounter.com/count?p=' + encodeURIComponent('max-cite/' + topPage) + '&e=true';
-        }catch(gcErr){}
-      }
-      var chatPayload = { messages: [{ role: 'user', content: prompt }], max_tokens: 700 };
-      return workerFetch(chatPayload).then(function(r){ return r.json(); }).then(function(j){
-        if (j.error){ throw new Error(j.error.message || j.error); }
-        var ans = j.choices && j.choices[0] ? j.choices[0].message.content : 'No answer returned.';
-        renderFinal(ans);
-      });
-    })['catch'](function(e){
-      wait.innerHTML = 'Something went wrong: ' + esc(String(e.message || e)) + '<br>If the day\u2019s shared allowance is spent, it renews overnight \u2014 and the guide itself is always here.';
-      saveChat();
-    }).then(function(){ busy = false; btn.disabled = false; });
-  }
-  btn.addEventListener('click', ask);
-  q.addEventListener('keydown', function(e){ if (e.key === 'Enter') ask(); });
-  log.addEventListener('click', function(e){
-    var t = e.target;
-    if (t.classList && t.classList.contains('ac-fu-btn')){ q.value = t.textContent; ask(); return; }
-    if (t.classList && t.classList.contains('ac-copy')){
-      var bubble = t.closest('.ac-bot');
-      if (!bubble) return;
-      var cl = bubble.cloneNode(true);
-      var rm = cl.querySelectorAll('.ac-src, .ac-fu');
-      for (var ri = 0; ri < rm.length; ri++){ rm[ri].parentNode.removeChild(rm[ri]); }
-      var txt = cl.innerText;
-      if (navigator.clipboard && navigator.clipboard.writeText){
-        navigator.clipboard.writeText(txt).then(function(){
-          t.textContent = 'Copied'; setTimeout(function(){ t.textContent = 'Copy'; }, 1600);
-        });
-      }
-    }
-  });
-  var clr = document.getElementById('ac-clear');
-  if (clr) clr.addEventListener('click', clearChat);
-  try{
-    var savedChat = JSON.parse(localStorage.getItem('maxChat') || 'null');
-    if (savedChat && savedChat.h){
-      log.innerHTML = savedChat.h;
-      HIST = savedChat.hist || [];
-      var cb2 = document.getElementById('ac-chips');
-      if (cb2) cb2.style.display = 'none';
-      log.scrollTop = log.scrollHeight;
-    }
-  }catch(restoreErr){}
-  var CHIP_POOL = [
-    'How do I structure a Section A essay?',
-    'What does the monkey symbolise in Sunset Boulevard?',
-    'What happens in Act 2, Scene 5 of Rainbow\u2019s End?',
-    'What did the assessors say about Section C?',
-    'Give me quotes about reality and illusion',
-    'How should I revise this week?',
-    'Who is Norma Desmond?',
-    'How are Gladys and Dolly different?',
-    'What does the staircase symbolise?',
-    'What is mise-en-sc\u00e8ne?',
-    'How do I write a strong contention?',
-    'What should go in a Section B piece?',
-    'What are hinge sentences?',
-    'What quotes show Nan Dear\u2019s resilience?',
-    'How is the Hollywood dream criticised in Sunset Boulevard?',
-    'What happened at the New Year\u2019s Eve party?',
-    'What does the flood mean in Rainbow\u2019s End?',
-    'What did the 2025 assessors warn about?',
-    'How do I analyse a persuasive article?',
-    'What film techniques should I mention in an essay?',
-    'How do I use topic sentences well?',
-    'What is the exam format?'
-  ];
-  var chipBox = document.getElementById('ac-chips');
-  if (chipBox){
-    var pool = CHIP_POOL.slice();
-    for (var si = pool.length - 1; si > 0; si--){
-      var sj = Math.floor(Math.random() * (si + 1));
-      var tmp = pool[si]; pool[si] = pool[sj]; pool[sj] = tmp;
-    }
-    pool.slice(0, 6).forEach(function(txt){
-      var b = document.createElement('button');
-      b.type = 'button'; b.className = 'ac-chip'; b.textContent = txt;
-      b.addEventListener('click', function(){ q.value = txt; ask(); });
-      chipBox.appendChild(b);
-    });
-  }
-  if (PRE_Q){ q.value = PRE_Q; ask(); }
-})();
-</script>"""
-
 hub_tools = TOOL_LABEL + """<h1>Study Tools</h1>
 <p class="lede">Interactive revision tools built from the guide&rsquo;s own content.</p>
 <h2 class="in-part-head">Tools</h2>
@@ -1407,16 +925,12 @@ hub_tools = TOOL_LABEL + """<h1>Study Tools</h1>
   <a class="ch-card" href="flashcards.html"><span class="ch-num">1</span><span>Quote Flashcards</span></a>
   <a class="ch-card" href="practice-topics.html"><span class="ch-num">2</span><span>Practice Topics &amp; Essay Timer</span></a>
   <a class="ch-card" href="glossary.html"><span class="ch-num">3</span><span>Glossary of Techniques</span></a>
-  <a class="ch-card" href="essay-marker.html"><span class="ch-num">4</span><span>Essay Marker</span></a>
-  <a class="ch-card" href="technique-quiz.html"><span class="ch-num">5</span><span>Technique Quiz</span></a>
-  <a class="ch-card" href="exam-generator.html"><span class="ch-num">6</span><span>Exam Generator</span></a>
-  <a class="ch-card" href="outline-builder.html"><span class="ch-num">7</span><span>Essay Outline Builder</span></a>
-  <a class="ch-card" href="vocab-upgrader.html"><span class="ch-num">8</span><span>Vocabulary Upgrader</span></a>
-  <a class="ch-card" href="micro-drills.html"><span class="ch-num">9</span><span>Micro-Drills</span></a>
-  <a class="ch-card" href="ask-max.html"><span class="ch-num">10</span><span>Ask Max</span></a>
-  <a class="ch-card" href="scavenger-hunt.html"><span class="ch-num">11</span><span>The Director&rsquo;s Cut</span></a>
-</div>
-<p style="font-family:var(--sans);font-size:14px;color:var(--muted)">The Essay Marker gives a calibrated score out of 10 with criteria-based feedback for Sections A, B and C. It needs an AI connection: a free GitHub Models token or an Anthropic API key (set up inside the tool; stored only in your browser).</p>"""
+  <a class="ch-card" href="technique-quiz.html"><span class="ch-num">4</span><span>Technique Quiz</span></a>
+  <a class="ch-card" href="exam-generator.html"><span class="ch-num">5</span><span>Exam Generator</span></a>
+  <a class="ch-card" href="outline-builder.html"><span class="ch-num">6</span><span>Essay Outline Builder</span></a>
+  <a class="ch-card" href="vocab-upgrader.html"><span class="ch-num">7</span><span>Vocabulary Upgrader</span></a>
+  <a class="ch-card" href="micro-drills.html"><span class="ch-num">8</span><span>Micro-Drills</span></a>
+</div>"""
 
 display_num += 1
 tools_num = display_num
@@ -1424,103 +938,20 @@ nav_items.append({"num": tools_num, "title": "Study Tools", "file": "study-tools
                   "chapters": [{"title": "Quote Flashcards", "file": "flashcards.html"},
                                {"title": "Practice Topics & Essay Timer", "file": "practice-topics.html"},
                                {"title": "Glossary of Techniques", "file": "glossary.html"},
-                               {"title": "Essay Marker", "file": "essay-marker.html"},
                                {"title": "Technique Quiz", "file": "technique-quiz.html"},
                                {"title": "Exam Generator", "file": "exam-generator.html"},
                                {"title": "Essay Outline Builder", "file": "outline-builder.html"},
                                {"title": "Vocabulary Upgrader", "file": "vocab-upgrader.html"},
-                               {"title": "Micro-Drills", "file": "micro-drills.html"},
-                               {"title": "Ask Max", "file": "ask-max.html"},
-                               {"title": "The Director's Cut", "file": "scavenger-hunt.html"}]})
+                               {"title": "Micro-Drills", "file": "micro-drills.html"}]})
 all_pages.append({"file": "study-tools.html", "title": "Study Tools", "html": hub_tools, "nav": "study-tools.html"})
 all_pages.append({"file": "flashcards.html", "title": "Quote Flashcards", "html": fc_page, "nav": "study-tools.html"})
 all_pages.append({"file": "practice-topics.html", "title": "Practice Topics & Essay Timer", "html": tp_page, "nav": "study-tools.html"})
 all_pages.append({"file": "glossary.html", "title": "Glossary of Techniques", "html": gl_page, "nav": "study-tools.html"})
-hunt_page = TOOL_LABEL + """<h1>The Director’s Cut</h1>
-<p class="lede">A thirty-stage scavenger hunt through this guide. Every answer is buried in these pages — in the scenes, the quote banks, the glossary, the exemplars. No answer is typed anywhere in this page’s code, so there is only one way through: read like a top-scoring student. Progress saves on this device. Finish, and bring what you find to Mr Morlin.</p>
-<div id="hunt-dots" class="hunt-dots"></div>
-<div id="hunt-card" class="hunt-card"></div>
-<p style="font-family:var(--sans);font-size:12px;color:var(--muted)"><button type="button" id="hunt-reset" class="hunt-reset">Start over</button></p>
-<script>
-(function(){
-  var ST = [{n:'I',q:'Norma buys Joe a coat he calls \u2018a little too dressy\u2019 for the copy desk he once sat behind. In which city did that desk stand?',h:'Joe Gillis\u2019s own words, in the quote banks \u2014 where fame is the subject.',a:['c746359b','f00aec40']},{n:'II',q:'The finance company finally catches up, and Joe\u2019s car is taken while former silent stars play cards. Give the NUMBER of the scene in which this happens.',h:'The Scene Summaries \u2014 count carefully; the bridge table is the tell.',a:['a37e2a65','b02c793f','c12ceda']},{n:'III',q:'An Italian-derived word for painting with light and shadow \u2014 the extreme contrast that marks film noir\u2019s whole visual temperament. Name the term.',h:'Film Techniques \u2014 the guide\u2019s treatment of noir itself.',a:['fca37f46']},{n:'IV',q:'The policeman gives his word that the family\u2019s encyclopaedias will be kept \u2018____ ____\u2019 (two words) \u2014 then abandons them to the flood, p.174. Complete his broken promise.',h:'Character analysis \u2014 the minor character in uniform.',a:['4d7e81eb']},{n:'V',q:'\u2018First in the family\u2019 with her Leaving Certificate and top of her class in algebra \u2014 yet the position Gladys seeks for Dolly is refused. Name that position.',h:'Gladys Banks \u2014 her proudest scene, and her most humiliating.',a:['2d39e6b4','f9264b45','7a5283ce','e1712b8a','f033f3c3','ae9cb559']},{n:'VI',q:'Founded 1888 on Yorta Yorta Country \u2014 refuge, resistance, and the site of the walk-off that shadows Nan Dear\u2019s memories of being \u2018at the mercy of the manager\u2019. Name it.',h:'The historical context of Rainbow\u2019s End \u2014 before the Flats.',a:['e2295c18','952e2b46','21ad03a9']},{n:'VII',q:'The stage directions grant one household object a miracle: \u2018celestial music is heard\u2019 around it, p.133. Name the object.',h:'The Stage Devices Quote Bank.',a:['bc254096','3200c40b','13a5287f','2f3548e8','9970d271']},{n:'VIII',q:'Section B craft: published pieces you studied may shape your writing and need no referencing. The examiners\u2019 two-word name for such a piece?',h:'What the 2025 report says about Creating a Text.',a:['27e5e8fb','56ed0e18','64f85716']},{n:'IX',q:'Apply, don\u2019t search: \u2018We march for justice. We vote for justice. We die for justice.\u2019 Anaphora\u2019s mirror-twin is at work \u2014 repetition at the END of successive clauses. Name the technique.',h:'Analysing Argument keeps its repetition terms in one place \u2014 twins together.',a:['d5b6803']},{n:'X',q:'Synthesis: one word names the artifice Norma\u2019s cinema sustains AND the false promise waiting at a rainbow\u2019s end \u2014 the Overview lists it beside fame and morality as Hollywood\u2019s obsession. Name it.',h:'The Sunset Boulevard Overview \u2014 then think about what a pot of gold really is.',a:['3e8482bb','3299e0d8','256df104']},{n:'XI',q:'All hand-made, twenty-eight thousand dollars, and paraded to Paramount as proudly as its owner. Name the marque of Norma\u2019s motor car.',h:'Norma\u2019s quote bank \u2014 fame and opulence.',a:['a01a1e98','c2d37999','be078a89','f41eabf1']},{n:'XII',q:'Betty Schaefer was born two blocks from the studio, but she refuses to stay in her current job \u2014 \u2018all my life\u2019, she says. What is that job, in one word?',h:'Betty\u2019s own words, in her character quotes.',a:['7a40a551','adb8cc8e','7b69664e']},{n:'XIII',q:'In Joe\u2019s \u2018mixed-up dream\u2019, a faceless man grinds away at an instrument draped all in black while a chimp dances for pennies. Name the instrument.',h:'The theme where isolation meets decay.',a:['54d9db74','dc4bb999','47852d6b','fa257f45']},{n:'XIV',q:'One word completes the guide\u2019s judgement twice over: \u2018The Queen\u2019s non-______ language mirrors the nation\u2019s non-______ identity at mid-century.\u2019 The same word is a persuasive technique you must know for Section C.',h:'The Royals\u2019 analysis in Rainbow\u2019s End \u2014 and the terms and strategies of Analysing Argument.',a:['16ae5382','4462071b','c8ab4450']},{n:'XV',q:'Apply, don\u2019t search: a writer covering the same event swaps \u2018killed\u2019 for \u2018slaughtered\u2019. Analysts name this choice of emotionally weighted wording word ______. Give the term.',h:'Terms and strategies \u2014 specific word choice.',a:['9e6ba521','b5754016','3f10ae9','57eafbb8','31ea6091']},{n:'XVI',q:'Norma despises one word above all: \u2018I hate that word. It\u2019s a ______\u2019 \u2014 complete her correction.',h:'Her relationship with ambition, in the theme analyses.',a:['132087ac','26c98123']},{n:'XVII',q:'She sits very close, and a scent follows that Joe admits is \u2018not my favorite perfume, not by a long shot\u2019. Name the flower.',h:'Where isolation meets decay.',a:['c4d6ece7','74d2cbae']},{n:'XVIII',q:'The butler\u2019s confession, the film\u2019s cruellest devotion: \u2018You see, I was her first ______.\u2019',h:'Max von Mayerling, in his own words.',a:['c928cb7','3d4cf266','eb3a44a']},{n:'XIX',q:'Joe\u2019s cruel museum-piece nickname for Norma\u2019s bridge guests \u2014 the discarded stars of the silent era. One word.',h:'Scene 8 \u2014 or the example contention that borrows the same word.',a:['7ff96a97','d5e9526e','f357a51e']},{n:'XX',q:'Betty Schaefer was born two blocks from the studio \u2014 name the avenue.',h:'Betty\u2019s character quotes.',a:['73824127','9b9c0581','8cde3f4b']},{n:'XXI',q:'At her height, how many fan letters reached Norma in a single week? Words or digits.',h:'Fame and opulence \u2014 Max keeps the count.',a:['4961ff3f','999c7b4','a42f1aba']},{n:'XXII',q:'Complete Nan Dear\u2019s quiet defiance, p.159: \u2018At least here we ______ __ ______ on our own. Not like the Cummeragunja days\u2026\u2019 Three little words.',h:'The thematic quote banks of Rainbow\u2019s End \u2014 under trauma.',a:['9cdd8c4d','2ec02895','347ebf24']},{n:'XXIII',q:'His visit is \u2018not a casual or friendly one\u2019 \u2014 the official whose judgement could take everything from Nan and Gladys. His title?',h:'The minor characters of Rainbow\u2019s End.',a:['5e263aa3','e8da6f9a','1e1bd9b3']},{n:'XXIV',q:'Harrison anchors her fiction with a real historical figure: Pastor Doug ______. Surname.',h:'Historical awareness, in the language analyses of Rainbow\u2019s End.',a:['c924ed15','12fb6051','c1b7729e']},{n:'XXV',q:'Rumbalara \u2014 the First Nations housing estate of Harrison\u2019s own family story \u2014 stands in which town?',h:'The author\u2019s background.',a:['4fa5bb20']},{n:'XXVI',q:'Section B craft: the assessors name four purposes a response could take \u2014 \u2018explain, express, ______ or argue\u2019. The missing verb.',h:'What the 2025 report says about Creating a Text.',a:['380a3610']},{n:'XXVII',q:'Section B craft: besides the given title, your piece must respond to at least one piece of ______ ______. Two words.',h:'The exam format pages \u2014 Section B\u2019s requirements.',a:['a067e6d3','5743958e','4e2d3e3d']},{n:'XXVIII',q:'Apply, don\u2019t search: \u2018As a surgeon of thirty years, I can assure you this policy will cost lives.\u2019 Name the persuasive technique.',h:'Terms and strategies \u2014 who gets believed, and why.',a:['5d06f7e9','d79a7c68','c7a8e048']},{n:'XXIX',q:'Apply, don\u2019t search: a careful writer softens \u2018all students\u2019 to \u2018most students\u2019. Name the class of words that tune a claim\u2019s level of impact \u2014 the guide names two, either will do.',h:'Particular language structures, in Analysing Argument.',a:['8c13d956','9f99e3bd','47fd0492','54276f61','6ad7171c']},{n:'XXX',q:'Apply, to close: \u2018I\u2019d rather cut off my arm than sit through another formulaic essay.\u2019 Name the technique \u2014 then never let Max catch you using its subject matter.',h:'Exaggeration has its own entry in the terms and strategies.',a:['4146ed94','789f995c','650f1786']}];
-  var CIPHER = 'MHZkc2FwGSM0d3JFH0F7eD47N3o=';
-  var card = document.getElementById('hunt-card'), dots = document.getElementById('hunt-dots');
-  var REBUFF = ['Not quite \u2014 the house rewards closer reading.',
-    'Max shakes his head. Consult the guide again.',
-    'The reel keeps spinning. Look once more.'];
-  function nrm(s){ return s.toLowerCase().replace(/[^a-z0-9]/g, ''); }
-  function fnv(s){
-    var h = 2166136261 >>> 0;
-    for (var i = 0; i < s.length; i++){ h ^= s.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; }
-    return h.toString(16);
-  }
-  function state(){ try{ return JSON.parse(localStorage.getItem('huntState') || '{"n":0,"w":0}'); }catch(e){ return { n: 0, w: 0 }; } }
-  function save(st){ try{ localStorage.setItem('huntState', JSON.stringify(st)); }catch(e){} }
-  function renderDots(n){
-    var out = '';
-    for (var i = 0; i < ST.length; i++){
-      out += '<span class="hunt-dot' + (i < n ? ' done' : (i === n ? ' now' : '')) + '">' + ST[i].n + '</span>';
-    }
-    dots.innerHTML = out;
-  }
-  function finish(){
-    var key = '';
-    for (var i = 0; i < ST.length; i++){ key += ST[i].a[0]; }
-    var raw = atob(CIPHER), out = '';
-    for (var j = 0; j < raw.length; j++){ out += String.fromCharCode(raw.charCodeAt(j) ^ key.charCodeAt(j % key.length)); }
-    card.innerHTML = '<div class="hunt-done"><div class="hunt-code">' + out + '</div>' +
-      '<p>All thirty locks opened. You have crossed both texts, walked a personal journey and named the machinery of persuasion \u2014 that is a revision session most students never do. Show the words above to Mr Morlin.</p></div>';
-    renderDots(ST.length);
-  }
-  function render(){
-    var st = state();
-    renderDots(st.n);
-    if (st.n >= ST.length){ finish(); return; }
-    var s = ST[st.n];
-    card.innerHTML = '<div class="hunt-stage"><div class="hunt-num">Stage ' + s.n + ' of X</div>' +
-      '<p class="hunt-q">' + s.q + '</p>' +
-      '<div class="tool-bar" style="margin:.6em 0"><input id="hunt-a" type="text" autocomplete="off" placeholder="Your answer\u2026" style="flex:1;padding:11px 14px;border:1px solid var(--line);border-radius:9px;background:var(--card);color:var(--ink);font-family:var(--serif);font-size:15.5px"><button id="hunt-go">Unlock</button></div>' +
-      '<div id="hunt-msg" class="hunt-msg"></div>' +
-      (st.w >= 2 ? '<details class="hunt-hint"><summary>Where to look</summary><p>' + s.h + '</p></details>' : '<p class="hunt-small">A hint appears after two wrong tries.</p>') +
-      '</div>';
-    var inp = document.getElementById('hunt-a'), go = document.getElementById('hunt-go'), msg = document.getElementById('hunt-msg');
-    function attempt(){
-      var v = nrm(inp.value);
-      if (!v) return;
-      var hv = fnv('h' + (st.n + 1) + ':' + v);
-      if (s.a.indexOf(hv) > -1){
-        var ns = state(); ns.n += 1; ns.w = 0; save(ns); render();
-        window.scrollTo({ top: 0 });
-      } else {
-        var ns2 = state(); ns2.w += 1; save(ns2);
-        msg.textContent = REBUFF[ns2.w % REBUFF.length];
-        card.querySelector('.hunt-stage').classList.remove('hunt-shake');
-        void card.offsetWidth;
-        card.querySelector('.hunt-stage').classList.add('hunt-shake');
-        if (ns2.w === 2) render();
-      }
-    }
-    go.addEventListener('click', attempt);
-    inp.addEventListener('keydown', function(e){ if (e.key === 'Enter') attempt(); });
-    inp.focus();
-  }
-  document.getElementById('hunt-reset').addEventListener('click', function(){
-    try{ localStorage.removeItem('huntState'); }catch(e){}
-    render();
-  });
-  render();
-})();
-</script>"""
-
-all_pages.append({"file": "essay-marker.html", "title": "Essay Marker", "html": em_page, "nav": "study-tools.html"})
 all_pages.append({"file": "technique-quiz.html", "title": "Technique Quiz", "html": qz_page, "nav": "study-tools.html"})
 all_pages.append({"file": "exam-generator.html", "title": "Exam Generator", "html": eg_page, "nav": "study-tools.html"})
 all_pages.append({"file": "outline-builder.html", "title": "Essay Outline Builder", "html": ob_page, "nav": "study-tools.html"})
 all_pages.append({"file": "vocab-upgrader.html", "title": "Vocabulary Upgrader", "html": vu_page, "nav": "study-tools.html"})
 all_pages.append({"file": "micro-drills.html", "title": "Micro-Drills", "html": dr_page, "nav": "study-tools.html"})
-all_pages.append({"file": "ask-max.html", "title": "Ask Max", "html": ac_page, "nav": "study-tools.html"})
-all_pages.append({"file": "scavenger-hunt.html", "title": "The Director's Cut", "html": hunt_page, "nav": "study-tools.html", "nosearch": True})
 _ed = os.path.join(PUBLIC, "assets", "exam")
 for _sub in ("b", "c"):
     os.makedirs(os.path.join(_ed, _sub), exist_ok=True)
@@ -1641,7 +1072,7 @@ def shell(title, active_nav, active_file, main_html, prevnext=""):
 <script data-goatcounter="https://nmo.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>""" % (html.escape(title), SITE_TITLE, html.escape(title), nav_html(active_nav, active_file), fix_quotes(main_html), fix_quotes(prevnext),
-       '' if active_file == 'ask-max.html' else '<a id="max-fab" href="ask-max.html?from=' + active_file + '" aria-label="Ask Max a question"><img src="assets/img/max.jpg" alt=""><span>Ask Max</span></a>')
+       '')
 
 def page_toc(scope):
     lis = []
@@ -1686,9 +1117,6 @@ for pg in all_pages:
                 _t = _pt + " - " + _t
         search.append({"t": _t, "p": part_title,
                        "u": pg["file"] + ("#" + hid if hid else ""), "b": body})
-search.append({"t": "Essay Marker", "p": "Study Tools", "u": "marker.html",
-               "b": "ai essay marker score feedback section a b c criteria calibrated marking precision mode second opinion handwriting transcription"})
-copy_if_changed(os.path.join(BUILD, "marker.html"), os.path.join(PUBLIC, "marker.html"))
 json.dump(search, open(os.path.join(PUBLIC, "assets", "search.json"), "w", encoding="utf-8"), ensure_ascii=False)
 
 # ---------------- write pages ----------------
@@ -1875,7 +1303,7 @@ landing = """
     <p class="hero-sub">Units 3/4 English &middot; For the VCE English Cohort of 2026</p>
     <p class="hero-sub hero-sub2">Compiled by Mr. Morlin &middot; Version Invicta 7.9</p>
     <p class="hero-lede">Annotated exemplar essays, thematic and character quote banks, scene-by-scene analyses, frameworks for every section of the examination, the assessors&rsquo; own insights from 2024 and 2025, and a suite of interactive study tools &mdash; from flashcards to a full exam generator. The complete guide to Units 3/4 English, refined for the web.</p>
-    <div class="hero-cta"><a class="btn" href="%s">Start reading &#8594;</a><a class="btn btn-max" href="ask-max.html"><img src="assets/img/max.jpg" alt="">Ask Max</a></div>
+    <div class="hero-cta"><a class="btn" href="%s">Start reading &#8594;</a></div>
   </div>
 </section>
 <div class="contents-row"><h2 class="section-head">Contents</h2><span id="resume-slot"></span></div>
@@ -1889,13 +1317,6 @@ landing = """
 """ % (nav_items[0]["file"], cards,
        exemplar_groups_html(exemplars))
 open(os.path.join(PUBLIC, "index.html"), "w", encoding="utf-8").write(shell("Home", "", "index.html", landing))
-
-# redirect stub: ask-the-guide.html -> ask-max.html
-open(os.path.join(PUBLIC, "ask-the-guide.html"), "w", encoding="utf-8").write(
-    '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">'
-    '<meta http-equiv="refresh" content="0;url=ask-max.html">'
-    '<link rel="canonical" href="ask-max.html"><title>Ask Max</title></head>'
-    '<body><p>Max has moved: <a href="ask-max.html">ask-max.html</a></p></body></html>')
 
 nf = """
 <div class="nf-wrap">

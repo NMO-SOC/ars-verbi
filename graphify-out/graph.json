@@ -4,33 +4,6 @@
   "graph": {
     "hyperedges": [
       {
-        "id": "marker_prompt_calibration_assembly",
-        "label": "Section prompt builders sharing a common calibration fragment",
-        "nodes": [
-          "marker_source_builda",
-          "marker_source_buildb",
-          "marker_source_buildc",
-          "marker_source_calib"
-        ],
-        "relation": "participate_in",
-        "confidence": "EXTRACTED",
-        "confidence_score": 1.0,
-        "source_file": "marker-source.html"
-      },
-      {
-        "id": "essay_marker_ai_backend_selection",
-        "label": "Essay Marker's pluggable AI backend (dispatch + two providers)",
-        "nodes": [
-          "marker_source_askai",
-          "handover_anthropic_api",
-          "marker_source_github_models_api"
-        ],
-        "relation": "participate_in",
-        "confidence": "EXTRACTED",
-        "confidence_score": 1.0,
-        "source_file": "marker-source.html"
-      },
-      {
         "id": "sunset_boulevard_core_relationship_web",
         "label": "Sunset Boulevard central relationship web (Joe, Norma, Max, Betty)",
         "nodes": [
@@ -58,21 +31,6 @@
         "confidence": "INFERRED",
         "confidence_score": 0.85,
         "source_file": "public/p03-character-analysis.html"
-      },
-      {
-        "id": "essay_writing_pipeline_part04",
-        "label": "Part 04 Essay-Writing Instructional Pipeline",
-        "nodes": [
-          "public_p04_introduction",
-          "public_p04_what_is_needed_in_an_essay",
-          "public_p04_planning",
-          "public_p04_analytical_text_response_structure",
-          "public_p04_proofreading"
-        ],
-        "relation": "form",
-        "confidence": "EXTRACTED",
-        "confidence_score": 1.0,
-        "source_file": "public/p04-introduction.html"
       },
       {
         "id": "colonial_symbolism_cluster",
@@ -150,20 +108,6 @@
         "source_file": "public/part-12-effectively-studying-for-exams.html"
       },
       {
-        "id": "hyperedge_prompt_type_worked_examples",
-        "label": "Prompt-type worked examples built on Sunset Boulevard characters",
-        "nodes": [
-          "public_prompt_types",
-          "concept_norma_desmond",
-          "concept_joe_gillis",
-          "concept_sunset_boulevard_text"
-        ],
-        "relation": "form",
-        "confidence": "EXTRACTED",
-        "confidence_score": 1.0,
-        "source_file": "public/prompt-types.html"
-      },
-      {
         "id": "hyperedge_2025_report_sequence",
         "label": "2025 Assessment Report section chain (hub + General/A/B/C + checklist)",
         "nodes": [
@@ -178,33 +122,6 @@
         "confidence": "EXTRACTED",
         "confidence_score": 1.0,
         "source_file": "public/part-13-key-takeaways-from-the-2025-assessment-report.html"
-      },
-      {
-        "id": "rainbows_end_study_apparatus",
-        "label": "Rainbow's End Analytical Toolkit (Quotes, Symbols, Devices)",
-        "nodes": [
-          "snippets_quotetable",
-          "snippets_symboltable",
-          "snippets_tracker"
-        ],
-        "relation": "participate_in",
-        "confidence": "INFERRED",
-        "confidence_score": 0.8,
-        "source_file": "snippets/tracker.html"
-      },
-      {
-        "id": "vce_prompt_type_analysis_method",
-        "label": "VCE Prompt-Type Analysis Method (Discuss/Extent/Agree/How Does)",
-        "nodes": [
-          "snippets_prompt_types",
-          "snippets_prompt_types_re",
-          "concept_argument_evidence_technique_effect",
-          "concept_four_prompt_types"
-        ],
-        "relation": "implement",
-        "confidence": "INFERRED",
-        "confidence_score": 0.85,
-        "source_file": "snippets/prompt-types.html"
       },
       {
         "id": "vcaa_2025_report_summary_cluster",
@@ -253,7 +170,7 @@
       "label": "slugify()",
       "file_type": "code",
       "source_file": "build.py",
-      "source_location": "L193",
+      "source_location": "L191",
       "_callable": true,
       "_origin": "ast",
       "id": "build_slugify",
@@ -265,7 +182,7 @@
       "label": "_clean()",
       "file_type": "code",
       "source_file": "build.py",
-      "source_location": "L326",
+      "source_location": "L314",
       "_callable": true,
       "_origin": "ast",
       "id": "build_clean",
@@ -277,7 +194,7 @@
       "label": "_heading_chain()",
       "file_type": "code",
       "source_file": "build.py",
-      "source_location": "L328",
+      "source_location": "L316",
       "_callable": true,
       "_origin": "ast",
       "id": "build_heading_chain",
@@ -289,7 +206,7 @@
       "label": "rewrite_anchors()",
       "file_type": "code",
       "source_file": "build.py",
-      "source_location": "L1539",
+      "source_location": "L970",
       "_callable": true,
       "_origin": "ast",
       "id": "build_rewrite_anchors",
@@ -301,7 +218,7 @@
       "label": "nav_html()",
       "file_type": "code",
       "source_file": "build.py",
-      "source_location": "L1548",
+      "source_location": "L979",
       "_callable": true,
       "_origin": "ast",
       "id": "build_nav_html",
@@ -313,7 +230,7 @@
       "label": "apply_annotations()",
       "file_type": "code",
       "source_file": "build.py",
-      "source_location": "L1568",
+      "source_location": "L999",
       "_callable": true,
       "_origin": "ast",
       "id": "build_apply_annotations",
@@ -325,7 +242,7 @@
       "label": "fix_quotes()",
       "file_type": "code",
       "source_file": "build.py",
-      "source_location": "L1591",
+      "source_location": "L1022",
       "_callable": true,
       "_origin": "ast",
       "id": "build_fix_quotes",
@@ -337,7 +254,7 @@
       "label": "shell()",
       "file_type": "code",
       "source_file": "build.py",
-      "source_location": "L1594",
+      "source_location": "L1025",
       "_callable": true,
       "_origin": "ast",
       "id": "build_shell",
@@ -349,7 +266,7 @@
       "label": "page_toc()",
       "file_type": "code",
       "source_file": "build.py",
-      "source_location": "L1646",
+      "source_location": "L1077",
       "_callable": true,
       "_origin": "ast",
       "id": "build_page_toc",
@@ -361,7 +278,7 @@
       "label": "exemplar_groups_html()",
       "file_type": "code",
       "source_file": "build.py",
-      "source_location": "L1809",
+      "source_location": "L1237",
       "_callable": true,
       "_origin": "ast",
       "id": "build_exemplar_groups_html",
@@ -373,24 +290,13 @@
       "label": "icon_svg()",
       "file_type": "code",
       "source_file": "build.py",
-      "source_location": "L1844",
+      "source_location": "L1272",
       "_callable": true,
       "_origin": "ast",
       "id": "build_icon_svg",
       "community": 18,
       "community_name": "build.py",
       "norm_label": "icon_svg()"
-    },
-    {
-      "label": "make-embeddings.ps1",
-      "file_type": "code",
-      "source_file": "make-embeddings.ps1",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "make_embeddings",
-      "community": 27,
-      "community_name": "make-embeddings.ps1",
-      "norm_label": "make-embeddings.ps1"
     },
     {
       "label": "make_web_template.py",
@@ -509,18 +415,6 @@
       "community": 8,
       "community_name": "assets/site.js",
       "norm_label": "toast()"
-    },
-    {
-      "label": "hide()",
-      "file_type": "code",
-      "source_file": "public/assets/site.js",
-      "source_location": "L195",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "public_assets_site_hide",
-      "community": 8,
-      "community_name": "assets/site.js",
-      "norm_label": "hide()"
     },
     {
       "label": "jszip.min.js",
@@ -905,18 +799,6 @@
       "norm_label": "toast()"
     },
     {
-      "label": "hide()",
-      "file_type": "code",
-      "source_file": "site.js",
-      "source_location": "L195",
-      "_callable": true,
-      "_origin": "ast",
-      "id": "site_hide",
-      "community": 19,
-      "community_name": "site.js",
-      "norm_label": "hide()"
-    },
-    {
       "label": "Deploy site to GitHub Pages (workflow)",
       "file_type": "document",
       "source_file": ".github/workflows/pages.yml",
@@ -985,10 +867,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 22,
       "norm_label": "essay marker",
       "_origin": "semantic",
-      "community_name": "renderResult(s, raw, rEl) \u2014 renders marking result UI",
+      "community_name": "VCE English Exam Prep Guide (site)",
       "id": "handover_essay_marker"
     },
     {
@@ -1060,10 +942,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 22,
       "norm_label": "api.anthropic.com (essay marker's ai backend, teacher-supplied key)",
       "_origin": "semantic",
-      "community_name": "renderResult(s, raw, rEl) \u2014 renders marking result UI",
+      "community_name": "VCE English Exam Prep Guide (site)",
       "id": "handover_anthropic_api"
     },
     {
@@ -1128,567 +1010,6 @@
       "id": "readme_vce_english_exam_prep_guide_website"
     },
     {
-      "label": "buildA() \u2014 Section A marking prompt builder",
-      "file_type": "code",
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 5,
-      "norm_label": "builda() \u2014 section a marking prompt builder",
-      "_origin": "semantic",
-      "community_name": "renderResult(s, raw, rEl) \u2014 renders marking result UI",
-      "id": "marker_source_builda"
-    },
-    {
-      "label": "buildB() \u2014 Section B marking prompt builder",
-      "file_type": "code",
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 5,
-      "norm_label": "buildb() \u2014 section b marking prompt builder",
-      "_origin": "semantic",
-      "community_name": "renderResult(s, raw, rEl) \u2014 renders marking result UI",
-      "id": "marker_source_buildb"
-    },
-    {
-      "label": "buildC() \u2014 Section C marking prompt builder",
-      "file_type": "code",
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 5,
-      "norm_label": "buildc() \u2014 section c marking prompt builder",
-      "_origin": "semantic",
-      "community_name": "renderResult(s, raw, rEl) \u2014 renders marking result UI",
-      "id": "marker_source_buildc"
-    },
-    {
-      "label": "markEssay(s) \u2014 orchestrates marking a section",
-      "file_type": "code",
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 5,
-      "norm_label": "markessay(s) \u2014 orchestrates marking a section",
-      "_origin": "semantic",
-      "community_name": "renderResult(s, raw, rEl) \u2014 renders marking result UI",
-      "id": "marker_source_markessay"
-    },
-    {
-      "label": "renderResult(s, raw, rEl) \u2014 renders marking result UI",
-      "file_type": "code",
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 5,
-      "norm_label": "renderresult(s, raw, rel) \u2014 renders marking result ui",
-      "_origin": "semantic",
-      "community_name": "renderResult(s, raw, rEl) \u2014 renders marking result UI",
-      "id": "marker_source_renderresult"
-    },
-    {
-      "label": "annotate(text, comments) \u2014 inline highlight builder",
-      "file_type": "code",
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 5,
-      "norm_label": "annotate(text, comments) \u2014 inline highlight builder",
-      "_origin": "semantic",
-      "community_name": "renderResult(s, raw, rEl) \u2014 renders marking result UI",
-      "id": "marker_source_annotate"
-    },
-    {
-      "label": "critBar(label, raw) \u2014 criterion score bar renderer",
-      "file_type": "code",
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 5,
-      "norm_label": "critbar(label, raw) \u2014 criterion score bar renderer",
-      "_origin": "semantic",
-      "community_name": "renderResult(s, raw, rEl) \u2014 renders marking result UI",
-      "id": "marker_source_critbar"
-    },
-    {
-      "label": "secondOpinion(btn) \u2014 blind cross-marking moderation pass",
-      "file_type": "code",
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 5,
-      "norm_label": "secondopinion(btn) \u2014 blind cross-marking moderation pass",
-      "_origin": "semantic",
-      "community_name": "renderResult(s, raw, rEl) \u2014 renders marking result UI",
-      "id": "marker_source_secondopinion"
-    },
-    {
-      "label": "topBand(btn) \u2014 9-10 advice and paragraph rewrite generator",
-      "file_type": "code",
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 5,
-      "norm_label": "topband(btn) \u2014 9-10 advice and paragraph rewrite generator",
-      "_origin": "semantic",
-      "community_name": "renderResult(s, raw, rEl) \u2014 renders marking result UI",
-      "id": "marker_source_topband"
-    },
-    {
-      "label": "transcribeImage(s) \u2014 handwriting transcription",
-      "file_type": "code",
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 5,
-      "norm_label": "transcribeimage(s) \u2014 handwriting transcription",
-      "_origin": "semantic",
-      "community_name": "renderResult(s, raw, rEl) \u2014 renders marking result UI",
-      "id": "marker_source_transcribeimage"
-    },
-    {
-      "label": "previewImage(s, input) \u2014 image upload preview",
-      "file_type": "code",
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 5,
-      "norm_label": "previewimage(s, input) \u2014 image upload preview",
-      "_origin": "semantic",
-      "community_name": "renderResult(s, raw, rEl) \u2014 renders marking result UI",
-      "id": "marker_source_previewimage"
-    },
-    {
-      "label": "askAI(prompt, files) \u2014 dispatches to Anthropic or GitHub Models",
-      "file_type": "code",
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 5,
-      "norm_label": "askai(prompt, files) \u2014 dispatches to anthropic or github models",
-      "_origin": "semantic",
-      "community_name": "renderResult(s, raw, rEl) \u2014 renders marking result UI",
-      "id": "marker_source_askai"
-    },
-    {
-      "label": "openSettings() \u2014 opens AI provider settings modal",
-      "file_type": "code",
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 5,
-      "norm_label": "opensettings() \u2014 opens ai provider settings modal",
-      "_origin": "semantic",
-      "community_name": "renderResult(s, raw, rEl) \u2014 renders marking result UI",
-      "id": "marker_source_opensettings"
-    },
-    {
-      "label": "saveAI() \u2014 persists AI provider config to localStorage",
-      "file_type": "code",
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 28,
-      "norm_label": "saveai() \u2014 persists ai provider config to localstorage",
-      "_origin": "semantic",
-      "community_name": "saveAI() \u2014 persists AI provider config to localStorage",
-      "id": "marker_source_saveai"
-    },
-    {
-      "label": "aiCfg() \u2014 reads AI provider config from localStorage",
-      "file_type": "code",
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 5,
-      "norm_label": "aicfg() \u2014 reads ai provider config from localstorage",
-      "_origin": "semantic",
-      "community_name": "renderResult(s, raw, rEl) \u2014 renders marking result UI",
-      "id": "marker_source_aicfg"
-    },
-    {
-      "label": "aiProviderHelp() \u2014 updates settings modal help text",
-      "file_type": "code",
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 5,
-      "norm_label": "aiproviderhelp() \u2014 updates settings modal help text",
-      "_origin": "semantic",
-      "community_name": "renderResult(s, raw, rEl) \u2014 renders marking result UI",
-      "id": "marker_source_aiproviderhelp"
-    },
-    {
-      "label": "norm(raw) \u2014 normalises AI response payload to text",
-      "file_type": "code",
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 5,
-      "norm_label": "norm(raw) \u2014 normalises ai response payload to text",
-      "_origin": "semantic",
-      "community_name": "renderResult(s, raw, rEl) \u2014 renders marking result UI",
-      "id": "marker_source_norm"
-    },
-    {
-      "label": "escH(s) \u2014 HTML-escapes a string",
-      "file_type": "code",
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 5,
-      "norm_label": "esch(s) \u2014 html-escapes a string",
-      "_origin": "semantic",
-      "community_name": "renderResult(s, raw, rEl) \u2014 renders marking result UI",
-      "id": "marker_source_esch"
-    },
-    {
-      "label": "sCls(s) \u2014 score-to-CSS-class mapping",
-      "file_type": "code",
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 5,
-      "norm_label": "scls(s) \u2014 score-to-css-class mapping",
-      "_origin": "semantic",
-      "community_name": "renderResult(s, raw, rEl) \u2014 renders marking result UI",
-      "id": "marker_source_scls"
-    },
-    {
-      "label": "sLbl(s) \u2014 score-to-label mapping",
-      "file_type": "code",
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 5,
-      "norm_label": "slbl(s) \u2014 score-to-label mapping",
-      "_origin": "semantic",
-      "community_name": "renderResult(s, raw, rEl) \u2014 renders marking result UI",
-      "id": "marker_source_slbl"
-    },
-    {
-      "label": "updateWC(tid, wid) \u2014 live word-count updater",
-      "file_type": "code",
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 5,
-      "norm_label": "updatewc(tid, wid) \u2014 live word-count updater",
-      "_origin": "semantic",
-      "community_name": "renderResult(s, raw, rEl) \u2014 renders marking result UI",
-      "id": "marker_source_updatewc"
-    },
-    {
-      "label": "switchTab(t) \u2014 switches Section A/B/C tab",
-      "file_type": "code",
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 29,
-      "norm_label": "switchtab(t) \u2014 switches section a/b/c tab",
-      "_origin": "semantic",
-      "community_name": "switchTab(t) \u2014 switches Section A/B/C tab",
-      "id": "marker_source_switchtab"
-    },
-    {
-      "label": "toggleEl(id) \u2014 toggles criteria accordion detail",
-      "file_type": "code",
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 30,
-      "norm_label": "toggleel(id) \u2014 toggles criteria accordion detail",
-      "_origin": "semantic",
-      "community_name": "toggleEl(id) \u2014 toggles criteria accordion detail",
-      "id": "marker_source_toggleel"
-    },
-    {
-      "label": "toggleFilter(type, btn) \u2014 toggles feedback-type highlight filter",
-      "file_type": "code",
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 31,
-      "norm_label": "togglefilter(type, btn) \u2014 toggles feedback-type highlight filter",
-      "_origin": "semantic",
-      "community_name": "toggleFilter(type, btn) \u2014 toggles feedback-type highlight filter",
-      "id": "marker_source_togglefilter"
-    },
-    {
-      "label": "toggleTheme() \u2014 toggles dark/light mode",
-      "file_type": "code",
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 32,
-      "norm_label": "toggletheme() \u2014 toggles dark/light mode",
-      "_origin": "semantic",
-      "community_name": "toggleTheme() \u2014 toggles dark/light mode",
-      "id": "marker_source_toggletheme"
-    },
-    {
-      "label": "CALIB \u2014 marking calibration prompt fragment",
-      "file_type": "rationale",
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "rationale": "Encodes anti-inflation AND anti-compression marking policy: state-wide score distributions are given as context only (not a quota), best-fit banding is mandated, and a consistency check reconciles criterion ratings with the holistic score \u2014 designed to make the AI mark like a real VCAA assessor rather than a lenient or overly cautious one.",
-      "community": 5,
-      "norm_label": "calib \u2014 marking calibration prompt fragment",
-      "_origin": "semantic",
-      "community_name": "renderResult(s, raw, rEl) \u2014 renders marking result UI",
-      "id": "marker_source_calib"
-    },
-    {
-      "label": "EXAMCTX \u2014 exam context prompt fragment",
-      "file_type": "rationale",
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "rationale": "Grounds the AI's judgement in real exam constraints (3-hour handwritten exam, ~55-60 minutes per section) so it does not penalise exam-appropriate length or expect take-home polish.",
-      "community": 5,
-      "norm_label": "examctx \u2014 exam context prompt fragment",
-      "_origin": "semantic",
-      "community_name": "renderResult(s, raw, rEl) \u2014 renders marking result UI",
-      "id": "marker_source_examctx"
-    },
-    {
-      "label": "REPORT_A \u2014 Section A assessor-report calibration text",
-      "file_type": "rationale",
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "rationale": "Encodes 2024-2025 VCAA assessor report guidance for Section A (text response) so the AI rewards/penalises the same features real assessors flagged, rather than generic essay-marking heuristics.",
-      "community": 5,
-      "norm_label": "report_a \u2014 section a assessor-report calibration text",
-      "_origin": "semantic",
-      "community_name": "renderResult(s, raw, rEl) \u2014 renders marking result UI",
-      "id": "marker_source_report_a"
-    },
-    {
-      "label": "REPORT_B \u2014 Section B assessor-report calibration text",
-      "file_type": "rationale",
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "rationale": "Encodes 2024-2025 VCAA assessor report guidance for Section B (creating texts) to calibrate marking to real assessor-identified strengths and weaknesses.",
-      "community": 5,
-      "norm_label": "report_b \u2014 section b assessor-report calibration text",
-      "_origin": "semantic",
-      "community_name": "renderResult(s, raw, rEl) \u2014 renders marking result UI",
-      "id": "marker_source_report_b"
-    },
-    {
-      "label": "REPORT_C \u2014 Section C assessor-report calibration text",
-      "file_type": "rationale",
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "rationale": "Encodes a skill-ladder (LOW to HIGH) drawn from VCAA assessor reports for Section C (argument analysis), explicitly to reward strategic selection and audience-effect analysis over technique-checklisting.",
-      "community": 5,
-      "norm_label": "report_c \u2014 section c assessor-report calibration text",
-      "_origin": "semantic",
-      "community_name": "renderResult(s, raw, rEl) \u2014 renders marking result UI",
-      "id": "marker_source_report_c"
-    },
-    {
-      "label": "CINSTR \u2014 inline comment output-format instructions",
-      "file_type": "concept",
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 5,
-      "norm_label": "cinstr \u2014 inline comment output-format instructions",
-      "_origin": "semantic",
-      "community_name": "renderResult(s, raw, rEl) \u2014 renders marking result UI",
-      "id": "marker_source_cinstr"
-    },
-    {
-      "label": "Precision mode (3x independent marking, median reported)",
-      "file_type": "rationale",
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "rationale": "Trade-off deliberately chosen: marks three times independently and reports the median \u2014 slower but more reliable than a single pass, and the mark spread across the three passes flags borderline scripts for human review.",
-      "community": 5,
-      "norm_label": "precision mode (3x independent marking, median reported)",
-      "_origin": "semantic",
-      "community_name": "renderResult(s, raw, rEl) \u2014 renders marking result UI",
-      "id": "marker_source_precision_mode"
-    },
-    {
-      "label": "Second opinion \u2014 blind re-mark (moderation feature)",
-      "file_type": "concept",
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 5,
-      "norm_label": "second opinion \u2014 blind re-mark (moderation feature)",
-      "_origin": "semantic",
-      "community_name": "renderResult(s, raw, rEl) \u2014 renders marking result UI",
-      "id": "marker_source_second_opinion_feature"
-    },
-    {
-      "label": "GitHub Models API (models.github.ai) \u2014 free alternative AI backend",
-      "file_type": "concept",
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 5,
-      "norm_label": "github models api (models.github.ai) \u2014 free alternative ai backend",
-      "_origin": "semantic",
-      "community_name": "renderResult(s, raw, rEl) \u2014 renders marking result UI",
-      "id": "marker_source_github_models_api"
-    },
-    {
-      "label": "Sunset Boulevard (Section A text option)",
-      "file_type": "concept",
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 23,
-      "norm_label": "sunset boulevard (section a text option)",
-      "_origin": "semantic",
-      "community_name": "Sunset Boulevard (Section A text option)",
-      "id": "marker_source_sunset_boulevard"
-    },
-    {
-      "label": "Rainbow's End (Section A text option)",
-      "file_type": "concept",
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 21,
-      "norm_label": "rainbow's end (section a text option)",
-      "_origin": "semantic",
-      "community_name": "Rainbow's End (Section A text option)",
-      "id": "marker_source_rainbows_end"
-    },
-    {
-      "label": "Personal Journeys (Section B Framework option)",
-      "file_type": "concept",
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 20,
-      "norm_label": "personal journeys (section b framework option)",
-      "_origin": "semantic",
-      "community_name": "Personal Journeys (Section B Framework option)",
-      "id": "marker_source_personal_journeys_framework"
-    },
-    {
       "label": "404 Page Not Found",
       "file_type": "document",
       "source_file": "public/404.html",
@@ -1704,51 +1025,6 @@
       "id": "public_404"
     },
     {
-      "label": "Ask Max (AI study assistant page)",
-      "file_type": "code",
-      "source_file": "public/ask-max.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 1,
-      "norm_label": "ask max (ai study assistant page)",
-      "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
-      "id": "public_ask_max"
-    },
-    {
-      "label": "Ask the Guide (redirect stub to Ask Max)",
-      "file_type": "document",
-      "source_file": "public/ask-the-guide.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 1,
-      "norm_label": "ask the guide (redirect stub to ask max)",
-      "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
-      "id": "public_ask_the_guide"
-    },
-    {
-      "label": "Essay Marker (landing/documentation page)",
-      "file_type": "document",
-      "source_file": "public/essay-marker.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 1,
-      "norm_label": "essay marker (landing/documentation page)",
-      "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
-      "id": "public_essay_marker"
-    },
-    {
       "label": "Exam Generator tool",
       "file_type": "code",
       "source_file": "public/exam-generator.html",
@@ -1757,7 +1033,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 17,
       "norm_label": "exam generator tool",
       "_origin": "semantic",
       "community_name": "Week-by-Week Revision Program",
@@ -1802,26 +1078,11 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 17,
       "norm_label": "vce english exam preparation guide (homepage)",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
-      "id": "public_index"
-    },
-    {
-      "label": "VCE English Essay Marker (AI marking app)",
-      "file_type": "code",
-      "source_file": "public/marker.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 1,
-      "norm_label": "vce english essay marker (ai marking app)",
-      "_origin": "semantic",
       "community_name": "Week-by-Week Revision Program",
-      "id": "public_marker"
+      "id": "public_index"
     },
     {
       "label": "Micro-Drills tool",
@@ -1832,10 +1093,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 4,
       "norm_label": "micro-drills tool",
       "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
+      "community_name": "Joe Gillis",
       "id": "public_micro_drills"
     },
     {
@@ -1847,7 +1108,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 17,
       "norm_label": "essay outline builder tool",
       "_origin": "semantic",
       "community_name": "Week-by-Week Revision Program",
@@ -2102,7 +1363,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 17,
       "norm_label": "errol (rainbow's end)",
       "_origin": "semantic",
       "community_name": "Week-by-Week Revision Program",
@@ -2484,21 +1745,6 @@
       "id": "high_angle_shot"
     },
     {
-      "label": "Ask Max Cloudflare Worker API",
-      "file_type": "concept",
-      "source_file": "public/ask-max.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 1,
-      "norm_label": "ask max cloudflare worker api",
-      "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
-      "id": "public_ask_max_worker"
-    },
-    {
       "label": "JSZip library (bundled locally)",
       "file_type": "concept",
       "source_file": "public/exam-generator.html",
@@ -2507,41 +1753,11 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 17,
       "norm_label": "jszip library (bundled locally)",
       "_origin": "semantic",
       "community_name": "Week-by-Week Revision Program",
       "id": "jszip_library"
-    },
-    {
-      "label": "assets/embeddings.json (retrieval embeddings)",
-      "file_type": "concept",
-      "source_file": "public/ask-max.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 1,
-      "norm_label": "assets/embeddings.json (retrieval embeddings)",
-      "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
-      "id": "embeddings_json"
-    },
-    {
-      "label": "assets/search.json (site search/retrieval index)",
-      "file_type": "concept",
-      "source_file": "public/ask-max.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 1,
-      "norm_label": "assets/search.json (site search/retrieval index)",
-      "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
-      "id": "search_json"
     },
     {
       "label": "Th.E.S.A.M.L. body paragraph method",
@@ -2552,86 +1768,11 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 17,
       "norm_label": "th.e.s.a.m.l. body paragraph method",
       "_origin": "semantic",
       "community_name": "Week-by-Week Revision Program",
       "id": "thesaml_method"
-    },
-    {
-      "label": "Essay Marker: Precision mode (median of three marks)",
-      "file_type": "concept",
-      "source_file": "public/essay-marker.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 1,
-      "norm_label": "essay marker: precision mode (median of three marks)",
-      "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
-      "id": "precision_mode"
-    },
-    {
-      "label": "Essay Marker: Second opinion (blind re-mark)",
-      "file_type": "concept",
-      "source_file": "public/essay-marker.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 1,
-      "norm_label": "essay marker: second opinion (blind re-mark)",
-      "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
-      "id": "second_opinion_mode"
-    },
-    {
-      "label": "Essay Marker: Handwriting transcription",
-      "file_type": "concept",
-      "source_file": "public/essay-marker.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 1,
-      "norm_label": "essay marker: handwriting transcription",
-      "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
-      "id": "handwriting_transcription"
-    },
-    {
-      "label": "Rationale: Essay Marker calibrated to VCAA assessor tolerance (within one mark of true score)",
-      "file_type": "rationale",
-      "source_file": "public/essay-marker.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 1,
-      "norm_label": "rationale: essay marker calibrated to vcaa assessor tolerance (within one mark of true score)",
-      "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
-      "id": "public_essay_marker_calibration_rationale"
-    },
-    {
-      "label": "Rationale: Essay Marker API token stored only in browser, never sent to school",
-      "file_type": "rationale",
-      "source_file": "public/essay-marker.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 1,
-      "norm_label": "rationale: essay marker api token stored only in browser, never sent to school",
-      "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
-      "id": "public_essay_marker_privacy_rationale"
     },
     {
       "label": "Character Analysis (Rainbow's End)",
@@ -2657,10 +1798,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 2,
+      "community": 14,
       "norm_label": "introduction and context (rainbow's end)",
       "_origin": "semantic",
-      "community_name": "Symbols and Motifs (Rainbow's End)",
+      "community_name": "Introduction and Context (Rainbow's End)",
       "id": "public_p03_introduction_and_context"
     },
     {
@@ -2672,10 +1813,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 2,
+      "community": 14,
       "norm_label": "practice analytical text response topics (rainbow's end)",
       "_origin": "semantic",
-      "community_name": "Symbols and Motifs (Rainbow's End)",
+      "community_name": "Introduction and Context (Rainbow's End)",
       "id": "public_p03_practice_analytical_text_response_topics"
     },
     {
@@ -2732,26 +1873,11 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 2,
       "norm_label": "written exemplars (rainbow's end)",
       "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
+      "community_name": "Symbols and Motifs (Rainbow's End)",
       "id": "public_p03_written_exemplars"
-    },
-    {
-      "label": "Analytical Text Response Structure",
-      "file_type": "document",
-      "source_file": "public/p04-analytical-text-response-structure.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 1,
-      "norm_label": "analytical text response structure",
-      "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
-      "id": "public_p04_analytical_text_response_structure"
     },
     {
       "label": "Introduction (Analytical Text Response Essays)",
@@ -2762,26 +1888,11 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 17,
       "norm_label": "introduction (analytical text response essays)",
       "_origin": "semantic",
       "community_name": "Week-by-Week Revision Program",
       "id": "public_p04_introduction"
-    },
-    {
-      "label": "Planning (Analytical Text Response Essays)",
-      "file_type": "document",
-      "source_file": "public/p04-planning.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 1,
-      "norm_label": "planning (analytical text response essays)",
-      "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
-      "id": "public_p04_planning"
     },
     {
       "label": "Proofreading",
@@ -2792,7 +1903,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 17,
       "norm_label": "proofreading",
       "_origin": "semantic",
       "community_name": "Week-by-Week Revision Program",
@@ -2807,7 +1918,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 17,
       "norm_label": "what is needed in an essay",
       "_origin": "semantic",
       "community_name": "Week-by-Week Revision Program",
@@ -2822,7 +1933,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 10,
+      "community": 17,
       "norm_label": "audience (creating texts)",
       "_origin": "semantic",
       "community_name": "Week-by-Week Revision Program",
@@ -2837,7 +1948,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 10,
+      "community": 17,
       "norm_label": "personal journeys",
       "_origin": "semantic",
       "community_name": "Week-by-Week Revision Program",
@@ -2852,7 +1963,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 10,
+      "community": 17,
       "norm_label": "practice stimuli",
       "_origin": "semantic",
       "community_name": "Week-by-Week Revision Program",
@@ -2867,7 +1978,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 10,
+      "community": 17,
       "norm_label": "purpose (creating texts)",
       "_origin": "semantic",
       "community_name": "Week-by-Week Revision Program",
@@ -2882,7 +1993,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 10,
+      "community": 17,
       "norm_label": "sample creating texts piece: 'the path less taken' (19/20)",
       "_origin": "semantic",
       "community_name": "Week-by-Week Revision Program",
@@ -2897,7 +2008,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 10,
+      "community": 17,
       "norm_label": "sample creating texts piece: 'finding my way' (10/10)",
       "_origin": "semantic",
       "community_name": "Week-by-Week Revision Program",
@@ -2912,7 +2023,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 10,
+      "community": 17,
       "norm_label": "sample creating texts piece: 'this is me' (10/10)",
       "_origin": "semantic",
       "community_name": "Week-by-Week Revision Program",
@@ -2942,10 +2053,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 2,
+      "community": 14,
       "norm_label": "rainbow's end (play)",
       "_origin": "semantic",
-      "community_name": "Symbols and Motifs (Rainbow's End)",
+      "community_name": "Introduction and Context (Rainbow's End)",
       "id": "rainbows_end"
     },
     {
@@ -2957,10 +2068,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 2,
+      "community": 14,
       "norm_label": "jane harrison (playwright)",
       "_origin": "semantic",
-      "community_name": "Symbols and Motifs (Rainbow's End)",
+      "community_name": "Introduction and Context (Rainbow's End)",
       "id": "jane_harrison"
     },
     {
@@ -2987,10 +2098,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 2,
       "norm_label": "gladys banks",
       "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
+      "community_name": "Symbols and Motifs (Rainbow's End)",
       "id": "gladys_banks"
     },
     {
@@ -3047,10 +2158,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 2,
+      "community": 14,
       "norm_label": "papa dear",
       "_origin": "semantic",
-      "community_name": "Symbols and Motifs (Rainbow's End)",
+      "community_name": "Introduction and Context (Rainbow's End)",
       "id": "papa_dear"
     },
     {
@@ -3137,10 +2248,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 2,
+      "community": 14,
       "norm_label": "cummeragunja (aboriginal settlement)",
       "_origin": "semantic",
-      "community_name": "Symbols and Motifs (Rainbow's End)",
+      "community_name": "Introduction and Context (Rainbow's End)",
       "id": "cummeragunja"
     },
     {
@@ -3167,10 +2278,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 2,
+      "community": 14,
       "norm_label": "stolen generations",
       "_origin": "semantic",
-      "community_name": "Symbols and Motifs (Rainbow's End)",
+      "community_name": "Introduction and Context (Rainbow's End)",
       "id": "stolen_generations"
     },
     {
@@ -3437,10 +2548,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 2,
       "norm_label": "written exemplar sample 1: 'how does rainbow's end suggest that everything will be alright?'",
       "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
+      "community_name": "Symbols and Motifs (Rainbow's End)",
       "id": "written_exemplar_sample_1"
     },
     {
@@ -3482,10 +2593,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 2,
       "norm_label": "written exemplar sample 4: 'harrison's play celebrates characters who show strength through adversity' (variant)",
       "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
+      "community_name": "Symbols and Motifs (Rainbow's End)",
       "id": "written_exemplar_sample_4"
     },
     {
@@ -3504,69 +2615,6 @@
       "id": "written_exemplar_sample_5"
     },
     {
-      "label": "Th.E.S.A.M.L. Body Paragraph Method",
-      "file_type": "rationale",
-      "source_file": "public/p04-analytical-text-response-structure.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "rationale": "Only the Thematic topic sentence (Th) and Linking sentence (L) must appear in fixed order; Evidence, Symbols, Authorial intention, and Metalanguage can be woven through the paragraph to maximise marks under VCE assessment criteria.",
-      "community": 1,
-      "norm_label": "th.e.s.a.m.l. body paragraph method",
-      "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
-      "id": "essay_th_e_s_a_m_l_method"
-    },
-    {
-      "label": "Hinge Sentence Technique",
-      "file_type": "rationale",
-      "source_file": "public/p04-planning.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "rationale": "Introducing two related ideas in a topic sentence (linked by because/but/so) and bridging them with a hinge sentence signals a shift in focus to the reader, producing a more complex and insightful paragraph than single-idea contentions.",
-      "community": 1,
-      "norm_label": "hinge sentence technique",
-      "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
-      "id": "essay_hinge_sentence"
-    },
-    {
-      "label": "Contention (Essay Writing)",
-      "file_type": "rationale",
-      "source_file": "public/p04-planning.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "rationale": "A contention should be specific and sophisticated rather than general, engaging directly with authorial intent and character motivation so the marker can see a clear, defensible position on the prompt.",
-      "community": 1,
-      "norm_label": "contention (essay writing)",
-      "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
-      "id": "essay_contention"
-    },
-    {
-      "label": "Prompt Types: Discuss / To What Extent / How",
-      "file_type": "concept",
-      "source_file": "public/p04-analytical-text-response-structure.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 1,
-      "norm_label": "prompt types: discuss / to what extent / how",
-      "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
-      "id": "prompt_types_discuss_extent_how"
-    },
-    {
       "label": "Essay Proofreading Checklist",
       "file_type": "rationale",
       "source_file": "public/p04-proofreading.html",
@@ -3576,7 +2624,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Stepping away from a finished essay for 10-15 minutes before proofreading counters over-familiarity with the text, allowing structural, clarity, grammar, and repetition issues to be caught with fresh eyes.",
-      "community": 1,
+      "community": 17,
       "norm_label": "essay proofreading checklist",
       "_origin": "semantic",
       "community_name": "Week-by-Week Revision Program",
@@ -3636,10 +2684,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 6,
       "norm_label": "sample analysing argument essays",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Analysing Argument (Part 06 hub)",
       "id": "public_p06_sample_analysing_argument_essays"
     },
     {
@@ -3669,7 +2717,7 @@
       "community": 0,
       "norm_label": "exam format",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Strategies for Addressing the Requirements",
       "id": "public_p07_exam_format"
     },
     {
@@ -3684,7 +2732,7 @@
       "community": 0,
       "norm_label": "strategies for addressing the requirements",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Strategies for Addressing the Requirements",
       "id": "public_p07_strategies_for_addressing_the_requirements"
     },
     {
@@ -3699,7 +2747,7 @@
       "community": 0,
       "norm_label": "section a mark allocation",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Strategies for Addressing the Requirements",
       "id": "public_p09_section_a_mark_allocation"
     },
     {
@@ -3714,7 +2762,7 @@
       "community": 0,
       "norm_label": "section b mark allocation",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Strategies for Addressing the Requirements",
       "id": "public_p09_section_b_mark_allocation"
     },
     {
@@ -3729,7 +2777,7 @@
       "community": 0,
       "norm_label": "section c mark allocation",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Strategies for Addressing the Requirements",
       "id": "public_p09_section_c_mark_allocation"
     },
     {
@@ -3744,7 +2792,7 @@
       "community": 0,
       "norm_label": "general checklist for section a response",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Strategies for Addressing the Requirements",
       "id": "public_p10_general_checklist_for_section_a_response"
     },
     {
@@ -3759,7 +2807,7 @@
       "community": 0,
       "norm_label": "general checklist for section b response",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Strategies for Addressing the Requirements",
       "id": "public_p10_general_checklist_for_section_b_response"
     },
     {
@@ -3774,7 +2822,7 @@
       "community": 0,
       "norm_label": "general checklist for section c response",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Strategies for Addressing the Requirements",
       "id": "public_p10_general_checklist_for_section_c_response"
     },
     {
@@ -3789,7 +2837,7 @@
       "community": 0,
       "norm_label": "final advice",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Strategies for Addressing the Requirements",
       "id": "public_p11_final_advice"
     },
     {
@@ -3804,7 +2852,7 @@
       "community": 0,
       "norm_label": "final exam checklist",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Strategies for Addressing the Requirements",
       "id": "public_p11_final_exam_checklist"
     },
     {
@@ -3819,7 +2867,7 @@
       "community": 0,
       "norm_label": "general exam advice",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Strategies for Addressing the Requirements",
       "id": "public_p11_general_exam_advice"
     },
     {
@@ -3834,7 +2882,7 @@
       "community": 0,
       "norm_label": "section a: analytical response to a text",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Strategies for Addressing the Requirements",
       "id": "public_p11_section_a_analytical_response_to_a_text"
     },
     {
@@ -3849,7 +2897,7 @@
       "community": 0,
       "norm_label": "section b - creating a text (framework of ideas)",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Strategies for Addressing the Requirements",
       "id": "public_p11_section_b_creating_a_text_framework_of_ideas"
     },
     {
@@ -3864,7 +2912,7 @@
       "community": 0,
       "norm_label": "section c - analysing argument",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Strategies for Addressing the Requirements",
       "id": "public_p11_section_c_analysing_argument"
     },
     {
@@ -3879,7 +2927,7 @@
       "community": 17,
       "norm_label": "assess your current study habits",
       "_origin": "semantic",
-      "community_name": "Effectively Studying For Exams (hub, displayed as Part 13)",
+      "community_name": "Week-by-Week Revision Program",
       "id": "public_p12_assess_your_current_study_habits"
     },
     {
@@ -3894,7 +2942,7 @@
       "community": 17,
       "norm_label": "collaborate with study groups",
       "_origin": "semantic",
-      "community_name": "Effectively Studying For Exams (hub, displayed as Part 13)",
+      "community_name": "Week-by-Week Revision Program",
       "id": "public_p12_collaborate_with_study_groups"
     },
     {
@@ -3909,7 +2957,7 @@
       "community": 17,
       "norm_label": "create a personalised study schedule",
       "_origin": "semantic",
-      "community_name": "Effectively Studying For Exams (hub, displayed as Part 13)",
+      "community_name": "Week-by-Week Revision Program",
       "id": "public_p12_create_a_personalised_study_schedule"
     },
     {
@@ -3924,7 +2972,7 @@
       "community": 17,
       "norm_label": "develop a healthy study-life balance",
       "_origin": "semantic",
-      "community_name": "Effectively Studying For Exams (hub, displayed as Part 13)",
+      "community_name": "Week-by-Week Revision Program",
       "id": "public_p12_develop_a_healthy_study_life_balance"
     },
     {
@@ -3939,7 +2987,7 @@
       "community": 17,
       "norm_label": "fine-tune your exam day strategy",
       "_origin": "semantic",
-      "community_name": "Effectively Studying For Exams (hub, displayed as Part 13)",
+      "community_name": "Week-by-Week Revision Program",
       "id": "public_p12_fine_tune_your_exam_day_strategy"
     },
     {
@@ -3954,7 +3002,7 @@
       "community": 17,
       "norm_label": "implement active recall and spaced repetition",
       "_origin": "semantic",
-      "community_name": "Effectively Studying For Exams (hub, displayed as Part 13)",
+      "community_name": "Week-by-Week Revision Program",
       "id": "public_p12_implement_active_recall_and_spaced_repetition"
     },
     {
@@ -3969,7 +3017,7 @@
       "community": 0,
       "norm_label": "section a: analytical response to a text (exam component, 20 marks)",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Strategies for Addressing the Requirements",
       "id": "public_p07_exam_format_section_a"
     },
     {
@@ -3984,7 +3032,7 @@
       "community": 0,
       "norm_label": "section b: creating a text (exam component, 20 marks)",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Strategies for Addressing the Requirements",
       "id": "public_p07_exam_format_section_b"
     },
     {
@@ -3999,7 +3047,7 @@
       "community": 0,
       "norm_label": "section c: analysis of argument and language (exam component, 20 marks)",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Strategies for Addressing the Requirements",
       "id": "public_p07_exam_format_section_c"
     },
     {
@@ -4206,10 +3254,10 @@
       "captured_at": null,
       "author": "Anonymous",
       "contributor": null,
-      "community": 0,
+      "community": 6,
       "norm_label": "i started using heroin decades ago. the rejection of a melbourne cbd injecting room feels like a rejection of me (the guardian)",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Analysing Argument (Part 06 hub)",
       "id": "public_p06_sample_analysing_argument_essays_heroin_injecting_room_article"
     },
     {
@@ -4221,10 +3269,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 6,
       "norm_label": "sample essay i (injecting room analysis)",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Analysing Argument (Part 06 hub)",
       "id": "public_p06_sample_analysing_argument_essays_sample_essay_i"
     },
     {
@@ -4236,10 +3284,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 6,
       "norm_label": "sample essay ii (injecting room analysis)",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Analysing Argument (Part 06 hub)",
       "id": "public_p06_sample_analysing_argument_essays_sample_essay_ii"
     },
     {
@@ -4251,10 +3299,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 6,
       "norm_label": "sample essay iii (injecting room analysis)",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Analysing Argument (Part 06 hub)",
       "id": "public_p06_sample_analysing_argument_essays_sample_essay_iii"
     },
     {
@@ -4266,10 +3314,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 6,
       "norm_label": "section c annotation categories (structure & evidence, audience positioning, language & technique, ideas & interpretation)",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Analysing Argument (Part 06 hub)",
       "id": "public_p06_sample_analysing_argument_essays_annotation_categories"
     },
     {
@@ -4359,7 +3407,7 @@
       "community": 17,
       "norm_label": "pomodoro method",
       "_origin": "semantic",
-      "community_name": "Effectively Studying For Exams (hub, displayed as Part 13)",
+      "community_name": "Week-by-Week Revision Program",
       "id": "public_p12_develop_a_healthy_study_life_balance_pomodoro_technique"
     },
     {
@@ -4374,7 +3422,7 @@
       "community": 17,
       "norm_label": "smart goals",
       "_origin": "semantic",
-      "community_name": "Effectively Studying For Exams (hub, displayed as Part 13)",
+      "community_name": "Week-by-Week Revision Program",
       "id": "public_p12_assess_your_current_study_habits_smart_goals"
     },
     {
@@ -4389,7 +3437,7 @@
       "community": 17,
       "norm_label": "active recall (self-testing)",
       "_origin": "semantic",
-      "community_name": "Effectively Studying For Exams (hub, displayed as Part 13)",
+      "community_name": "Week-by-Week Revision Program",
       "id": "public_p12_implement_active_recall_and_spaced_repetition_active_recall"
     },
     {
@@ -4404,7 +3452,7 @@
       "community": 17,
       "norm_label": "spaced repetition",
       "_origin": "semantic",
-      "community_name": "Effectively Studying For Exams (hub, displayed as Part 13)",
+      "community_name": "Week-by-Week Revision Program",
       "id": "public_p12_implement_active_recall_and_spaced_repetition_spaced_repetition"
     },
     {
@@ -4419,7 +3467,7 @@
       "community": 17,
       "norm_label": "organise your study materials",
       "_origin": "semantic",
-      "community_name": "Effectively Studying For Exams (hub, displayed as Part 13)",
+      "community_name": "Week-by-Week Revision Program",
       "id": "public_p12_organise_your_study_materials"
     },
     {
@@ -4434,7 +3482,7 @@
       "community": 17,
       "norm_label": "seek help when needed",
       "_origin": "semantic",
-      "community_name": "Effectively Studying For Exams (hub, displayed as Part 13)",
+      "community_name": "Week-by-Week Revision Program",
       "id": "public_p12_seek_help_when_needed"
     },
     {
@@ -4449,7 +3497,7 @@
       "community": 17,
       "norm_label": "utilise practice exams and past papers",
       "_origin": "semantic",
-      "community_name": "Effectively Studying For Exams (hub, displayed as Part 13)",
+      "community_name": "Week-by-Week Revision Program",
       "id": "public_p12_utilise_practice_exams_and_past_papers"
     },
     {
@@ -4461,10 +3509,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 17,
       "norm_label": "how to use this site (part 01)",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Week-by-Week Revision Program",
       "id": "public_part_01_preface"
     },
     {
@@ -4476,7 +3524,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 17,
       "norm_label": "analytical text response essays (part 04 hub)",
       "_origin": "semantic",
       "community_name": "Week-by-Week Revision Program",
@@ -4491,7 +3539,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 10,
+      "community": 17,
       "norm_label": "creating texts (part 05 hub)",
       "_origin": "semantic",
       "community_name": "Week-by-Week Revision Program",
@@ -4524,7 +3572,7 @@
       "community": 0,
       "norm_label": "the exam (part 07 hub)",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Strategies for Addressing the Requirements",
       "id": "public_part_07_the_exam"
     },
     {
@@ -4536,10 +3584,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 17,
       "norm_label": "practice exams (part 08)",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Week-by-Week Revision Program",
       "id": "public_part_08_practice_exams"
     },
     {
@@ -4551,10 +3599,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 17,
       "norm_label": "exam assessment criteria (part 09)",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Week-by-Week Revision Program",
       "id": "public_part_09_exam_assessment_criteria"
     },
     {
@@ -4569,7 +3617,7 @@
       "community": 0,
       "norm_label": "exam checklists (part 10 hub)",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Strategies for Addressing the Requirements",
       "id": "public_part_10_exam_checklists"
     },
     {
@@ -4584,7 +3632,7 @@
       "community": 0,
       "norm_label": "key takeaways from the 2024 assessment report (part 11 hub)",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Strategies for Addressing the Requirements",
       "id": "public_part_11_key_takeaways_from_the_2024_assessment_report"
     },
     {
@@ -4599,7 +3647,7 @@
       "community": 17,
       "norm_label": "effectively studying for exams (hub, displayed as part 13)",
       "_origin": "semantic",
-      "community_name": "Effectively Studying For Exams (hub, displayed as Part 13)",
+      "community_name": "Week-by-Week Revision Program",
       "id": "public_part_12_effectively_studying_for_exams"
     },
     {
@@ -4611,10 +3659,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 17,
       "norm_label": "key takeaways from the 2025 assessment report (hub, displayed as part 12)",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Week-by-Week Revision Program",
       "id": "public_part_13_key_takeaways_from_the_2025_assessment_report"
     },
     {
@@ -4626,26 +3674,11 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 4,
       "norm_label": "practice topics & essay timer",
       "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
+      "community_name": "Joe Gillis",
       "id": "public_practice_topics"
-    },
-    {
-      "label": "Prompt Types: Discuss, To What Extent, Do You Agree, How Does\u2026",
-      "file_type": "document",
-      "source_file": "public/prompt-types.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 1,
-      "norm_label": "prompt types: discuss, to what extent, do you agree, how does...",
-      "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
-      "id": "public_prompt_types"
     },
     {
       "label": "Priority Checklist for 2026",
@@ -4656,10 +3689,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 17,
       "norm_label": "priority checklist for 2026",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Week-by-Week Revision Program",
       "id": "public_r25_checklist"
     },
     {
@@ -4671,10 +3704,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 17,
       "norm_label": "2025 report: general exam advice",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Week-by-Week Revision Program",
       "id": "public_r25_general"
     },
     {
@@ -4686,10 +3719,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 17,
       "norm_label": "2025 report: section a \u2013 analytical response to a text",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Week-by-Week Revision Program",
       "id": "public_r25_section_a"
     },
     {
@@ -4701,10 +3734,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 17,
       "norm_label": "2025 report: section b \u2013 creating a text",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Week-by-Week Revision Program",
       "id": "public_r25_section_b"
     },
     {
@@ -4716,10 +3749,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 17,
       "norm_label": "2025 report: section c \u2013 analysis of argument and language",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Week-by-Week Revision Program",
       "id": "public_r25_section_c"
     },
     {
@@ -4731,7 +3764,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 17,
       "norm_label": "week-by-week revision program",
       "_origin": "semantic",
       "community_name": "Week-by-Week Revision Program",
@@ -4746,26 +3779,11 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 4,
       "norm_label": "study tools",
       "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
+      "community_name": "Joe Gillis",
       "id": "public_study_tools"
-    },
-    {
-      "label": "Sunset Boulevard (VCE text)",
-      "file_type": "concept",
-      "source_file": "public/prompt-types.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 1,
-      "norm_label": "sunset boulevard (vce text)",
-      "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
-      "id": "concept_sunset_boulevard_text"
     },
     {
       "label": "Rainbow's End (VCE text)",
@@ -4776,10 +3794,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 4,
       "norm_label": "rainbow's end (vce text)",
       "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
+      "community_name": "Joe Gillis",
       "id": "concept_rainbows_end_text"
     },
     {
@@ -4791,10 +3809,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 17,
       "norm_label": "vcaa (victorian curriculum and assessment authority)",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Week-by-Week Revision Program",
       "id": "concept_vcaa"
     },
     {
@@ -4806,10 +3824,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 17,
       "norm_label": "vcaa 2025 english examination report",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Week-by-Week Revision Program",
       "id": "concept_vcaa_2025_examiners_report"
     },
     {
@@ -4821,10 +3839,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 17,
       "norm_label": "vcaa 2024 english assessment report",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Week-by-Week Revision Program",
       "id": "concept_vcaa_2024_examiners_report"
     },
     {
@@ -4836,10 +3854,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 17,
       "norm_label": "vce english and eal study design 2024\u20132027",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Week-by-Week Revision Program",
       "id": "concept_vce_english_study_design_2024_2027"
     },
     {
@@ -4851,10 +3869,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 17,
       "norm_label": "framework of ideas (section b)",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Week-by-Week Revision Program",
       "id": "concept_framework_of_ideas"
     },
     {
@@ -4866,101 +3884,11 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 17,
       "norm_label": "th.e.s.a.m.l. essay structure method",
       "_origin": "semantic",
       "community_name": "Week-by-Week Revision Program",
       "id": "concept_thesaml_method"
-    },
-    {
-      "label": "Norma Desmond (character, Sunset Boulevard)",
-      "file_type": "concept",
-      "source_file": "public/prompt-types.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 1,
-      "norm_label": "norma desmond (character, sunset boulevard)",
-      "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
-      "id": "concept_norma_desmond"
-    },
-    {
-      "label": "Joe Gillis (character, Sunset Boulevard)",
-      "file_type": "concept",
-      "source_file": "public/prompt-types.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 1,
-      "norm_label": "joe gillis (character, sunset boulevard)",
-      "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
-      "id": "concept_joe_gillis"
-    },
-    {
-      "label": "'Discuss' prompt type",
-      "file_type": "rationale",
-      "source_file": "public/prompt-types.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 1,
-      "norm_label": "'discuss' prompt type",
-      "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
-      "id": "concept_prompt_type_discuss"
-    },
-    {
-      "label": "'To what extent do you agree?' prompt type",
-      "file_type": "rationale",
-      "source_file": "public/prompt-types.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 1,
-      "norm_label": "'to what extent do you agree?' prompt type",
-      "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
-      "id": "concept_prompt_type_to_what_extent"
-    },
-    {
-      "label": "'Do you agree?' prompt type",
-      "file_type": "rationale",
-      "source_file": "public/prompt-types.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 1,
-      "norm_label": "'do you agree?' prompt type",
-      "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
-      "id": "concept_prompt_type_do_you_agree"
-    },
-    {
-      "label": "'How does\u2026' prompt type",
-      "file_type": "rationale",
-      "source_file": "public/prompt-types.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 1,
-      "norm_label": "'how does...' prompt type",
-      "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
-      "id": "concept_prompt_type_how_does"
     },
     {
       "label": "Technique Quiz Tool",
@@ -4971,10 +3899,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 4,
       "norm_label": "technique quiz tool",
       "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
+      "community_name": "Joe Gillis",
       "id": "public_technique_quiz"
     },
     {
@@ -4986,10 +3914,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 4,
       "norm_label": "technique quiz question bank (quiz js data)",
       "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
+      "community_name": "Joe Gillis",
       "id": "public_technique_quiz_quiz_data"
     },
     {
@@ -5001,10 +3929,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 6,
       "norm_label": "vocabulary upgrader tool",
       "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
+      "community_name": "Analysing Argument (Part 06 hub)",
       "id": "public_vocab_upgrader"
     },
     {
@@ -5016,10 +3944,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 6,
       "norm_label": "vocabulary upgrader swap dictionary (vu js data)",
       "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
+      "community_name": "Analysing Argument (Part 06 hub)",
       "id": "public_vocab_upgrader_vu_data"
     },
     {
@@ -5031,10 +3959,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 6,
       "norm_label": "high-scoring vocabulary bank (public page)",
       "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
+      "community_name": "Analysing Argument (Part 06 hub)",
       "id": "public_vocabulary"
     },
     {
@@ -5046,10 +3974,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 17,
       "norm_label": "how to use this site",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Week-by-Week Revision Program",
       "id": "snippets_howto"
     },
     {
@@ -5061,41 +3989,11 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 10,
+      "community": 17,
       "norm_label": "personal journeys writing tasks (stimulus set)",
       "_origin": "semantic",
       "community_name": "Week-by-Week Revision Program",
       "id": "snippets_pj1"
-    },
-    {
-      "label": "Prompt Types: Rainbow's End",
-      "file_type": "document",
-      "source_file": "snippets/prompt-types-re.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 10,
-      "norm_label": "prompt types: rainbow's end",
-      "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
-      "id": "snippets_prompt_types_re"
-    },
-    {
-      "label": "Prompt Types: Sunset Boulevard",
-      "file_type": "document",
-      "source_file": "snippets/prompt-types.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 10,
-      "norm_label": "prompt types: sunset boulevard",
-      "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
-      "id": "snippets_prompt_types"
     },
     {
       "label": "Rainbow's End Quote Table",
@@ -5106,10 +4004,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 20,
       "norm_label": "rainbow's end quote table",
       "_origin": "semantic",
-      "community_name": "Joe Gillis",
+      "community_name": "Rainbow's End Quote Table",
       "id": "snippets_quotetable"
     },
     {
@@ -5124,7 +4022,7 @@
       "community": 10,
       "norm_label": "priority checklist for 2026",
       "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
+      "community_name": "VCAA 2025 English Examination Report",
       "id": "snippets_r25_checklist"
     },
     {
@@ -5139,7 +4037,7 @@
       "community": 10,
       "norm_label": "2025 report: general exam advice",
       "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
+      "community_name": "VCAA 2025 English Examination Report",
       "id": "snippets_r25_general"
     },
     {
@@ -5154,7 +4052,7 @@
       "community": 10,
       "norm_label": "key takeaways from the 2025 assessment report (hub intro)",
       "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
+      "community_name": "VCAA 2025 English Examination Report",
       "id": "snippets_r25_hub"
     },
     {
@@ -5169,7 +4067,7 @@
       "community": 10,
       "norm_label": "2025 report section a: analytical response to a text",
       "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
+      "community_name": "VCAA 2025 English Examination Report",
       "id": "snippets_r25_section_a"
     },
     {
@@ -5184,7 +4082,7 @@
       "community": 10,
       "norm_label": "2025 report section b: creating a text",
       "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
+      "community_name": "VCAA 2025 English Examination Report",
       "id": "snippets_r25_section_b"
     },
     {
@@ -5199,7 +4097,7 @@
       "community": 10,
       "norm_label": "2025 report section c: analysis of argument and language",
       "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
+      "community_name": "VCAA 2025 English Examination Report",
       "id": "snippets_r25_section_c"
     },
     {
@@ -5214,7 +4112,7 @@
       "community": 10,
       "norm_label": "key takeaways from the 2025 assessment report (full assembled page)",
       "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
+      "community_name": "VCAA 2025 English Examination Report",
       "id": "snippets_report2025"
     },
     {
@@ -5226,26 +4124,11 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 10,
+      "community": 17,
       "norm_label": "week-by-week revision program",
       "_origin": "semantic",
       "community_name": "Week-by-Week Revision Program",
       "id": "snippets_revision_program"
-    },
-    {
-      "label": "Sunset Boulevard Shot Analysis Table",
-      "file_type": "document",
-      "source_file": "snippets/shotanalysis.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 4,
-      "norm_label": "sunset boulevard shot analysis table",
-      "_origin": "semantic",
-      "community_name": "Joe Gillis",
-      "id": "snippets_shotanalysis"
     },
     {
       "label": "Sentence Starters and Linking Words Table",
@@ -5256,26 +4139,11 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 6,
       "norm_label": "sentence starters and linking words table",
       "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
+      "community_name": "Analysing Argument (Part 06 hub)",
       "id": "snippets_ss"
-    },
-    {
-      "label": "Rainbow's End Symbol Table",
-      "file_type": "document",
-      "source_file": "snippets/symboltable.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 4,
-      "norm_label": "rainbow's end symbol table",
-      "_origin": "semantic",
-      "community_name": "Joe Gillis",
-      "id": "snippets_symboltable"
     },
     {
       "label": "Rainbow's End Literary and Dramatic Device Tracker",
@@ -5286,10 +4154,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 20,
       "norm_label": "rainbow's end literary and dramatic device tracker",
       "_origin": "semantic",
-      "community_name": "Joe Gillis",
+      "community_name": "Rainbow's End Quote Table",
       "id": "snippets_tracker"
     },
     {
@@ -5301,71 +4169,11 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 6,
       "norm_label": "high-scoring vocabulary bank (snippet)",
       "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
+      "community_name": "Analysing Argument (Part 06 hub)",
       "id": "snippets_vocab"
-    },
-    {
-      "label": "Watch the Film (snippet)",
-      "file_type": "document",
-      "source_file": "snippets/watch-film.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 4,
-      "norm_label": "watch the film (snippet)",
-      "_origin": "semantic",
-      "community_name": "Joe Gillis",
-      "id": "snippets_watch_film"
-    },
-    {
-      "label": "Th.E.S.A.M.L. Paragraph Method",
-      "file_type": "concept",
-      "source_file": "snippets/prompt-types.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 10,
-      "norm_label": "th.e.s.a.m.l. paragraph method",
-      "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
-      "id": "concept_th_e_s_a_m_l_method"
-    },
-    {
-      "label": "Argument -> Evidence -> Technique -> Effect Paragraph Structure",
-      "file_type": "concept",
-      "source_file": "snippets/prompt-types.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 10,
-      "norm_label": "argument -> evidence -> technique -> effect paragraph structure",
-      "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
-      "id": "concept_argument_evidence_technique_effect"
-    },
-    {
-      "label": "Four VCE Prompt Types (Discuss / To What Extent / Do You Agree / How Does)",
-      "file_type": "concept",
-      "source_file": "snippets/prompt-types.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 10,
-      "norm_label": "four vce prompt types (discuss / to what extent / do you agree / how does)",
-      "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
-      "id": "concept_four_prompt_types"
     },
     {
       "label": "VCAA 2025 English Examination Report",
@@ -5379,7 +4187,7 @@
       "community": 10,
       "norm_label": "vcaa 2025 english examination report",
       "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
+      "community_name": "VCAA 2025 English Examination Report",
       "id": "concept_2025_assessment_report"
     },
     {
@@ -5395,7 +4203,7 @@
       "community": 11,
       "norm_label": "analysing argument: persuasive techniques (vce reference table)",
       "_origin": "semantic",
-      "community_name": "Language and Word Choice",
+      "community_name": "Appeals to Emotion and Values",
       "id": "localpdf_persuasive_techniques_reference"
     },
     {
@@ -5407,7 +4215,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 14,
+      "community": 11,
       "norm_label": "appeals to emotion and values",
       "_origin": "semantic",
       "community_name": "Appeals to Emotion and Values",
@@ -5422,7 +4230,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 14,
+      "community": 11,
       "norm_label": "appeal to fear",
       "_origin": "semantic",
       "community_name": "Appeals to Emotion and Values",
@@ -5437,7 +4245,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 14,
+      "community": 11,
       "norm_label": "appeal to family values",
       "_origin": "semantic",
       "community_name": "Appeals to Emotion and Values",
@@ -5452,7 +4260,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 14,
+      "community": 11,
       "norm_label": "appeal to patriotism / national pride",
       "_origin": "semantic",
       "community_name": "Appeals to Emotion and Values",
@@ -5467,7 +4275,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 14,
+      "community": 11,
       "norm_label": "appeal to self-interest",
       "_origin": "semantic",
       "community_name": "Appeals to Emotion and Values",
@@ -5482,7 +4290,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 14,
+      "community": 11,
       "norm_label": "appeal to the hip-pocket nerve",
       "_origin": "semantic",
       "community_name": "Appeals to Emotion and Values",
@@ -5497,7 +4305,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 14,
+      "community": 11,
       "norm_label": "appeal to tradition / nostalgia",
       "_origin": "semantic",
       "community_name": "Appeals to Emotion and Values",
@@ -5512,7 +4320,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 14,
+      "community": 11,
       "norm_label": "appeal to justice and fairness",
       "_origin": "semantic",
       "community_name": "Appeals to Emotion and Values",
@@ -5527,7 +4335,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 14,
+      "community": 11,
       "norm_label": "appeal to common sense",
       "_origin": "semantic",
       "community_name": "Appeals to Emotion and Values",
@@ -5542,7 +4350,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 14,
+      "community": 11,
       "norm_label": "appeal to authority / expert opinion",
       "_origin": "semantic",
       "community_name": "Appeals to Emotion and Values",
@@ -5557,7 +4365,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 14,
+      "community": 11,
       "norm_label": "appeal to group loyalty / belonging",
       "_origin": "semantic",
       "community_name": "Appeals to Emotion and Values",
@@ -5572,7 +4380,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 14,
+      "community": 11,
       "norm_label": "appeal to pity / compassion",
       "_origin": "semantic",
       "community_name": "Appeals to Emotion and Values",
@@ -5587,7 +4395,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 14,
+      "community": 11,
       "norm_label": "appeal to responsibility / duty",
       "_origin": "semantic",
       "community_name": "Appeals to Emotion and Values",
@@ -5602,7 +4410,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 14,
+      "community": 11,
       "norm_label": "appeal to hope / optimism",
       "_origin": "semantic",
       "community_name": "Appeals to Emotion and Values",
@@ -5617,7 +4425,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 14,
+      "community": 11,
       "norm_label": "appeal to guilt or shame",
       "_origin": "semantic",
       "community_name": "Appeals to Emotion and Values",
@@ -5632,7 +4440,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 14,
+      "community": 11,
       "norm_label": "appeal to modernity / progress",
       "_origin": "semantic",
       "community_name": "Appeals to Emotion and Values",
@@ -5647,7 +4455,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 14,
+      "community": 11,
       "norm_label": "appeal to freedom and individual rights",
       "_origin": "semantic",
       "community_name": "Appeals to Emotion and Values",
@@ -5662,7 +4470,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 14,
+      "community": 11,
       "norm_label": "appeal to security and safety",
       "_origin": "semantic",
       "community_name": "Appeals to Emotion and Values",
@@ -5677,7 +4485,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 1,
       "norm_label": "language and word choice",
       "_origin": "semantic",
       "community_name": "Language and Word Choice",
@@ -5692,7 +4500,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 1,
       "norm_label": "emotive language",
       "_origin": "semantic",
       "community_name": "Language and Word Choice",
@@ -5707,7 +4515,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 1,
       "norm_label": "connotation",
       "_origin": "semantic",
       "community_name": "Language and Word Choice",
@@ -5722,7 +4530,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 1,
       "norm_label": "labelling and naming",
       "_origin": "semantic",
       "community_name": "Language and Word Choice",
@@ -5737,7 +4545,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 1,
       "norm_label": "inclusive language",
       "_origin": "semantic",
       "community_name": "Language and Word Choice",
@@ -5752,7 +4560,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 1,
       "norm_label": "exclusive language",
       "_origin": "semantic",
       "community_name": "Language and Word Choice",
@@ -5767,7 +4575,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 1,
       "norm_label": "colloquial language",
       "_origin": "semantic",
       "community_name": "Language and Word Choice",
@@ -5782,7 +4590,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 1,
       "norm_label": "formal register and technical jargon",
       "_origin": "semantic",
       "community_name": "Language and Word Choice",
@@ -5797,7 +4605,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 1,
       "norm_label": "euphemism",
       "_origin": "semantic",
       "community_name": "Language and Word Choice",
@@ -5812,7 +4620,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 1,
       "norm_label": "dysphemism",
       "_origin": "semantic",
       "community_name": "Language and Word Choice",
@@ -5827,7 +4635,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 1,
       "norm_label": "cliche",
       "_origin": "semantic",
       "community_name": "Language and Word Choice",
@@ -5842,7 +4650,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 1,
       "norm_label": "hyperbole",
       "_origin": "semantic",
       "community_name": "Language and Word Choice",
@@ -5857,7 +4665,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 1,
       "norm_label": "understatement / litotes",
       "_origin": "semantic",
       "community_name": "Language and Word Choice",
@@ -5872,7 +4680,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 1,
       "norm_label": "superlatives and absolutes",
       "_origin": "semantic",
       "community_name": "Language and Word Choice",
@@ -5887,7 +4695,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 1,
       "norm_label": "high modality",
       "_origin": "semantic",
       "community_name": "Language and Word Choice",
@@ -5902,7 +4710,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 1,
       "norm_label": "low modality",
       "_origin": "semantic",
       "community_name": "Language and Word Choice",
@@ -5917,7 +4725,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 1,
       "norm_label": "imperatives and direct address",
       "_origin": "semantic",
       "community_name": "Language and Word Choice",
@@ -5932,7 +4740,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 1,
       "norm_label": "neologism and coinage",
       "_origin": "semantic",
       "community_name": "Language and Word Choice",
@@ -5947,7 +4755,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 1,
       "norm_label": "allusion",
       "_origin": "semantic",
       "community_name": "Language and Word Choice",
@@ -5962,7 +4770,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 1,
       "norm_label": "pun and wordplay",
       "_origin": "semantic",
       "community_name": "Language and Word Choice",
@@ -5977,7 +4785,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 1,
       "norm_label": "slogan / sound bite",
       "_origin": "semantic",
       "community_name": "Language and Word Choice",
@@ -6355,7 +5163,7 @@
       "community": 11,
       "norm_label": "evidence and support",
       "_origin": "semantic",
-      "community_name": "Language and Word Choice",
+      "community_name": "Appeals to Emotion and Values",
       "id": "localpdf_persuasive_techniques_reference_category_evidence_and_support"
     },
     {
@@ -6370,7 +5178,7 @@
       "community": 11,
       "norm_label": "statistics",
       "_origin": "semantic",
-      "community_name": "Language and Word Choice",
+      "community_name": "Appeals to Emotion and Values",
       "id": "localpdf_persuasive_techniques_reference_statistics"
     },
     {
@@ -6385,7 +5193,7 @@
       "community": 11,
       "norm_label": "research and studies",
       "_origin": "semantic",
-      "community_name": "Language and Word Choice",
+      "community_name": "Appeals to Emotion and Values",
       "id": "localpdf_persuasive_techniques_reference_research_and_studies"
     },
     {
@@ -6400,7 +5208,7 @@
       "community": 11,
       "norm_label": "expert testimony",
       "_origin": "semantic",
-      "community_name": "Language and Word Choice",
+      "community_name": "Appeals to Emotion and Values",
       "id": "localpdf_persuasive_techniques_reference_expert_testimony"
     },
     {
@@ -6415,7 +5223,7 @@
       "community": 11,
       "norm_label": "eyewitness or vox pop quotation",
       "_origin": "semantic",
-      "community_name": "Language and Word Choice",
+      "community_name": "Appeals to Emotion and Values",
       "id": "localpdf_persuasive_techniques_reference_eyewitness_or_vox_pop_quotation"
     },
     {
@@ -6430,7 +5238,7 @@
       "community": 11,
       "norm_label": "personal experience and credentials",
       "_origin": "semantic",
-      "community_name": "Language and Word Choice",
+      "community_name": "Appeals to Emotion and Values",
       "id": "localpdf_persuasive_techniques_reference_personal_experience_and_credentials"
     },
     {
@@ -6445,7 +5253,7 @@
       "community": 11,
       "norm_label": "historical precedent",
       "_origin": "semantic",
-      "community_name": "Language and Word Choice",
+      "community_name": "Appeals to Emotion and Values",
       "id": "localpdf_persuasive_techniques_reference_historical_precedent"
     },
     {
@@ -6460,7 +5268,7 @@
       "community": 11,
       "norm_label": "comparison to other jurisdictions",
       "_origin": "semantic",
-      "community_name": "Language and Word Choice",
+      "community_name": "Appeals to Emotion and Values",
       "id": "localpdf_persuasive_techniques_reference_comparison_to_other_jurisdictions"
     },
     {
@@ -6475,7 +5283,7 @@
       "community": 11,
       "norm_label": "official documentation",
       "_origin": "semantic",
-      "community_name": "Language and Word Choice",
+      "community_name": "Appeals to Emotion and Values",
       "id": "localpdf_persuasive_techniques_reference_official_documentation"
     },
     {
@@ -6490,7 +5298,7 @@
       "community": 11,
       "norm_label": "reasoning, logic and logical fallacies",
       "_origin": "semantic",
-      "community_name": "Language and Word Choice",
+      "community_name": "Appeals to Emotion and Values",
       "id": "localpdf_persuasive_techniques_reference_category_reasoning_logic_and_logical_fallacies"
     },
     {
@@ -6505,7 +5313,7 @@
       "community": 11,
       "norm_label": "logical reasoning / cause and effect",
       "_origin": "semantic",
-      "community_name": "Language and Word Choice",
+      "community_name": "Appeals to Emotion and Values",
       "id": "localpdf_persuasive_techniques_reference_logical_reasoning_cause_and_effect"
     },
     {
@@ -6520,7 +5328,7 @@
       "community": 11,
       "norm_label": "generalisation",
       "_origin": "semantic",
-      "community_name": "Language and Word Choice",
+      "community_name": "Appeals to Emotion and Values",
       "id": "localpdf_persuasive_techniques_reference_generalisation"
     },
     {
@@ -6535,7 +5343,7 @@
       "community": 11,
       "norm_label": "slippery slope",
       "_origin": "semantic",
-      "community_name": "Language and Word Choice",
+      "community_name": "Appeals to Emotion and Values",
       "id": "localpdf_persuasive_techniques_reference_slippery_slope"
     },
     {
@@ -6550,7 +5358,7 @@
       "community": 11,
       "norm_label": "false dichotomy (either-or)",
       "_origin": "semantic",
-      "community_name": "Language and Word Choice",
+      "community_name": "Appeals to Emotion and Values",
       "id": "localpdf_persuasive_techniques_reference_false_dichotomy_either_or"
     },
     {
@@ -6565,7 +5373,7 @@
       "community": 11,
       "norm_label": "bandwagon",
       "_origin": "semantic",
-      "community_name": "Language and Word Choice",
+      "community_name": "Appeals to Emotion and Values",
       "id": "localpdf_persuasive_techniques_reference_bandwagon"
     },
     {
@@ -6580,7 +5388,7 @@
       "community": 11,
       "norm_label": "attack / ad hominem",
       "_origin": "semantic",
-      "community_name": "Language and Word Choice",
+      "community_name": "Appeals to Emotion and Values",
       "id": "localpdf_persuasive_techniques_reference_attack_ad_hominem"
     },
     {
@@ -6595,7 +5403,7 @@
       "community": 11,
       "norm_label": "straw man",
       "_origin": "semantic",
-      "community_name": "Language and Word Choice",
+      "community_name": "Appeals to Emotion and Values",
       "id": "localpdf_persuasive_techniques_reference_straw_man"
     },
     {
@@ -6610,7 +5418,7 @@
       "community": 11,
       "norm_label": "circular reasoning",
       "_origin": "semantic",
-      "community_name": "Language and Word Choice",
+      "community_name": "Appeals to Emotion and Values",
       "id": "localpdf_persuasive_techniques_reference_circular_reasoning"
     },
     {
@@ -6625,7 +5433,7 @@
       "community": 11,
       "norm_label": "reductio ad absurdum",
       "_origin": "semantic",
-      "community_name": "Language and Word Choice",
+      "community_name": "Appeals to Emotion and Values",
       "id": "localpdf_persuasive_techniques_reference_reductio_ad_absurdum"
     },
     {
@@ -6640,7 +5448,7 @@
       "community": 11,
       "norm_label": "post hoc reasoning",
       "_origin": "semantic",
-      "community_name": "Language and Word Choice",
+      "community_name": "Appeals to Emotion and Values",
       "id": "localpdf_persuasive_techniques_reference_post_hoc_reasoning"
     },
     {
@@ -6655,7 +5463,7 @@
       "community": 11,
       "norm_label": "red herring",
       "_origin": "semantic",
-      "community_name": "Language and Word Choice",
+      "community_name": "Appeals to Emotion and Values",
       "id": "localpdf_persuasive_techniques_reference_red_herring"
     },
     {
@@ -6670,7 +5478,7 @@
       "community": 11,
       "norm_label": "tone",
       "_origin": "semantic",
-      "community_name": "Language and Word Choice",
+      "community_name": "Appeals to Emotion and Values",
       "id": "localpdf_persuasive_techniques_reference_category_tone_section"
     },
     {
@@ -6685,7 +5493,7 @@
       "community": 11,
       "norm_label": "tone",
       "_origin": "semantic",
-      "community_name": "Language and Word Choice",
+      "community_name": "Appeals to Emotion and Values",
       "id": "localpdf_persuasive_techniques_reference_tone"
     },
     {
@@ -6700,7 +5508,7 @@
       "community": 11,
       "norm_label": "tone shift",
       "_origin": "semantic",
-      "community_name": "Language and Word Choice",
+      "community_name": "Appeals to Emotion and Values",
       "id": "localpdf_persuasive_techniques_reference_tone_shift"
     },
     {
@@ -6715,7 +5523,7 @@
       "community": 11,
       "norm_label": "outraged / indignant tone",
       "_origin": "semantic",
-      "community_name": "Language and Word Choice",
+      "community_name": "Appeals to Emotion and Values",
       "id": "localpdf_persuasive_techniques_reference_outraged_indignant_tone"
     },
     {
@@ -6730,7 +5538,7 @@
       "community": 11,
       "norm_label": "reasonable / conciliatory tone",
       "_origin": "semantic",
-      "community_name": "Language and Word Choice",
+      "community_name": "Appeals to Emotion and Values",
       "id": "localpdf_persuasive_techniques_reference_reasonable_conciliatory_tone"
     },
     {
@@ -6971,7 +5779,7 @@
       "community": 3,
       "norm_label": "analysing argument: persuasive techniques (vce reference table)",
       "_origin": "semantic",
-      "community_name": "Language and Word Choice",
+      "community_name": "Reasoning, Logic and Logical Fallacies",
       "id": "public_assets_pdf_persuasive_techniques_reference"
     },
     {
@@ -7253,7 +6061,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 5,
       "norm_label": "language and word choice",
       "_origin": "semantic",
       "community_name": "Language and Word Choice",
@@ -7268,7 +6076,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 5,
       "norm_label": "emotive language",
       "_origin": "semantic",
       "community_name": "Language and Word Choice",
@@ -7283,7 +6091,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 5,
       "norm_label": "connotation",
       "_origin": "semantic",
       "community_name": "Language and Word Choice",
@@ -7298,7 +6106,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 5,
       "norm_label": "labelling and naming",
       "_origin": "semantic",
       "community_name": "Language and Word Choice",
@@ -7313,7 +6121,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 5,
       "norm_label": "inclusive language",
       "_origin": "semantic",
       "community_name": "Language and Word Choice",
@@ -7328,7 +6136,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 5,
       "norm_label": "exclusive language",
       "_origin": "semantic",
       "community_name": "Language and Word Choice",
@@ -7343,7 +6151,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 5,
       "norm_label": "colloquial language",
       "_origin": "semantic",
       "community_name": "Language and Word Choice",
@@ -7358,7 +6166,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 5,
       "norm_label": "formal register and technical jargon",
       "_origin": "semantic",
       "community_name": "Language and Word Choice",
@@ -7373,7 +6181,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 5,
       "norm_label": "euphemism",
       "_origin": "semantic",
       "community_name": "Language and Word Choice",
@@ -7388,7 +6196,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 5,
       "norm_label": "dysphemism",
       "_origin": "semantic",
       "community_name": "Language and Word Choice",
@@ -7403,7 +6211,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 5,
       "norm_label": "cliche",
       "_origin": "semantic",
       "community_name": "Language and Word Choice",
@@ -7418,7 +6226,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 5,
       "norm_label": "hyperbole",
       "_origin": "semantic",
       "community_name": "Language and Word Choice",
@@ -7433,7 +6241,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 5,
       "norm_label": "understatement / litotes",
       "_origin": "semantic",
       "community_name": "Language and Word Choice",
@@ -7448,7 +6256,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 5,
       "norm_label": "superlatives and absolutes",
       "_origin": "semantic",
       "community_name": "Language and Word Choice",
@@ -7463,7 +6271,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 5,
       "norm_label": "high modality",
       "_origin": "semantic",
       "community_name": "Language and Word Choice",
@@ -7478,7 +6286,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 5,
       "norm_label": "low modality",
       "_origin": "semantic",
       "community_name": "Language and Word Choice",
@@ -7493,7 +6301,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 5,
       "norm_label": "imperatives and direct address",
       "_origin": "semantic",
       "community_name": "Language and Word Choice",
@@ -7508,7 +6316,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 5,
       "norm_label": "neologism and coinage",
       "_origin": "semantic",
       "community_name": "Language and Word Choice",
@@ -7523,7 +6331,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 5,
       "norm_label": "allusion",
       "_origin": "semantic",
       "community_name": "Language and Word Choice",
@@ -7538,7 +6346,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 5,
       "norm_label": "pun and wordplay",
       "_origin": "semantic",
       "community_name": "Language and Word Choice",
@@ -7553,7 +6361,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 5,
       "norm_label": "slogan / sound bite",
       "_origin": "semantic",
       "community_name": "Language and Word Choice",
@@ -7931,7 +6739,7 @@
       "community": 3,
       "norm_label": "evidence and support",
       "_origin": "semantic",
-      "community_name": "Language and Word Choice",
+      "community_name": "Reasoning, Logic and Logical Fallacies",
       "id": "public_assets_pdf_persuasive_techniques_reference_category_evidence_and_support"
     },
     {
@@ -7946,7 +6754,7 @@
       "community": 3,
       "norm_label": "statistics",
       "_origin": "semantic",
-      "community_name": "Language and Word Choice",
+      "community_name": "Reasoning, Logic and Logical Fallacies",
       "id": "public_assets_pdf_persuasive_techniques_reference_statistics"
     },
     {
@@ -7961,7 +6769,7 @@
       "community": 3,
       "norm_label": "research and studies",
       "_origin": "semantic",
-      "community_name": "Language and Word Choice",
+      "community_name": "Reasoning, Logic and Logical Fallacies",
       "id": "public_assets_pdf_persuasive_techniques_reference_research_and_studies"
     },
     {
@@ -7976,7 +6784,7 @@
       "community": 3,
       "norm_label": "expert testimony",
       "_origin": "semantic",
-      "community_name": "Language and Word Choice",
+      "community_name": "Reasoning, Logic and Logical Fallacies",
       "id": "public_assets_pdf_persuasive_techniques_reference_expert_testimony"
     },
     {
@@ -7991,7 +6799,7 @@
       "community": 3,
       "norm_label": "eyewitness or vox pop quotation",
       "_origin": "semantic",
-      "community_name": "Language and Word Choice",
+      "community_name": "Reasoning, Logic and Logical Fallacies",
       "id": "public_assets_pdf_persuasive_techniques_reference_eyewitness_or_vox_pop_quotation"
     },
     {
@@ -8006,7 +6814,7 @@
       "community": 3,
       "norm_label": "personal experience and credentials",
       "_origin": "semantic",
-      "community_name": "Language and Word Choice",
+      "community_name": "Reasoning, Logic and Logical Fallacies",
       "id": "public_assets_pdf_persuasive_techniques_reference_personal_experience_and_credentials"
     },
     {
@@ -8021,7 +6829,7 @@
       "community": 3,
       "norm_label": "historical precedent",
       "_origin": "semantic",
-      "community_name": "Language and Word Choice",
+      "community_name": "Reasoning, Logic and Logical Fallacies",
       "id": "public_assets_pdf_persuasive_techniques_reference_historical_precedent"
     },
     {
@@ -8036,7 +6844,7 @@
       "community": 3,
       "norm_label": "comparison to other jurisdictions",
       "_origin": "semantic",
-      "community_name": "Language and Word Choice",
+      "community_name": "Reasoning, Logic and Logical Fallacies",
       "id": "public_assets_pdf_persuasive_techniques_reference_comparison_to_other_jurisdictions"
     },
     {
@@ -8051,7 +6859,7 @@
       "community": 3,
       "norm_label": "official documentation",
       "_origin": "semantic",
-      "community_name": "Language and Word Choice",
+      "community_name": "Reasoning, Logic and Logical Fallacies",
       "id": "public_assets_pdf_persuasive_techniques_reference_official_documentation"
     },
     {
@@ -8066,7 +6874,7 @@
       "community": 3,
       "norm_label": "reasoning, logic and logical fallacies",
       "_origin": "semantic",
-      "community_name": "Language and Word Choice",
+      "community_name": "Reasoning, Logic and Logical Fallacies",
       "id": "public_assets_pdf_persuasive_techniques_reference_category_reasoning_logic_and_logical_fallacies"
     },
     {
@@ -8081,7 +6889,7 @@
       "community": 3,
       "norm_label": "logical reasoning / cause and effect",
       "_origin": "semantic",
-      "community_name": "Language and Word Choice",
+      "community_name": "Reasoning, Logic and Logical Fallacies",
       "id": "public_assets_pdf_persuasive_techniques_reference_logical_reasoning_cause_and_effect"
     },
     {
@@ -8096,7 +6904,7 @@
       "community": 3,
       "norm_label": "generalisation",
       "_origin": "semantic",
-      "community_name": "Language and Word Choice",
+      "community_name": "Reasoning, Logic and Logical Fallacies",
       "id": "public_assets_pdf_persuasive_techniques_reference_generalisation"
     },
     {
@@ -8111,7 +6919,7 @@
       "community": 3,
       "norm_label": "slippery slope",
       "_origin": "semantic",
-      "community_name": "Language and Word Choice",
+      "community_name": "Reasoning, Logic and Logical Fallacies",
       "id": "public_assets_pdf_persuasive_techniques_reference_slippery_slope"
     },
     {
@@ -8126,7 +6934,7 @@
       "community": 3,
       "norm_label": "false dichotomy (either-or)",
       "_origin": "semantic",
-      "community_name": "Language and Word Choice",
+      "community_name": "Reasoning, Logic and Logical Fallacies",
       "id": "public_assets_pdf_persuasive_techniques_reference_false_dichotomy_either_or"
     },
     {
@@ -8141,7 +6949,7 @@
       "community": 3,
       "norm_label": "bandwagon",
       "_origin": "semantic",
-      "community_name": "Language and Word Choice",
+      "community_name": "Reasoning, Logic and Logical Fallacies",
       "id": "public_assets_pdf_persuasive_techniques_reference_bandwagon"
     },
     {
@@ -8156,7 +6964,7 @@
       "community": 3,
       "norm_label": "attack / ad hominem",
       "_origin": "semantic",
-      "community_name": "Language and Word Choice",
+      "community_name": "Reasoning, Logic and Logical Fallacies",
       "id": "public_assets_pdf_persuasive_techniques_reference_attack_ad_hominem"
     },
     {
@@ -8171,7 +6979,7 @@
       "community": 3,
       "norm_label": "straw man",
       "_origin": "semantic",
-      "community_name": "Language and Word Choice",
+      "community_name": "Reasoning, Logic and Logical Fallacies",
       "id": "public_assets_pdf_persuasive_techniques_reference_straw_man"
     },
     {
@@ -8186,7 +6994,7 @@
       "community": 3,
       "norm_label": "circular reasoning",
       "_origin": "semantic",
-      "community_name": "Language and Word Choice",
+      "community_name": "Reasoning, Logic and Logical Fallacies",
       "id": "public_assets_pdf_persuasive_techniques_reference_circular_reasoning"
     },
     {
@@ -8201,7 +7009,7 @@
       "community": 3,
       "norm_label": "reductio ad absurdum",
       "_origin": "semantic",
-      "community_name": "Language and Word Choice",
+      "community_name": "Reasoning, Logic and Logical Fallacies",
       "id": "public_assets_pdf_persuasive_techniques_reference_reductio_ad_absurdum"
     },
     {
@@ -8216,7 +7024,7 @@
       "community": 3,
       "norm_label": "post hoc reasoning",
       "_origin": "semantic",
-      "community_name": "Language and Word Choice",
+      "community_name": "Reasoning, Logic and Logical Fallacies",
       "id": "public_assets_pdf_persuasive_techniques_reference_post_hoc_reasoning"
     },
     {
@@ -8231,7 +7039,7 @@
       "community": 3,
       "norm_label": "red herring",
       "_origin": "semantic",
-      "community_name": "Language and Word Choice",
+      "community_name": "Reasoning, Logic and Logical Fallacies",
       "id": "public_assets_pdf_persuasive_techniques_reference_red_herring"
     },
     {
@@ -8246,7 +7054,7 @@
       "community": 3,
       "norm_label": "tone",
       "_origin": "semantic",
-      "community_name": "Language and Word Choice",
+      "community_name": "Reasoning, Logic and Logical Fallacies",
       "id": "public_assets_pdf_persuasive_techniques_reference_category_tone_section"
     },
     {
@@ -8261,7 +7069,7 @@
       "community": 3,
       "norm_label": "tone",
       "_origin": "semantic",
-      "community_name": "Language and Word Choice",
+      "community_name": "Reasoning, Logic and Logical Fallacies",
       "id": "public_assets_pdf_persuasive_techniques_reference_tone"
     },
     {
@@ -8276,7 +7084,7 @@
       "community": 3,
       "norm_label": "tone shift",
       "_origin": "semantic",
-      "community_name": "Language and Word Choice",
+      "community_name": "Reasoning, Logic and Logical Fallacies",
       "id": "public_assets_pdf_persuasive_techniques_reference_tone_shift"
     },
     {
@@ -8291,7 +7099,7 @@
       "community": 3,
       "norm_label": "outraged / indignant tone",
       "_origin": "semantic",
-      "community_name": "Language and Word Choice",
+      "community_name": "Reasoning, Logic and Logical Fallacies",
       "id": "public_assets_pdf_persuasive_techniques_reference_outraged_indignant_tone"
     },
     {
@@ -8306,7 +7114,7 @@
       "community": 3,
       "norm_label": "reasonable / conciliatory tone",
       "_origin": "semantic",
-      "community_name": "Language and Word Choice",
+      "community_name": "Reasoning, Logic and Logical Fallacies",
       "id": "public_assets_pdf_persuasive_techniques_reference_reasonable_conciliatory_tone"
     },
     {
@@ -8540,7 +7348,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "build.py",
-      "source_location": "L1568",
+      "source_location": "L999",
       "weight": 1.0,
       "_origin": "ast",
       "source": "build",
@@ -8551,7 +7359,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "build.py",
-      "source_location": "L326",
+      "source_location": "L314",
       "weight": 1.0,
       "_origin": "ast",
       "source": "build",
@@ -8573,7 +7381,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "build.py",
-      "source_location": "L1809",
+      "source_location": "L1237",
       "weight": 1.0,
       "_origin": "ast",
       "source": "build",
@@ -8584,7 +7392,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "build.py",
-      "source_location": "L1591",
+      "source_location": "L1022",
       "weight": 1.0,
       "_origin": "ast",
       "source": "build",
@@ -8595,7 +7403,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "build.py",
-      "source_location": "L328",
+      "source_location": "L316",
       "weight": 1.0,
       "_origin": "ast",
       "source": "build",
@@ -8606,7 +7414,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "build.py",
-      "source_location": "L1844",
+      "source_location": "L1272",
       "weight": 1.0,
       "_origin": "ast",
       "source": "build",
@@ -8617,7 +7425,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "build.py",
-      "source_location": "L1548",
+      "source_location": "L979",
       "weight": 1.0,
       "_origin": "ast",
       "source": "build",
@@ -8628,7 +7436,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "build.py",
-      "source_location": "L1646",
+      "source_location": "L1077",
       "weight": 1.0,
       "_origin": "ast",
       "source": "build",
@@ -8639,7 +7447,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "build.py",
-      "source_location": "L1539",
+      "source_location": "L970",
       "weight": 1.0,
       "_origin": "ast",
       "source": "build",
@@ -8650,7 +7458,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "build.py",
-      "source_location": "L1594",
+      "source_location": "L1025",
       "weight": 1.0,
       "_origin": "ast",
       "source": "build",
@@ -8661,7 +7469,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "build.py",
-      "source_location": "L193",
+      "source_location": "L191",
       "weight": 1.0,
       "_origin": "ast",
       "source": "build",
@@ -8673,7 +7481,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "build.py",
-      "source_location": "L333",
+      "source_location": "L321",
       "weight": 1.0,
       "_origin": "ast",
       "source": "build_heading_chain",
@@ -8685,7 +7493,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "build.py",
-      "source_location": "L1643",
+      "source_location": "L1074",
       "weight": 1.0,
       "_origin": "ast",
       "source": "build_shell",
@@ -8697,7 +7505,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "build.py",
-      "source_location": "L1643",
+      "source_location": "L1074",
       "weight": 1.0,
       "_origin": "ast",
       "source": "build_shell",
@@ -8724,17 +7532,6 @@
       "_origin": "ast",
       "source": "public_assets_site",
       "target": "public_assets_site_esc",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "public/assets/site.js",
-      "source_location": "L195",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "public_assets_site",
-      "target": "public_assets_site_hide",
       "confidence_score": 1.0
     },
     {
@@ -9743,17 +8540,6 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "site.js",
-      "source_location": "L195",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "site",
-      "target": "site_hide",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "site.js",
       "source_location": "L8",
       "weight": 1.0,
       "_origin": "ast",
@@ -9974,17 +8760,6 @@
       "target": "handover_anthropic_api"
     },
     {
-      "relation": "references",
-      "confidence": "INFERRED",
-      "confidence_score": 0.95,
-      "source_file": "HANDOVER.md",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "handover_essay_marker",
-      "target": "marker_source_askai"
-    },
-    {
       "relation": "shares_data_with",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
@@ -9999,650 +8774,12 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "marker_source_askai",
-      "target": "handover_anthropic_api"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
       "source_file": "HANDOVER.md",
       "source_location": null,
       "weight": 1.0,
       "_origin": "semantic",
       "source": "handover_build_pipeline",
       "target": "handover_embeddings_json"
-    },
-    {
-      "relation": "shares_data_with",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "marker_source_builda",
-      "target": "marker_source_calib"
-    },
-    {
-      "relation": "shares_data_with",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "marker_source_builda",
-      "target": "marker_source_cinstr"
-    },
-    {
-      "relation": "shares_data_with",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "marker_source_builda",
-      "target": "marker_source_examctx"
-    },
-    {
-      "relation": "shares_data_with",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "marker_source_builda",
-      "target": "marker_source_report_a"
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "marker_source_markessay",
-      "target": "marker_source_builda"
-    },
-    {
-      "relation": "shares_data_with",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "marker_source_buildb",
-      "target": "marker_source_calib"
-    },
-    {
-      "relation": "shares_data_with",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "marker_source_buildb",
-      "target": "marker_source_cinstr"
-    },
-    {
-      "relation": "shares_data_with",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "marker_source_buildb",
-      "target": "marker_source_examctx"
-    },
-    {
-      "relation": "shares_data_with",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "marker_source_buildb",
-      "target": "marker_source_report_b"
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "marker_source_markessay",
-      "target": "marker_source_buildb"
-    },
-    {
-      "relation": "shares_data_with",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "marker_source_buildc",
-      "target": "marker_source_calib"
-    },
-    {
-      "relation": "shares_data_with",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "marker_source_buildc",
-      "target": "marker_source_cinstr"
-    },
-    {
-      "relation": "shares_data_with",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "marker_source_buildc",
-      "target": "marker_source_examctx"
-    },
-    {
-      "relation": "shares_data_with",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "marker_source_buildc",
-      "target": "marker_source_report_c"
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "marker_source_markessay",
-      "target": "marker_source_buildc"
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "marker_source_markessay",
-      "target": "marker_source_askai"
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "marker_source_markessay",
-      "target": "marker_source_norm"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "marker_source_markessay",
-      "target": "marker_source_precision_mode"
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "marker_source_markessay",
-      "target": "marker_source_renderresult"
-    },
-    {
-      "relation": "shares_data_with",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "marker_source_markessay",
-      "target": "marker_source_secondopinion"
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "marker_source_renderresult",
-      "target": "marker_source_annotate"
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "marker_source_renderresult",
-      "target": "marker_source_critbar"
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "marker_source_renderresult",
-      "target": "marker_source_esch"
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "marker_source_renderresult",
-      "target": "marker_source_norm"
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "marker_source_renderresult",
-      "target": "marker_source_scls"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "marker_source_renderresult",
-      "target": "marker_source_second_opinion_feature"
-    },
-    {
-      "relation": "shares_data_with",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "marker_source_renderresult",
-      "target": "marker_source_secondopinion"
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "marker_source_renderresult",
-      "target": "marker_source_slbl"
-    },
-    {
-      "relation": "shares_data_with",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "marker_source_renderresult",
-      "target": "marker_source_topband"
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "marker_source_secondopinion",
-      "target": "marker_source_askai"
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "marker_source_secondopinion",
-      "target": "marker_source_esch"
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "marker_source_secondopinion",
-      "target": "marker_source_norm"
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "marker_source_topband",
-      "target": "marker_source_askai"
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "marker_source_topband",
-      "target": "marker_source_esch"
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "marker_source_topband",
-      "target": "marker_source_norm"
-    },
-    {
-      "relation": "shares_data_with",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "marker_source_previewimage",
-      "target": "marker_source_transcribeimage"
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "marker_source_transcribeimage",
-      "target": "marker_source_askai"
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "marker_source_transcribeimage",
-      "target": "marker_source_norm"
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "marker_source_transcribeimage",
-      "target": "marker_source_updatewc"
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "marker_source_askai",
-      "target": "marker_source_aicfg"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "marker_source_askai",
-      "target": "marker_source_github_models_api"
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "marker_source_askai",
-      "target": "marker_source_opensettings"
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "marker_source_opensettings",
-      "target": "marker_source_aicfg"
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "marker-source.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "marker_source_opensettings",
-      "target": "marker_source_aiproviderhelp"
-    },
-    {
-      "relation": "shares_data_with",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "public/ask-max.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "public_ask_max",
-      "target": "embeddings_json"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "public/ask-max.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "public_ask_max",
-      "target": "max_von_mayerling"
-    },
-    {
-      "relation": "shares_data_with",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "public/ask-max.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "public_ask_max",
-      "target": "public_ask_max_worker"
-    },
-    {
-      "relation": "semantically_similar_to",
-      "confidence": "INFERRED",
-      "confidence_score": 0.75,
-      "source_file": "public/ask-max.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "public_ask_max",
-      "target": "public_marker"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "public/ask-max.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "public_ask_max",
-      "target": "public_outline_builder"
-    },
-    {
-      "relation": "shares_data_with",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "public/ask-max.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "public_ask_max",
-      "target": "search_json"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "public/ask-the-guide.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "public_ask_the_guide",
-      "target": "public_ask_max"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "public/study-tools.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "public_study_tools",
-      "target": "public_ask_max"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "public/essay-marker.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "public_essay_marker",
-      "target": "handwriting_transcription"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "public/essay-marker.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "public_essay_marker",
-      "target": "precision_mode"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "public/essay-marker.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "public_essay_marker",
-      "target": "public_marker"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "public/essay-marker.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "public_essay_marker",
-      "target": "second_opinion_mode"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "public/study-tools.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "public_study_tools",
-      "target": "public_essay_marker"
     },
     {
       "relation": "references",
@@ -10687,17 +8824,6 @@
       "_origin": "semantic",
       "source": "public_exam_generator",
       "target": "norma_desmond"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "public/exam-generator.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "public_exam_generator",
-      "target": "public_marker"
     },
     {
       "relation": "shares_data_with",
@@ -10962,72 +9088,6 @@
       "_origin": "semantic",
       "source": "snippets_howto",
       "target": "public_index"
-    },
-    {
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "public/essay-marker.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "public_essay_marker_calibration_rationale",
-      "target": "public_marker"
-    },
-    {
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "public/essay-marker.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "public_essay_marker_privacy_rationale",
-      "target": "public_marker"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "public/practice-topics.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "public_practice_topics",
-      "target": "public_marker"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "public/vocabulary.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "public_vocabulary",
-      "target": "public_marker"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "snippets/revision-program.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "snippets_revision_program",
-      "target": "public_marker"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "snippets/vocab.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "snippets_vocab",
-      "target": "public_marker"
     },
     {
       "relation": "shares_data_with",
@@ -11492,28 +9552,6 @@
       "target": "the_organ_symbol"
     },
     {
-      "relation": "shares_data_with",
-      "confidence": "INFERRED",
-      "confidence_score": 0.75,
-      "source_file": "snippets/shotanalysis.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "snippets_shotanalysis",
-      "target": "public_p02_film_techniques"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "snippets/watch-film.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "snippets_watch_film",
-      "target": "public_p02_film_techniques"
-    },
-    {
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
@@ -11600,17 +9638,6 @@
       "_origin": "semantic",
       "source": "public_p02_scene_summaries_and_analyses",
       "target": "the_pool_symbol"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "snippets/watch-film.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "snippets_watch_film",
-      "target": "public_p02_scene_summaries_and_analyses"
     },
     {
       "relation": "references",
@@ -12658,105 +10685,6 @@
       "target": "public_p03_written_exemplars"
     },
     {
-      "relation": "conceptually_related_to",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "source_file": "public/revision-program.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "concept_thesaml_method",
-      "target": "public_p04_analytical_text_response_structure"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "public/p04-analytical-text-response-structure.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "public_p04_analytical_text_response_structure",
-      "target": "essay_hinge_sentence"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "public/p04-analytical-text-response-structure.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "public_p04_analytical_text_response_structure",
-      "target": "essay_th_e_s_a_m_l_method"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "public/p04-analytical-text-response-structure.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "public_p04_analytical_text_response_structure",
-      "target": "gladys_banks"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "public/p04-analytical-text-response-structure.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "public_p04_analytical_text_response_structure",
-      "target": "prompt_types_discuss_extent_how"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "public/p04-analytical-text-response-structure.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "public_p04_analytical_text_response_structure",
-      "target": "public_p04_planning"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "public/p04-proofreading.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "public_p04_proofreading",
-      "target": "public_p04_analytical_text_response_structure"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "public/part-04-analytical-text-response-essays.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "public_part_04_analytical_text_response_essays",
-      "target": "public_p04_analytical_text_response_structure"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "public/revision-program.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "public_revision_program",
-      "target": "public_p04_analytical_text_response_structure"
-    },
-    {
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
@@ -12777,83 +10705,6 @@
       "_origin": "semantic",
       "source": "public_part_04_analytical_text_response_essays",
       "target": "public_p04_introduction"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "public/p04-planning.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "public_p04_planning",
-      "target": "essay_contention"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "public/p04-planning.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "public_p04_planning",
-      "target": "essay_hinge_sentence"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "public/p04-planning.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "public_p04_planning",
-      "target": "gladys_banks"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "public/p04-planning.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "public_p04_planning",
-      "target": "public_p04_what_is_needed_in_an_essay"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "public/p04-planning.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "public_p04_planning",
-      "target": "rainbows_end"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "public/part-04-analytical-text-response-essays.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "public_part_04_analytical_text_response_essays",
-      "target": "public_p04_planning"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "public/revision-program.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "public_revision_program",
-      "target": "public_p04_planning"
     },
     {
       "relation": "references",
@@ -12876,17 +10727,6 @@
       "_origin": "semantic",
       "source": "public_part_04_analytical_text_response_essays",
       "target": "public_p04_proofreading"
-    },
-    {
-      "relation": "conceptually_related_to",
-      "confidence": "INFERRED",
-      "confidence_score": 0.75,
-      "source_file": "public/p04-what-is-needed-in-an-essay.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "public_p04_what_is_needed_in_an_essay",
-      "target": "essay_contention"
     },
     {
       "relation": "references",
@@ -13184,28 +11024,6 @@
       "_origin": "semantic",
       "source": "written_exemplar_sample_5",
       "target": "symbol_encyclopedias"
-    },
-    {
-      "relation": "implements",
-      "confidence": "INFERRED",
-      "confidence_score": 0.75,
-      "source_file": "public/p03-written-exemplars.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "written_exemplar_sample_1",
-      "target": "essay_th_e_s_a_m_l_method"
-    },
-    {
-      "relation": "semantically_similar_to",
-      "confidence": "INFERRED",
-      "confidence_score": 0.7,
-      "source_file": "public/p04-planning.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "essay_hinge_sentence",
-      "target": "essay_th_e_s_a_m_l_method"
     },
     {
       "relation": "references",
@@ -14608,17 +12426,6 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "public/part-04-analytical-text-response-essays.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "public_part_04_analytical_text_response_essays",
-      "target": "public_prompt_types"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
       "source_file": "snippets/howto.html",
       "source_location": null,
       "weight": 1.0,
@@ -15026,17 +12833,6 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "public/practice-topics.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "public_practice_topics",
-      "target": "concept_sunset_boulevard_text"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
       "source_file": "public/revision-program.html",
       "source_location": null,
       "weight": 1.0,
@@ -15054,105 +12850,6 @@
       "_origin": "semantic",
       "source": "public_study_tools",
       "target": "public_practice_topics"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "public/prompt-types.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "public_prompt_types",
-      "target": "concept_joe_gillis"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "public/prompt-types.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "public_prompt_types",
-      "target": "concept_norma_desmond"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "public/prompt-types.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "public_prompt_types",
-      "target": "concept_prompt_type_discuss"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "public/prompt-types.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "public_prompt_types",
-      "target": "concept_prompt_type_do_you_agree"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "public/prompt-types.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "public_prompt_types",
-      "target": "concept_prompt_type_how_does"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "public/prompt-types.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "public_prompt_types",
-      "target": "concept_prompt_type_to_what_extent"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "public/prompt-types.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "public_prompt_types",
-      "target": "concept_sunset_boulevard_text"
-    },
-    {
-      "relation": "conceptually_related_to",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "source_file": "public/r25-section-a.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "public_r25_section_a",
-      "target": "public_prompt_types"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "public/revision-program.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "public_revision_program",
-      "target": "public_prompt_types"
     },
     {
       "relation": "cites",
@@ -15334,28 +13031,6 @@
       "relation": "conceptually_related_to",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "public/prompt-types.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "concept_joe_gillis",
-      "target": "concept_sunset_boulevard_text"
-    },
-    {
-      "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "public/prompt-types.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "concept_norma_desmond",
-      "target": "concept_sunset_boulevard_text"
-    },
-    {
-      "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
       "source_file": "public/part-11-key-takeaways-from-the-2024-assessment-report.html",
       "source_location": null,
       "weight": 1.0,
@@ -15494,105 +13169,6 @@
       "_origin": "semantic",
       "source": "public_vocabulary",
       "target": "snippets_vocab"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "snippets/prompt-types-re.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "snippets_prompt_types_re",
-      "target": "concept_argument_evidence_technique_effect"
-    },
-    {
-      "relation": "implements",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "snippets/prompt-types-re.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "snippets_prompt_types_re",
-      "target": "concept_four_prompt_types"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "snippets/prompt-types-re.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "snippets_prompt_types_re",
-      "target": "concept_th_e_s_a_m_l_method"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "snippets/prompt-types-re.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "snippets_prompt_types_re",
-      "target": "snippets_prompt_types"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "snippets/prompt-types-re.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "snippets_prompt_types_re",
-      "target": "snippets_r25_section_a"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "snippets/prompt-types.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "snippets_prompt_types",
-      "target": "concept_argument_evidence_technique_effect"
-    },
-    {
-      "relation": "implements",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "snippets/prompt-types.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "snippets_prompt_types",
-      "target": "concept_four_prompt_types"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "snippets/prompt-types.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "snippets_prompt_types",
-      "target": "concept_th_e_s_a_m_l_method"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "snippets/prompt-types.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "snippets_prompt_types",
-      "target": "snippets_r25_section_a"
     },
     {
       "relation": "conceptually_related_to",
@@ -15835,39 +13411,6 @@
       "_origin": "semantic",
       "source": "snippets_report2025",
       "target": "concept_2025_assessment_report"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "snippets/revision-program.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "snippets_revision_program",
-      "target": "concept_th_e_s_a_m_l_method"
-    },
-    {
-      "relation": "semantically_similar_to",
-      "confidence": "INFERRED",
-      "confidence_score": 0.7,
-      "source_file": "snippets/shotanalysis.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "snippets_shotanalysis",
-      "target": "snippets_tracker"
-    },
-    {
-      "relation": "conceptually_related_to",
-      "confidence": "INFERRED",
-      "confidence_score": 0.7,
-      "source_file": "snippets/tracker.html",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "snippets_tracker",
-      "target": "snippets_symboltable"
     },
     {
       "relation": "conceptually_related_to",
@@ -18160,33 +15703,6 @@
   ],
   "hyperedges": [
     {
-      "id": "marker_prompt_calibration_assembly",
-      "label": "Section prompt builders sharing a common calibration fragment",
-      "nodes": [
-        "marker_source_builda",
-        "marker_source_buildb",
-        "marker_source_buildc",
-        "marker_source_calib"
-      ],
-      "relation": "participate_in",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "marker-source.html"
-    },
-    {
-      "id": "essay_marker_ai_backend_selection",
-      "label": "Essay Marker's pluggable AI backend (dispatch + two providers)",
-      "nodes": [
-        "marker_source_askai",
-        "handover_anthropic_api",
-        "marker_source_github_models_api"
-      ],
-      "relation": "participate_in",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "marker-source.html"
-    },
-    {
       "id": "sunset_boulevard_core_relationship_web",
       "label": "Sunset Boulevard central relationship web (Joe, Norma, Max, Betty)",
       "nodes": [
@@ -18214,21 +15730,6 @@
       "confidence": "INFERRED",
       "confidence_score": 0.85,
       "source_file": "public/p03-character-analysis.html"
-    },
-    {
-      "id": "essay_writing_pipeline_part04",
-      "label": "Part 04 Essay-Writing Instructional Pipeline",
-      "nodes": [
-        "public_p04_introduction",
-        "public_p04_what_is_needed_in_an_essay",
-        "public_p04_planning",
-        "public_p04_analytical_text_response_structure",
-        "public_p04_proofreading"
-      ],
-      "relation": "form",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "public/p04-introduction.html"
     },
     {
       "id": "colonial_symbolism_cluster",
@@ -18306,20 +15807,6 @@
       "source_file": "public/part-12-effectively-studying-for-exams.html"
     },
     {
-      "id": "hyperedge_prompt_type_worked_examples",
-      "label": "Prompt-type worked examples built on Sunset Boulevard characters",
-      "nodes": [
-        "public_prompt_types",
-        "concept_norma_desmond",
-        "concept_joe_gillis",
-        "concept_sunset_boulevard_text"
-      ],
-      "relation": "form",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "public/prompt-types.html"
-    },
-    {
       "id": "hyperedge_2025_report_sequence",
       "label": "2025 Assessment Report section chain (hub + General/A/B/C + checklist)",
       "nodes": [
@@ -18334,33 +15821,6 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "public/part-13-key-takeaways-from-the-2025-assessment-report.html"
-    },
-    {
-      "id": "rainbows_end_study_apparatus",
-      "label": "Rainbow's End Analytical Toolkit (Quotes, Symbols, Devices)",
-      "nodes": [
-        "snippets_quotetable",
-        "snippets_symboltable",
-        "snippets_tracker"
-      ],
-      "relation": "participate_in",
-      "confidence": "INFERRED",
-      "confidence_score": 0.8,
-      "source_file": "snippets/tracker.html"
-    },
-    {
-      "id": "vce_prompt_type_analysis_method",
-      "label": "VCE Prompt-Type Analysis Method (Discuss/Extent/Agree/How Does)",
-      "nodes": [
-        "snippets_prompt_types",
-        "snippets_prompt_types_re",
-        "concept_argument_evidence_technique_effect",
-        "concept_four_prompt_types"
-      ],
-      "relation": "implement",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "source_file": "snippets/prompt-types.html"
     },
     {
       "id": "vcaa_2025_report_summary_cluster",
@@ -18380,5 +15840,5 @@
       "source_file": "snippets/report2025.html"
     }
   ],
-  "built_at_commit": "1b20895b3904e9d481c866cfe90c794cae57c870"
+  "built_at_commit": "2e1e098db0b2b0d39105e714f961ac68c4973f78"
 }
