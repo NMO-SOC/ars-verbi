@@ -1,81 +1,83 @@
-# Graph Report - .  (2026-08-07)
+# Graph Report - ars-verbi  (2026-10-27)
 
 ## Corpus Check
-- Large corpus: 404 files · ~1,534,821 words. Semantic extraction will be expensive (many Claude tokens). Consider running on a subfolder.
+- 14 files · ~388,211 words
+- Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 680 nodes · 1110 edges · 34 communities (27 shown, 7 thin omitted)
-- Extraction: 87% EXTRACTED · 13% INFERRED · 0% AMBIGUOUS · INFERRED: 141 edges (avg confidence: 0.77)
-- Token cost: 1,454,683 input · 0 output
+- 565 nodes · 869 edges · 33 communities (23 shown, 10 thin omitted)
+- Extraction: 90% EXTRACTED · 10% INFERRED · 0% AMBIGUOUS · INFERRED: 90 edges (avg confidence: 0.71)
+- Token cost: 0 input · 0 output
+
+## Graph Freshness
+- Built from commit: `117f5e39`
+- Run `git rev-parse HEAD` and compare to check if the graph is stale.
+- Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
-- VCE Study Design & Assessment Overview
-- Sunset Boulevard Themes & Prompt Types
-- Rainbow's End Historical Context
-- Persuasive Techniques Reference
-- Sunset Boulevard Film Techniques
-- Exam Structure & Text List
-- VCE Prescribed Text List
-- site.js Utility Functions
-- 2024 Sample Exam Stimuli
-- Rhetorical & Structural Devices
-- Creating Texts Framework
-- Language & Word Choice Techniques
-- Appeals to Values (Persuasion)
-- Rhetorical Devices (Practice Copy)
-- Appeals to Values (Practice Copy)
-- Visual Language Analysis
-- Visual Language Analysis (Copy)
-- Study Skills & Habits
-- build.py Site Generator
-- Section C Persuasive Text Analysis
-- Logical Fallacies
-- Persuasive Techniques (Practice Exam)
-- Site Infrastructure & AI Tools
-- Evidence & Support Techniques
-- Tone Techniques
-- Deployment Pipelines
-- AI Provider Config
-- Exam Tab Switching
-- Criteria Accordion Toggle
-- Feedback Filter Toggle
-- Theme Toggle
-- 404 Page
+- Exam Assessment Criteria (Part 09)
+- Week-by-Week Revision Program
+- Symbols and Motifs (Rainbow's End)
+- Language and Word Choice
+- Joe Gillis
+- renderResult(s, raw, rEl) — renders marking result UI
+- Analysing Argument (Part 06 hub)
+- jszip.min.js
+- assets/site.js
+- Rhetorical and Structural Devices
+- Week-by-Week Revision Program
+- Language and Word Choice
+- Appeals to Emotion and Values
+- Rhetorical and Structural Devices
+- Appeals to Emotion and Values
+- Visual Language
+- Visual Language
+- Effectively Studying For Exams (hub, displayed as Part 13)
+- build.py
+- site.js
+- Personal Journeys (Section B Framework option)
+- Rainbow's End (Section A text option)
+- VCE English Exam Prep Guide (site)
+- Sunset Boulevard (Section A text option)
+- Deploy site to GitHub Pages (workflow)
+- saveAI() — persists AI provider config to localStorage
+- switchTab(t) — switches Section A/B/C tab
+- toggleEl(id) — toggles criteria accordion detail
+- toggleFilter(type, btn) — toggles feedback-type highlight filter
+- toggleTheme() — toggles dark/light mode
+- 404 Page Not Found
 
 ## God Nodes (most connected - your core abstractions)
-1. `Week-by-Week Revision Program` - 26 edges
+1. `Week-by-Week Revision Program` - 24 edges
 2. `Rhetorical and Structural Devices` - 24 edges
 3. `Rhetorical and Structural Devices` - 24 edges
 4. `Language and Word Choice` - 21 edges
 5. `Language and Word Choice` - 21 edges
-6. `Section A: Analytical Response to a Text` - 21 edges
-7. `Section A: Analytical Response to a Text` - 21 edges
-8. `Rainbow's End (Part 03 hub)` - 18 edges
-9. `Appeals to Emotion and Values` - 18 edges
-10. `Appeals to Emotion and Values` - 18 edges
+6. `Appeals to Emotion and Values` - 18 edges
+7. `Appeals to Emotion and Values` - 18 edges
+8. `Joe Gillis` - 16 edges
+9. `Norma Desmond` - 15 edges
+10. `Visual Language` - 15 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `High-Scoring Vocabulary Bank (public page)` --semantically_similar_to--> `Sentence Starters and Linking Words Table`  [INFERRED] [semantically similar]
   public/vocabulary.html → snippets/ss.html
 - `Deploy site to GitHub Pages (workflow)` --semantically_similar_to--> `GitLab Pages job`  [INFERRED] [semantically similar]
   .github/workflows/pages.yml → .gitlab-ci.yml
-- `Sunset Boulevard Shot Analysis Table` --shares_data_with--> `Film Techniques (Sunset Boulevard)`  [INFERRED]
-  snippets/shotanalysis.html → public/p02-film-techniques.html
+- `run()` --indirect_call--> `r()`  [INFERRED]
+  site.js → public/assets/vendor/jszip.min.js
+- `tick()` --indirect_call--> `c()`  [INFERRED]
+  site.js → public/assets/vendor/jszip.min.js
 - `VCE English Exam Preparation Guide — Website (project)` --conceptually_related_to--> `VCE English Exam Prep Guide (site)`  [INFERRED]
   README.md → HANDOVER.md
-- `Section C - Analysis of argument and language` --conceptually_related_to--> `buildC() — Section C marking prompt builder`  [INFERRED]
-  graphify-out/converted/Exam Template_7aba19ce.md → marker-source.html
 
 ## Import Cycles
 - None detected.
 
 ## Hyperedges (group relationships)
-- **VCE English exam's three-section + assessment-criteria structure** — graphify_out_converted_exam_template_7aba19ce_section_a, graphify_out_converted_exam_template_7aba19ce_section_b, graphify_out_converted_exam_template_7aba19ce_section_c, graphify_out_converted_exam_template_7aba19ce_assessment_criteria [EXTRACTED 1.00]
 - **Section prompt builders sharing a common calibration fragment** — marker_source_builda, marker_source_buildb, marker_source_buildc, marker_source_calib [EXTRACTED 1.00]
 - **Essay Marker's pluggable AI backend (dispatch + two providers)** — marker_source_askai, handover_anthropic_api, marker_source_github_models_api [EXTRACTED 1.00]
 - **Sunset Boulevard central relationship web (Joe, Norma, Max, Betty)** — joe_gillis, norma_desmond, max_von_mayerling, betty_schaefer [EXTRACTED 0.95]
-- **Three generations of Aboriginal women in Rainbow's End (Nan Dear, Gladys, Dolly)** — gladys_character, dolly_character, nan_dear_character [EXTRACTED 0.95]
-- **Site tools dependent on external services/libraries (Ask Max worker, Essay Marker API, JSZip)** — public_ask_max_worker, public_marker, jszip_library [INFERRED 0.85]
 - **Rainbow's End Central Character Ensemble Analysis** — nan_dear, gladys_banks, dolly_banks, errol_fisher, papa_dear [INFERRED 0.85]
 - **Part 04 Essay-Writing Instructional Pipeline** — public_p04_introduction, public_p04_what_is_needed_in_an_essay, public_p04_planning, public_p04_analytical_text_response_structure, public_p04_proofreading [EXTRACTED 1.00]
 - **Symbols of Colonial Oppression in Rainbow's End** — symbol_encyclopedias, symbol_hessian, symbol_the_humpy, theme_race_and_racism, rumbalara [INFERRED 0.80]
@@ -88,130 +90,112 @@
 - **Rainbow's End Analytical Toolkit (Quotes, Symbols, Devices)** — snippets_quotetable, snippets_symboltable, snippets_tracker [INFERRED 0.80]
 - **VCE Prompt-Type Analysis Method (Discuss/Extent/Agree/How Does)** — snippets_prompt_types, snippets_prompt_types_re, concept_argument_evidence_technique_effect, concept_four_prompt_types [INFERRED 0.85]
 - **2025 Assessment Report Chapter Cluster** — snippets_r25_hub, snippets_r25_general, snippets_r25_section_a, snippets_r25_section_b, snippets_r25_section_c, snippets_r25_checklist, snippets_report2025 [INFERRED 0.85]
-- **VCE Section C: analysing an unseen persuasive text against a shared technique taxonomy** — localpdf_practice_exam_ix_section_c, localpdf_practice_exam_viii_section_c, localpdf_persuasive_techniques_reference [INFERRED 0.85]
-- **Shared VCE English set-text list curated independently across two trial exam publishers** — localpdf_practice_exam_ix_section_a, localpdf_practice_exam_viii_section_a, localpdf_practice_exam_ix_we_have_always_lived_in_the_castle, localpdf_practice_exam_viii_we_have_always_lived_in_the_castle [INFERRED 0.75]
 
-## Communities (34 total, 7 thin omitted)
+## Communities (33 total, 10 thin omitted)
 
-### Community 0 - "VCE Study Design & Assessment Overview"
+### Community 0 - "Exam Assessment Criteria (Part 09)"
+Cohesion: 0.12
+Nodes (42): Framework of Ideas (Section B), VCAA (Victorian Curriculum and Assessment Authority), VCAA 2024 English Assessment Report, VCAA 2025 English Examination Report, VCE English and EAL Study Design 2024–2027, VCE English Exam Preparation Guide (homepage), Sample Analysing Argument Essays, Section C Annotation Categories (Structure & evidence, Audience positioning, Language & technique, Ideas & interpretation) (+34 more)
+
+### Community 1 - "Week-by-Week Revision Program"
 Cohesion: 0.06
-Nodes (66): Framework of Ideas (Section B), VCAA (Victorian Curriculum and Assessment Authority), VCAA 2024 English Assessment Report, VCAA 2025 English Examination Report, VCE English and EAL Study Design 2024–2027, VCE English Exam Preparation Guide (homepage), Analysing Visual Language, Analysing Written Language (+58 more)
+Nodes (53): Joe Gillis (character, Sunset Boulevard), Norma Desmond (character, Sunset Boulevard), 'Discuss' prompt type, 'Do you agree?' prompt type, 'How does…' prompt type, 'To what extent do you agree?' prompt type, Rainbow's End (VCE text), Sunset Boulevard (VCE text) (+45 more)
 
-### Community 1 - "Sunset Boulevard Themes & Prompt Types"
+### Community 2 - "Symbols and Motifs (Rainbow's End)"
 Cohesion: 0.06
-Nodes (61): Rationale: Ask Max worker deployment gating (origin allowlist + school web filter blocks workers.dev), Colonisation and Segregation (historical context), Joe Gillis (character, Sunset Boulevard), Norma Desmond (character, Sunset Boulevard), 'Discuss' prompt type, 'Do you agree?' prompt type, 'How does…' prompt type, 'To what extent do you agree?' prompt type (+53 more)
+Nodes (41): Assimilation Policy (1950s Australia), Bank Manager, Cummeragunja (Aboriginal settlement), Dolly Banks, Errol Fisher, Ester, Jane Harrison (playwright), Leon (Cousin) (+33 more)
 
-### Community 2 - "Rainbow's End Historical Context"
-Cohesion: 0.07
-Nodes (60): Assimilation Policy (1950s Australia), Bank Manager, Cummeragunja (Aboriginal settlement), Dolly Banks, Errol Fisher, Ester, Gladys Banks, Jane Harrison (playwright) (+52 more)
-
-### Community 3 - "Persuasive Techniques Reference"
+### Community 3 - "Language and Word Choice"
 Cohesion: 0.04
 Nodes (48): Analysing Argument: Persuasive Techniques (VCE Reference Table), Allusion, Attack / ad hominem, Bandwagon, Evidence and Support, Language and Word Choice, Reasoning, Logic and Logical Fallacies, Tone (+40 more)
 
-### Community 4 - "Sunset Boulevard Film Techniques"
+### Community 4 - "Joe Gillis"
+Cohesion: 0.09
+Nodes (48): America in the 1950s, Artie Green, Betty Schaefer, Cecil B. deMille, Chiaroscuro (film technique), Close-up Shot (film technique), Fame and Obsession (theme), Film Noir (+40 more)
+
+### Community 5 - "renderResult(s, raw, rEl) — renders marking result UI"
 Cohesion: 0.10
-Nodes (47): America in the 1950s, Artie Green, Betty Schaefer, Cecil B. deMille, Chiaroscuro (film technique), Close-up Shot (film technique), Fame and Obsession (theme), Film Noir (+39 more)
+Nodes (31): api.anthropic.com (Essay Marker's AI backend, teacher-supplied key), Essay Marker, aiCfg() — reads AI provider config from localStorage, aiProviderHelp() — updates settings modal help text, annotate(text, comments) — inline highlight builder, askAI(prompt, files) — dispatches to Anthropic or GitHub Models, buildA() — Section A marking prompt builder, buildB() — Section B marking prompt builder (+23 more)
 
-### Community 5 - "Exam Structure & Text List"
-Cohesion: 0.07
-Nodes (45): Assessment criteria (Sections A/B/C), Exam Template.docx — VCE Practice Examination Task Book (converted), Framework 3: Writing about personal journeys, Rainbow's End, by Jane Harrison (Text list), Section A - Analytical response to a text, Section B - Creating a text, Section C - Analysis of argument and language, South Oakleigh College (+37 more)
+### Community 6 - "Analysing Argument (Part 06 hub)"
+Cohesion: 0.10
+Nodes (24): Analysing Visual Language, Analysing Written Language, Table of Linking Words and Phrases, Persuasive Techniques Reference (PDF), Table of Common Persuasive Techniques, Table of Adjectives Describing Tone, Table of Verbs for Authorial Intent, Essay Structure (+16 more)
 
-### Community 6 - "VCE Prescribed Text List"
-Cohesion: 0.06
-Nodes (42): Bad Dreams and Other Stories by Tessa Hadley, Born a Crime by Trevor Noah, Chronicle of a Death Foretold by Gabriel García Márquez, False Claims of Colonial Thieves by Charmaine Papertalk Greene and John Kinsella, Flames by Robbie Arnott, Go, Went, Gone by Jenny Erpenbeck, High Ground by Stephen Johnson, Much Ado About Nothing by William Shakespeare (+34 more)
+### Community 7 - "jszip.min.js"
+Cohesion: 0.26
+Nodes (21): A(), c(), d(), f(), G(), h(), i(), j() (+13 more)
 
-### Community 7 - "site.js Utility Functions"
-Cohesion: 0.11
-Nodes (31): esc(), load(), pad(), run(), tick(), A(), c(), d() (+23 more)
+### Community 8 - "assets/site.js"
+Cohesion: 0.31
+Nodes (5): esc(), load(), pad(), run(), tick()
 
-### Community 8 - "2024 Sample Exam Stimuli"
-Cohesion: 0.08
-Nodes (24): 2024 VATE English Sample Exam, Carl Sagan, Ehsan Sehgal, Elie Wiesel, Framework: Every voice is important, Framework: Let the journey begin, Libba Bray, Michael Rosen (+16 more)
-
-### Community 9 - "Rhetorical & Structural Devices"
+### Community 9 - "Rhetorical and Structural Devices"
 Cohesion: 0.08
 Nodes (24): Alliteration, Analogy, Anaphora, Anecdote, Antithesis, Call to action, Rhetorical and Structural Devices, Climactic ordering (+16 more)
 
-### Community 10 - "Creating Texts Framework"
+### Community 10 - "Week-by-Week Revision Program"
 Cohesion: 0.18
 Nodes (23): VCAA 2025 English Examination Report, Argument -> Evidence -> Technique -> Effect Paragraph Structure, Four VCE Prompt Types (Discuss / To What Extent / Do You Agree / How Does), Th.E.S.A.M.L. Paragraph Method, Audience (Creating Texts), Personal Journeys, Practice Stimuli, Purpose (Creating Texts) (+15 more)
 
-### Community 11 - "Language & Word Choice Techniques"
-Cohesion: 0.11
-Nodes (18): Language and Word Choice, Cliche, Colloquial language, Connotation, Dysphemism, Euphemism, Exclusive language, Formal register and technical jargon (+10 more)
+### Community 11 - "Language and Word Choice"
+Cohesion: 0.04
+Nodes (48): Analysing Argument: Persuasive Techniques (VCE Reference Table), Allusion, Attack / ad hominem, Bandwagon, Evidence and Support, Language and Word Choice, Reasoning, Logic and Logical Fallacies, Tone (+40 more)
 
-### Community 12 - "Appeals to Values (Persuasion)"
+### Community 12 - "Appeals to Emotion and Values"
 Cohesion: 0.11
 Nodes (18): Appeal to authority / expert opinion, Appeal to common sense, Appeal to family values, Appeal to fear, Appeal to freedom and individual rights, Appeal to group loyalty / belonging, Appeal to guilt or shame, Appeal to hope / optimism (+10 more)
 
-### Community 13 - "Rhetorical Devices (Practice Copy)"
-Cohesion: 0.12
-Nodes (17): Alliteration, Anaphora, Anecdote, Antithesis, Rhetorical and Structural Devices, Climactic ordering, Extended metaphor, Framing / defining the issue (+9 more)
+### Community 13 - "Rhetorical and Structural Devices"
+Cohesion: 0.08
+Nodes (24): Alliteration, Analogy, Anaphora, Anecdote, Antithesis, Call to action, Rhetorical and Structural Devices, Climactic ordering (+16 more)
 
-### Community 14 - "Appeals to Values (Practice Copy)"
-Cohesion: 0.12
-Nodes (16): Appeal to authority / expert opinion, Appeal to common sense, Appeal to fear, Appeal to freedom and individual rights, Appeal to group loyalty / belonging, Appeal to guilt or shame, Appeal to hope / optimism, Appeal to justice and fairness (+8 more)
+### Community 14 - "Appeals to Emotion and Values"
+Cohesion: 0.11
+Nodes (18): Appeal to authority / expert opinion, Appeal to common sense, Appeal to family values, Appeal to fear, Appeal to freedom and individual rights, Appeal to group loyalty / belonging, Appeal to guilt or shame, Appeal to hope / optimism (+10 more)
 
-### Community 15 - "Visual Language Analysis"
+### Community 15 - "Visual Language"
 Cohesion: 0.13
 Nodes (15): Caption, Caricature and exaggeration, Visual Language, Colour, Facial expression and body language, Gaze and vectors, Graphs and infographics, Labelling in cartoons (+7 more)
 
-### Community 16 - "Visual Language Analysis (Copy)"
+### Community 16 - "Visual Language"
 Cohesion: 0.13
 Nodes (15): Caption, Caricature and exaggeration, Visual Language, Colour, Facial expression and body language, Gaze and vectors, Graphs and infographics, Labelling in cartoons (+7 more)
 
-### Community 17 - "Study Skills & Habits"
+### Community 17 - "Effectively Studying For Exams (hub, displayed as Part 13)"
 Cohesion: 0.25
 Nodes (14): Assess your current study habits, SMART Goals, Collaborate with study groups, Create a personalised study schedule, Develop a healthy study-life balance, Pomodoro Method, Fine-tune your exam day strategy, Implement active recall and spaced repetition (+6 more)
 
-### Community 18 - "build.py Site Generator"
+### Community 18 - "build.py"
 Cohesion: 0.19
 Nodes (5): _clean(), fix_quotes(), _heading_chain(), nav_html(), shell()
 
-### Community 19 - "Section C Persuasive Text Analysis"
-Cohesion: 0.15
-Nodes (13): Allusion, Concession, Emotive language, High modality, Rebuttal, Ayla Adamu, Banksy, Colman Arts Society (+5 more)
+### Community 19 - "site.js"
+Cohesion: 0.31
+Nodes (5): esc(), load(), pad(), run(), tick()
 
-### Community 20 - "Logical Fallacies"
-Cohesion: 0.17
-Nodes (12): Attack / ad hominem, Bandwagon, Reasoning, Logic and Logical Fallacies, Circular reasoning, False dichotomy (either-or), Generalisation, Logical reasoning / cause and effect, Post hoc reasoning (+4 more)
-
-### Community 21 - "Persuasive Techniques (Practice Exam)"
-Cohesion: 0.18
-Nodes (11): Analogy, Appeal to family values, Appeal to the hip-pocket nerve, Call to action, Headline and opening hook, Repetition, Rhetorical question, Bill Davies (+3 more)
-
-### Community 22 - "Site Infrastructure & AI Tools"
+### Community 22 - "VCE English Exam Prep Guide (site)"
 Cohesion: 0.22
 Nodes (10): Ask Max (AI assistant), LaTeX/Python build pipeline, Cloudflare Worker API (jolly-waterfall-d01a.nicholas-morlin.workers.dev), assets/embeddings.json (Ask Max retrieval index), Exam Generator, GoatCounter (nmo.goatcounter.com) — anonymous page-view counts, fonts.googleapis.com / gstatic.com (typefaces), JSZip library (bundled locally in assets/vendor/) (+2 more)
 
-### Community 23 - "Evidence & Support Techniques"
-Cohesion: 0.22
-Nodes (9): Evidence and Support, Comparison to other jurisdictions, Expert testimony, Eyewitness or vox pop quotation, Historical precedent, Official documentation, Personal experience and credentials, Research and studies (+1 more)
-
-### Community 24 - "Tone Techniques"
-Cohesion: 0.33
-Nodes (6): Analysing Argument: Persuasive Techniques (VCE Reference Table), Tone, Outraged / indignant tone, Reasonable / conciliatory tone, Tone, Tone shift
-
 ## Knowledge Gaps
-- **289 isolated node(s):** `Deploy site to GitHub Pages (workflow)`, `GitLab Pages job`, `JSZip library (bundled locally in assets/vendor/)`, `Cloudflare Worker API (jolly-waterfall-d01a.nicholas-morlin.workers.dev)`, `GoatCounter (nmo.goatcounter.com) — anonymous page-view counts` (+284 more)
+- **278 isolated node(s):** `Deploy site to GitHub Pages (workflow)`, `GitLab Pages job`, `JSZip library (bundled locally in assets/vendor/)`, `Cloudflare Worker API (jolly-waterfall-d01a.nicholas-morlin.workers.dev)`, `GoatCounter (nmo.goatcounter.com) — anonymous page-view counts` (+273 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **7 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **10 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `Week-by-Week Revision Program` connect `Sunset Boulevard Themes & Prompt Types` to `VCE Study Design & Assessment Overview`, `Rainbow's End Historical Context`, `Sunset Boulevard Film Techniques`, `Creating Texts Framework`, `Study Skills & Habits`?**
-  _High betweenness centrality (0.060) - this node is a cross-community bridge._
-- **Why does `Rainbow's End (Part 03 hub)` connect `Rainbow's End Historical Context` to `VCE Study Design & Assessment Overview`, `Sunset Boulevard Themes & Prompt Types`?**
-  _High betweenness centrality (0.043) - this node is a cross-community bridge._
-- **Why does `Analysing Argument: Persuasive Techniques (VCE Reference Table)` connect `Tone Techniques` to `Language & Word Choice Techniques`, `Rhetorical Devices (Practice Copy)`, `Appeals to Values (Practice Copy)`, `Visual Language Analysis`, `Logical Fallacies`, `Evidence & Support Techniques`?**
-  _High betweenness centrality (0.027) - this node is a cross-community bridge._
+- **Why does `Week-by-Week Revision Program` connect `Week-by-Week Revision Program` to `Exam Assessment Criteria (Part 09)`, `Joe Gillis`, `Analysing Argument (Part 06 hub)`, `Week-by-Week Revision Program`, `Effectively Studying For Exams (hub, displayed as Part 13)`?**
+  _High betweenness centrality (0.096) - this node is a cross-community bridge._
+- **Why does `Analysing Argument (Part 06 hub)` connect `Analysing Argument (Part 06 hub)` to `Exam Assessment Criteria (Part 09)`, `Week-by-Week Revision Program`?**
+  _High betweenness centrality (0.032) - this node is a cross-community bridge._
+- **Why does `Written Exemplars (Rainbow's End)` connect `Week-by-Week Revision Program` to `Symbols and Motifs (Rainbow's End)`?**
+  _High betweenness centrality (0.030) - this node is a cross-community bridge._
 - **What connects `Deploy site to GitHub Pages (workflow)`, `GitLab Pages job`, `JSZip library (bundled locally in assets/vendor/)` to the rest of the system?**
-  _289 weakly-connected nodes found - possible documentation gaps or missing edges._
-- **Should `VCE Study Design & Assessment Overview` be split into smaller, more focused modules?**
-  _Cohesion score 0.06247086247086247 - nodes in this community are weakly interconnected._
-- **Should `Sunset Boulevard Themes & Prompt Types` be split into smaller, more focused modules?**
-  _Cohesion score 0.055191256830601096 - nodes in this community are weakly interconnected._
-- **Should `Rainbow's End Historical Context` be split into smaller, more focused modules?**
-  _Cohesion score 0.0672316384180791 - nodes in this community are weakly interconnected._
+  _278 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Should `Exam Assessment Criteria (Part 09)` be split into smaller, more focused modules?**
+  _Cohesion score 0.11614401858304298 - nodes in this community are weakly interconnected._
+- **Should `Week-by-Week Revision Program` be split into smaller, more focused modules?**
+  _Cohesion score 0.0602322206095791 - nodes in this community are weakly interconnected._
+- **Should `Symbols and Motifs (Rainbow's End)` be split into smaller, more focused modules?**
+  _Cohesion score 0.05975609756097561 - nodes in this community are weakly interconnected._

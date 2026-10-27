@@ -633,8 +633,9 @@ qz_page = TOOL_LABEL + """<h1>Technique Quiz</h1>
 </script>""" % json.dumps([{"term": g["term"], "def": g["def"]} for g in glossary], ensure_ascii=False)
 
 EXAMGEN = json.load(open(os.path.join(BUILD, "examgen", "examgen.json"), encoding="utf-8"))
-EXAMGEN["sb"] = topics_data.get("Sunset Boulevard", EXAMGEN["sb"])
-EXAMGEN["re"] = topics_data.get("Rainbow\u2019s End", EXAMGEN["re"])
+# template slots: sb = text 2 (Picnic at Hanging Rock), re = text 1 (The Lottery and Other Stories)
+EXAMGEN["sb"] = topics_data.get("Picnic at Hanging Rock", EXAMGEN["sb"])
+EXAMGEN["re"] = topics_data.get("The Lottery and Other Stories", EXAMGEN["re"])
 SLOTCFG = json.load(open(os.path.join(BUILD, "examgen", "slots.json"), encoding="utf-8"))
 eg_page = TOOL_LABEL + """<h1>Exam Generator</h1>
 <p class="lede">Generate a unique three-section practice examination on the spot &mdash; the complete task book as a Word document, identical in format to the real paper: cover page, instructions, Section A topics for both texts, a Creating Texts prompt with stimulus material, Section C source material and the assessment criteria.</p>
