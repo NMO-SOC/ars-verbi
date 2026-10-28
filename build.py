@@ -961,6 +961,21 @@ _fi = os.path.join(PUBLIC, "assets", "img", "pdffrag")
 os.makedirs(_fi, exist_ok=True)
 for _f in os.listdir(os.path.join(BUILD, "pdffrag", "img")):
     copy_if_changed(os.path.join(BUILD, "pdffrag", "img", _f), os.path.join(_fi, _f))
+# Picnic character stills (sources in picnic/), resized for the Character Quote Bank
+CHAR_PHOTOS = {"Miranda": "miranda.jpg", "Marion": "marion.jpg", "Irma": "Irma.jpg", "Edith": "edith.jpg",
+               "Mrs Appleyard": "mrsappleyard.jpg", "Sara Waybourne": "sarawaybourne.jpg",
+               "Miss McCraw": "missmcraw.jpg", "Mademoiselle de Poitiers": "mademoiselle.jpg",
+               "Miss Lumley": "miss lumley.jpg", "Michael Fitzhubert": "michaelfithubert.jpg",
+               "Albert Crundall": "albertcrundall.jpg"}
+_pd = os.path.join(PUBLIC, "assets", "img", "picnic")
+os.makedirs(_pd, exist_ok=True)
+from PIL import Image
+for _k, _f in list(CHAR_PHOTOS.items()):
+    _out = slugify(_k) + ".jpg"
+    _src, _dst = os.path.join(BUILD, "picnic", _f), os.path.join(_pd, _out)
+    if not os.path.exists(_dst) or os.path.getmtime(_dst) < os.path.getmtime(_src):
+        _im = Image.open(_src).convert("RGB"); _im.thumbnail((900, 900)); _im.save(_dst, quality=82)
+    CHAR_PHOTOS[_k] = _out
 os.makedirs(os.path.join(PUBLIC, "assets", "pdf"), exist_ok=True)
 copy_if_changed(os.path.join(BUILD, "localpdf", "persuasive-techniques-reference.pdf"),
                 os.path.join(PUBLIC, "assets", "pdf", "persuasive-techniques-reference.pdf"))
@@ -1039,7 +1054,7 @@ def shell(title, active_nav, active_file, main_html, prevnext=""):
 <meta property="og:description" content="South Oakleigh College Units 3/4 English exam preparation guide - texts, essays, practice exams and study tools.">
 <meta property="og:image" content="https://nmo-soc.github.io/VCE-English-Guide/assets/img/soc-logo.png">
 <script>try{if(localStorage.getItem('siteTheme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}</script>
-<link rel="stylesheet" href="assets/style.css?v=46">
+<link rel="stylesheet" href="assets/style.css?v=47">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -1179,6 +1194,12 @@ for k, pg in enumerate(all_pages):
             sec["class"] = sec.get("class", []) + ["quotes-page"]
         if "exemplar" in pg["file"] or "sample-" in pg["file"]:
             sec["class"] = sec.get("class", []) + ["exemplar-page"]
+        if pg["file"] == "p02-character-quote-bank.html":
+            for _h in sec.find_all("h4"):
+                _img = CHAR_PHOTOS.get(_clean(_h.get_text()))
+                if _img:
+                    _h.insert_after(BeautifulSoup('<figure class="char-photo"><img src="assets/img/picnic/%s" alt="%s" loading="lazy"></figure>'
+                                                  % (_img, html.escape(_clean(_h.get_text()))), "html.parser"))
         if pg["file"] == "p02-symbols.html":
             _ul = sec.find("ul")
             if _ul:

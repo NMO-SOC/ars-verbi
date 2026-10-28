@@ -552,3 +552,5 @@ body.closeup-zoom{transition:transform 1.6s ease-in-out;transform:scale(1.18)}
 li.chk{list-style:none;margin-left:-1.2em;cursor:pointer;display:flex;gap:.6em;align-items:baseline}
 li.chk input{flex:none;width:1.05em;height:1.05em;accent-color:var(--accent);cursor:pointer;transform:translateY(.15em)}
 li.chk.done{color:var(--muted);text-decoration:line-through}
+.char-photo{margin:6px 0 14px;max-width:420px}
+.char-photo img{display:block;width:100%;height:auto;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,.18)}
