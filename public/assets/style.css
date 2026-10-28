@@ -549,3 +549,6 @@ body.closeup-zoom{transition:transform 1.6s ease-in-out;transform:scale(1.18)}
 /* outline builder modes */
 .ob-mode{opacity:.65}
 .ob-mode.ob-mode-on{opacity:1;border-color:var(--gold) !important;background:var(--tint) !important;font-weight:800}
+li.chk{list-style:none;margin-left:-1.2em;cursor:pointer;display:flex;gap:.6em;align-items:baseline}
+li.chk input{flex:none;width:1.05em;height:1.05em;accent-color:var(--accent);cursor:pointer;transform:translateY(.15em)}
+li.chk.done{color:var(--muted);text-decoration:line-through}

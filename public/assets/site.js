@@ -188,3 +188,24 @@
   }
 })();
 
+
+/* Exam checklists: clickable tick boxes, remembered per browser */
+(function(){
+  var f=(location.pathname.split('/').pop()||'');
+  if(!/^(p10-|r25-checklist|p11-final-exam-checklist)/.test(f))return;
+  var main=document.getElementById('main');if(!main)return;
+  var key='av-check:'+f,state={};
+  try{state=JSON.parse(localStorage.getItem(key)||'{}');}catch(e){}
+  main.querySelectorAll('section li').forEach(function(li,i){
+    if(li.querySelector('ul,ol'))return;
+    var cb=document.createElement('input');cb.type='checkbox';cb.checked=!!state[i];
+    li.classList.add('chk');if(cb.checked)li.classList.add('done');
+    li.insertBefore(cb,li.firstChild);
+    li.addEventListener('click',function(e){
+      if(e.target.tagName==='A')return;
+      if(e.target!==cb)cb.checked=!cb.checked;
+      state[i]=cb.checked;li.classList.toggle('done',cb.checked);
+      try{localStorage.setItem(key,JSON.stringify(state));}catch(e){}
+    });
+  });
+})();
