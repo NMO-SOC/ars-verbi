@@ -210,21 +210,33 @@
   });
 })();
 
-/* Quote Banks: toggle between grouping by theme and by story */
+/* Quote Banks: toggle between grouping by theme and by story (Lottery) or character (Picnic).
+   Each item starts with an <em> naming its story/speaker; that is the grouping key. */
 (function(){
   var sec=document.querySelector('.quotes-page[data-sortable]');
   if(!sec) return;
-  var ORDER=["The Daemon Lover","Like Mother Used to Make","The Villager","The Witch","The Renegade",
-    "After You, My Dear Alphonse","Charles","Flower Garden","Elizabeth","Of Course","The Tooth","The Lottery"];
+  var INV="The Investigators and the Town";
+  var MODES={
+    story:{label:"Story",strip:true,alias:{},
+      order:["The Daemon Lover","Like Mother Used to Make","The Villager","The Witch","The Renegade",
+        "After You, My Dear Alphonse","Charles","Flower Garden","Elizabeth","Of Course","The Tooth","The Lottery"]},
+    character:{label:"Character",strip:false,
+      alias:{"Mademoiselle":"Mademoiselle de Poitiers","Michael":"Michael Fitzhubert","Albert":"Albert Crundall",
+        "Sara":"Sara Waybourne","Mr Hussey":INV,"Sergeant Bumpher":INV,"Mrs Bumpher":INV,"A townsman":INV,
+        "The doctor":INV,"The head gardener":INV},
+      order:["Miranda","Marion","Irma","Edith","Mrs Appleyard","Sara Waybourne","Miss McCraw",
+        "Mademoiselle de Poitiers","Miss Lumley","Michael Fitzhubert","Albert Crundall",INV]}
+  };
+  var mode=MODES[sec.dataset.sortable]||MODES.story, ORDER=mode.order;
   var themes=[].slice.call(sec.querySelectorAll(':scope > section'));
   var groups={};
   themes.forEach(function(ts){
     var h=ts.querySelector('h2,h3,h4,h5'); var theme=h?h.textContent.trim():'';
     ts.querySelectorAll('li').forEach(function(li){
       var em=li.querySelector('p > em:first-child, :scope > em:first-child');
-      var story=em?em.textContent.trim():'Other';
+      var key=em?em.textContent.trim():'Other', story=mode.alias[key]||key;
       var c=li.cloneNode(true), cem=c.querySelector('em');
-      if(em&&cem){ // drop the now-redundant "Title:" prefix
+      if(mode.strip&&em&&cem){ // drop the now-redundant "Title:" prefix
         var p=cem.parentNode; p.removeChild(cem);
         if(p.firstChild&&p.firstChild.nodeType===3) p.firstChild.nodeValue=p.firstChild.nodeValue.replace(/^\s*:\s*/,'');
       }
@@ -241,7 +253,7 @@
     view.appendChild(h); view.appendChild(ul);
   });
   var bar=document.createElement('div'); bar.className='qb-sort'; bar.setAttribute('role','group');
-  bar.innerHTML='<span>Sort by</span><button type="button" data-v="theme" aria-pressed="true">Theme</button><button type="button" data-v="story" aria-pressed="false">Story</button>';
+  bar.innerHTML='<span>Sort by</span><button type="button" data-v="theme" aria-pressed="true">Theme</button><button type="button" data-v="story" aria-pressed="false">'+mode.label+'</button>';
   var toc=sec.querySelector('.page-toc'), anchor=toc||sec.querySelector('h1');
   anchor.parentNode.insertBefore(bar,anchor.nextSibling);
   sec.appendChild(view);

@@ -1083,7 +1083,7 @@ def shell(title, active_nav, active_file, main_html, prevnext=""):
   </main>
 </div>
 %s
-<script src="assets/site.js?v=47"></script>
+<script src="assets/site.js?v=48"></script>
 <script data-goatcounter="https://nmo.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>""" % (html.escape(title), SITE_TITLE, html.escape(title), nav_html(active_nav, active_file), fix_quotes(main_html), fix_quotes(prevnext),
@@ -1191,8 +1191,10 @@ for k, pg in enumerate(all_pages):
         sec = pg["chapter"]["sec"]
         if "quote-bank" in pg["file"]:
             sec["class"] = sec.get("class", []) + ["quotes-page"]
-            if pg["file"] == "p03-quote-banks.html":
-                sec["data-sortable"] = ""  # site.js adds the theme/story toggle
+            # site.js adds a Theme / Story-or-Character toggle to these pages
+            _sortable = {"p03-quote-banks.html": "story", "p02-thematic-quote-bank.html": "character"}
+            if pg["file"] in _sortable:
+                sec["data-sortable"] = _sortable[pg["file"]]
         if "exemplar" in pg["file"] or "sample-" in pg["file"]:
             sec["class"] = sec.get("class", []) + ["exemplar-page"]
         if pg["file"] == "p02-character-quote-bank.html":
