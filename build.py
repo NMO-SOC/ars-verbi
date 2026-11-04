@@ -1297,8 +1297,8 @@ def icon_svg(title):
 
 BLURB = {
  "How to Use This Site": "Quick orientation: search, sections, practice exams and suggested study routes.",
- "Picnic at Hanging Rock": "Peter Weir's film — content coming for 2027.",
- "The Lottery and Other Stories": "Shirley Jackson's short stories — content coming for 2027.",
+ "Picnic at Hanging Rock": "Peter Weir's film — scenes, characters, symbols, film techniques and quote banks.",
+ "The Lottery and Other Stories": "Shirley Jackson's twelve set stories — summaries, themes, quote banks and a theme grid.",
  "Analytical Text Response Essays": "Planning, structure, and proofreading a text-response essay.",
  "Creating Texts": "Audience, purpose, personal journeys and practice stimuli.",
  "Analysing Argument": "Language analysis — written & visual, sample articles and essays.",
