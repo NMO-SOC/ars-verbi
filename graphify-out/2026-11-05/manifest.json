@@ -1,0 +1,747 @@
+{
+  ".claude/settings.local.json": {
+    "mtime": 1793061968.2571485,
+    "ast_hash": "faf83e69bf90f58a21322a4ef0dd3f86",
+    "semantic_hash": "faf83e69bf90f58a21322a4ef0dd3f86"
+  },
+  "annotations.json": {
+    "mtime": 1793061969.226021,
+    "ast_hash": "6f67264a01d2477525a68ff4a79940b6",
+    "semantic_hash": "6f67264a01d2477525a68ff4a79940b6"
+  },
+  "build.py": {
+    "mtime": 1793834828.362219,
+    "ast_hash": "92f0edd9a46a214133b3d428bea7689e",
+    "semantic_hash": ""
+  },
+  "examgen/examgen.json": {
+    "mtime": 1793061974.7038178,
+    "ast_hash": "a0e28c2075166a06808390af2767a7bc",
+    "semantic_hash": "a0e28c2075166a06808390af2767a7bc"
+  },
+  "examgen/slots.json": {
+    "mtime": 1793061974.4602392,
+    "ast_hash": "3602d5dc10212a564a2f2436b8855935",
+    "semantic_hash": "3602d5dc10212a564a2f2436b8855935"
+  },
+  "make_web_template.py": {
+    "mtime": 1793062004.7572062,
+    "ast_hash": "58c03917f507bc875f3206e7f9ae2da4",
+    "semantic_hash": "58c03917f507bc875f3206e7f9ae2da4"
+  },
+  "public/assets/search.json": {
+    "mtime": 1793834828.37514,
+    "ast_hash": "14a22d20ee51696f449209a4c0f0f606",
+    "semantic_hash": ""
+  },
+  "public/assets/site.js": {
+    "mtime": 1793152642.2565682,
+    "ast_hash": "c042b62ff4bd34f9fa1c5c025369e284",
+    "semantic_hash": ""
+  },
+  "public/assets/vendor/jszip.min.js": {
+    "mtime": 1793062037.3710926,
+    "ast_hash": "b5d02b3f0bf3ae026451909419df07bb",
+    "semantic_hash": "b5d02b3f0bf3ae026451909419df07bb"
+  },
+  "site.js": {
+    "mtime": 1793152642.012252,
+    "ast_hash": "c042b62ff4bd34f9fa1c5c025369e284",
+    "semantic_hash": ""
+  },
+  ".github/workflows/pages.yml": {
+    "mtime": 1793061968.4420168,
+    "ast_hash": "98502bdd2ad00a512838a78e4835388f",
+    "semantic_hash": "98502bdd2ad00a512838a78e4835388f"
+  },
+  ".gitlab-ci.yml": {
+    "mtime": 1793061968.5334094,
+    "ast_hash": "f7d693d5f06665bbf06762cc471579d8",
+    "semantic_hash": "f7d693d5f06665bbf06762cc471579d8"
+  },
+  "HANDOVER.md": {
+    "mtime": 1793072665.2078185,
+    "ast_hash": "3cc9a0a0ec56c00201dade547ff5ecd4",
+    "semantic_hash": ""
+  },
+  "README.md": {
+    "mtime": 1793072665.2050722,
+    "ast_hash": "9c8b9703d0aa178973143efc68922fe4",
+    "semantic_hash": ""
+  },
+  "public/404.html": {
+    "mtime": 1793834828.366148,
+    "ast_hash": "daafb2a40cbbebb5ca71a5595b4bcf9a",
+    "semantic_hash": ""
+  },
+  "public/exam-generator.html": {
+    "mtime": 1793834828.379143,
+    "ast_hash": "c4ca957b3cadc92e73a35e2f961f83f0",
+    "semantic_hash": ""
+  },
+  "public/flashcards.html": {
+    "mtime": 1793834828.3830554,
+    "ast_hash": "5439f6fc85ffeffce521a34db8e1c2da",
+    "semantic_hash": ""
+  },
+  "public/glossary.html": {
+    "mtime": 1793834828.387055,
+    "ast_hash": "5f9ed177f556a8b349185f1c28710755",
+    "semantic_hash": ""
+  },
+  "public/index.html": {
+    "mtime": 1793834828.390277,
+    "ast_hash": "833f0e9a9cdbc7220d36caeadb56852a",
+    "semantic_hash": ""
+  },
+  "public/micro-drills.html": {
+    "mtime": 1793834828.393419,
+    "ast_hash": "2a2c471457d4213fa5f4e33f288763ab",
+    "semantic_hash": ""
+  },
+  "public/outline-builder.html": {
+    "mtime": 1793834828.3959916,
+    "ast_hash": "3450988c265a09407abc1b7d902e99f7",
+    "semantic_hash": ""
+  },
+  "public/p02-background-and-context.html": {
+    "mtime": 1793834828.3987947,
+    "ast_hash": "65ade609387b5d19b5e2e71a31517a28",
+    "semantic_hash": ""
+  },
+  "public/p02-character-quote-bank.html": {
+    "mtime": 1793834828.4017928,
+    "ast_hash": "8d113d597277f467d1b9a29faef0c840",
+    "semantic_hash": ""
+  },
+  "public/p02-character-relationships.html": {
+    "mtime": 1793834828.4047072,
+    "ast_hash": "64a815c91fa82fe43ff9157b7c49d176",
+    "semantic_hash": ""
+  },
+  "public/p02-film-techniques.html": {
+    "mtime": 1793834828.4119406,
+    "ast_hash": "b973ef514c6ed913379fdc95e4b0c13f",
+    "semantic_hash": ""
+  },
+  "public/p02-practice-analytical-text-response-topics.html": {
+    "mtime": 1793834828.4144692,
+    "ast_hash": "aae081400adff539eec3d7e805b29cd7",
+    "semantic_hash": ""
+  },
+  "public/p02-scene-summaries-and-analyses.html": {
+    "mtime": 1793834828.418485,
+    "ast_hash": "6b5eea5cc7610b15dea8c642354f14da",
+    "semantic_hash": ""
+  },
+  "public/p02-symbols.html": {
+    "mtime": 1793834828.4224858,
+    "ast_hash": "2e5555f2ecc917f4c7ac10844ac4ac7e",
+    "semantic_hash": ""
+  },
+  "public/p02-thematic-quote-bank.html": {
+    "mtime": 1793834828.4254997,
+    "ast_hash": "27efd8bde3acf5929ab6f1db680fae64",
+    "semantic_hash": ""
+  },
+  "public/p02-written-exemplars.html": {
+    "mtime": 1793834828.4315083,
+    "ast_hash": "985868845e53b209c8834b0bfc409bfc",
+    "semantic_hash": ""
+  },
+  "public/p03-character-analysis.html": {
+    "mtime": 1793834828.4350278,
+    "ast_hash": "ff0030c1ddc9889132f4025983526082",
+    "semantic_hash": ""
+  },
+  "public/p03-introduction-and-context.html": {
+    "mtime": 1793834828.4408605,
+    "ast_hash": "c8c409900a2839e55ec25331367cfff5",
+    "semantic_hash": ""
+  },
+  "public/p03-practice-analytical-text-response-topics.html": {
+    "mtime": 1793834828.4511106,
+    "ast_hash": "7c6072f3701ba3c8ac02ddc1edd3664e",
+    "semantic_hash": ""
+  },
+  "public/p03-quote-banks.html": {
+    "mtime": 1793834828.4538116,
+    "ast_hash": "f015bb681b52c0f10336a7aa74dbd86f",
+    "semantic_hash": ""
+  },
+  "public/p03-symbols-and-motifs.html": {
+    "mtime": 1793834828.4719114,
+    "ast_hash": "21937a8e862486265997702618f7ade2",
+    "semantic_hash": ""
+  },
+  "public/p03-theme-analysis.html": {
+    "mtime": 1793834828.474913,
+    "ast_hash": "b0a6b73e9d3a8de2e570b519f9f545ac",
+    "semantic_hash": ""
+  },
+  "public/p03-written-exemplars.html": {
+    "mtime": 1793834828.4769135,
+    "ast_hash": "9a1ebeb966954ff217cb6ffb6b4feb83",
+    "semantic_hash": ""
+  },
+  "public/p04-introduction.html": {
+    "mtime": 1793834828.484043,
+    "ast_hash": "d9628e6009a3a0ff089b3b9c64476253",
+    "semantic_hash": ""
+  },
+  "public/p04-proofreading.html": {
+    "mtime": 1793834828.4874537,
+    "ast_hash": "f85a12315599f473bfd756b3b9271441",
+    "semantic_hash": ""
+  },
+  "public/p04-what-is-needed-in-an-essay.html": {
+    "mtime": 1793834828.4908555,
+    "ast_hash": "3901eda4775315bf8be669fa00397a04",
+    "semantic_hash": ""
+  },
+  "public/p05-audience.html": {
+    "mtime": 1793834828.494372,
+    "ast_hash": "bc38113fc1adae5d5b27f3cda4ac4ed9",
+    "semantic_hash": ""
+  },
+  "public/p05-personal-journeys.html": {
+    "mtime": 1793834828.4963758,
+    "ast_hash": "c3a34a6092276cab35390d4a7fcdbf4c",
+    "semantic_hash": ""
+  },
+  "public/p05-practice-stimuli.html": {
+    "mtime": 1793834828.5001187,
+    "ast_hash": "b3e7e35056e9f0f3e324b9a3c9118b52",
+    "semantic_hash": ""
+  },
+  "public/p05-purpose.html": {
+    "mtime": 1793834828.50271,
+    "ast_hash": "a4c930ad0cc6336bd4222f74a9ba5bca",
+    "semantic_hash": ""
+  },
+  "public/p05-sample-creating-texts-piece-19-20.html": {
+    "mtime": 1793834828.5051987,
+    "ast_hash": "ac34f99db5009180adbfbfc576d4e5c7",
+    "semantic_hash": ""
+  },
+  "public/p05-sample-creating-texts-piece-finding-my-way-10-10.html": {
+    "mtime": 1793834828.5091302,
+    "ast_hash": "9097eb9719b9668e95fcfcccd7eb9bbc",
+    "semantic_hash": ""
+  },
+  "public/p05-sample-creating-texts-piece-this-is-me-10-10.html": {
+    "mtime": 1793834828.5118117,
+    "ast_hash": "ab46ce870d958e15aa26687f1f5f2fa8",
+    "semantic_hash": ""
+  },
+  "public/p06-analysing-visual-language.html": {
+    "mtime": 1793834828.5180988,
+    "ast_hash": "55e7541f88b3f0175f59e13974d1f138",
+    "semantic_hash": ""
+  },
+  "public/p06-analysing-written-language.html": {
+    "mtime": 1793834828.5220993,
+    "ast_hash": "316ffa145de553e8f95a99be187b38bd",
+    "semantic_hash": ""
+  },
+  "public/p06-essay-structure.html": {
+    "mtime": 1793834828.5261106,
+    "ast_hash": "2171e8d4ab016808712688890f7b4bca",
+    "semantic_hash": ""
+  },
+  "public/p06-practice-articles-for-analysis.html": {
+    "mtime": 1793834828.5291114,
+    "ast_hash": "1e03b81a5d167efd72c1bfeb84c9a1bc",
+    "semantic_hash": ""
+  },
+  "public/p06-sample-analysing-argument-essays.html": {
+    "mtime": 1793834828.5351055,
+    "ast_hash": "90dde5c9cc25a3a9b5d52117e087e352",
+    "semantic_hash": ""
+  },
+  "public/p06-section-c-from-previous-exams.html": {
+    "mtime": 1793834828.5381088,
+    "ast_hash": "434c50a2df2c699a878020dec5779c20",
+    "semantic_hash": ""
+  },
+  "public/p07-exam-format.html": {
+    "mtime": 1793834828.5416372,
+    "ast_hash": "3a29e400937e58597609b9bcbd2f07b5",
+    "semantic_hash": ""
+  },
+  "public/p07-strategies-for-addressing-the-requirements.html": {
+    "mtime": 1793834828.5480428,
+    "ast_hash": "37db69eef86fc2c8b3eea9b529188817",
+    "semantic_hash": ""
+  },
+  "public/p09-section-a-mark-allocation.html": {
+    "mtime": 1793834828.5550404,
+    "ast_hash": "b0d88849b208971e0ecb808083103e0e",
+    "semantic_hash": ""
+  },
+  "public/p09-section-b-mark-allocation.html": {
+    "mtime": 1793834828.5580406,
+    "ast_hash": "343e85a18d4ceca726e357185c6da232",
+    "semantic_hash": ""
+  },
+  "public/p09-section-c-mark-allocation.html": {
+    "mtime": 1793834828.5610402,
+    "ast_hash": "59b36adb02684062c4ebbcdde595103e",
+    "semantic_hash": ""
+  },
+  "public/p10-general-checklist-for-section-a-response.html": {
+    "mtime": 1793834828.5640552,
+    "ast_hash": "7bb9be65ac90e42efff3a3f92fc6d874",
+    "semantic_hash": ""
+  },
+  "public/p10-general-checklist-for-section-b-response.html": {
+    "mtime": 1793834828.5670507,
+    "ast_hash": "c25c457d293f44911ea7b7debf9b64bd",
+    "semantic_hash": ""
+  },
+  "public/p10-general-checklist-for-section-c-response.html": {
+    "mtime": 1793834828.5706835,
+    "ast_hash": "bbdab6984b46dbed522248f632109d44",
+    "semantic_hash": ""
+  },
+  "public/p11-final-advice.html": {
+    "mtime": 1793834828.5731351,
+    "ast_hash": "2a9bdf076aadcd76e34f388431e84c48",
+    "semantic_hash": ""
+  },
+  "public/p11-final-exam-checklist.html": {
+    "mtime": 1793834828.5765395,
+    "ast_hash": "7caf763d8f7ef023251baf687c4404f2",
+    "semantic_hash": ""
+  },
+  "public/p11-general-exam-advice.html": {
+    "mtime": 1793834828.5800343,
+    "ast_hash": "5ed4547f58c8877399c8610f32c0aca4",
+    "semantic_hash": ""
+  },
+  "public/p11-section-a-analytical-response-to-a-text.html": {
+    "mtime": 1793834828.5824158,
+    "ast_hash": "aae3fe5c109e48f6aa654c31e223fe3f",
+    "semantic_hash": ""
+  },
+  "public/p11-section-b-creating-a-text-framework-of-ideas.html": {
+    "mtime": 1793834828.5854867,
+    "ast_hash": "dda6a19777b1769046f92b2dbb13507d",
+    "semantic_hash": ""
+  },
+  "public/p11-section-c-analysing-argument.html": {
+    "mtime": 1793834828.588515,
+    "ast_hash": "dfffce3a84007c3ca271507913d52bf5",
+    "semantic_hash": ""
+  },
+  "public/p12-assess-your-current-study-habits.html": {
+    "mtime": 1793834828.5915308,
+    "ast_hash": "b363fd37afbffc0e14e26d7974c15fd7",
+    "semantic_hash": ""
+  },
+  "public/p12-collaborate-with-study-groups.html": {
+    "mtime": 1793834828.59482,
+    "ast_hash": "bd9cfbee07bd7cd82e82b71864fa46fe",
+    "semantic_hash": ""
+  },
+  "public/p12-create-a-personalised-study-schedule.html": {
+    "mtime": 1793834828.5978203,
+    "ast_hash": "cbe940571c223d3c806c2df59ceecf78",
+    "semantic_hash": ""
+  },
+  "public/p12-develop-a-healthy-study-life-balance.html": {
+    "mtime": 1793834828.60182,
+    "ast_hash": "0de6e30b09917c1c62fb3440cc3e5507",
+    "semantic_hash": ""
+  },
+  "public/p12-fine-tune-your-exam-day-strategy.html": {
+    "mtime": 1793834828.606333,
+    "ast_hash": "b4486305e71aea5163ec182f0b041fc5",
+    "semantic_hash": ""
+  },
+  "public/p12-implement-active-recall-and-spaced-repetition.html": {
+    "mtime": 1793834828.6087139,
+    "ast_hash": "a7db095fdea37147afd30683d8e6d4c6",
+    "semantic_hash": ""
+  },
+  "public/p12-organise-your-study-materials.html": {
+    "mtime": 1793834828.6122522,
+    "ast_hash": "2c23ce8f8cb1a0f6998d990ca263028c",
+    "semantic_hash": ""
+  },
+  "public/p12-seek-help-when-needed.html": {
+    "mtime": 1793834828.6152823,
+    "ast_hash": "f800a94c79f0ca1360adf66ecdd97de6",
+    "semantic_hash": ""
+  },
+  "public/p12-utilise-practice-exams-and-past-papers.html": {
+    "mtime": 1793834828.61928,
+    "ast_hash": "096bbe13bfe13995b0205b86cb3cdacd",
+    "semantic_hash": ""
+  },
+  "public/part-01-preface.html": {
+    "mtime": 1793834828.6217785,
+    "ast_hash": "3e162157ea48dd9d0eb2f58727a1ac92",
+    "semantic_hash": ""
+  },
+  "public/part-04-analytical-text-response-essays.html": {
+    "mtime": 1793834828.6310086,
+    "ast_hash": "6329b6821aa8d54ca20545f703a65b49",
+    "semantic_hash": ""
+  },
+  "public/part-05-creating-texts.html": {
+    "mtime": 1793834828.6342192,
+    "ast_hash": "254ef98b6b1f6e9e5569e964d02bfe59",
+    "semantic_hash": ""
+  },
+  "public/part-06-analysing-argument.html": {
+    "mtime": 1793834828.6379175,
+    "ast_hash": "a4f8cdc782415845265363019dc377db",
+    "semantic_hash": ""
+  },
+  "public/part-07-the-exam.html": {
+    "mtime": 1793834828.640981,
+    "ast_hash": "3a817bee8ab1d0006ab1750f762b9e42",
+    "semantic_hash": ""
+  },
+  "public/part-08-practice-exams.html": {
+    "mtime": 1793834828.6434097,
+    "ast_hash": "2a2eb750969c3205454f538f91b241fd",
+    "semantic_hash": ""
+  },
+  "public/part-09-exam-assessment-criteria.html": {
+    "mtime": 1793834828.6459322,
+    "ast_hash": "72ad493f22d5537055cbae8da080f409",
+    "semantic_hash": ""
+  },
+  "public/part-10-exam-checklists.html": {
+    "mtime": 1793834828.6489477,
+    "ast_hash": "f96fc5c2f904b65ffd366dd9e176819e",
+    "semantic_hash": ""
+  },
+  "public/part-11-key-takeaways-from-the-2024-assessment-report.html": {
+    "mtime": 1793834828.6519477,
+    "ast_hash": "41b4d4e553b53d1793d707d434282875",
+    "semantic_hash": ""
+  },
+  "public/part-12-effectively-studying-for-exams.html": {
+    "mtime": 1793834828.6549509,
+    "ast_hash": "4dc7d2756d9fab1ce2d5fdf23c09f8a1",
+    "semantic_hash": ""
+  },
+  "public/part-13-key-takeaways-from-the-2025-assessment-report.html": {
+    "mtime": 1793834828.6569507,
+    "ast_hash": "36fdbac407f56cc29aaf3ccacab542ec",
+    "semantic_hash": ""
+  },
+  "public/practice-topics.html": {
+    "mtime": 1793834828.6599486,
+    "ast_hash": "d15b1d3ebc19539b31dd94e058c89023",
+    "semantic_hash": ""
+  },
+  "public/r25-checklist.html": {
+    "mtime": 1793834828.6629522,
+    "ast_hash": "e58b663941ab0baa6852738168ed7ece",
+    "semantic_hash": ""
+  },
+  "public/r25-general.html": {
+    "mtime": 1793834828.6649675,
+    "ast_hash": "25a4930b7ad1849913a78c780065ea4a",
+    "semantic_hash": ""
+  },
+  "public/r25-section-a.html": {
+    "mtime": 1793834828.6679666,
+    "ast_hash": "fa13dbeb9ff7b449057cf7535abc2d13",
+    "semantic_hash": ""
+  },
+  "public/r25-section-b.html": {
+    "mtime": 1793834828.6709628,
+    "ast_hash": "946f218cc9fc65054ec6c0cc1c9325e7",
+    "semantic_hash": ""
+  },
+  "public/r25-section-c.html": {
+    "mtime": 1793834828.6739633,
+    "ast_hash": "383236a4f79a0cffbe6a799a8c7ac6ec",
+    "semantic_hash": ""
+  },
+  "public/revision-program.html": {
+    "mtime": 1793834828.6769626,
+    "ast_hash": "0204f41b140c4119944ecd0d5d51154f",
+    "semantic_hash": ""
+  },
+  "public/study-tools.html": {
+    "mtime": 1793834828.6842625,
+    "ast_hash": "3864f2514071db15244f5092790dcd10",
+    "semantic_hash": ""
+  },
+  "public/technique-quiz.html": {
+    "mtime": 1793834828.6872635,
+    "ast_hash": "8808eb923e66ab019e95b281c2170b9c",
+    "semantic_hash": ""
+  },
+  "public/vocab-upgrader.html": {
+    "mtime": 1793834828.6902633,
+    "ast_hash": "5be9415c3572ee9829f997f848115981",
+    "semantic_hash": ""
+  },
+  "public/vocabulary.html": {
+    "mtime": 1793834828.693773,
+    "ast_hash": "5c7e15ed12536d96b64ba7ea5c464bd2",
+    "semantic_hash": ""
+  },
+  "snippets/howto.html": {
+    "mtime": 1793072528.7151654,
+    "ast_hash": "9a2fb0412c19ebbe830b1a7c1f11c298",
+    "semantic_hash": ""
+  },
+  "snippets/pj1.html": {
+    "mtime": 1793062044.244606,
+    "ast_hash": "9ae162845e1882ec4842c6a0ccc05f14",
+    "semantic_hash": "9ae162845e1882ec4842c6a0ccc05f14"
+  },
+  "snippets/pj2.html": {
+    "mtime": 1793062044.28415,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "snippets/quotetable.html": {
+    "mtime": 1793062045.10849,
+    "ast_hash": "a19eae7e8d1964b775fba349af64b088",
+    "semantic_hash": "a19eae7e8d1964b775fba349af64b088"
+  },
+  "snippets/r25-checklist.html": {
+    "mtime": 1793062044.999138,
+    "ast_hash": "87926646dd66cd5a9e85e80cc348d385",
+    "semantic_hash": "87926646dd66cd5a9e85e80cc348d385"
+  },
+  "snippets/r25-general.html": {
+    "mtime": 1793062045.2711618,
+    "ast_hash": "4151c101441abd383cdfcfbdb3c97e39",
+    "semantic_hash": "4151c101441abd383cdfcfbdb3c97e39"
+  },
+  "snippets/r25-hub.html": {
+    "mtime": 1793062045.323907,
+    "ast_hash": "be935901b30ef7321fc86ee34afa3ce8",
+    "semantic_hash": "be935901b30ef7321fc86ee34afa3ce8"
+  },
+  "snippets/r25-section-a.html": {
+    "mtime": 1793072528.8608463,
+    "ast_hash": "691e7a5f60e63db0a449436920f9a06e",
+    "semantic_hash": ""
+  },
+  "snippets/r25-section-b.html": {
+    "mtime": 1793062044.675264,
+    "ast_hash": "e66fd01ed8c861ae135b5cfa8c1b8137",
+    "semantic_hash": "e66fd01ed8c861ae135b5cfa8c1b8137"
+  },
+  "snippets/r25-section-c.html": {
+    "mtime": 1793062044.8983672,
+    "ast_hash": "93856003ecd995ea37106618860546fa",
+    "semantic_hash": "93856003ecd995ea37106618860546fa"
+  },
+  "snippets/report2025.html": {
+    "mtime": 1793062045.1543534,
+    "ast_hash": "db98c0c675a53854cd1202c084c27817",
+    "semantic_hash": "db98c0c675a53854cd1202c084c27817"
+  },
+  "snippets/revision-program.html": {
+    "mtime": 1793072528.796354,
+    "ast_hash": "112242fe6cd048542122f865505e063e",
+    "semantic_hash": ""
+  },
+  "snippets/ss.html": {
+    "mtime": 1793062044.409477,
+    "ast_hash": "6b0eaefded2acf6e7d164266fd149800",
+    "semantic_hash": "6b0eaefded2acf6e7d164266fd149800"
+  },
+  "snippets/tracker.html": {
+    "mtime": 1793062045.0461473,
+    "ast_hash": "734d950094f429158a91f3b6908a531d",
+    "semantic_hash": "734d950094f429158a91f3b6908a531d"
+  },
+  "snippets/vocab.html": {
+    "mtime": 1793072528.826311,
+    "ast_hash": "37cb68f3db4cbdc20cd4eb18b171d0f3",
+    "semantic_hash": ""
+  },
+  "localpdf/persuasive-techniques-reference.pdf": {
+    "mtime": 1793062004.6748283,
+    "ast_hash": "5c1d33e5c8db775c75c73095f02965e5",
+    "semantic_hash": "5c1d33e5c8db775c75c73095f02965e5"
+  },
+  "public/assets/pdf/persuasive-techniques-reference.pdf": {
+    "mtime": 1793062013.1680877,
+    "ast_hash": "5c1d33e5c8db775c75c73095f02965e5",
+    "semantic_hash": "5c1d33e5c8db775c75c73095f02965e5"
+  },
+  "VCE-English-Guide-Complete.html": {
+    "mtime": 1793061969.1567676,
+    "ast_hash": "e71ddbf5e13df3509dcd930919d527fb",
+    "semantic_hash": "e71ddbf5e13df3509dcd930919d527fb"
+  },
+  "public/p09-how-the-marker-reads-your-essay.html": {
+    "mtime": 1793834828.552041,
+    "ast_hash": "0926993b624953f0243a0fadd32a375a",
+    "semantic_hash": ""
+  },
+  "public/sentence-starters.html": {
+    "mtime": 1793834828.6804967,
+    "ast_hash": "74deabbab9b3c09f91c421dd94ed4a1f",
+    "semantic_hash": ""
+  },
+  "snippets/sentence-starters.html": {
+    "mtime": 1793062044.7350311,
+    "ast_hash": "137cc22b694989e1836ff87851d22223",
+    "semantic_hash": "137cc22b694989e1836ff87851d22223"
+  },
+  "public/assets/apple-touch-icon.png": {
+    "mtime": 1793834801.8319364,
+    "ast_hash": "7f93a17d7c344e4e7f1993ed61e8345c",
+    "semantic_hash": "7f93a17d7c344e4e7f1993ed61e8345c"
+  },
+  "public/assets/favicon.png": {
+    "mtime": 1793834801.8177652,
+    "ast_hash": "200be5bb723d1cfd1d8fac1b97af0c57",
+    "semantic_hash": "200be5bb723d1cfd1d8fac1b97af0c57"
+  },
+  "public/p02-values-in-picnic-at-hanging-rock.html": {
+    "mtime": 1793834828.4289064,
+    "ast_hash": "879a508d02ed69e81ac45376f1e57076",
+    "semantic_hash": ""
+  },
+  "public/p03-language-and-style.html": {
+    "mtime": 1793834828.4448464,
+    "ast_hash": "4b48e7648cead2396c5554904ca6445f",
+    "semantic_hash": ""
+  },
+  "public/p03-literary-device-tracker.html": {
+    "mtime": 1793834828.447991,
+    "ast_hash": "c2860f728fac06b4782ee5748624b775",
+    "semantic_hash": ""
+  },
+  "public/p03-shirley-jackson-and-the-short-story.html": {
+    "mtime": 1793834828.4571345,
+    "ast_hash": "0896cb0b07f1688a307c5f9461fcc668",
+    "semantic_hash": ""
+  },
+  "public/p03-story-summaries-and-analyses.html": {
+    "mtime": 1793834828.4659097,
+    "ast_hash": "ded21bca74d9b31096168c7143422def",
+    "semantic_hash": ""
+  },
+  "public/p03-structure-and-themes-in-the-lottery-and-other-stories.html": {
+    "mtime": 1793834828.468914,
+    "ast_hash": "e900615dc52c99b61eb252dc9bf08b03",
+    "semantic_hash": ""
+  },
+  "public/p04-interrogating-the-topic.html": {
+    "mtime": 1793834828.481044,
+    "ast_hash": "e100f7537ed4fdadee236be7fe093805",
+    "semantic_hash": ""
+  },
+  "public/p05-section-b-under-exam-conditions.html": {
+    "mtime": 1793834828.5150778,
+    "ast_hash": "551996482d5a3f10c0a05bbf436d6343",
+    "semantic_hash": ""
+  },
+  "public/p06-reading-the-background-and-mapping-the-argument.html": {
+    "mtime": 1793834828.5321076,
+    "ast_hash": "a3b72e269ad159593573e0cc503f2dc7",
+    "semantic_hash": ""
+  },
+  "public/p07-exam-mindset-timing-and-faqs.html": {
+    "mtime": 1793834828.5451534,
+    "ast_hash": "ac28a51b842704c3310f9b3b3a300bdc",
+    "semantic_hash": ""
+  },
+  "public/part-02-picnic-at-hanging-rock.html": {
+    "mtime": 1793834828.6242337,
+    "ast_hash": "252283c17b5b9579fe10452af3d259e8",
+    "semantic_hash": ""
+  },
+  "public/part-03-the-lottery-and-other-stories.html": {
+    "mtime": 1793834828.6270142,
+    "ast_hash": "cf96084e2c4c21d54dc45f1a622aca0d",
+    "semantic_hash": ""
+  },
+  "public/p02-close-analysis-of-key-elements.html": {
+    "mtime": 1793834828.408944,
+    "ast_hash": "66beecc2a3984a628389da4f994bbc88",
+    "semantic_hash": ""
+  },
+  "public/p03-connecting-the-stories.html": {
+    "mtime": 1793834828.4380605,
+    "ast_hash": "f5924e72c73c0c0024e7750c30763b40",
+    "semantic_hash": ""
+  },
+  "public/p03-story-study-guides.html": {
+    "mtime": 1793834828.4618988,
+    "ast_hash": "c00494d683dda3011561bdf7e2123c2e",
+    "semantic_hash": ""
+  },
+  "picnic/marion.jpg": {
+    "mtime": 1793152637.1713798,
+    "ast_hash": "9c3fbb550abd012b4b289dc00dc336cb",
+    "semantic_hash": ""
+  },
+  "picnic/miranda.jpg": {
+    "mtime": 1793152614.2317636,
+    "ast_hash": "57e4bb5b411524689fdefb3a151bef32",
+    "semantic_hash": ""
+  },
+  "picnic/Irma.jpg": {
+    "mtime": 1793152683.0249827,
+    "ast_hash": "c4ad3bb61112a1cc4f490d031796c129",
+    "semantic_hash": ""
+  },
+  "picnic/albertcrundall.jpg": {
+    "mtime": 1793153115.2556834,
+    "ast_hash": "fca8385cbb1f4e3ef88f5ac83cee2ffd",
+    "semantic_hash": ""
+  },
+  "picnic/edith.jpg": {
+    "mtime": 1793152706.9352002,
+    "ast_hash": "40182b5fdd7cbaf0fd870450f27d83c5",
+    "semantic_hash": ""
+  },
+  "picnic/mademoiselle.jpg": {
+    "mtime": 1793152928.8316057,
+    "ast_hash": "9363b91b722a20d928e1a964a04f5466",
+    "semantic_hash": ""
+  },
+  "picnic/michaelfithubert.jpg": {
+    "mtime": 1793153056.0929186,
+    "ast_hash": "fda36e5190c30f07ef5ea3e35f70e1fd",
+    "semantic_hash": ""
+  },
+  "picnic/miss lumley.jpg": {
+    "mtime": 1793153002.7947507,
+    "ast_hash": "a57f27bb4d92f974c4df5a243c86b8ad",
+    "semantic_hash": ""
+  },
+  "picnic/missmcraw.jpg": {
+    "mtime": 1793152899.4605932,
+    "ast_hash": "8d6ede682a6d7dea47c4bc7ae1ee6944",
+    "semantic_hash": ""
+  },
+  "picnic/mrsappleyard.jpg": {
+    "mtime": 1793152724.5054548,
+    "ast_hash": "afe76aa1951d325b45a3be4b6211e267",
+    "semantic_hash": ""
+  },
+  "picnic/sarawaybourne.jpg": {
+    "mtime": 1793152857.858883,
+    "ast_hash": "c795ae21c0acc9005d500cd41695a903",
+    "semantic_hash": ""
+  },
+  "public/p03-character-quote-bank.html": {
+    "mtime": 1793834804.431342,
+    "ast_hash": "759837970a92c72c9ea855c85afe82cb",
+    "semantic_hash": ""
+  },
+  "public/p03-story-and-theme-grid.html": {
+    "mtime": 1793834804.466144,
+    "ast_hash": "c7e9b9b8c9ca20a176ab2f099c832e32",
+    "semantic_hash": ""
+  }
+}

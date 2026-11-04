@@ -278,7 +278,7 @@
       "label": "exemplar_groups_html()",
       "file_type": "code",
       "source_file": "build.py",
-      "source_location": "L1258",
+      "source_location": "L1260",
       "_callable": true,
       "_origin": "ast",
       "id": "build_exemplar_groups_html",
@@ -290,7 +290,7 @@
       "label": "icon_svg()",
       "file_type": "code",
       "source_file": "build.py",
-      "source_location": "L1293",
+      "source_location": "L1295",
       "_callable": true,
       "_origin": "ast",
       "id": "build_icon_svg",
@@ -415,6 +415,18 @@
       "community": 8,
       "community_name": "assets/site.js",
       "norm_label": "toast()"
+    },
+    {
+      "label": "show()",
+      "file_type": "code",
+      "source_file": "public/assets/site.js",
+      "source_location": "L248",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "public_assets_site_show",
+      "community": 8,
+      "community_name": "assets/site.js",
+      "norm_label": "show()"
     },
     {
       "label": "jszip.min.js",
@@ -799,6 +811,18 @@
       "norm_label": "toast()"
     },
     {
+      "label": "show()",
+      "file_type": "code",
+      "source_file": "site.js",
+      "source_location": "L248",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "site_show",
+      "community": 19,
+      "community_name": "site.js",
+      "norm_label": "show()"
+    },
+    {
       "label": "Deploy site to GitHub Pages (workflow)",
       "file_type": "document",
       "source_file": ".github/workflows/pages.yml",
@@ -1108,10 +1132,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 17,
+      "community": 4,
       "norm_label": "essay outline builder tool",
       "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
+      "community_name": "Joe Gillis",
       "id": "public_outline_builder"
     },
     {
@@ -1768,10 +1792,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 17,
+      "community": 4,
       "norm_label": "th.e.s.a.m.l. body paragraph method",
       "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
+      "community_name": "Joe Gillis",
       "id": "thesaml_method"
     },
     {
@@ -1801,7 +1825,7 @@
       "community": 14,
       "norm_label": "introduction and context (rainbow's end)",
       "_origin": "semantic",
-      "community_name": "Introduction and Context (Rainbow's End)",
+      "community_name": "Practice Topics & Essay Timer",
       "id": "public_p03_introduction_and_context"
     },
     {
@@ -1816,7 +1840,7 @@
       "community": 14,
       "norm_label": "practice analytical text response topics (rainbow's end)",
       "_origin": "semantic",
-      "community_name": "Introduction and Context (Rainbow's End)",
+      "community_name": "Practice Topics & Essay Timer",
       "id": "public_p03_practice_analytical_text_response_topics"
     },
     {
@@ -2056,7 +2080,7 @@
       "community": 14,
       "norm_label": "rainbow's end (play)",
       "_origin": "semantic",
-      "community_name": "Introduction and Context (Rainbow's End)",
+      "community_name": "Practice Topics & Essay Timer",
       "id": "rainbows_end"
     },
     {
@@ -2071,7 +2095,7 @@
       "community": 14,
       "norm_label": "jane harrison (playwright)",
       "_origin": "semantic",
-      "community_name": "Introduction and Context (Rainbow's End)",
+      "community_name": "Practice Topics & Essay Timer",
       "id": "jane_harrison"
     },
     {
@@ -2161,7 +2185,7 @@
       "community": 14,
       "norm_label": "papa dear",
       "_origin": "semantic",
-      "community_name": "Introduction and Context (Rainbow's End)",
+      "community_name": "Practice Topics & Essay Timer",
       "id": "papa_dear"
     },
     {
@@ -2251,7 +2275,7 @@
       "community": 14,
       "norm_label": "cummeragunja (aboriginal settlement)",
       "_origin": "semantic",
-      "community_name": "Introduction and Context (Rainbow's End)",
+      "community_name": "Practice Topics & Essay Timer",
       "id": "cummeragunja"
     },
     {
@@ -2281,7 +2305,7 @@
       "community": 14,
       "norm_label": "stolen generations",
       "_origin": "semantic",
-      "community_name": "Introduction and Context (Rainbow's End)",
+      "community_name": "Practice Topics & Essay Timer",
       "id": "stolen_generations"
     },
     {
@@ -3674,10 +3698,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 14,
       "norm_label": "practice topics & essay timer",
       "_origin": "semantic",
-      "community_name": "Joe Gillis",
+      "community_name": "Practice Topics & Essay Timer",
       "id": "public_practice_topics"
     },
     {
@@ -3794,10 +3818,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 14,
       "norm_label": "rainbow's end (vce text)",
       "_origin": "semantic",
-      "community_name": "Joe Gillis",
+      "community_name": "Practice Topics & Essay Timer",
       "id": "concept_rainbows_end_text"
     },
     {
@@ -3839,10 +3863,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 17,
+      "community": 0,
       "norm_label": "vcaa 2024 english assessment report",
       "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
+      "community_name": "Strategies for Addressing the Requirements",
       "id": "concept_vcaa_2024_examiners_report"
     },
     {
@@ -3929,10 +3953,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 4,
       "norm_label": "vocabulary upgrader tool",
       "_origin": "semantic",
-      "community_name": "Analysing Argument (Part 06 hub)",
+      "community_name": "Joe Gillis",
       "id": "public_vocab_upgrader"
     },
     {
@@ -3944,10 +3968,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 4,
       "norm_label": "vocabulary upgrader swap dictionary (vu js data)",
       "_origin": "semantic",
-      "community_name": "Analysing Argument (Part 06 hub)",
+      "community_name": "Joe Gillis",
       "id": "public_vocab_upgrader_vu_data"
     },
     {
@@ -3959,10 +3983,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 4,
       "norm_label": "high-scoring vocabulary bank (public page)",
       "_origin": "semantic",
-      "community_name": "Analysing Argument (Part 06 hub)",
+      "community_name": "Joe Gillis",
       "id": "public_vocabulary"
     },
     {
@@ -4139,10 +4163,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 4,
       "norm_label": "sentence starters and linking words table",
       "_origin": "semantic",
-      "community_name": "Analysing Argument (Part 06 hub)",
+      "community_name": "Joe Gillis",
       "id": "snippets_ss"
     },
     {
@@ -4169,10 +4193,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 4,
       "norm_label": "high-scoring vocabulary bank (snippet)",
       "_origin": "semantic",
-      "community_name": "Analysing Argument (Part 06 hub)",
+      "community_name": "Joe Gillis",
       "id": "snippets_vocab"
     },
     {
@@ -5776,10 +5800,10 @@
       "author": null,
       "contributor": null,
       "rationale": "Naming a technique earns no marks on its own; strong VCE analysis explains how a technique positions the intended audience to think or feel, and why the writer placed it where they did. The table therefore pairs each technique with its intended effect on the reader, not just a definition.",
-      "community": 3,
+      "community": 5,
       "norm_label": "analysing argument: persuasive techniques (vce reference table)",
       "_origin": "semantic",
-      "community_name": "Reasoning, Logic and Logical Fallacies",
+      "community_name": "Language and Word Choice",
       "id": "public_assets_pdf_persuasive_techniques_reference"
     },
     {
@@ -6736,10 +6760,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 5,
       "norm_label": "evidence and support",
       "_origin": "semantic",
-      "community_name": "Reasoning, Logic and Logical Fallacies",
+      "community_name": "Language and Word Choice",
       "id": "public_assets_pdf_persuasive_techniques_reference_category_evidence_and_support"
     },
     {
@@ -6751,10 +6775,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 5,
       "norm_label": "statistics",
       "_origin": "semantic",
-      "community_name": "Reasoning, Logic and Logical Fallacies",
+      "community_name": "Language and Word Choice",
       "id": "public_assets_pdf_persuasive_techniques_reference_statistics"
     },
     {
@@ -6766,10 +6790,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 5,
       "norm_label": "research and studies",
       "_origin": "semantic",
-      "community_name": "Reasoning, Logic and Logical Fallacies",
+      "community_name": "Language and Word Choice",
       "id": "public_assets_pdf_persuasive_techniques_reference_research_and_studies"
     },
     {
@@ -6781,10 +6805,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 5,
       "norm_label": "expert testimony",
       "_origin": "semantic",
-      "community_name": "Reasoning, Logic and Logical Fallacies",
+      "community_name": "Language and Word Choice",
       "id": "public_assets_pdf_persuasive_techniques_reference_expert_testimony"
     },
     {
@@ -6796,10 +6820,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 5,
       "norm_label": "eyewitness or vox pop quotation",
       "_origin": "semantic",
-      "community_name": "Reasoning, Logic and Logical Fallacies",
+      "community_name": "Language and Word Choice",
       "id": "public_assets_pdf_persuasive_techniques_reference_eyewitness_or_vox_pop_quotation"
     },
     {
@@ -6811,10 +6835,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 5,
       "norm_label": "personal experience and credentials",
       "_origin": "semantic",
-      "community_name": "Reasoning, Logic and Logical Fallacies",
+      "community_name": "Language and Word Choice",
       "id": "public_assets_pdf_persuasive_techniques_reference_personal_experience_and_credentials"
     },
     {
@@ -6826,10 +6850,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 5,
       "norm_label": "historical precedent",
       "_origin": "semantic",
-      "community_name": "Reasoning, Logic and Logical Fallacies",
+      "community_name": "Language and Word Choice",
       "id": "public_assets_pdf_persuasive_techniques_reference_historical_precedent"
     },
     {
@@ -6841,10 +6865,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 5,
       "norm_label": "comparison to other jurisdictions",
       "_origin": "semantic",
-      "community_name": "Reasoning, Logic and Logical Fallacies",
+      "community_name": "Language and Word Choice",
       "id": "public_assets_pdf_persuasive_techniques_reference_comparison_to_other_jurisdictions"
     },
     {
@@ -6856,10 +6880,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 5,
       "norm_label": "official documentation",
       "_origin": "semantic",
-      "community_name": "Reasoning, Logic and Logical Fallacies",
+      "community_name": "Language and Word Choice",
       "id": "public_assets_pdf_persuasive_techniques_reference_official_documentation"
     },
     {
@@ -7051,10 +7075,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 5,
       "norm_label": "tone",
       "_origin": "semantic",
-      "community_name": "Reasoning, Logic and Logical Fallacies",
+      "community_name": "Language and Word Choice",
       "id": "public_assets_pdf_persuasive_techniques_reference_category_tone_section"
     },
     {
@@ -7066,10 +7090,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 5,
       "norm_label": "tone",
       "_origin": "semantic",
-      "community_name": "Reasoning, Logic and Logical Fallacies",
+      "community_name": "Language and Word Choice",
       "id": "public_assets_pdf_persuasive_techniques_reference_tone"
     },
     {
@@ -7081,10 +7105,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 5,
       "norm_label": "tone shift",
       "_origin": "semantic",
-      "community_name": "Reasoning, Logic and Logical Fallacies",
+      "community_name": "Language and Word Choice",
       "id": "public_assets_pdf_persuasive_techniques_reference_tone_shift"
     },
     {
@@ -7096,10 +7120,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 5,
       "norm_label": "outraged / indignant tone",
       "_origin": "semantic",
-      "community_name": "Reasoning, Logic and Logical Fallacies",
+      "community_name": "Language and Word Choice",
       "id": "public_assets_pdf_persuasive_techniques_reference_outraged_indignant_tone"
     },
     {
@@ -7111,10 +7135,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 5,
       "norm_label": "reasonable / conciliatory tone",
       "_origin": "semantic",
-      "community_name": "Reasoning, Logic and Logical Fallacies",
+      "community_name": "Language and Word Choice",
       "id": "public_assets_pdf_persuasive_techniques_reference_reasonable_conciliatory_tone"
     },
     {
@@ -7381,7 +7405,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "build.py",
-      "source_location": "L1258",
+      "source_location": "L1260",
       "weight": 1.0,
       "_origin": "ast",
       "source": "build",
@@ -7414,7 +7438,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "build.py",
-      "source_location": "L1293",
+      "source_location": "L1295",
       "weight": 1.0,
       "_origin": "ast",
       "source": "build",
@@ -7565,6 +7589,17 @@
       "_origin": "ast",
       "source": "public_assets_site",
       "target": "public_assets_site_run",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/site.js",
+      "source_location": "L248",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "public_assets_site",
+      "target": "public_assets_site_show",
       "confidence_score": 1.0
     },
     {
@@ -8567,6 +8602,17 @@
       "_origin": "ast",
       "source": "site",
       "target": "site_run",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "site.js",
+      "source_location": "L248",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "site",
+      "target": "site_show",
       "confidence_score": 1.0
     },
     {
@@ -15840,5 +15886,5 @@
       "source_file": "snippets/report2025.html"
     }
   ],
-  "built_at_commit": "3bbc7751cb92dfb0529b7c39ea77228546ed58e1"
+  "built_at_commit": "c970cdf632f0163b9acb6fc078d498151fb5fc54"
 }

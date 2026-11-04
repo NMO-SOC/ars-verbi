@@ -209,3 +209,48 @@
     });
   });
 })();
+
+/* Quote Banks: toggle between grouping by theme and by story */
+(function(){
+  var sec=document.querySelector('.quotes-page[data-sortable]');
+  if(!sec) return;
+  var ORDER=["The Daemon Lover","Like Mother Used to Make","The Villager","The Witch","The Renegade",
+    "After You, My Dear Alphonse","Charles","Flower Garden","Elizabeth","Of Course","The Tooth","The Lottery"];
+  var themes=[].slice.call(sec.querySelectorAll(':scope > section'));
+  var groups={};
+  themes.forEach(function(ts){
+    var h=ts.querySelector('h2,h3,h4,h5'); var theme=h?h.textContent.trim():'';
+    ts.querySelectorAll('li').forEach(function(li){
+      var em=li.querySelector('p > em:first-child, :scope > em:first-child');
+      var story=em?em.textContent.trim():'Other';
+      var c=li.cloneNode(true), cem=c.querySelector('em');
+      if(em&&cem){ // drop the now-redundant "Title:" prefix
+        var p=cem.parentNode; p.removeChild(cem);
+        if(p.firstChild&&p.firstChild.nodeType===3) p.firstChild.nodeValue=p.firstChild.nodeValue.replace(/^\s*:\s*/,'');
+      }
+      var tag=document.createElement('span'); tag.className='qb-tag'; tag.textContent=theme;
+      (c.querySelector('p')||c).appendChild(tag);
+      (groups[story]=groups[story]||[]).push(c);
+    });
+  });
+  var view=document.createElement('div'); view.className='qb-by-story'; view.hidden=true;
+  ORDER.concat(Object.keys(groups).filter(function(k){return ORDER.indexOf(k)<0;})).forEach(function(s){
+    if(!groups[s]) return;
+    var h=document.createElement('h4'); var em=document.createElement('em'); em.textContent=s; h.appendChild(em);
+    var ul=document.createElement('ul'); groups[s].forEach(function(li){ul.appendChild(li);});
+    view.appendChild(h); view.appendChild(ul);
+  });
+  var bar=document.createElement('div'); bar.className='qb-sort'; bar.setAttribute('role','group');
+  bar.innerHTML='<span>Sort by</span><button type="button" data-v="theme" aria-pressed="true">Theme</button><button type="button" data-v="story" aria-pressed="false">Story</button>';
+  var toc=sec.querySelector('.page-toc'), anchor=toc||sec.querySelector('h1');
+  anchor.parentNode.insertBefore(bar,anchor.nextSibling);
+  sec.appendChild(view);
+  function show(v){
+    var story=v==='story';
+    themes.forEach(function(t){t.hidden=story;}); view.hidden=!story; if(toc) toc.hidden=story;
+    bar.querySelectorAll('button').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.v===v));});
+    try{localStorage.setItem('qb-sort',v);}catch(e){}
+  }
+  bar.addEventListener('click',function(e){var b=e.target.closest('button'); if(b) show(b.dataset.v);});
+  try{ if(localStorage.getItem('qb-sort')==='story') show('story'); }catch(e){}
+})();
