@@ -1091,10 +1091,9 @@ def shell(title, active_nav, active_file, main_html, prevnext=""):
 
 def page_toc(scope):
     lis = []
-    heads = scope.find_all(["h2", "h3", "h4", "h5"])
-    for h in heads[1:] if heads else []:
+    for h in scope.find_all(["h2", "h3", "h4", "h5"]):
         anc = h.find_parent("section")
-        if anc and anc.get("id"):
+        if anc is not scope and anc and anc.get("id"):  # skip the page's own title heading
             lis.append('<li class="lvl%s"><a href="#%s">%s</a></li>'
                        % (h.name[1], anc["id"], html.escape(h.get_text(" ", strip=True))))
     return ('<details class="page-toc" open><summary>On this page</summary><ul>%s</ul></details>' % "".join(lis)) if lis else ""

@@ -278,7 +278,7 @@
       "label": "exemplar_groups_html()",
       "file_type": "code",
       "source_file": "build.py",
-      "source_location": "L1260",
+      "source_location": "L1259",
       "_callable": true,
       "_origin": "ast",
       "id": "build_exemplar_groups_html",
@@ -290,7 +290,7 @@
       "label": "icon_svg()",
       "file_type": "code",
       "source_file": "build.py",
-      "source_location": "L1295",
+      "source_location": "L1294",
       "_callable": true,
       "_origin": "ast",
       "id": "build_icon_svg",
@@ -7405,7 +7405,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "build.py",
-      "source_location": "L1260",
+      "source_location": "L1259",
       "weight": 1.0,
       "_origin": "ast",
       "source": "build",
@@ -7438,7 +7438,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "build.py",
-      "source_location": "L1295",
+      "source_location": "L1294",
       "weight": 1.0,
       "_origin": "ast",
       "source": "build",
@@ -15886,5 +15886,5 @@
       "source_file": "snippets/report2025.html"
     }
   ],
-  "built_at_commit": "c970cdf632f0163b9acb6fc078d498151fb5fc54"
+  "built_at_commit": "354b405d7ef996a4074195478db43538a910c2ac"
 }
