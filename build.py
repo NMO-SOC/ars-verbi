@@ -450,7 +450,7 @@ fc_page = TOOL_LABEL + """<h1>Quote Flashcards</h1>
 </div>
 <div class="fc-card" id="fc-card" tabindex="0">
   <div class="fc-inner">
-    <div class="fc-face"><div class="fc-front" id="fc-front"></div><div class="fc-hint">Click card to flip</div></div>
+    <div class="fc-face"><div class="fc-front" id="fc-front"></div><div class="fc-hint">Select the card, or press Space, to flip it</div></div>
     <div class="fc-face fc-back-face"><div class="fc-back" id="fc-back"></div></div>
   </div>
 </div>
@@ -478,6 +478,7 @@ fc_page = TOOL_LABEL + """<h1>Quote Flashcards</h1>
   }
   function flip(){ flipped = !flipped; document.getElementById('fc-card').classList.toggle('flipped', flipped); }
   document.getElementById('fc-card').addEventListener('click', flip);
+  document.getElementById('fc-card').addEventListener('keydown', function(e){ if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); flip(); } });
   document.getElementById('fc-flip').addEventListener('click', flip);
   document.getElementById('fc-next').addEventListener('click', function(){ i = (i + 1) %% deck.length; show(); });
   document.getElementById('fc-prev').addEventListener('click', function(){ i = (i - 1 + deck.length) %% deck.length; show(); });
@@ -922,14 +923,14 @@ hub_tools = TOOL_LABEL + """<h1>Study Tools</h1>
 <p class="lede">Interactive revision tools built from the guide&rsquo;s own content.</p>
 <h2 class="in-part-head">Tools</h2>
 <div class="ch-list">
-  <a class="ch-card" href="flashcards.html"><span class="ch-num">1</span><span>Quote Flashcards</span></a>
-  <a class="ch-card" href="practice-topics.html"><span class="ch-num">2</span><span>Practice Topics &amp; Essay Timer</span></a>
-  <a class="ch-card" href="glossary.html"><span class="ch-num">3</span><span>Glossary of Techniques</span></a>
-  <a class="ch-card" href="technique-quiz.html"><span class="ch-num">4</span><span>Technique Quiz</span></a>
-  <a class="ch-card" href="exam-generator.html"><span class="ch-num">5</span><span>Exam Generator</span></a>
-  <a class="ch-card" href="outline-builder.html"><span class="ch-num">6</span><span>Essay Outline Builder</span></a>
-  <a class="ch-card" href="vocab-upgrader.html"><span class="ch-num">7</span><span>Vocabulary Upgrader</span></a>
-  <a class="ch-card" href="micro-drills.html"><span class="ch-num">8</span><span>Micro-Drills</span></a>
+  <a class="ch-card" href="flashcards.html"><span>Quote Flashcards</span></a>
+  <a class="ch-card" href="practice-topics.html"><span>Practice Topics &amp; Essay Timer</span></a>
+  <a class="ch-card" href="glossary.html"><span>Glossary of Techniques</span></a>
+  <a class="ch-card" href="technique-quiz.html"><span>Technique Quiz</span></a>
+  <a class="ch-card" href="exam-generator.html"><span>Exam Generator</span></a>
+  <a class="ch-card" href="outline-builder.html"><span>Essay Outline Builder</span></a>
+  <a class="ch-card" href="vocab-upgrader.html"><span>Vocabulary Upgrader</span></a>
+  <a class="ch-card" href="micro-drills.html"><span>Micro-Drills</span></a>
 </div>"""
 
 display_num += 1
@@ -999,7 +1000,7 @@ NAV_SHORT = {"Key Takeaways from the 2024 Assessment Report": "2024 Assessment R
 def nav_html(active_nav, active_file):
     out = []
     for it in nav_items:
-        num = "%02d" % it["num"]
+        num = "%d" % it["num"]
         if it["chapters"]:
             is_open = " open" if it["file"] == active_nav else ""
             cls = ' class="active"' if active_file == it["file"] else ""
@@ -1051,15 +1052,15 @@ def shell(title, active_nav, active_file, main_html, prevnext=""):
 <title>%s &middot; %s</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <meta property="og:site_name" content="VCE English Exam Preparation Guide">
 <meta property="og:title" content="%s">
 <meta property="og:description" content="South Oakleigh College Units 3/4 English exam preparation guide - texts, essays, practice exams and study tools.">
 <meta property="og:image" content="https://nmo-soc.github.io/VCE-English-Guide/assets/img/soc-logo.png">
-<script>try{if(localStorage.getItem('siteTheme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}</script>
-<link rel="stylesheet" href="assets/style.css?v=49">
+<script>try{var _t=localStorage.getItem('siteTheme');if(_t==='dark'||(!_t&&window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.setAttribute('data-theme','dark');}catch(e){}</script>
+<link rel="stylesheet" href="assets/style.css?v=52">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -1076,7 +1077,7 @@ def shell(title, active_nav, active_file, main_html, prevnext=""):
       <div id="search-results"></div>
     </div>
     <nav class="toc"><ol>%s</ol></nav>
-    <div class="side-foot">South Oakleigh College &middot; 2026</div>
+    <div class="side-foot">South Oakleigh College, 2027</div>
   </aside>
   <main class="content" id="main">
     %s
@@ -1167,19 +1168,19 @@ for k, pg in enumerate(all_pages):
 
     if "html" in pg:
         body = pg["html"]
-        body = re.sub(r'<div class="part-label">Part \d+</div>', '<div class="part-label">Part %02d</div>' % num, body)
+        body = re.sub(r'<div class="part-label">Part \d+</div>', '<div class="part-label">Part %d</div>' % num, body)
     elif "chapters" in pg and pg["chapters"]:
         sec = pg["part"]["sec"]
         for c in pg["chapters"]:
             if "sec" in c: c["sec"].extract()
         rewrite_anchors(sec, pg["file"])
         h1 = sec.find("h1")
-        if h1: h1.insert_before(BeautifulSoup('<div class="part-label">Part %02d</div>' % num, "html.parser"))
+        if h1: h1.insert_before(BeautifulSoup('<div class="part-label">Part %d</div>' % num, "html.parser"))
         cards = "".join('<a class="ch-card" href="%s"><span class="ch-num">%d</span><span>%s</span></a>'
                         % (c["file"], j+1, html.escape(c["title"])) for j, c in enumerate(pg["chapters"]))
         body = sec.decode() + '<h2 class="in-part-head">In this part</h2><div class="ch-list">%s</div>' % cards
     elif pg["file"] == "p08-english-exam-generator.html":
-        crumb = ('<div class="part-label"><a href="%s">Part %02d &middot; %s</a>'
+        crumb = ('<div class="part-label"><a href="%s">Part %d: %s</a>'
                  '<span class="ch-pos">Chapter %d of %d</span></div>'
                  % (pg["part"]["file"], num, html.escape(pg["part"]["title"]),
                     pg.get("chidx", 8), pg.get("chtotal", 8)))
@@ -1204,6 +1205,9 @@ for k, pg in enumerate(all_pages):
                 if _img:
                     _h.insert_after(BeautifulSoup('<figure class="char-photo"><img src="assets/img/picnic/%s" alt="%s" loading="lazy"></figure>'
                                                   % (_img, html.escape(_clean(_h.get_text()))), "html.parser"))
+        if pg["file"] in ("p03-story-and-theme-grid.html", "p02-sequence-and-theme-grid.html"):
+            for _tb in sec.find_all("table"):
+                _tb["class"] = _tb.get("class", []) + ["theme-grid"]
         if pg["file"] == "p06-practice-articles-for-analysis.html":
             # original Section C practice tasks live in sectionc/ (web only)
             for _p in sec.find_all("p"):
@@ -1238,7 +1242,7 @@ for k, pg in enumerate(all_pages):
         hh = sec.find(["h2", "h3", "h4"])
         if hh: hh.name = "h1"
         pos = ('<span class="ch-pos">Chapter %d of %d</span>' % (pg["chidx"], pg["chtotal"])) if pg.get("chidx") else ""
-        crumb = ('<div class="part-label"><a href="%s">Part %02d &middot; %s</a>%s</div>'
+        crumb = ('<div class="part-label"><a href="%s">Part %d: %s</a>%s</div>'
                  % (pg["part"]["file"], num, html.escape(pg["part"]["title"]), pos))
         _toc = page_toc(sec)
         _h1 = sec.find("h1")
@@ -1251,7 +1255,7 @@ for k, pg in enumerate(all_pages):
         sec = pg["part"]["sec"]
         rewrite_anchors(sec, pg["file"])
         h1 = sec.find("h1")
-        if h1: h1.insert_before(BeautifulSoup('<div class="part-label">Part %02d</div>' % num, "html.parser"))
+        if h1: h1.insert_before(BeautifulSoup('<div class="part-label">Part %d</div>' % num, "html.parser"))
         body = page_toc(sec) + sec.decode()
 
     if pg["file"] == "p06-analysing-written-language.html":
@@ -1276,10 +1280,10 @@ for k, pg in enumerate(all_pages):
 
 # ---------------- landing ----------------
 def exemplar_groups_html(exemplars):
-    GROUPS = [("Section A \u00b7 Picnic at Hanging Rock", "p02-"),
-              ("Section A \u00b7 The Lottery and Other Stories", "p03-"),
-              ("Section B \u00b7 Creating Texts", "p05-"),
-              ("Section C \u00b7 Analysing Argument", "p06-")]
+    GROUPS = [("Section A: Picnic at Hanging Rock", "p02-"),
+              ("Section A: The Lottery and Other Stories", "p03-"),
+              ("Section B: Creating Texts", "p05-"),
+              ("Section C: Analysing Argument", "p06-")]
     out = []
     used = set()
     for label, prefix in GROUPS:
@@ -1330,32 +1334,32 @@ BLURB = {
  "Key Takeaways from the 2025 Assessment Report": "What VCAA assessors flagged in 2025 — topic verbs, Framework choices and the interplay discriminator.",
  "Effectively Studying For Exams": "Study habits, schedules, recall and wellbeing.",
 }
-cards = "".join('<a class="card %s" href="%s">%s<div class="card-num">%02d</div><div class="card-body"><h3>%s</h3><p>%s</p></div></a>'
-                % ("card-gold" if it["num"] >= 11 or it["num"] == 1 else "card-maroon",
-                   it["file"], icon_svg(it["title"]), it["num"], html.escape(it["title"]), html.escape(BLURB.get(it["title"], "")))
-                for it in nav_items)
+contents = "".join('<li><a href="%s"><span class="cl-num">%d</span><span class="cl-title">%s</span><span class="cl-blurb">%s</span></a></li>'
+                   % (it["file"], it["num"], html.escape(it["title"]), html.escape(BLURB.get(it["title"], "")))
+                   for it in nav_items)
 
 landing = """
-<section class="hero">
-  <div class="hero-inner">
-    <img class="hero-logo" src="assets/img/SOC%%20LOGO_VERTICAL.png" alt="South Oakleigh College logo">
-    <div class="hero-badge">South Oakleigh College</div>
-    <h1>VCE English<br>Exam Preparation Guide</h1>
-    <p class="hero-sub">Units 3/4 English &middot; For the VCE English Cohort of 2026</p>
-    <p class="hero-sub hero-sub2">Compiled by Mr. Morlin &middot; Version Sapere 8.1</p>
-    <p class="hero-lede">Annotated exemplar essays, thematic and character quote banks, scene-by-scene analyses, frameworks for every section of the examination, the assessors&rsquo; own insights from 2024 and 2025, and a suite of interactive study tools &mdash; from flashcards to a full exam generator. The complete guide to Units 3/4 English, refined for the web.</p>
-    <div class="hero-cta"><a class="btn" href="%s">Start reading &#8594;</a></div>
+<div class="home-top"><img src="assets/img/SOC%%20LOGO_VERTICAL.png" alt="">South Oakleigh College, VCE English Units 3 and 4</div>
+<section class="home-quote" aria-label="Opening quotation">
+  <div>
+    <blockquote>&lsquo;What we see and what we seem are but a dream, a dream within a dream.&rsquo;</blockquote>
+    <cite>Miranda, <i>Picnic at Hanging Rock</i></cite>
   </div>
+  <p class="margin-note">The gap between how things seem and what they are runs through both of your texts. Keep an eye on it.</p>
 </section>
-<div class="contents-row"><h2 class="section-head">Contents</h2><span id="resume-slot"></span></div>
-<div class="cards">%s</div>
-<h2 class="section-head">Examples of high marking responses</h2>
+<h1 class="home-title">VCE English Exam Preparation Guide</h1>
+<p class="home-meta">For students sitting the English exam in 2027. Compiled by Mr Morlin. Version Sapere 8.1.</p>
+<p class="home-lede">Notes and quote banks for <i>Picnic at Hanging Rock</i> and <i>The Lottery and Other Stories</i>, annotated sample responses for all three sections, practice tasks, what the assessors said in 2024 and 2025, and tools for revising.</p>
+<div class="home-actions"><a class="btn" href="%s">Start reading</a><span id="resume-slot"></span></div>
+<h2 class="home-h2">Contents</h2>
+<ol class="contents-list">%s</ol>
+<h2 class="home-h2">Sample responses</h2>
 %s
 <div class="site-foot">
-  <div class="sf-motto">Sapere Aude</div>
+  <div class="sf-motto">Sapere aude</div>
   <div class="sf-sub">This site is provided free and as-is for study purposes, without warranty of any kind. Content is offered in good faith but may contain errors &mdash; verify anything high-stakes with your teacher. External links lead to sites not controlled by the author, and no liability is accepted for their content or for any loss arising from use of this site.</div>
 </div>
-""" % (nav_items[0]["file"], cards,
+""" % (nav_items[0]["file"], contents,
        exemplar_groups_html(exemplars))
 open(os.path.join(PUBLIC, "index.html"), "w", encoding="utf-8").write(shell("Home", "", "index.html", landing))
 
