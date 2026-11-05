@@ -294,7 +294,7 @@ for pm in part_meta:
                  ("Section A: Analytical Response to a Text", "r25-section-a"),
                  ("Section B: Creating a Text", "r25-section-b"),
                  ("Section C: Analysis of Argument and Language", "r25-section-c"),
-                 ("Priority Checklist for 2026", "r25-checklist")]
+                 ("Priority Checklist for 2027", "r25-checklist")]
         ch_pages = [{"title": t, "file": sn + ".html",
                      "html": open(os.path.join(BUILD, "snippets", sn + ".html"), encoding="utf-8").read()}
                     for t, sn in chs25]
@@ -1624,7 +1624,7 @@ landing = """
 <section class="all-parts" aria-labelledby="parts-h"><h2 id="parts-h">All parts of the guide</h2><ol class="parts-list">%s</ol></section>
 <div class="site-foot">
   <div class="sf-motto">Sapere aude</div>
-  <div class="sf-sub">South Oakleigh College. Compiled by Mr Morlin, version Sapere 8.1. This site is provided free and as-is for study purposes, without warranty of any kind. Content is offered in good faith but may contain errors &mdash; check anything high-stakes with your teacher. External links lead to sites not controlled by the author, and no liability is accepted for their content or for any loss arising from use of this site.</div>
+  <div class="sf-sub">South Oakleigh College. Compiled by Mr Morlin, version Incipit 9.0.1. This site is provided free and as-is for study purposes, without warranty of any kind. Content is offered in good faith but may contain errors &mdash; check anything high-stakes with your teacher. External links lead to sites not controlled by the author, and no liability is accepted for their content or for any loss arising from use of this site.</div>
 </div>
 """ % (exam_band, before_links, contents)
 open(os.path.join(PUBLIC, "index.html"), "w", encoding="utf-8").write(shell("Home", "", "index.html", landing))
