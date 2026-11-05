@@ -1368,7 +1368,7 @@ for k, pg in enumerate(all_pages):
                       '<li>Your response will be assessed according to the Section C assessment criteria.</li></ul>'
                       '<p class="sc-label">Task</p><p>Write an analysis of the ways in which arguments, written and spoken language, and visuals are used in the material below to try to persuade the intended audience to share the point of view presented.</p>'
                       '<p class="sc-label">Background information</p>')
-            _years = {"our-local-gym": "2024 VCAA exam", "strapleton-community-voice": "2024 VCAA sample exam"}
+            _years = {"our-local-gym": "2024 VCAA exam", "strapleton-community-voice": "2024 VCAA sample exam", "an-open-letter": "2023 VCAA exam", "hapsey-happenings": "2022 VCAA exam"}
             # 2025 is rebuilt from the VCAA paper itself (the booklet copy had merged paragraphs)
             # 2024 and 2025 are rebuilt from the VCAA papers, with the exam's own images
             for _pre, _frag in (("lighting-the-way", "vcaa-2025.html"), ("our-local-gym", "vcaa-2024.html")):
@@ -1419,7 +1419,7 @@ for k, pg in enumerate(all_pages):
                 _s["class"] = _s.get("class", []) + ["sc-scenario"]
                 _s.append(_ins)
                 _s.append(_art)
-                _src = {"2024 VCAA exam": "VCAA 2024 VCE English examination", "2024 VCAA sample exam": "VCAA 2024 VCE English sample examination"}.get(_yr, "VCAA VCE English examination")
+                _src = {"2024 VCAA exam": "VCAA 2024 VCE English examination", "2024 VCAA sample exam": "VCAA 2024 VCE English sample examination", "2023 VCAA exam": "VCAA 2023 VCE English examination", "2022 VCAA exam": "VCAA 2022 VCE English examination"}.get(_yr, "VCAA VCE English examination")
                 _s.append(BeautifulSoup('<p class="sc-credit">Source: %s, Section C &copy; Victorian Curriculum and Assessment Authority.</p>' % _src, "html.parser"))
             # newest first: 2026, 2025, 2024, then the earlier tasks
             _rank = lambda s: 0 if s.get("id", "").startswith("vcaa-2025") else 1 if s.get("id", "").startswith("vcaa-2024") else 2 if s.get("id", "").startswith("strapleton") else 3
