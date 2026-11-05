@@ -1,16 +1,16 @@
 # Graph Report - ars-verbi  (2026-11-05)
 
 ## Corpus Check
-- 12 files · ~509,000 words
+- 12 files · ~512,376 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 507 nodes · 772 edges · 25 communities (22 shown, 3 thin omitted)
-- Extraction: 90% EXTRACTED · 10% INFERRED · 0% AMBIGUOUS · INFERRED: 80 edges (avg confidence: 0.7)
+- 515 nodes · 782 edges · 27 communities (24 shown, 3 thin omitted)
+- Extraction: 90% EXTRACTED · 10% INFERRED · 0% AMBIGUOUS · INFERRED: 82 edges (avg confidence: 0.7)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `f5c82728`
+- Built from commit: `86f3b56e`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -30,13 +30,15 @@
 - Appeals to Emotion and Values
 - Rhetorical and Structural Devices
 - Introduction and Context (Rainbow's End)
-- Visual Language
+- Strategies for Addressing the Requirements
+- Reasoning, Logic and Logical Fallacies
 - Week-by-Week Revision Program
 - build.py
 - site.js
 - Rainbow's End Quote Table
-- Creating Texts (Part 05 hub)
+- Visual Language
 - VCE English Exam Prep Guide (site)
+- Reasoning, Logic and Logical Fallacies
 - Deploy site to GitHub Pages (workflow)
 - 404 Page Not Found
 
@@ -57,12 +59,12 @@
   public/vocabulary.html → snippets/ss.html
 - `Deploy site to GitHub Pages (workflow)` --semantically_similar_to--> `GitLab Pages job`  [INFERRED] [semantically similar]
   .github/workflows/pages.yml → .gitlab-ci.yml
+- `run()` --indirect_call--> `i()`  [INFERRED]
+  site.js → public/assets/vendor/jszip.min.js
 - `run()` --indirect_call--> `r()`  [INFERRED]
   site.js → public/assets/vendor/jszip.min.js
 - `tick()` --indirect_call--> `c()`  [INFERRED]
   site.js → public/assets/vendor/jszip.min.js
-- `VCE English Exam Preparation Guide — Website (project)` --conceptually_related_to--> `VCE English Exam Prep Guide (site)`  [INFERRED]
-  README.md → HANDOVER.md
 
 ## Import Cycles
 - None detected.
@@ -78,7 +80,7 @@
 - **2025 Assessment Report section chain (hub + General/A/B/C + checklist)** — public_part_13_key_takeaways_from_the_2025_assessment_report, public_r25_general, public_r25_section_a, public_r25_section_b, public_r25_section_c, public_r25_checklist [EXTRACTED 1.00]
 - **2025 Assessment Report Chapter Cluster** — snippets_r25_hub, snippets_r25_general, snippets_r25_section_a, snippets_r25_section_b, snippets_r25_section_c, snippets_r25_checklist, snippets_report2025 [INFERRED 0.85]
 
-## Communities (25 total, 3 thin omitted)
+## Communities (27 total, 3 thin omitted)
 
 ### Community 0 - "Appeals to Emotion and Values"
 Cohesion: 0.11
@@ -113,7 +115,7 @@ Cohesion: 0.26
 Nodes (21): A(), c(), d(), f(), G(), h(), i(), j() (+13 more)
 
 ### Community 8 - "assets/site.js"
-Cohesion: 0.21
+Cohesion: 0.15
 Nodes (7): esc(), items(), load(), mark(), pad(), run(), tick()
 
 ### Community 9 - "Rhetorical and Structural Devices"
@@ -125,44 +127,52 @@ Cohesion: 0.71
 Nodes (8): VCAA 2025 English Examination Report, Priority Checklist for 2026, 2025 Report: General Exam Advice, Key Takeaways from the 2025 Assessment Report (hub intro), 2025 Report Section A: Analytical Response to a Text, 2025 Report Section B: Creating a Text, 2025 Report Section C: Analysis of Argument and Language, Key Takeaways from the 2025 Assessment Report (full assembled page)
 
 ### Community 11 - "Visual Language"
-Cohesion: 0.05
-Nodes (42): Analysing Argument: Persuasive Techniques (VCE Reference Table), Attack / ad hominem, Bandwagon, Caption, Caricature and exaggeration, Evidence and Support, Reasoning, Logic and Logical Fallacies, Tone (+34 more)
+Cohesion: 0.13
+Nodes (15): Caption, Caricature and exaggeration, Visual Language, Colour, Facial expression and body language, Gaze and vectors, Graphs and infographics, Labelling in cartoons (+7 more)
 
 ### Community 12 - "Appeals to Emotion and Values"
 Cohesion: 0.11
 Nodes (18): Appeal to authority / expert opinion, Appeal to common sense, Appeal to family values, Appeal to fear, Appeal to freedom and individual rights, Appeal to group loyalty / belonging, Appeal to guilt or shame, Appeal to hope / optimism (+10 more)
 
 ### Community 13 - "Rhetorical and Structural Devices"
-Cohesion: 0.08
-Nodes (24): Alliteration, Analogy, Anaphora, Anecdote, Antithesis, Call to action, Rhetorical and Structural Devices, Climactic ordering (+16 more)
+Cohesion: 0.05
+Nodes (39): Analysing Argument: Persuasive Techniques (VCE Reference Table), Alliteration, Analogy, Anaphora, Anecdote, Antithesis, Call to action, Evidence and Support (+31 more)
 
 ### Community 14 - "Introduction and Context (Rainbow's End)"
 Cohesion: 0.33
 Nodes (7): Cummeragunja (Aboriginal settlement), Jane Harrison (playwright), Papa Dear, Introduction and Context (Rainbow's End), Practice Analytical Text Response Topics (Rainbow's End), Rainbow's End (play), Stolen Generations
 
-### Community 16 - "Visual Language"
-Cohesion: 0.05
-Nodes (42): Analysing Argument: Persuasive Techniques (VCE Reference Table), Attack / ad hominem, Bandwagon, Caption, Caricature and exaggeration, Evidence and Support, Reasoning, Logic and Logical Fallacies, Tone (+34 more)
+### Community 15 - "Strategies for Addressing the Requirements"
+Cohesion: 0.23
+Nodes (20): VCAA 2024 English Assessment Report, Exam Format, Section A: Analytical Response to a Text (exam component, 20 marks), Section B: Creating a Text (exam component, 20 marks), Section C: Analysis of Argument and Language (exam component, 20 marks), Strategies for Addressing the Requirements, Section A Mark Allocation, Section B Mark Allocation (+12 more)
+
+### Community 16 - "Reasoning, Logic and Logical Fallacies"
+Cohesion: 0.07
+Nodes (27): Analysing Argument: Persuasive Techniques (VCE Reference Table), Attack / ad hominem, Bandwagon, Evidence and Support, Reasoning, Logic and Logical Fallacies, Tone, Circular reasoning, Comparison to other jurisdictions (+19 more)
 
 ### Community 17 - "Week-by-Week Revision Program"
-Cohesion: 0.08
-Nodes (57): Framework of Ideas (Section B), Rainbow's End (VCE text), Th.E.S.A.M.L. essay structure method, VCAA (Victorian Curriculum and Assessment Authority), VCAA 2024 English Assessment Report, VCAA 2025 English Examination Report, VCE English and EAL Study Design 2024–2027, Errol (Rainbow's End) (+49 more)
+Cohesion: 0.09
+Nodes (46): Framework of Ideas (Section B), Rainbow's End (VCE text), Th.E.S.A.M.L. essay structure method, VCAA (Victorian Curriculum and Assessment Authority), VCAA 2025 English Examination Report, VCE English and EAL Study Design 2024–2027, Errol (Rainbow's End), Essay Proofreading Checklist (+38 more)
 
 ### Community 18 - "build.py"
 Cohesion: 0.12
 Nodes (9): _clean(), fix_quotes(), _heading_chain(), nav_html(), polish_images(), Sub-headings start at h2 under the page h1; keep their original look via an…, Alt text for known images, lazy loading below the first image, WebP for large…, shell() (+1 more)
 
 ### Community 19 - "site.js"
-Cohesion: 0.21
+Cohesion: 0.15
 Nodes (7): esc(), items(), load(), mark(), pad(), run(), tick()
 
-### Community 21 - "Creating Texts (Part 05 hub)"
-Cohesion: 0.39
-Nodes (9): Audience (Creating Texts), Personal Journeys, Practice Stimuli, Purpose (Creating Texts), Sample Creating Texts Piece: 'The Path Less Taken' (19/20), Sample Creating Texts Piece: 'Finding My Way' (10/10), Sample Creating Texts Piece: 'This is Me' (10/10), Creating Texts (Part 05 hub) (+1 more)
+### Community 21 - "Visual Language"
+Cohesion: 0.13
+Nodes (15): Caption, Caricature and exaggeration, Visual Language, Colour, Facial expression and body language, Gaze and vectors, Graphs and infographics, Labelling in cartoons (+7 more)
 
 ### Community 22 - "VCE English Exam Prep Guide (site)"
 Cohesion: 0.18
 Nodes (12): api.anthropic.com (Essay Marker's AI backend, teacher-supplied key), Ask Max (AI assistant), LaTeX/Python build pipeline, Cloudflare Worker API (jolly-waterfall-d01a.nicholas-morlin.workers.dev), assets/embeddings.json (Ask Max retrieval index), Essay Marker, Exam Generator, GoatCounter (nmo.goatcounter.com) — anonymous page-view counts (+4 more)
+
+### Community 23 - "Reasoning, Logic and Logical Fallacies"
+Cohesion: 0.17
+Nodes (12): Attack / ad hominem, Bandwagon, Reasoning, Logic and Logical Fallacies, Circular reasoning, False dichotomy (either-or), Generalisation, Logical reasoning / cause and effect, Post hoc reasoning (+4 more)
 
 ## Knowledge Gaps
 - **255 isolated node(s):** `Deploy site to GitHub Pages (workflow)`, `GitLab Pages job`, `JSZip library (bundled locally in assets/vendor/)`, `Cloudflare Worker API (jolly-waterfall-d01a.nicholas-morlin.workers.dev)`, `GoatCounter (nmo.goatcounter.com) — anonymous page-view counts` (+250 more)
@@ -172,12 +182,12 @@ Nodes (12): api.anthropic.com (Essay Marker's AI backend, teacher-supplied key),
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `Week-by-Week Revision Program` connect `Week-by-Week Revision Program` to `Symbols and Motifs (Rainbow's End)`, `Effectively Studying For Exams (hub, displayed as Part 13)`, `Joe Gillis`, `Analysing Argument (Part 06 hub)`, `Creating Texts (Part 05 hub)`?**
-  _High betweenness centrality (0.090) - this node is a cross-community bridge._
+- **Why does `Week-by-Week Revision Program` connect `Week-by-Week Revision Program` to `Symbols and Motifs (Rainbow's End)`, `Effectively Studying For Exams (hub, displayed as Part 13)`, `Joe Gillis`, `Analysing Argument (Part 06 hub)`, `Strategies for Addressing the Requirements`?**
+  _High betweenness centrality (0.087) - this node is a cross-community bridge._
 - **Why does `Written Exemplars (Rainbow's End)` connect `Symbols and Motifs (Rainbow's End)` to `Week-by-Week Revision Program`?**
-  _High betweenness centrality (0.046) - this node is a cross-community bridge._
-- **Why does `Analysing Argument: Persuasive Techniques (VCE Reference Table)` connect `Visual Language` to `Appeals to Emotion and Values`, `Language and Word Choice`, `Rhetorical and Structural Devices`?**
-  _High betweenness centrality (0.035) - this node is a cross-community bridge._
+  _High betweenness centrality (0.045) - this node is a cross-community bridge._
+- **Why does `Analysing Argument: Persuasive Techniques (VCE Reference Table)` connect `Rhetorical and Structural Devices` to `Appeals to Emotion and Values`, `Language and Word Choice`, `Visual Language`, `Reasoning, Logic and Logical Fallacies`?**
+  _High betweenness centrality (0.034) - this node is a cross-community bridge._
 - **What connects `Deploy site to GitHub Pages (workflow)`, `GitLab Pages job`, `JSZip library (bundled locally in assets/vendor/)` to the rest of the system?**
   _255 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Appeals to Emotion and Values` be split into smaller, more focused modules?**

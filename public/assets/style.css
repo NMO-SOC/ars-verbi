@@ -826,3 +826,41 @@ mark.anno .anno-cat{font-size:var(--fs-xs)}
 .route h3{margin:0 0 .4em;color:var(--ink);font-size:1rem}
 .content .note-card h2,.content .note-card h3{border:0;padding:0}
 .quotes-page .page-toc li{border:0;background:none;padding:0;margin:3px 0;border-radius:0}
+
+/* ---- UX pass 2 ---- */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+.layout{transition:filter .8s ease-in-out}
+body.dream-blur .layout{filter:blur(2px)}
+.content img{height:auto;max-width:100%}
+/* phone search button */
+#search-toggle{display:none;position:fixed;top:14px;left:66px;z-index:200;width:44px;height:44px;border:0;border-radius:var(--r);
+  background:var(--accent);color:#fff;cursor:pointer;box-shadow:var(--shadow)}
+#search-toggle svg{display:block;margin:auto}
+@media(max-width:960px){#search-toggle{display:block}}
+[data-theme="dark"] #search-toggle{color:#1d1112}
+/* flashcard progress */
+.fc-judge{margin-top:.4em}
+.tool-bar button.fc-know{background:var(--accent);color:#fff;border-color:var(--accent)}
+[data-theme="dark"] .tool-bar button.fc-know{color:#1d1112}
+.tool-bar button.fc-reset{margin-left:auto;font-weight:600;color:var(--muted)}
+.content .fc-help{font-family:var(--sans);font-size:var(--fs-sm);color:var(--muted)}
+/* section links */
+.anchor-link{margin-left:.4em;font-family:var(--sans);font-weight:600;font-size:.8em;color:var(--muted);text-decoration:none;opacity:0}
+h2:hover>.anchor-link,h3:hover>.anchor-link,.anchor-link:focus-visible{opacity:1}
+.anchor-link:hover{color:var(--accent);text-decoration:none}
+@media (hover:none){.anchor-link{opacity:.45}}
+.mini-toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:300;background:var(--ink);color:var(--bg);
+  font-family:var(--sans);font-size:var(--fs-ui);padding:9px 16px;border-radius:var(--r);box-shadow:var(--shadow-pop)}
+/* done chapters */
+.done-btn{display:block;margin:48px 0 0;font-family:var(--sans);font-size:var(--fs-ui);font-weight:600;padding:10px 18px;
+  border:1px solid var(--line);border-radius:999px;background:var(--panel);color:var(--ink);cursor:pointer}
+.done-btn:hover{border-color:var(--accent);color:var(--accent)}
+.done-btn[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+.done-btn + .prevnext{margin-top:24px}
+.subnav a.is-done::after,.ch-card.is-done::after{content:"\2713";margin-left:6px;color:var(--accent);font-weight:700}
+.done-count{margin-left:auto;padding-left:8px;font-size:var(--fs-xs);color:var(--accent);font-weight:600}
+@media print{.done-btn,.anchor-link,#search-toggle{display:none!important}}
+.fc-judge .tool-count{margin-left:8px}

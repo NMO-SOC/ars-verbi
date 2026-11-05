@@ -10,6 +10,8 @@
       else if(refocus){toggle.focus();}
     }
     toggle.addEventListener('click',function(){setMenu(!sb.classList.contains('open'),false);});
+    var st=document.getElementById('search-toggle');
+    if(st)st.addEventListener('click',function(){setMenu(true,false);var s=document.getElementById('search');if(s)s.focus();});
     document.querySelector('.content').addEventListener('click',function(){if(sb.classList.contains('open'))setMenu(false,false);});
     document.addEventListener('keydown',function(e){
       if(e.key==='Escape'&&sb.classList.contains('open')&&getComputedStyle(toggle).display!=='none')setMenu(false,true);});
@@ -25,14 +27,16 @@
       if(q.length<2){out.classList.remove('show');out.innerHTML='';return;}
       load().then(function(data){
         var res=[],seen={};
-        for(var i=0;i<data.length&&res.length<40;i++){
+        for(var i=0;i<data.length&&res.length<300;i++){
           var t=data[i].t.toLowerCase(),p=data[i].p.toLowerCase(),b=(data[i].b||'').toLowerCase();
-          var hit=t.indexOf(q)>-1||p.indexOf(q)>-1?1:(b.indexOf(q)>-1?2:0);
+          var ti=t.indexOf(q);
+          var hit=ti>-1||p.indexOf(q)>-1?1:(b.indexOf(q)>-1?2:0);
           if(hit&&!seen[data[i].u]){seen[data[i].u]=1;
-            var r={t:data[i].t,p:data[i].p,u:data[i].u,s:''};
+            var r={t:data[i].t,p:data[i].p,u:data[i].u,s:'',o:i,rank:ti===0?0:ti>0?1:p.indexOf(q)>-1?2:3};
             if(hit===2){var k=b.indexOf(q);r.s=(k>40?'\u2026':'')+((data[i].b||'').substring(Math.max(0,k-40),k+60))+'\u2026';}
             res.push(r);}
         }
+        res.sort(function(a,b){return a.rank-b.rank||a.o-b.o;});res=res.slice(0,40);
         if(!res.length){out.innerHTML='<div class="nores" role="status">No matches for &ldquo;'+esc(box.value)+'&rdquo;. Try a shorter word, a character or story name (Tessie, Miranda, &lsquo;The Witch&rsquo;) or a skill (symbols, contention, Section C).</div>';out.classList.add('show');return;}
         function hl(s){var e=esc(s),i=e.toLowerCase().indexOf(q);if(i<0)return e;
           return e.substring(0,i)+'<b>'+e.substring(i,i+q.length)+'</b>'+e.substring(i+q.length);}
@@ -189,7 +193,7 @@
     try{
       if(!sessionStorage.getItem('midnightNudge')){
         sessionStorage.setItem('midnightNudge','1');
-        setTimeout(function(){toast("It's past midnight. Norma Desmond never slept either, and look how that ended. Go to bed — the quote banks will still be here tomorrow.",10000);},2500);
+        setTimeout(function(){toast("It's past midnight. Mrs Appleyard would have had you in bed hours ago. The quote banks will still be here tomorrow.",10000);},2500);
       }
     }catch(e){}
   }
@@ -198,13 +202,16 @@
   if(sb){
     sb.addEventListener('input',function(){
       var q=sb.value.trim().toLowerCase().replace(/[^a-z ]/g,'');
-      if(q==='closeup'||q==='close up'){
+      var still=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if(q==='a dream within a dream'||q==='dream within a dream'){
         sb.value='';
-        document.body.classList.add('closeup-zoom');
-        setTimeout(function(){toast("All right, Mr. DeMille, I'm ready for my close-up.",6000);},900);
-        setTimeout(function(){document.body.classList.remove('closeup-zoom');},3200);
+        if(!still){document.body.classList.add('dream-blur');setTimeout(function(){document.body.classList.remove('dream-blur');},2600);}
+        toast("\u2018What we see and what we seem are but a dream, a dream within a dream.\u2019",6000);
       }
-      if(/^(do a )?barr?ell? ?roll$/.test(q)){
+      if(q==='the lottery'){
+        toast("You drew a blank slip. Lucky. Keep revising.",5000);
+      }
+      if(/^(do a )?barr?ell? ?roll$/.test(q)&&!still){
         sb.value='';
         document.body.classList.remove('barrel-roll');
         void document.body.offsetWidth;
@@ -314,4 +321,58 @@
     new IntersectionObserver(function(en){btn.classList.toggle('show',!en[0].isIntersecting&&en[0].boundingClientRect.top<0);
       if(en[0].isIntersecting)set(false,false);}).observe(toc);
   }else{btn.classList.add('show');}
+})();
+
+
+/* Section links: a small link beside each section heading copies a direct link to it */
+(function(){
+  var content=document.querySelector('.content'); if(!content) return;
+  function note(msg){var n=document.createElement('div');n.className='mini-toast';n.setAttribute('role','status');n.textContent=msg;
+    document.body.appendChild(n);setTimeout(function(){n.remove();},2200);}
+  content.querySelectorAll('section[id] > h2, section[id] > h3').forEach(function(h){
+    if(h.closest('.page-toc,.exam-band,.sc-paper')) return;
+    var id=h.parentNode.id, a=document.createElement('a');
+    a.className='anchor-link';a.href='#'+id;a.setAttribute('aria-label','Copy link to '+h.textContent.trim());a.textContent='#';
+    a.addEventListener('click',function(e){
+      e.preventDefault();var url=location.href.split('#')[0]+'#'+id;
+      history.replaceState(null,'','#'+id);
+      if(navigator.clipboard){navigator.clipboard.writeText(url).then(function(){note('Link copied');},function(){note('Link: '+url);});}
+      else{note('Link: '+url);}
+    });
+    h.appendChild(a);
+  });
+})();
+
+/* Mark chapters as done: saved in this browser, shown in the sidebar and on part pages */
+(function(){
+  var KEY='donePages',done={};
+  try{done=JSON.parse(localStorage.getItem(KEY)||'{}');}catch(e){}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(done));}catch(e){}}
+  var here=location.pathname.split('/').pop()||'index.html';
+  function paint(){
+    document.querySelectorAll('.subnav a, .ch-card').forEach(function(a){
+      var f=(a.getAttribute('href')||'').split('#')[0];
+      var on=!!done[f];a.classList.toggle('is-done',on);
+      var sr=a.querySelector('.done-sr');
+      if(on&&!sr){sr=document.createElement('span');sr.className='vh done-sr';sr.textContent=' (done)';a.appendChild(sr);}
+      if(!on&&sr)sr.remove();
+    });
+    document.querySelectorAll('.toc li.grp').forEach(function(g){
+      var links=g.querySelectorAll('.subnav a'),n=0;
+      links.forEach(function(a){if(done[(a.getAttribute('href')||'').split('#')[0]])n++;});
+      var b=g.querySelector('.done-count');
+      if(!b){b=document.createElement('span');b.className='done-count';var s=g.querySelector('summary a');if(s)s.appendChild(b);}
+      b.textContent=n?n+'/'+links.length:'';
+      if(n)b.setAttribute('aria-label',n+' of '+links.length+' chapters done');else b.removeAttribute('aria-label');
+    });
+  }
+  var pos=document.querySelector('.content .ch-pos'), pn=document.querySelector('.content .prevnext');
+  if(pos&&pn){
+    var btn=document.createElement('button');btn.type='button';btn.className='done-btn';
+    function label(){var on=!!done[here];btn.setAttribute('aria-pressed',String(on));
+      btn.textContent=on?'✓ Done. Select to undo':'Mark this chapter as done';}
+    btn.addEventListener('click',function(){if(done[here])delete done[here];else done[here]=1;save();label();paint();});
+    label();pn.parentNode.insertBefore(btn,pn);
+  }
+  paint();
 })();

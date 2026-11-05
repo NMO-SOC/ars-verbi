@@ -251,10 +251,34 @@
       "norm_label": "apply_annotations()"
     },
     {
-      "label": "fix_quotes()",
+      "label": "shift_headings()",
       "file_type": "code",
       "source_file": "build.py",
       "source_location": "L1085",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "build_shift_headings",
+      "community": 18,
+      "community_name": "build.py",
+      "norm_label": "shift_headings()"
+    },
+    {
+      "label": "polish_images()",
+      "file_type": "code",
+      "source_file": "build.py",
+      "source_location": "L1113",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "build_polish_images",
+      "community": 18,
+      "community_name": "build.py",
+      "norm_label": "polish_images()"
+    },
+    {
+      "label": "fix_quotes()",
+      "file_type": "code",
+      "source_file": "build.py",
+      "source_location": "L1147",
       "_callable": true,
       "_origin": "ast",
       "id": "build_fix_quotes",
@@ -266,7 +290,7 @@
       "label": "shell()",
       "file_type": "code",
       "source_file": "build.py",
-      "source_location": "L1088",
+      "source_location": "L1150",
       "_callable": true,
       "_origin": "ast",
       "id": "build_shell",
@@ -278,7 +302,7 @@
       "label": "page_toc()",
       "file_type": "code",
       "source_file": "build.py",
-      "source_location": "L1136",
+      "source_location": "L1198",
       "_callable": true,
       "_origin": "ast",
       "id": "build_page_toc",
@@ -290,7 +314,7 @@
       "label": "exemplar_groups_html()",
       "file_type": "code",
       "source_file": "build.py",
-      "source_location": "L1404",
+      "source_location": "L1468",
       "_callable": true,
       "_origin": "ast",
       "id": "build_exemplar_groups_html",
@@ -302,7 +326,7 @@
       "label": "icon_svg()",
       "file_type": "code",
       "source_file": "build.py",
-      "source_location": "L1439",
+      "source_location": "L1503",
       "_callable": true,
       "_origin": "ast",
       "id": "build_icon_svg",
@@ -314,13 +338,35 @@
       "label": "_sec()",
       "file_type": "code",
       "source_file": "build.py",
-      "source_location": "L1462",
+      "source_location": "L1526",
       "_callable": true,
       "_origin": "ast",
       "id": "build_sec",
       "community": 18,
       "community_name": "build.py",
       "norm_label": "_sec()"
+    },
+    {
+      "label": "Sub-headings start at h2 under the page h1; keep their original look via an\u2026",
+      "file_type": "rationale",
+      "source_file": "build.py",
+      "source_location": "L1086",
+      "_origin": "ast",
+      "id": "build_rationale_1086",
+      "community": 18,
+      "community_name": "build.py",
+      "norm_label": "sub-headings start at h2 under the page h1; keep their original look via an..."
+    },
+    {
+      "label": "Alt text for known images, lazy loading below the first image, WebP for large\u2026",
+      "file_type": "rationale",
+      "source_file": "build.py",
+      "source_location": "L1114",
+      "_origin": "ast",
+      "id": "build_rationale_1114",
+      "community": 18,
+      "community_name": "build.py",
+      "norm_label": "alt text for known images, lazy loading below the first image, webp for large..."
     },
     {
       "label": "make_web_template.py",
@@ -357,10 +403,22 @@
       "norm_label": "assets/site.js"
     },
     {
+      "label": "setMenu()",
+      "file_type": "code",
+      "source_file": "public/assets/site.js",
+      "source_location": "L6",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "public_assets_site_setmenu",
+      "community": 8,
+      "community_name": "assets/site.js",
+      "norm_label": "setmenu()"
+    },
+    {
       "label": "load()",
       "file_type": "code",
       "source_file": "public/assets/site.js",
-      "source_location": "L8",
+      "source_location": "L20",
       "_callable": true,
       "_origin": "ast",
       "id": "public_assets_site_load",
@@ -372,7 +430,7 @@
       "label": "esc()",
       "file_type": "code",
       "source_file": "public/assets/site.js",
-      "source_location": "L10",
+      "source_location": "L22",
       "_callable": true,
       "_origin": "ast",
       "id": "public_assets_site_esc",
@@ -384,7 +442,7 @@
       "label": "run()",
       "file_type": "code",
       "source_file": "public/assets/site.js",
-      "source_location": "L11",
+      "source_location": "L23",
       "_callable": true,
       "_origin": "ast",
       "id": "public_assets_site_run",
@@ -393,10 +451,34 @@
       "norm_label": "run()"
     },
     {
+      "label": "items()",
+      "file_type": "code",
+      "source_file": "public/assets/site.js",
+      "source_location": "L51",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "public_assets_site_items",
+      "community": 8,
+      "community_name": "assets/site.js",
+      "norm_label": "items()"
+    },
+    {
+      "label": "mark()",
+      "file_type": "code",
+      "source_file": "public/assets/site.js",
+      "source_location": "L52",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "public_assets_site_mark",
+      "community": 8,
+      "community_name": "assets/site.js",
+      "norm_label": "mark()"
+    },
+    {
       "label": "pad()",
       "file_type": "code",
       "source_file": "public/assets/site.js",
-      "source_location": "L45",
+      "source_location": "L71",
       "_callable": true,
       "_origin": "ast",
       "id": "public_assets_site_pad",
@@ -408,7 +490,7 @@
       "label": "tick()",
       "file_type": "code",
       "source_file": "public/assets/site.js",
-      "source_location": "L46",
+      "source_location": "L72",
       "_callable": true,
       "_origin": "ast",
       "id": "public_assets_site_tick",
@@ -420,7 +502,7 @@
       "label": "upd()",
       "file_type": "code",
       "source_file": "public/assets/site.js",
-      "source_location": "L86",
+      "source_location": "L112",
       "_callable": true,
       "_origin": "ast",
       "id": "public_assets_site_upd",
@@ -432,7 +514,7 @@
       "label": "toast()",
       "file_type": "code",
       "source_file": "public/assets/site.js",
-      "source_location": "L153",
+      "source_location": "L180",
       "_callable": true,
       "_origin": "ast",
       "id": "public_assets_site_toast",
@@ -444,13 +526,25 @@
       "label": "show()",
       "file_type": "code",
       "source_file": "public/assets/site.js",
-      "source_location": "L260",
+      "source_location": "L287",
       "_callable": true,
       "_origin": "ast",
       "id": "public_assets_site_show",
       "community": 8,
       "community_name": "assets/site.js",
       "norm_label": "show()"
+    },
+    {
+      "label": "set()",
+      "file_type": "code",
+      "source_file": "public/assets/site.js",
+      "source_location": "L307",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "public_assets_site_set",
+      "community": 8,
+      "community_name": "assets/site.js",
+      "norm_label": "set()"
     },
     {
       "label": "jszip.min.js",
@@ -751,10 +845,22 @@
       "norm_label": "site.js"
     },
     {
+      "label": "setMenu()",
+      "file_type": "code",
+      "source_file": "site.js",
+      "source_location": "L6",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "site_setmenu",
+      "community": 19,
+      "community_name": "site.js",
+      "norm_label": "setmenu()"
+    },
+    {
       "label": "load()",
       "file_type": "code",
       "source_file": "site.js",
-      "source_location": "L8",
+      "source_location": "L20",
       "_callable": true,
       "_origin": "ast",
       "id": "site_load",
@@ -766,7 +872,7 @@
       "label": "esc()",
       "file_type": "code",
       "source_file": "site.js",
-      "source_location": "L10",
+      "source_location": "L22",
       "_callable": true,
       "_origin": "ast",
       "id": "site_esc",
@@ -778,7 +884,7 @@
       "label": "run()",
       "file_type": "code",
       "source_file": "site.js",
-      "source_location": "L11",
+      "source_location": "L23",
       "_callable": true,
       "_origin": "ast",
       "id": "site_run",
@@ -787,10 +893,34 @@
       "norm_label": "run()"
     },
     {
+      "label": "items()",
+      "file_type": "code",
+      "source_file": "site.js",
+      "source_location": "L51",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "site_items",
+      "community": 19,
+      "community_name": "site.js",
+      "norm_label": "items()"
+    },
+    {
+      "label": "mark()",
+      "file_type": "code",
+      "source_file": "site.js",
+      "source_location": "L52",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "site_mark",
+      "community": 19,
+      "community_name": "site.js",
+      "norm_label": "mark()"
+    },
+    {
       "label": "pad()",
       "file_type": "code",
       "source_file": "site.js",
-      "source_location": "L45",
+      "source_location": "L71",
       "_callable": true,
       "_origin": "ast",
       "id": "site_pad",
@@ -802,7 +932,7 @@
       "label": "tick()",
       "file_type": "code",
       "source_file": "site.js",
-      "source_location": "L46",
+      "source_location": "L72",
       "_callable": true,
       "_origin": "ast",
       "id": "site_tick",
@@ -814,7 +944,7 @@
       "label": "upd()",
       "file_type": "code",
       "source_file": "site.js",
-      "source_location": "L86",
+      "source_location": "L112",
       "_callable": true,
       "_origin": "ast",
       "id": "site_upd",
@@ -826,7 +956,7 @@
       "label": "toast()",
       "file_type": "code",
       "source_file": "site.js",
-      "source_location": "L153",
+      "source_location": "L180",
       "_callable": true,
       "_origin": "ast",
       "id": "site_toast",
@@ -838,13 +968,25 @@
       "label": "show()",
       "file_type": "code",
       "source_file": "site.js",
-      "source_location": "L260",
+      "source_location": "L287",
       "_callable": true,
       "_origin": "ast",
       "id": "site_show",
       "community": 19,
       "community_name": "site.js",
       "norm_label": "show()"
+    },
+    {
+      "label": "set()",
+      "file_type": "code",
+      "source_file": "site.js",
+      "source_location": "L307",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "site_set",
+      "community": 19,
+      "community_name": "site.js",
+      "norm_label": "set()"
     },
     {
       "label": "Deploy site to GitHub Pages (workflow)",
@@ -1126,10 +1268,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 17,
       "norm_label": "vce english exam preparation guide (homepage)",
       "_origin": "semantic",
-      "community_name": "Joe Gillis",
+      "community_name": "Week-by-Week Revision Program",
       "id": "public_index"
     },
     {
@@ -2089,7 +2231,7 @@
       "community": 6,
       "norm_label": "analysing visual language",
       "_origin": "semantic",
-      "community_name": "Analysing Written Language",
+      "community_name": "Analysing Argument (Part 06 hub)",
       "id": "public_p06_analysing_visual_language"
     },
     {
@@ -2690,7 +2832,7 @@
       "community": 6,
       "norm_label": "analysing written language",
       "_origin": "semantic",
-      "community_name": "Analysing Written Language",
+      "community_name": "Analysing Argument (Part 06 hub)",
       "id": "public_p06_analysing_written_language"
     },
     {
@@ -2705,7 +2847,7 @@
       "community": 6,
       "norm_label": "essay structure",
       "_origin": "semantic",
-      "community_name": "Analysing Written Language",
+      "community_name": "Analysing Argument (Part 06 hub)",
       "id": "public_p06_essay_structure"
     },
     {
@@ -2717,10 +2859,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 15,
+      "community": 6,
       "norm_label": "practice articles for analysis",
       "_origin": "semantic",
-      "community_name": "Section C from Previous Exams",
+      "community_name": "Analysing Argument (Part 06 hub)",
       "id": "public_p06_practice_articles_for_analysis"
     },
     {
@@ -2732,10 +2874,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 6,
       "norm_label": "sample analysing argument essays",
       "_origin": "semantic",
-      "community_name": "Sample Analysing Argument Essays",
+      "community_name": "Analysing Argument (Part 06 hub)",
       "id": "public_p06_sample_analysing_argument_essays"
     },
     {
@@ -2747,10 +2889,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 15,
+      "community": 6,
       "norm_label": "section c from previous exams",
       "_origin": "semantic",
-      "community_name": "Section C from Previous Exams",
+      "community_name": "Analysing Argument (Part 06 hub)",
       "id": "public_p06_section_c_from_previous_exams"
     },
     {
@@ -2762,10 +2904,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 17,
       "norm_label": "exam format",
       "_origin": "semantic",
-      "community_name": "Sample Analysing Argument Essays",
+      "community_name": "Week-by-Week Revision Program",
       "id": "public_p07_exam_format"
     },
     {
@@ -2777,10 +2919,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 17,
       "norm_label": "strategies for addressing the requirements",
       "_origin": "semantic",
-      "community_name": "Sample Analysing Argument Essays",
+      "community_name": "Week-by-Week Revision Program",
       "id": "public_p07_strategies_for_addressing_the_requirements"
     },
     {
@@ -2792,10 +2934,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 17,
       "norm_label": "section a mark allocation",
       "_origin": "semantic",
-      "community_name": "Sample Analysing Argument Essays",
+      "community_name": "Week-by-Week Revision Program",
       "id": "public_p09_section_a_mark_allocation"
     },
     {
@@ -2807,10 +2949,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 17,
       "norm_label": "section b mark allocation",
       "_origin": "semantic",
-      "community_name": "Sample Analysing Argument Essays",
+      "community_name": "Week-by-Week Revision Program",
       "id": "public_p09_section_b_mark_allocation"
     },
     {
@@ -2822,10 +2964,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 17,
       "norm_label": "section c mark allocation",
       "_origin": "semantic",
-      "community_name": "Sample Analysing Argument Essays",
+      "community_name": "Week-by-Week Revision Program",
       "id": "public_p09_section_c_mark_allocation"
     },
     {
@@ -2837,10 +2979,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 17,
       "norm_label": "general checklist for section a response",
       "_origin": "semantic",
-      "community_name": "Sample Analysing Argument Essays",
+      "community_name": "Week-by-Week Revision Program",
       "id": "public_p10_general_checklist_for_section_a_response"
     },
     {
@@ -2852,10 +2994,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 17,
       "norm_label": "general checklist for section b response",
       "_origin": "semantic",
-      "community_name": "Sample Analysing Argument Essays",
+      "community_name": "Week-by-Week Revision Program",
       "id": "public_p10_general_checklist_for_section_b_response"
     },
     {
@@ -2867,10 +3009,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 17,
       "norm_label": "general checklist for section c response",
       "_origin": "semantic",
-      "community_name": "Sample Analysing Argument Essays",
+      "community_name": "Week-by-Week Revision Program",
       "id": "public_p10_general_checklist_for_section_c_response"
     },
     {
@@ -2882,10 +3024,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 17,
       "norm_label": "final advice",
       "_origin": "semantic",
-      "community_name": "Sample Analysing Argument Essays",
+      "community_name": "Week-by-Week Revision Program",
       "id": "public_p11_final_advice"
     },
     {
@@ -2897,10 +3039,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 17,
       "norm_label": "final exam checklist",
       "_origin": "semantic",
-      "community_name": "Sample Analysing Argument Essays",
+      "community_name": "Week-by-Week Revision Program",
       "id": "public_p11_final_exam_checklist"
     },
     {
@@ -2912,10 +3054,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 17,
       "norm_label": "general exam advice",
       "_origin": "semantic",
-      "community_name": "Sample Analysing Argument Essays",
+      "community_name": "Week-by-Week Revision Program",
       "id": "public_p11_general_exam_advice"
     },
     {
@@ -2927,10 +3069,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 17,
       "norm_label": "section a: analytical response to a text",
       "_origin": "semantic",
-      "community_name": "Sample Analysing Argument Essays",
+      "community_name": "Week-by-Week Revision Program",
       "id": "public_p11_section_a_analytical_response_to_a_text"
     },
     {
@@ -2942,10 +3084,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 17,
       "norm_label": "section b - creating a text (framework of ideas)",
       "_origin": "semantic",
-      "community_name": "Sample Analysing Argument Essays",
+      "community_name": "Week-by-Week Revision Program",
       "id": "public_p11_section_b_creating_a_text_framework_of_ideas"
     },
     {
@@ -2957,10 +3099,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 17,
       "norm_label": "section c - analysing argument",
       "_origin": "semantic",
-      "community_name": "Sample Analysing Argument Essays",
+      "community_name": "Week-by-Week Revision Program",
       "id": "public_p11_section_c_analysing_argument"
     },
     {
@@ -2972,10 +3114,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 17,
+      "community": 3,
       "norm_label": "assess your current study habits",
       "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
+      "community_name": "Effectively Studying For Exams (hub, displayed as Part 13)",
       "id": "public_p12_assess_your_current_study_habits"
     },
     {
@@ -2987,10 +3129,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 17,
+      "community": 3,
       "norm_label": "collaborate with study groups",
       "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
+      "community_name": "Effectively Studying For Exams (hub, displayed as Part 13)",
       "id": "public_p12_collaborate_with_study_groups"
     },
     {
@@ -3002,10 +3144,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 17,
+      "community": 3,
       "norm_label": "create a personalised study schedule",
       "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
+      "community_name": "Effectively Studying For Exams (hub, displayed as Part 13)",
       "id": "public_p12_create_a_personalised_study_schedule"
     },
     {
@@ -3017,10 +3159,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 17,
+      "community": 3,
       "norm_label": "develop a healthy study-life balance",
       "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
+      "community_name": "Effectively Studying For Exams (hub, displayed as Part 13)",
       "id": "public_p12_develop_a_healthy_study_life_balance"
     },
     {
@@ -3032,10 +3174,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 17,
+      "community": 3,
       "norm_label": "fine-tune your exam day strategy",
       "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
+      "community_name": "Effectively Studying For Exams (hub, displayed as Part 13)",
       "id": "public_p12_fine_tune_your_exam_day_strategy"
     },
     {
@@ -3047,10 +3189,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 17,
+      "community": 3,
       "norm_label": "implement active recall and spaced repetition",
       "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
+      "community_name": "Effectively Studying For Exams (hub, displayed as Part 13)",
       "id": "public_p12_implement_active_recall_and_spaced_repetition"
     },
     {
@@ -3062,10 +3204,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 17,
       "norm_label": "section a: analytical response to a text (exam component, 20 marks)",
       "_origin": "semantic",
-      "community_name": "Sample Analysing Argument Essays",
+      "community_name": "Week-by-Week Revision Program",
       "id": "public_p07_exam_format_section_a"
     },
     {
@@ -3077,10 +3219,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 17,
       "norm_label": "section b: creating a text (exam component, 20 marks)",
       "_origin": "semantic",
-      "community_name": "Sample Analysing Argument Essays",
+      "community_name": "Week-by-Week Revision Program",
       "id": "public_p07_exam_format_section_b"
     },
     {
@@ -3092,10 +3234,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 17,
       "norm_label": "section c: analysis of argument and language (exam component, 20 marks)",
       "_origin": "semantic",
-      "community_name": "Sample Analysing Argument Essays",
+      "community_name": "Week-by-Week Revision Program",
       "id": "public_p07_exam_format_section_c"
     },
     {
@@ -3110,7 +3252,7 @@
       "community": 6,
       "norm_label": "table of common persuasive techniques",
       "_origin": "semantic",
-      "community_name": "Analysing Written Language",
+      "community_name": "Analysing Argument (Part 06 hub)",
       "id": "public_p06_analysing_written_language_persuasive_techniques_table"
     },
     {
@@ -3125,7 +3267,7 @@
       "community": 6,
       "norm_label": "table of verbs for authorial intent",
       "_origin": "semantic",
-      "community_name": "Analysing Written Language",
+      "community_name": "Analysing Argument (Part 06 hub)",
       "id": "public_p06_analysing_written_language_verbs_authorial_intent"
     },
     {
@@ -3140,7 +3282,7 @@
       "community": 6,
       "norm_label": "table of adjectives describing tone",
       "_origin": "semantic",
-      "community_name": "Analysing Written Language",
+      "community_name": "Analysing Argument (Part 06 hub)",
       "id": "public_p06_analysing_written_language_tone_adjectives_table"
     },
     {
@@ -3155,7 +3297,7 @@
       "community": 6,
       "norm_label": "table of linking words and phrases",
       "_origin": "semantic",
-      "community_name": "Analysing Written Language",
+      "community_name": "Analysing Argument (Part 06 hub)",
       "id": "public_p06_analysing_written_language_linking_words_table"
     },
     {
@@ -3170,7 +3312,7 @@
       "community": 6,
       "norm_label": "persuasive techniques reference (pdf)",
       "_origin": "semantic",
-      "community_name": "Analysing Written Language",
+      "community_name": "Analysing Argument (Part 06 hub)",
       "id": "public_p06_analysing_written_language_persuasive_techniques_pdf"
     },
     {
@@ -3185,7 +3327,7 @@
       "community": 6,
       "norm_label": "analysing argument introduction framework",
       "_origin": "semantic",
-      "community_name": "Analysing Written Language",
+      "community_name": "Analysing Argument (Part 06 hub)",
       "id": "public_p06_essay_structure_introduction_framework"
     },
     {
@@ -3200,7 +3342,7 @@
       "community": 6,
       "norm_label": "what/how/why body paragraph framework",
       "_origin": "semantic",
-      "community_name": "Analysing Written Language",
+      "community_name": "Analysing Argument (Part 06 hub)",
       "id": "public_p06_essay_structure_body_paragraph_framework"
     },
     {
@@ -3215,7 +3357,7 @@
       "community": 6,
       "norm_label": "w.a.s.t.e.: f.a.t. sentence-building technique",
       "_origin": "semantic",
-      "community_name": "Analysing Written Language",
+      "community_name": "Analysing Argument (Part 06 hub)",
       "id": "public_p06_essay_structure_waste_fat_technique"
     },
     {
@@ -3230,7 +3372,7 @@
       "community": 6,
       "norm_label": "positive/neutral/negative tone vocabulary banks",
       "_origin": "semantic",
-      "community_name": "Analysing Written Language",
+      "community_name": "Analysing Argument (Part 06 hub)",
       "id": "public_p06_essay_structure_tone_vocabulary_banks"
     },
     {
@@ -3242,10 +3384,10 @@
       "captured_at": null,
       "author": "Tracey Cheung",
       "contributor": null,
-      "community": 15,
+      "community": 6,
       "norm_label": "this book week, let's celebrate the power of reading (not just the costumes)",
       "_origin": "semantic",
-      "community_name": "Section C from Previous Exams",
+      "community_name": "Analysing Argument (Part 06 hub)",
       "id": "public_p06_practice_articles_for_analysis_book_week_article"
     },
     {
@@ -3257,10 +3399,10 @@
       "captured_at": null,
       "author": "Daniel Cash",
       "contributor": null,
-      "community": 15,
+      "community": 6,
       "norm_label": "i'm melbourne grammar's school captain and i'm gay. the presbyterian church would have me sacked",
       "_origin": "semantic",
-      "community_name": "Section C from Previous Exams",
+      "community_name": "Analysing Argument (Part 06 hub)",
       "id": "public_p06_practice_articles_for_analysis_melbourne_grammar_article"
     },
     {
@@ -3272,10 +3414,10 @@
       "captured_at": null,
       "author": "Malcolm Knox",
       "contributor": null,
-      "community": 15,
+      "community": 6,
       "norm_label": "confession of a knox grammar old boy: my son won't lose sleep as i have",
       "_origin": "semantic",
-      "community_name": "Section C from Previous Exams",
+      "community_name": "Analysing Argument (Part 06 hub)",
       "id": "public_p06_practice_articles_for_analysis_knox_grammar_article"
     },
     {
@@ -3287,10 +3429,10 @@
       "captured_at": null,
       "author": "Lidia Thorpe",
       "contributor": null,
-      "community": 15,
+      "community": 6,
       "norm_label": "don't ask me to give the queen a minute's silence, ask me for the truth about british colonialism",
       "_origin": "semantic",
-      "community_name": "Section C from Previous Exams",
+      "community_name": "Analysing Argument (Part 06 hub)",
       "id": "public_p06_practice_articles_for_analysis_queen_colonialism_article"
     },
     {
@@ -3302,10 +3444,10 @@
       "captured_at": null,
       "author": "Anonymous",
       "contributor": null,
-      "community": 0,
+      "community": 6,
       "norm_label": "i started using heroin decades ago. the rejection of a melbourne cbd injecting room feels like a rejection of me (the guardian)",
       "_origin": "semantic",
-      "community_name": "Sample Analysing Argument Essays",
+      "community_name": "Analysing Argument (Part 06 hub)",
       "id": "public_p06_sample_analysing_argument_essays_heroin_injecting_room_article"
     },
     {
@@ -3317,10 +3459,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 6,
       "norm_label": "sample essay i (injecting room analysis)",
       "_origin": "semantic",
-      "community_name": "Sample Analysing Argument Essays",
+      "community_name": "Analysing Argument (Part 06 hub)",
       "id": "public_p06_sample_analysing_argument_essays_sample_essay_i"
     },
     {
@@ -3332,10 +3474,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 6,
       "norm_label": "sample essay ii (injecting room analysis)",
       "_origin": "semantic",
-      "community_name": "Sample Analysing Argument Essays",
+      "community_name": "Analysing Argument (Part 06 hub)",
       "id": "public_p06_sample_analysing_argument_essays_sample_essay_ii"
     },
     {
@@ -3347,10 +3489,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 6,
       "norm_label": "sample essay iii (injecting room analysis)",
       "_origin": "semantic",
-      "community_name": "Sample Analysing Argument Essays",
+      "community_name": "Analysing Argument (Part 06 hub)",
       "id": "public_p06_sample_analysing_argument_essays_sample_essay_iii"
     },
     {
@@ -3362,10 +3504,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 6,
       "norm_label": "section c annotation categories (structure & evidence, audience positioning, language & technique, ideas & interpretation)",
       "_origin": "semantic",
-      "community_name": "Sample Analysing Argument Essays",
+      "community_name": "Analysing Argument (Part 06 hub)",
       "id": "public_p06_sample_analysing_argument_essays_annotation_categories"
     },
     {
@@ -3377,10 +3519,10 @@
       "captured_at": null,
       "author": "Daphne Lower",
       "contributor": null,
-      "community": 15,
+      "community": 6,
       "norm_label": "strapleton community voice: public post by daphne lower",
       "_origin": "semantic",
-      "community_name": "Section C from Previous Exams",
+      "community_name": "Analysing Argument (Part 06 hub)",
       "id": "public_p06_section_c_from_previous_exams_strapleton_community_voice"
     },
     {
@@ -3392,10 +3534,10 @@
       "captured_at": null,
       "author": "Sandy Gestalt",
       "contributor": null,
-      "community": 15,
+      "community": 6,
       "norm_label": "our local gym: emergency meeting speech by sandy gestalt",
       "_origin": "semantic",
-      "community_name": "Section C from Previous Exams",
+      "community_name": "Analysing Argument (Part 06 hub)",
       "id": "public_p06_section_c_from_previous_exams_our_local_gym_speech"
     },
     {
@@ -3407,10 +3549,10 @@
       "captured_at": null,
       "author": "Jack Adut",
       "contributor": null,
-      "community": 15,
+      "community": 6,
       "norm_label": "lighting the way: a new year, a new celebration",
       "_origin": "semantic",
-      "community_name": "Section C from Previous Exams",
+      "community_name": "Analysing Argument (Part 06 hub)",
       "id": "public_p06_section_c_from_previous_exams_lighting_the_way_article"
     },
     {
@@ -3422,10 +3564,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 15,
+      "community": 6,
       "norm_label": "an open letter from the student music leadership group, narrow valley",
       "_origin": "semantic",
-      "community_name": "Section C from Previous Exams",
+      "community_name": "Analysing Argument (Part 06 hub)",
       "id": "public_p06_section_c_from_previous_exams_narrow_valley_open_letter"
     },
     {
@@ -3437,10 +3579,10 @@
       "captured_at": null,
       "author": "Janelle Tanley",
       "contributor": null,
-      "community": 15,
+      "community": 6,
       "norm_label": "hapsey happenings - transcript of podcast, episode 32",
       "_origin": "semantic",
-      "community_name": "Section C from Previous Exams",
+      "community_name": "Analysing Argument (Part 06 hub)",
       "id": "public_p06_section_c_from_previous_exams_hapsey_happenings_podcast"
     },
     {
@@ -3452,10 +3594,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 17,
+      "community": 3,
       "norm_label": "pomodoro method",
       "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
+      "community_name": "Effectively Studying For Exams (hub, displayed as Part 13)",
       "id": "public_p12_develop_a_healthy_study_life_balance_pomodoro_technique"
     },
     {
@@ -3467,10 +3609,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 17,
+      "community": 3,
       "norm_label": "smart goals",
       "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
+      "community_name": "Effectively Studying For Exams (hub, displayed as Part 13)",
       "id": "public_p12_assess_your_current_study_habits_smart_goals"
     },
     {
@@ -3482,10 +3624,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 17,
+      "community": 3,
       "norm_label": "active recall (self-testing)",
       "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
+      "community_name": "Effectively Studying For Exams (hub, displayed as Part 13)",
       "id": "public_p12_implement_active_recall_and_spaced_repetition_active_recall"
     },
     {
@@ -3497,10 +3639,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 17,
+      "community": 3,
       "norm_label": "spaced repetition",
       "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
+      "community_name": "Effectively Studying For Exams (hub, displayed as Part 13)",
       "id": "public_p12_implement_active_recall_and_spaced_repetition_spaced_repetition"
     },
     {
@@ -3512,10 +3654,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 17,
+      "community": 3,
       "norm_label": "organise your study materials",
       "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
+      "community_name": "Effectively Studying For Exams (hub, displayed as Part 13)",
       "id": "public_p12_organise_your_study_materials"
     },
     {
@@ -3527,10 +3669,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 17,
+      "community": 3,
       "norm_label": "seek help when needed",
       "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
+      "community_name": "Effectively Studying For Exams (hub, displayed as Part 13)",
       "id": "public_p12_seek_help_when_needed"
     },
     {
@@ -3542,10 +3684,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 17,
+      "community": 3,
       "norm_label": "utilise practice exams and past papers",
       "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
+      "community_name": "Effectively Studying For Exams (hub, displayed as Part 13)",
       "id": "public_p12_utilise_practice_exams_and_past_papers"
     },
     {
@@ -3602,10 +3744,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 17,
+      "community": 6,
       "norm_label": "analysing argument (part 06 hub)",
       "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
+      "community_name": "Analysing Argument (Part 06 hub)",
       "id": "public_part_06_analysing_argument"
     },
     {
@@ -3617,10 +3759,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 17,
       "norm_label": "the exam (part 07 hub)",
       "_origin": "semantic",
-      "community_name": "Sample Analysing Argument Essays",
+      "community_name": "Week-by-Week Revision Program",
       "id": "public_part_07_the_exam"
     },
     {
@@ -3677,10 +3819,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 17,
       "norm_label": "key takeaways from the 2024 assessment report (part 11 hub)",
       "_origin": "semantic",
-      "community_name": "Sample Analysing Argument Essays",
+      "community_name": "Week-by-Week Revision Program",
       "id": "public_part_11_key_takeaways_from_the_2024_assessment_report"
     },
     {
@@ -3692,10 +3834,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 17,
+      "community": 3,
       "norm_label": "effectively studying for exams (hub, displayed as part 13)",
       "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
+      "community_name": "Effectively Studying For Exams (hub, displayed as Part 13)",
       "id": "public_part_12_effectively_studying_for_exams"
     },
     {
@@ -3887,10 +4029,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 17,
       "norm_label": "vcaa 2024 english assessment report",
       "_origin": "semantic",
-      "community_name": "Sample Analysing Argument Essays",
+      "community_name": "Week-by-Week Revision Program",
       "id": "concept_vcaa_2024_examiners_report"
     },
     {
@@ -3992,10 +4134,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 17,
+      "community": 6,
       "norm_label": "vocabulary upgrader swap dictionary (vu js data)",
       "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
+      "community_name": "Analysing Argument (Part 06 hub)",
       "id": "public_vocab_upgrader_vu_data"
     },
     {
@@ -4007,10 +4149,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 17,
+      "community": 6,
       "norm_label": "high-scoring vocabulary bank (public page)",
       "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
+      "community_name": "Analysing Argument (Part 06 hub)",
       "id": "public_vocabulary"
     },
     {
@@ -4187,10 +4329,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 17,
+      "community": 6,
       "norm_label": "sentence starters and linking words table",
       "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
+      "community_name": "Analysing Argument (Part 06 hub)",
       "id": "snippets_ss"
     },
     {
@@ -4217,10 +4359,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 17,
+      "community": 6,
       "norm_label": "high-scoring vocabulary bank (snippet)",
       "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
+      "community_name": "Analysing Argument (Part 06 hub)",
       "id": "snippets_vocab"
     },
     {
@@ -4251,7 +4393,7 @@
       "community": 11,
       "norm_label": "analysing argument: persuasive techniques (vce reference table)",
       "_origin": "semantic",
-      "community_name": "Appeals to Emotion and Values",
+      "community_name": "Visual Language",
       "id": "localpdf_persuasive_techniques_reference"
     },
     {
@@ -4263,7 +4405,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 0,
       "norm_label": "appeals to emotion and values",
       "_origin": "semantic",
       "community_name": "Appeals to Emotion and Values",
@@ -4278,7 +4420,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 0,
       "norm_label": "appeal to fear",
       "_origin": "semantic",
       "community_name": "Appeals to Emotion and Values",
@@ -4293,7 +4435,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 0,
       "norm_label": "appeal to family values",
       "_origin": "semantic",
       "community_name": "Appeals to Emotion and Values",
@@ -4308,7 +4450,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 0,
       "norm_label": "appeal to patriotism / national pride",
       "_origin": "semantic",
       "community_name": "Appeals to Emotion and Values",
@@ -4323,7 +4465,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 0,
       "norm_label": "appeal to self-interest",
       "_origin": "semantic",
       "community_name": "Appeals to Emotion and Values",
@@ -4338,7 +4480,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 0,
       "norm_label": "appeal to the hip-pocket nerve",
       "_origin": "semantic",
       "community_name": "Appeals to Emotion and Values",
@@ -4353,7 +4495,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 0,
       "norm_label": "appeal to tradition / nostalgia",
       "_origin": "semantic",
       "community_name": "Appeals to Emotion and Values",
@@ -4368,7 +4510,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 0,
       "norm_label": "appeal to justice and fairness",
       "_origin": "semantic",
       "community_name": "Appeals to Emotion and Values",
@@ -4383,7 +4525,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 0,
       "norm_label": "appeal to common sense",
       "_origin": "semantic",
       "community_name": "Appeals to Emotion and Values",
@@ -4398,7 +4540,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 0,
       "norm_label": "appeal to authority / expert opinion",
       "_origin": "semantic",
       "community_name": "Appeals to Emotion and Values",
@@ -4413,7 +4555,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 0,
       "norm_label": "appeal to group loyalty / belonging",
       "_origin": "semantic",
       "community_name": "Appeals to Emotion and Values",
@@ -4428,7 +4570,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 0,
       "norm_label": "appeal to pity / compassion",
       "_origin": "semantic",
       "community_name": "Appeals to Emotion and Values",
@@ -4443,7 +4585,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 0,
       "norm_label": "appeal to responsibility / duty",
       "_origin": "semantic",
       "community_name": "Appeals to Emotion and Values",
@@ -4458,7 +4600,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 0,
       "norm_label": "appeal to hope / optimism",
       "_origin": "semantic",
       "community_name": "Appeals to Emotion and Values",
@@ -4473,7 +4615,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 0,
       "norm_label": "appeal to guilt or shame",
       "_origin": "semantic",
       "community_name": "Appeals to Emotion and Values",
@@ -4488,7 +4630,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 0,
       "norm_label": "appeal to modernity / progress",
       "_origin": "semantic",
       "community_name": "Appeals to Emotion and Values",
@@ -4503,7 +4645,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 0,
       "norm_label": "appeal to freedom and individual rights",
       "_origin": "semantic",
       "community_name": "Appeals to Emotion and Values",
@@ -4518,7 +4660,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 0,
       "norm_label": "appeal to security and safety",
       "_origin": "semantic",
       "community_name": "Appeals to Emotion and Values",
@@ -5211,7 +5353,7 @@
       "community": 11,
       "norm_label": "evidence and support",
       "_origin": "semantic",
-      "community_name": "Appeals to Emotion and Values",
+      "community_name": "Visual Language",
       "id": "localpdf_persuasive_techniques_reference_category_evidence_and_support"
     },
     {
@@ -5226,7 +5368,7 @@
       "community": 11,
       "norm_label": "statistics",
       "_origin": "semantic",
-      "community_name": "Appeals to Emotion and Values",
+      "community_name": "Visual Language",
       "id": "localpdf_persuasive_techniques_reference_statistics"
     },
     {
@@ -5241,7 +5383,7 @@
       "community": 11,
       "norm_label": "research and studies",
       "_origin": "semantic",
-      "community_name": "Appeals to Emotion and Values",
+      "community_name": "Visual Language",
       "id": "localpdf_persuasive_techniques_reference_research_and_studies"
     },
     {
@@ -5256,7 +5398,7 @@
       "community": 11,
       "norm_label": "expert testimony",
       "_origin": "semantic",
-      "community_name": "Appeals to Emotion and Values",
+      "community_name": "Visual Language",
       "id": "localpdf_persuasive_techniques_reference_expert_testimony"
     },
     {
@@ -5271,7 +5413,7 @@
       "community": 11,
       "norm_label": "eyewitness or vox pop quotation",
       "_origin": "semantic",
-      "community_name": "Appeals to Emotion and Values",
+      "community_name": "Visual Language",
       "id": "localpdf_persuasive_techniques_reference_eyewitness_or_vox_pop_quotation"
     },
     {
@@ -5286,7 +5428,7 @@
       "community": 11,
       "norm_label": "personal experience and credentials",
       "_origin": "semantic",
-      "community_name": "Appeals to Emotion and Values",
+      "community_name": "Visual Language",
       "id": "localpdf_persuasive_techniques_reference_personal_experience_and_credentials"
     },
     {
@@ -5301,7 +5443,7 @@
       "community": 11,
       "norm_label": "historical precedent",
       "_origin": "semantic",
-      "community_name": "Appeals to Emotion and Values",
+      "community_name": "Visual Language",
       "id": "localpdf_persuasive_techniques_reference_historical_precedent"
     },
     {
@@ -5316,7 +5458,7 @@
       "community": 11,
       "norm_label": "comparison to other jurisdictions",
       "_origin": "semantic",
-      "community_name": "Appeals to Emotion and Values",
+      "community_name": "Visual Language",
       "id": "localpdf_persuasive_techniques_reference_comparison_to_other_jurisdictions"
     },
     {
@@ -5331,7 +5473,7 @@
       "community": 11,
       "norm_label": "official documentation",
       "_origin": "semantic",
-      "community_name": "Appeals to Emotion and Values",
+      "community_name": "Visual Language",
       "id": "localpdf_persuasive_techniques_reference_official_documentation"
     },
     {
@@ -5346,7 +5488,7 @@
       "community": 11,
       "norm_label": "reasoning, logic and logical fallacies",
       "_origin": "semantic",
-      "community_name": "Appeals to Emotion and Values",
+      "community_name": "Visual Language",
       "id": "localpdf_persuasive_techniques_reference_category_reasoning_logic_and_logical_fallacies"
     },
     {
@@ -5361,7 +5503,7 @@
       "community": 11,
       "norm_label": "logical reasoning / cause and effect",
       "_origin": "semantic",
-      "community_name": "Appeals to Emotion and Values",
+      "community_name": "Visual Language",
       "id": "localpdf_persuasive_techniques_reference_logical_reasoning_cause_and_effect"
     },
     {
@@ -5376,7 +5518,7 @@
       "community": 11,
       "norm_label": "generalisation",
       "_origin": "semantic",
-      "community_name": "Appeals to Emotion and Values",
+      "community_name": "Visual Language",
       "id": "localpdf_persuasive_techniques_reference_generalisation"
     },
     {
@@ -5391,7 +5533,7 @@
       "community": 11,
       "norm_label": "slippery slope",
       "_origin": "semantic",
-      "community_name": "Appeals to Emotion and Values",
+      "community_name": "Visual Language",
       "id": "localpdf_persuasive_techniques_reference_slippery_slope"
     },
     {
@@ -5406,7 +5548,7 @@
       "community": 11,
       "norm_label": "false dichotomy (either-or)",
       "_origin": "semantic",
-      "community_name": "Appeals to Emotion and Values",
+      "community_name": "Visual Language",
       "id": "localpdf_persuasive_techniques_reference_false_dichotomy_either_or"
     },
     {
@@ -5421,7 +5563,7 @@
       "community": 11,
       "norm_label": "bandwagon",
       "_origin": "semantic",
-      "community_name": "Appeals to Emotion and Values",
+      "community_name": "Visual Language",
       "id": "localpdf_persuasive_techniques_reference_bandwagon"
     },
     {
@@ -5436,7 +5578,7 @@
       "community": 11,
       "norm_label": "attack / ad hominem",
       "_origin": "semantic",
-      "community_name": "Appeals to Emotion and Values",
+      "community_name": "Visual Language",
       "id": "localpdf_persuasive_techniques_reference_attack_ad_hominem"
     },
     {
@@ -5451,7 +5593,7 @@
       "community": 11,
       "norm_label": "straw man",
       "_origin": "semantic",
-      "community_name": "Appeals to Emotion and Values",
+      "community_name": "Visual Language",
       "id": "localpdf_persuasive_techniques_reference_straw_man"
     },
     {
@@ -5466,7 +5608,7 @@
       "community": 11,
       "norm_label": "circular reasoning",
       "_origin": "semantic",
-      "community_name": "Appeals to Emotion and Values",
+      "community_name": "Visual Language",
       "id": "localpdf_persuasive_techniques_reference_circular_reasoning"
     },
     {
@@ -5481,7 +5623,7 @@
       "community": 11,
       "norm_label": "reductio ad absurdum",
       "_origin": "semantic",
-      "community_name": "Appeals to Emotion and Values",
+      "community_name": "Visual Language",
       "id": "localpdf_persuasive_techniques_reference_reductio_ad_absurdum"
     },
     {
@@ -5496,7 +5638,7 @@
       "community": 11,
       "norm_label": "post hoc reasoning",
       "_origin": "semantic",
-      "community_name": "Appeals to Emotion and Values",
+      "community_name": "Visual Language",
       "id": "localpdf_persuasive_techniques_reference_post_hoc_reasoning"
     },
     {
@@ -5511,7 +5653,7 @@
       "community": 11,
       "norm_label": "red herring",
       "_origin": "semantic",
-      "community_name": "Appeals to Emotion and Values",
+      "community_name": "Visual Language",
       "id": "localpdf_persuasive_techniques_reference_red_herring"
     },
     {
@@ -5526,7 +5668,7 @@
       "community": 11,
       "norm_label": "tone",
       "_origin": "semantic",
-      "community_name": "Appeals to Emotion and Values",
+      "community_name": "Visual Language",
       "id": "localpdf_persuasive_techniques_reference_category_tone_section"
     },
     {
@@ -5541,7 +5683,7 @@
       "community": 11,
       "norm_label": "tone",
       "_origin": "semantic",
-      "community_name": "Appeals to Emotion and Values",
+      "community_name": "Visual Language",
       "id": "localpdf_persuasive_techniques_reference_tone"
     },
     {
@@ -5556,7 +5698,7 @@
       "community": 11,
       "norm_label": "tone shift",
       "_origin": "semantic",
-      "community_name": "Appeals to Emotion and Values",
+      "community_name": "Visual Language",
       "id": "localpdf_persuasive_techniques_reference_tone_shift"
     },
     {
@@ -5571,7 +5713,7 @@
       "community": 11,
       "norm_label": "outraged / indignant tone",
       "_origin": "semantic",
-      "community_name": "Appeals to Emotion and Values",
+      "community_name": "Visual Language",
       "id": "localpdf_persuasive_techniques_reference_outraged_indignant_tone"
     },
     {
@@ -5586,7 +5728,7 @@
       "community": 11,
       "norm_label": "reasonable / conciliatory tone",
       "_origin": "semantic",
-      "community_name": "Appeals to Emotion and Values",
+      "community_name": "Visual Language",
       "id": "localpdf_persuasive_techniques_reference_reasonable_conciliatory_tone"
     },
     {
@@ -5598,7 +5740,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 11,
       "norm_label": "visual language",
       "_origin": "semantic",
       "community_name": "Visual Language",
@@ -5613,7 +5755,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 11,
       "norm_label": "political cartoon",
       "_origin": "semantic",
       "community_name": "Visual Language",
@@ -5628,7 +5770,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 11,
       "norm_label": "caricature and exaggeration",
       "_origin": "semantic",
       "community_name": "Visual Language",
@@ -5643,7 +5785,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 11,
       "norm_label": "symbolism",
       "_origin": "semantic",
       "community_name": "Visual Language",
@@ -5658,7 +5800,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 11,
       "norm_label": "labelling in cartoons",
       "_origin": "semantic",
       "community_name": "Visual Language",
@@ -5673,7 +5815,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 11,
       "norm_label": "facial expression and body language",
       "_origin": "semantic",
       "community_name": "Visual Language",
@@ -5688,7 +5830,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 11,
       "norm_label": "photograph",
       "_origin": "semantic",
       "community_name": "Visual Language",
@@ -5703,7 +5845,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 11,
       "norm_label": "gaze and vectors",
       "_origin": "semantic",
       "community_name": "Visual Language",
@@ -5718,7 +5860,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 11,
       "norm_label": "salience and size",
       "_origin": "semantic",
       "community_name": "Visual Language",
@@ -5733,7 +5875,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 11,
       "norm_label": "colour",
       "_origin": "semantic",
       "community_name": "Visual Language",
@@ -5748,7 +5890,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 11,
       "norm_label": "caption",
       "_origin": "semantic",
       "community_name": "Visual Language",
@@ -5763,7 +5905,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 11,
       "norm_label": "graphs and infographics",
       "_origin": "semantic",
       "community_name": "Visual Language",
@@ -5778,7 +5920,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 11,
       "norm_label": "layout, subheadings and pull quotes",
       "_origin": "semantic",
       "community_name": "Visual Language",
@@ -5793,7 +5935,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 11,
       "norm_label": "logos and branding",
       "_origin": "semantic",
       "community_name": "Visual Language",
@@ -5808,7 +5950,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 11,
       "norm_label": "visual juxtaposition",
       "_origin": "semantic",
       "community_name": "Visual Language",
@@ -7440,7 +7582,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "build.py",
-      "source_location": "L1404",
+      "source_location": "L1468",
       "weight": 1.0,
       "_origin": "ast",
       "source": "build",
@@ -7451,7 +7593,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "build.py",
-      "source_location": "L1085",
+      "source_location": "L1147",
       "weight": 1.0,
       "_origin": "ast",
       "source": "build",
@@ -7473,7 +7615,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "build.py",
-      "source_location": "L1439",
+      "source_location": "L1503",
       "weight": 1.0,
       "_origin": "ast",
       "source": "build",
@@ -7495,11 +7637,22 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "build.py",
-      "source_location": "L1136",
+      "source_location": "L1198",
       "weight": 1.0,
       "_origin": "ast",
       "source": "build",
       "target": "build_page_toc",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "build.py",
+      "source_location": "L1113",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "build",
+      "target": "build_polish_images",
       "confidence_score": 1.0
     },
     {
@@ -7517,7 +7670,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "build.py",
-      "source_location": "L1462",
+      "source_location": "L1526",
       "weight": 1.0,
       "_origin": "ast",
       "source": "build",
@@ -7528,11 +7681,22 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "build.py",
-      "source_location": "L1088",
+      "source_location": "L1150",
       "weight": 1.0,
       "_origin": "ast",
       "source": "build",
       "target": "build_shell",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "build.py",
+      "source_location": "L1085",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "build",
+      "target": "build_shift_headings",
       "confidence_score": 1.0
     },
     {
@@ -7563,7 +7727,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "build.py",
-      "source_location": "L1133",
+      "source_location": "L1195",
       "weight": 1.0,
       "_origin": "ast",
       "source": "build_shell",
@@ -7571,11 +7735,33 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "build.py",
+      "source_location": "L1086",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "build_rationale_1086",
+      "target": "build_shift_headings",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "build.py",
+      "source_location": "L1114",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "build_rationale_1114",
+      "target": "build_polish_images",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "calls",
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "build.py",
-      "source_location": "L1133",
+      "source_location": "L1195",
       "weight": 1.0,
       "_origin": "ast",
       "source": "build_shell",
@@ -7597,7 +7783,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "public/assets/site.js",
-      "source_location": "L10",
+      "source_location": "L22",
       "weight": 1.0,
       "_origin": "ast",
       "source": "public_assets_site",
@@ -7608,7 +7794,18 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "public/assets/site.js",
-      "source_location": "L8",
+      "source_location": "L51",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "public_assets_site",
+      "target": "public_assets_site_items",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/site.js",
+      "source_location": "L20",
       "weight": 1.0,
       "_origin": "ast",
       "source": "public_assets_site",
@@ -7619,7 +7816,18 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "public/assets/site.js",
-      "source_location": "L45",
+      "source_location": "L52",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "public_assets_site",
+      "target": "public_assets_site_mark",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/site.js",
+      "source_location": "L71",
       "weight": 1.0,
       "_origin": "ast",
       "source": "public_assets_site",
@@ -7630,7 +7838,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "public/assets/site.js",
-      "source_location": "L11",
+      "source_location": "L23",
       "weight": 1.0,
       "_origin": "ast",
       "source": "public_assets_site",
@@ -7641,7 +7849,29 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "public/assets/site.js",
-      "source_location": "L260",
+      "source_location": "L307",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "public_assets_site",
+      "target": "public_assets_site_set",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/site.js",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "public_assets_site",
+      "target": "public_assets_site_setmenu",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/site.js",
+      "source_location": "L287",
       "weight": 1.0,
       "_origin": "ast",
       "source": "public_assets_site",
@@ -7652,7 +7882,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "public/assets/site.js",
-      "source_location": "L46",
+      "source_location": "L72",
       "weight": 1.0,
       "_origin": "ast",
       "source": "public_assets_site",
@@ -7663,7 +7893,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "public/assets/site.js",
-      "source_location": "L153",
+      "source_location": "L180",
       "weight": 1.0,
       "_origin": "ast",
       "source": "public_assets_site",
@@ -7674,7 +7904,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "public/assets/site.js",
-      "source_location": "L86",
+      "source_location": "L112",
       "weight": 1.0,
       "_origin": "ast",
       "source": "public_assets_site",
@@ -7686,7 +7916,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "public/assets/site.js",
-      "source_location": "L14",
+      "source_location": "L26",
       "weight": 1.0,
       "_origin": "ast",
       "source": "public_assets_site_run",
@@ -7698,7 +7928,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "public/assets/site.js",
-      "source_location": "L24",
+      "source_location": "L36",
       "weight": 1.0,
       "_origin": "ast",
       "source": "public_assets_site_run",
@@ -7711,7 +7941,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "public/assets/site.js",
-      "source_location": "L22",
+      "source_location": "L34",
       "weight": 1.0,
       "_origin": "ast",
       "source": "public_assets_site_run",
@@ -7722,7 +7952,19 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "public/assets/site.js",
-      "source_location": "L56",
+      "source_location": "L52",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "public_assets_site_mark",
+      "target": "public_assets_site_items",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "public/assets/site.js",
+      "source_location": "L82",
       "weight": 1.0,
       "_origin": "ast",
       "source": "public_assets_site_tick",
@@ -7735,7 +7977,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "public/assets/site.js",
-      "source_location": "L60",
+      "source_location": "L86",
       "weight": 1.0,
       "_origin": "ast",
       "source": "public_assets_site_tick",
@@ -8432,7 +8674,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "site.js",
-      "source_location": "L22",
+      "source_location": "L34",
       "weight": 1.0,
       "_origin": "ast",
       "source": "site_run",
@@ -8468,7 +8710,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "site.js",
-      "source_location": "L60",
+      "source_location": "L86",
       "weight": 1.0,
       "_origin": "ast",
       "source": "site_tick",
@@ -8610,7 +8852,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "site.js",
-      "source_location": "L10",
+      "source_location": "L22",
       "weight": 1.0,
       "_origin": "ast",
       "source": "site",
@@ -8621,7 +8863,18 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "site.js",
-      "source_location": "L8",
+      "source_location": "L51",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "site",
+      "target": "site_items",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "site.js",
+      "source_location": "L20",
       "weight": 1.0,
       "_origin": "ast",
       "source": "site",
@@ -8632,7 +8885,18 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "site.js",
-      "source_location": "L45",
+      "source_location": "L52",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "site",
+      "target": "site_mark",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "site.js",
+      "source_location": "L71",
       "weight": 1.0,
       "_origin": "ast",
       "source": "site",
@@ -8643,7 +8907,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "site.js",
-      "source_location": "L11",
+      "source_location": "L23",
       "weight": 1.0,
       "_origin": "ast",
       "source": "site",
@@ -8654,7 +8918,29 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "site.js",
-      "source_location": "L260",
+      "source_location": "L307",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "site",
+      "target": "site_set",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "site.js",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "site",
+      "target": "site_setmenu",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "site.js",
+      "source_location": "L287",
       "weight": 1.0,
       "_origin": "ast",
       "source": "site",
@@ -8665,7 +8951,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "site.js",
-      "source_location": "L46",
+      "source_location": "L72",
       "weight": 1.0,
       "_origin": "ast",
       "source": "site",
@@ -8676,7 +8962,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "site.js",
-      "source_location": "L153",
+      "source_location": "L180",
       "weight": 1.0,
       "_origin": "ast",
       "source": "site",
@@ -8687,7 +8973,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "site.js",
-      "source_location": "L86",
+      "source_location": "L112",
       "weight": 1.0,
       "_origin": "ast",
       "source": "site",
@@ -8699,7 +8985,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "site.js",
-      "source_location": "L14",
+      "source_location": "L26",
       "weight": 1.0,
       "_origin": "ast",
       "source": "site_run",
@@ -8711,7 +8997,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "site.js",
-      "source_location": "L24",
+      "source_location": "L36",
       "weight": 1.0,
       "_origin": "ast",
       "source": "site_run",
@@ -8723,7 +9009,19 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "site.js",
-      "source_location": "L56",
+      "source_location": "L52",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "site_mark",
+      "target": "site_items",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "site.js",
+      "source_location": "L82",
       "weight": 1.0,
       "_origin": "ast",
       "source": "site_tick",
@@ -15932,5 +16230,5 @@
       "source_file": "snippets/report2025.html"
     }
   ],
-  "built_at_commit": "07afb12b8c8097cca9b8d91dadd76756c14e7498"
+  "built_at_commit": "f5c8272878c26bc8c0675a9f511d700156e9b28e"
 }

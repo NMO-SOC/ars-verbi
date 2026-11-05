@@ -497,6 +497,13 @@ fc_page = TOOL_LABEL + """<h1>Quote Flashcards</h1>
   <button id="fc-flip">Flip</button>
   <button id="fc-next">Next &#8594;</button>
 </div>
+<div class="tool-bar fc-judge">
+  <button id="fc-again">Again</button>
+  <button id="fc-know" class="fc-know">Got it</button>
+  <span class="tool-count" id="fc-known"></span>
+  <button id="fc-reset" class="fc-reset">Reset progress</button>
+</div>
+<p class="fc-help">Cards you mark &ldquo;Got it&rdquo; move to the back of the deck, so the ones you still need come up first. Your progress is saved in this browser.</p>
 <script>window.FLASHCARDS = %s;</script>
 <script>
 (function(){
@@ -505,14 +512,29 @@ fc_page = TOOL_LABEL + """<h1>Quote Flashcards</h1>
   var sel = document.getElementById('fc-text');
   Object.keys(texts).forEach(function(t){ var o = document.createElement('option'); o.value = t; o.textContent = t; sel.appendChild(o); });
   function shuffle(a){ for (var j = a.length - 1; j > 0; j--){ var k = Math.floor(Math.random() * (j + 1)); var tmp = a[j]; a[j] = a[k]; a[k] = tmp; } }
-  function rebuild(){ deck = all.filter(function(c){ return !sel.value || c.text === sel.value; }); shuffle(deck); i = 0; show(); }
+  var known = {}; try { known = JSON.parse(localStorage.getItem('fcKnown') || '{}'); } catch (e) {}
+  function key(c){ var h = 0, s = c.q; for (var j = 0; j < s.length; j++){ h = (h * 31 + s.charCodeAt(j)) | 0; } return 'k' + h; }
+  function save(){ try { localStorage.setItem('fcKnown', JSON.stringify(known)); } catch (e) {} }
+  function rebuild(){
+    var pool = all.filter(function(c){ return !sel.value || c.text === sel.value; });
+    var todo = pool.filter(function(c){ return !known[key(c)]; }), done = pool.filter(function(c){ return known[key(c)]; });
+    shuffle(todo); shuffle(done); deck = todo.concat(done); i = 0; show();
+  }
+  function tally(){
+    var pool = all.filter(function(c){ return !sel.value || c.text === sel.value; });
+    var k = pool.filter(function(c){ return known[key(c)]; }).length;
+    document.getElementById('fc-known').textContent = 'You know ' + k + ' of ' + pool.length;
+  }
   function show(){
     if (!deck.length) return;
     flipped = false;
     document.getElementById('fc-card').classList.remove('flipped');
     document.getElementById('fc-front').textContent = deck[i].q;
     document.getElementById('fc-back').textContent = deck[i].text + ' \u2014 ' + deck[i].cat;
-    document.getElementById('fc-count').textContent = (i + 1) + ' / ' + deck.length;
+    document.getElementById('fc-count').textContent = 'Card ' + (i + 1) + ' of ' + deck.length;
+    var kn = !!known[key(deck[i])];
+    document.getElementById('fc-know').setAttribute('aria-pressed', String(kn));
+    tally();
   }
   function flip(){ flipped = !flipped; document.getElementById('fc-card').classList.toggle('flipped', flipped); }
   document.getElementById('fc-card').addEventListener('click', flip);
@@ -521,6 +543,9 @@ fc_page = TOOL_LABEL + """<h1>Quote Flashcards</h1>
   document.getElementById('fc-next').addEventListener('click', function(){ i = (i + 1) %% deck.length; show(); });
   document.getElementById('fc-prev').addEventListener('click', function(){ i = (i - 1 + deck.length) %% deck.length; show(); });
   document.getElementById('fc-shuffle').addEventListener('click', rebuild);
+  document.getElementById('fc-know').addEventListener('click', function(){ known[key(deck[i])] = 1; save(); i = (i + 1) %% deck.length; show(); });
+  document.getElementById('fc-again').addEventListener('click', function(){ delete known[key(deck[i])]; save(); i = (i + 1) %% deck.length; show(); });
+  document.getElementById('fc-reset').addEventListener('click', function(){ if (confirm('Clear the cards you have marked as known?')) { known = {}; save(); rebuild(); } });
   sel.addEventListener('change', rebuild);
   rebuild();
 })();
@@ -1110,6 +1135,7 @@ IMG_ALT = {
     "Screenshot 2025-07-25 090126.png": "A heron in shallow wetland water pecking at floating plastic rubbish",
 }
 
+_IMG_SIZE = {}
 def polish_images(body):
     """Alt text for known images, lazy loading below the first image, WebP for large PNGs."""
     from urllib.parse import unquote as _uq
@@ -1130,6 +1156,21 @@ def polish_images(body):
                     from PIL import Image as _Im
                     _Im.open(path).save(webp, "WEBP", quality=82, method=6)
                 img["src"] = src[:-4] + ".webp"
+        if src.startswith("assets/") and not (img.get("width") and img.get("height")):
+            fp = os.path.join(PUBLIC, *_uq(img["src"]).split("/"))
+            if os.path.exists(fp):
+                if fp not in _IMG_SIZE:
+                    _IMG_SIZE[fp] = None
+                    if fp.lower().endswith(".svg"):
+                        _vb = re.search(r'viewBox="[\d.\-]+ [\d.\-]+ ([\d.]+) ([\d.]+)"', open(fp, encoding="utf-8").read())
+                        if _vb:
+                            _IMG_SIZE[fp] = (round(float(_vb.group(1))), round(float(_vb.group(2))))
+                    else:
+                        from PIL import Image as _Im
+                        with _Im.open(fp) as _x:
+                            _IMG_SIZE[fp] = _x.size
+                if _IMG_SIZE[fp]:
+                    img["width"], img["height"] = (str(v) for v in _IMG_SIZE[fp])
     # no heading-level jumps: a heading never sits more than one level below the one before it
     import re as _re
     prev = 0
@@ -1164,11 +1205,12 @@ def shell(title, active_nav, active_file, main_html, prevnext=""):
 <meta property="og:description" content="South Oakleigh College Units 3/4 English exam preparation guide - texts, essays, practice exams and study tools.">
 <meta property="og:image" content="https://nmo-soc.github.io/VCE-English-Guide/assets/img/soc-logo.png">
 <script>try{var _t=localStorage.getItem('siteTheme');if(_t==='dark'||(!_t&&window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.setAttribute('data-theme','dark');}catch(e){}</script>
-<link rel="stylesheet" href="assets/style.css?v=70">
+<link rel="stylesheet" href="assets/style.css?v=72">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<button id="menu-toggle" aria-label="Menu">&#9776;</button>
+<button id="menu-toggle" aria-label="Open menu">&#9776;</button>
+<button id="search-toggle" type="button" aria-label="Search the guide"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></button>
 <div class="layout">
   <aside class="sidebar" id="sidebar">
     <a class="brand" href="index.html">
@@ -1189,7 +1231,7 @@ def shell(title, active_nav, active_file, main_html, prevnext=""):
   </main>
 </div>
 %s
-<script src="assets/site.js?v=49"></script>
+<script src="assets/site.js?v=50"></script>
 <script data-goatcounter="https://nmo.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>""" % (html.escape(title), SITE_TITLE, html.escape(title), nav_html(active_nav, active_file), fix_quotes(main_html), fix_quotes(prevnext),
@@ -1568,7 +1610,7 @@ before_links = "".join('<li><a href="%s">%s</a></li>' % (f, t) for f, t in [
 landing = """
 <section class="home-hero">
   <div class="hero-media">
-    <img src="assets/img/covers/home-hanging-rock.jpg" alt="Hanging Rock rising above Michael Fitzhubert in a still from the film">
+    <img src="assets/img/covers/home-hanging-rock.jpg" width="1280" height="720" alt="Hanging Rock rising above Michael Fitzhubert in a still from the film">
     <header class="home-box">
       <h1 class="home-title">VCE English Exam Preparation Guide</h1>
       <p class="home-meta">For students sitting the English exam in 2027. Three sections, three hours of writing: start with the one you&rsquo;re working on.</p>
