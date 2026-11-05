@@ -155,6 +155,19 @@ for _t in soup.find_all("table"):
         _rows[1].decompose()
         _rows = _t.find_all("tr")
 
+# cover images (sources in covers/, copied to assets/img/covers)
+def cover_html(img, alt, credit, cls="cover"):
+    return ('<figure class="%s"><img src="assets/img/covers/%s" alt="%s"><figcaption>%s</figcaption></figure>'
+            % (cls, img, html.escape(alt), credit))
+HUB_COVERS = {
+    "part-02-picnic-at-hanging-rock.html": ("picnic-newspaper.jpg",
+        "A magnifying glass over a newspaper headline: College mystery deepens, four still missing",
+        "<i>Picnic at Hanging Rock</i> (dir. Peter Weir, 1975)"),
+    "part-03-the-lottery-and-other-stories.html": ("lottery-hyman.jpg",
+        "Illustration: a raised hand holds up a paper slip marked with a black spot above a crowd of villagers",
+        "Miles Hyman, <i>Shirley Jackson&rsquo;s &lsquo;The Lottery&rsquo;: The Authorized Graphic Adaptation</i> (2016)"),
+}
+
 SAML_HTML = """<div class="saml">
 <div class="saml-item"><span class="saml-badge">Th</span><div class="saml-body"><b>Thematic-based topic sentence</b>
 <p>Your topic sentence needs to be based upon a theme in the text, not a character.</p>
@@ -1003,6 +1016,10 @@ for _k, _f in list(CHAR_PHOTOS.items()):
         _im = Image.open(_src).convert("RGB"); _im.thumbnail((900, 900)); _im.save(_dst, quality=82)
     CHAR_PHOTOS[_k] = _out
 os.makedirs(os.path.join(PUBLIC, "assets", "pdf"), exist_ok=True)
+_cv = os.path.join(PUBLIC, "assets", "img", "covers")
+os.makedirs(_cv, exist_ok=True)
+for _f in os.listdir(os.path.join(BUILD, "covers")):
+    shutil.copy(os.path.join(BUILD, "covers", _f), os.path.join(_cv, _f))
 _sc = os.path.join(PUBLIC, "assets", "img", "sectionc")
 os.makedirs(_sc, exist_ok=True)
 for _f in os.listdir(os.path.join(BUILD, "sectionc")):
@@ -1085,7 +1102,7 @@ def shell(title, active_nav, active_file, main_html, prevnext=""):
 <meta property="og:description" content="South Oakleigh College Units 3/4 English exam preparation guide - texts, essays, practice exams and study tools.">
 <meta property="og:image" content="https://nmo-soc.github.io/VCE-English-Guide/assets/img/soc-logo.png">
 <script>try{var _t=localStorage.getItem('siteTheme');if(_t==='dark'||(!_t&&window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.setAttribute('data-theme','dark');}catch(e){}</script>
-<link rel="stylesheet" href="assets/style.css?v=63">
+<link rel="stylesheet" href="assets/style.css?v=65">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -1201,6 +1218,10 @@ for k, pg in enumerate(all_pages):
         rewrite_anchors(sec, pg["file"])
         h1 = sec.find("h1")
         if h1: h1.insert_before(BeautifulSoup('<div class="part-label">Part %d</div>' % num, "html.parser"))
+        _cover = HUB_COVERS.get(pg["file"])
+        if h1 and _cover:
+            _after = h1.find_next_sibling()
+            (_after if _after is not None and _after.name == "p" else h1).insert_after(BeautifulSoup(cover_html(*_cover), "html.parser"))
         cards = "".join('<a class="ch-card" href="%s"><span class="ch-num">%d</span><span>%s</span></a>'
                         % (c["file"], j+1, html.escape(c["title"])) for j, c in enumerate(pg["chapters"]))
         body = sec.decode() + '<h2 class="in-part-head">In this part</h2><div class="ch-list">%s</div>' % cards
@@ -1481,6 +1502,7 @@ before_links = "".join('<li><a href="%s">%s</a></li>' % (f, t) for f, t in [
     ("study-tools.html", "Study tools")])
 
 landing = """
+%s
 <header class="home-head">
   <h1 class="home-title">VCE English Exam Preparation Guide</h1>
   <p class="home-meta">For students sitting the English exam in 2027. Three sections, three hours of writing: start with the one you&rsquo;re working on.</p>
@@ -1493,7 +1515,9 @@ landing = """
   <div class="sf-motto">Sapere aude</div>
   <div class="sf-sub">South Oakleigh College. Compiled by Mr Morlin, version Sapere 8.1. This site is provided free and as-is for study purposes, without warranty of any kind. Content is offered in good faith but may contain errors &mdash; check anything high-stakes with your teacher. External links lead to sites not controlled by the author, and no liability is accepted for their content or for any loss arising from use of this site.</div>
 </div>
-""" % (exam_band, before_links, contents)
+""" % (cover_html("home-hanging-rock.jpg", "Hanging Rock rising above Michael Fitzhubert in a still from the film",
+                  "<i>Picnic at Hanging Rock</i> (dir. Peter Weir, 1975)", "cover home-cover"),
+       exam_band, before_links, contents)
 open(os.path.join(PUBLIC, "index.html"), "w", encoding="utf-8").write(shell("Home", "", "index.html", landing))
 
 nf = """
