@@ -1060,7 +1060,7 @@ def shell(title, active_nav, active_file, main_html, prevnext=""):
 <meta property="og:description" content="South Oakleigh College Units 3/4 English exam preparation guide - texts, essays, practice exams and study tools.">
 <meta property="og:image" content="https://nmo-soc.github.io/VCE-English-Guide/assets/img/soc-logo.png">
 <script>try{var _t=localStorage.getItem('siteTheme');if(_t==='dark'||(!_t&&window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.setAttribute('data-theme','dark');}catch(e){}</script>
-<link rel="stylesheet" href="assets/style.css?v=55">
+<link rel="stylesheet" href="assets/style.css?v=57">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -1339,10 +1339,9 @@ contents = "".join('<li><a href="%s"><span class="cl-num">%d</span>%s</a></li>'
 
 def _sec(letter, name, asks, links):
     lis = "".join('<li><a href="%s">%s</a></li>' % (f, t) for f, t in links)
-    return ('<section class="exam-sec" aria-labelledby="sec-%s"><div class="es-head"><div class="es-letter" aria-hidden="true">%s</div>'
-            '<p class="es-meta">One third of the marks<br>About 60 minutes</p></div>'
-            '<h2 id="sec-%s"><span class="vh">Section %s: </span>%s</h2><p class="es-asks">%s</p><ul>%s</ul></section>'
-            % (letter.lower(), letter, letter.lower(), letter, name, asks, lis))
+    return ('<section class="exam-sec" aria-labelledby="sec-%s">'
+            '<h2 id="sec-%s"><span class="es-sec">Section %s</span>%s</h2><p class="es-asks">%s</p><ul>%s</ul></section>'
+            % (letter.lower(), letter.lower(), letter, name, asks, lis))
 
 exam_band = "".join([
     _sec("A", "Analytical response to a text",

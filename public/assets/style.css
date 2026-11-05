@@ -746,3 +746,6 @@ mark.anno .anno-cat{font-size:var(--fs-xs)}
 .es-head .es-letter{margin:0;font-size:5rem;line-height:.78}
 .content .es-meta{margin:0;font-family:var(--sans);font-size:var(--fs-sm);line-height:1.4;color:var(--muted);max-width:none}
 @media(max-width:860px){.es-head .es-letter{font-size:3.8rem}}
+/* exam band: plain "Section A" heading above the section name */
+.exam-sec h2 .es-sec{display:block;font-size:1.75rem;line-height:1.15;color:var(--accent);font-weight:700;margin-bottom:6px}
+.exam-sec{padding-top:24px}
