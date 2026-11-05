@@ -757,3 +757,10 @@ mark.anno .anno-cat{font-size:var(--fs-xs)}
 .exam-sec,.exam-sec:first-child,.exam-sec:last-child{border-left:0;border-top:4px solid var(--sec);padding:20px 0 24px}
 .exam-sec h2 .es-sec{color:var(--sec)}
 @media(max-width:860px){.exam-band{row-gap:8px}.exam-sec,.exam-sec:first-child{border-top:4px solid var(--sec)}}
+.sc-paper figcaption{font-family:Arial,Helvetica,sans-serif;font-size:var(--fs-sm);color:#333;margin-top:6px}
+.sc-paper img.content-img{border:0;box-shadow:none;border-radius:0;margin:0 auto;filter:grayscale(1)}
+.content .sc-credit{font-family:var(--sans);font-size:var(--fs-xs);color:var(--muted);margin:-4px 0 0;max-width:none}
+.sc-article .sc-figure img,.sc-article figure img{max-width:min(100%,520px)}
+.content .sc-article img.content-img,.content .sc-article figure img{max-width:min(100%,520px);display:block;margin:0 auto}
+.content .sc-footnote{font-size:var(--fs-sm);color:#444;margin-top:1.2em}
+.sc-instructions > p > em:only-child{font-style:normal}

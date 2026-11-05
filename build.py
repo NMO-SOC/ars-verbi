@@ -981,7 +981,7 @@ os.makedirs(os.path.join(PUBLIC, "assets", "pdf"), exist_ok=True)
 _sc = os.path.join(PUBLIC, "assets", "img", "sectionc")
 os.makedirs(_sc, exist_ok=True)
 for _f in os.listdir(os.path.join(BUILD, "sectionc")):
-    if _f.endswith(".svg"):
+    if _f.endswith((".svg", ".png")):
         shutil.copy(os.path.join(BUILD, "sectionc", _f), os.path.join(_sc, _f))
 copy_if_changed(os.path.join(BUILD, "localpdf", "persuasive-techniques-reference.pdf"),
                 os.path.join(PUBLIC, "assets", "pdf", "persuasive-techniques-reference.pdf"))
@@ -1060,7 +1060,7 @@ def shell(title, active_nav, active_file, main_html, prevnext=""):
 <meta property="og:description" content="South Oakleigh College Units 3/4 English exam preparation guide - texts, essays, practice exams and study tools.">
 <meta property="og:image" content="https://nmo-soc.github.io/VCE-English-Guide/assets/img/soc-logo.png">
 <script>try{var _t=localStorage.getItem('siteTheme');if(_t==='dark'||(!_t&&window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.setAttribute('data-theme','dark');}catch(e){}</script>
-<link rel="stylesheet" href="assets/style.css?v=58">
+<link rel="stylesheet" href="assets/style.css?v=62">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -1208,6 +1208,80 @@ for k, pg in enumerate(all_pages):
         if pg["file"] in ("p03-story-and-theme-grid.html", "p02-sequence-and-theme-grid.html"):
             for _tb in sec.find_all("table"):
                 _tb["class"] = _tb.get("class", []) + ["theme-grid"]
+        if pg["file"] == "p06-section-c-from-previous-exams.html":
+            # lay every past task out like the exam paper (same look as the practice tasks)
+            _instr = ('<p class="sc-label">Section C &ndash; Analysis of argument and language</p>'
+                      '<p class="sc-label">Instructions</p><ul>'
+                      '<li>In this section, you are required to analyse the use of argument(s) and language to persuade an intended audience to share the point of view expressed in a persuasive text.</li>'
+                      '<li>Read the background information below and the material that follows, and write an analytical response to the task.</li>'
+                      '<li>For the purposes of this task, the term &lsquo;language&rsquo; refers to written and spoken language, and &lsquo;visuals&rsquo; refers to images and graphics.</li>'
+                      '<li>Your response will be assessed according to the Section C assessment criteria.</li></ul>'
+                      '<p class="sc-label">Task</p><p>Write an analysis of the ways in which arguments, written and spoken language, and visuals are used in the material below to try to persuade the intended audience to share the point of view presented.</p>'
+                      '<p class="sc-label">Background information</p>')
+            _years = {"our-local-gym": "2024"}
+            # 2025 is rebuilt from the VCAA paper itself (the booklet copy had merged paragraphs)
+            _old25 = sec.find("section", id=lambda x: x and x.startswith("lighting-the-way"))
+            if _old25:
+                _old25.replace_with(BeautifulSoup(open(os.path.join(BUILD, "sectionc", "vcaa-2025.html"),
+                                                       encoding="utf-8").read(), "html.parser"))
+            _secs = sec.find_all("section", class_="level4", recursive=False)
+            for _s in _secs:
+                _h = _s.find("h4")
+                _label = next((p for p in _s.find_all("p", recursive=False)
+                               if p.get_text(strip=True) == "Background information"), None)
+                if not (_h and _label):
+                    continue
+                _bg = _label.find_next_sibling("p")
+                _yr = next((y for k, y in _years.items() if _s.get("id", "").startswith(k)), "")
+                if _yr:
+                    _h.string = "%s VCAA exam: %s" % (_yr, _h.get_text())
+                _ins = BeautifulSoup('<div class="sc-paper sc-instructions">%s</div>' % _instr, "html.parser").div
+                # the background ends at the sentence introducing "the following" piece; anything after it
+                # in the same source paragraph is the start of the article
+                _segs, _cur = [], []
+                for _c in list(_bg.contents):
+                    if getattr(_c, "name", None) == "span" and "pbr" in (_c.get("class") or []):
+                        _segs.append(_cur); _cur = []
+                    else:
+                        _cur.append(_c)
+                _segs.append(_cur)
+                _txt = lambda seg: "".join(x.get_text() if hasattr(x, "get_text") else str(x) for x in seg)
+                _cut = next((i for i, sg in enumerate(_segs) if "following" in _txt(sg)), len(_segs) - 1)
+                _rest = [sg for sg in _segs[_cut + 1:] if _txt(sg).strip()]
+                _bg_new = BeautifulSoup("<p></p>", "html.parser").p
+                for _i, sg in enumerate(_segs[:_cut + 1]):
+                    if _i: _bg_new.append(BeautifulSoup('<span class="pbr"></span>', "html.parser").span)
+                    for x in sg: _bg_new.append(x.extract() if hasattr(x, "extract") else x)
+                _lead = None
+                if _rest:
+                    _lead = BeautifulSoup("<p></p>", "html.parser").p
+                    for _i, sg in enumerate(_rest):
+                        if _i: _lead.append(BeautifulSoup('<span class="pbr"></span>', "html.parser").span)
+                        for x in sg: _lead.append(x.extract() if hasattr(x, "extract") else x)
+                _bg.replace_with(_lead) if _lead else _bg.extract()
+                _ins.append(_bg_new)
+                _label.decompose()
+                _art = BeautifulSoup('<div class="sc-paper sc-article"></div>', "html.parser").div
+                for _ch in [c for c in _s.contents if c is not _h]:
+                    _art.append(_ch.extract())
+                _s["class"] = _s.get("class", []) + ["sc-scenario"]
+                _s.append(_ins)
+                _s.append(_art)
+                _s.append(BeautifulSoup('<p class="sc-credit">Source: VCAA %sVCE English examination, Section C &copy; Victorian Curriculum and Assessment Authority.</p>'
+                                        % (_yr + " " if _yr else ""), "html.parser"))
+            # newest first: 2026, 2025, 2024, then the earlier tasks
+            _rank = lambda s: 0 if s.get("id", "").startswith("vcaa-2025") else 1 if s.get("id", "").startswith("our-local-gym") else 2
+            _order = sorted(_secs, key=_rank)
+            for _s in _order:
+                sec.append(_s.extract())
+            _first = _order[0] if _order else None
+            _new = BeautifulSoup(open(os.path.join(BUILD, "sectionc", "vcaa-2026.html"), encoding="utf-8").read(), "html.parser")
+            _intro = BeautifulSoup('<p class="sc-intro">Section C tasks from past VCAA English exams, laid out as they appear on the exam paper, newest first. '
+                                   'Allow about an hour for each. The full papers are available on the VCAA website.</p>', "html.parser")
+            if _first:
+                _first.insert_before(_new)
+                _new_sec = sec.find(id="vcaa-2026-frozen-swirl")
+                _new_sec.insert_before(_intro)
         if pg["file"] == "p06-practice-articles-for-analysis.html":
             # original Section C practice tasks live in sectionc/ (web only)
             for _p in sec.find_all("p"):
