@@ -1063,10 +1063,6 @@ def shell(title, active_nav, active_file, main_html, prevnext=""):
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<div class="exam-banner" id="countdown" data-target="2026-10-27T09:00:00+11:00">
-  <span class="eb-label">English exam &middot; Tue 27 October, 9:00 am</span>
-  <span class="eb-time"><b id="cd-d">&ndash;</b> days <b id="cd-h">&ndash;</b> hrs <b id="cd-m">&ndash;</b> min <b id="cd-s">&ndash;</b> sec</span>
-</div>
 <button id="menu-toggle" aria-label="Menu">&#9776;</button>
 <div class="layout">
   <aside class="sidebar" id="sidebar">
