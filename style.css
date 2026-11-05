@@ -749,3 +749,11 @@ mark.anno .anno-cat{font-size:var(--fs-xs)}
 /* exam band: plain "Section A" heading above the section name */
 .exam-sec h2 .es-sec{display:block;font-size:1.75rem;line-height:1.15;color:var(--accent);font-weight:700;margin-bottom:6px}
 .exam-sec{padding-top:24px}
+/* section colours: A burgundy (school), B green (logo leaf), C ochre (site gold) */
+:root{--sec-a:#7a1f2b;--sec-b:#2f5d3a;--sec-c:#8a6423}
+[data-theme="dark"]{--sec-a:#e0979c;--sec-b:#8cc49a;--sec-c:#d9b061}
+.es-a{--sec:var(--sec-a)}.es-b{--sec:var(--sec-b)}.es-c{--sec:var(--sec-c)}
+.exam-band{border-top:0;column-gap:32px}
+.exam-sec,.exam-sec:first-child,.exam-sec:last-child{border-left:0;border-top:4px solid var(--sec);padding:20px 0 24px}
+.exam-sec h2 .es-sec{color:var(--sec)}
+@media(max-width:860px){.exam-band{row-gap:8px}.exam-sec,.exam-sec:first-child{border-top:4px solid var(--sec)}}
