@@ -1,7 +1,7 @@
 # Graph Report - ars-verbi  (2026-11-05)
 
 ## Corpus Check
-- 12 files · ~471,430 words
+- 12 files · ~488,168 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `f1b6d7cb`
+- Built from commit: `c76d0505`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 

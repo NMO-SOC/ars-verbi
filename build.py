@@ -1218,12 +1218,14 @@ for k, pg in enumerate(all_pages):
                       '<li>Your response will be assessed according to the Section C assessment criteria.</li></ul>'
                       '<p class="sc-label">Task</p><p>Write an analysis of the ways in which arguments, written and spoken language, and visuals are used in the material below to try to persuade the intended audience to share the point of view presented.</p>'
                       '<p class="sc-label">Background information</p>')
-            _years = {"our-local-gym": "2024"}
+            _years = {"our-local-gym": "2024 VCAA exam", "strapleton-community-voice": "2024 VCAA sample exam"}
             # 2025 is rebuilt from the VCAA paper itself (the booklet copy had merged paragraphs)
-            _old25 = sec.find("section", id=lambda x: x and x.startswith("lighting-the-way"))
-            if _old25:
-                _old25.replace_with(BeautifulSoup(open(os.path.join(BUILD, "sectionc", "vcaa-2025.html"),
-                                                       encoding="utf-8").read(), "html.parser"))
+            # 2024 and 2025 are rebuilt from the VCAA papers, with the exam's own images
+            for _pre, _frag in (("lighting-the-way", "vcaa-2025.html"), ("our-local-gym", "vcaa-2024.html")):
+                _old = sec.find("section", id=lambda x, _pre=_pre: x and x.startswith(_pre))
+                if _old:
+                    _old.replace_with(BeautifulSoup(open(os.path.join(BUILD, "sectionc", _frag),
+                                                         encoding="utf-8").read(), "html.parser"))
             _secs = sec.find_all("section", class_="level4", recursive=False)
             for _s in _secs:
                 _h = _s.find("h4")
@@ -1234,7 +1236,7 @@ for k, pg in enumerate(all_pages):
                 _bg = _label.find_next_sibling("p")
                 _yr = next((y for k, y in _years.items() if _s.get("id", "").startswith(k)), "")
                 if _yr:
-                    _h.string = "%s VCAA exam: %s" % (_yr, _h.get_text())
+                    _h.string = "%s: %s" % (_yr, _h.get_text())
                 _ins = BeautifulSoup('<div class="sc-paper sc-instructions">%s</div>' % _instr, "html.parser").div
                 # the background ends at the sentence introducing "the following" piece; anything after it
                 # in the same source paragraph is the start of the article
@@ -1267,10 +1269,10 @@ for k, pg in enumerate(all_pages):
                 _s["class"] = _s.get("class", []) + ["sc-scenario"]
                 _s.append(_ins)
                 _s.append(_art)
-                _s.append(BeautifulSoup('<p class="sc-credit">Source: VCAA %sVCE English examination, Section C &copy; Victorian Curriculum and Assessment Authority.</p>'
-                                        % (_yr + " " if _yr else ""), "html.parser"))
+                _src = {"2024 VCAA exam": "VCAA 2024 VCE English examination", "2024 VCAA sample exam": "VCAA 2024 VCE English sample examination"}.get(_yr, "VCAA VCE English examination")
+                _s.append(BeautifulSoup('<p class="sc-credit">Source: %s, Section C &copy; Victorian Curriculum and Assessment Authority.</p>' % _src, "html.parser"))
             # newest first: 2026, 2025, 2024, then the earlier tasks
-            _rank = lambda s: 0 if s.get("id", "").startswith("vcaa-2025") else 1 if s.get("id", "").startswith("our-local-gym") else 2
+            _rank = lambda s: 0 if s.get("id", "").startswith("vcaa-2025") else 1 if s.get("id", "").startswith("vcaa-2024") else 2 if s.get("id", "").startswith("strapleton") else 3
             _order = sorted(_secs, key=_rank)
             for _s in _order:
                 sec.append(_s.extract())
