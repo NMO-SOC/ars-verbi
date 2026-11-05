@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 300" role="img" aria-label="Cartoon of a cheerful hen in glasses holding a clipboard">
+  <g stroke="#222" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+    <!-- legs -->
+    <path d="M140 228 L132 272 M132 272 l-16 6 M132 272 l2 10 M132 272 l14 6" fill="none"/>
+    <path d="M178 228 L186 272 M186 272 l-14 6 M186 272 l-2 10 M186 272 l16 6" fill="none"/>
+    <!-- tail -->
+    <path d="M222 150 C262 112 268 88 252 70 C262 104 246 120 226 132 Z" fill="#9a9a9a"/>
+    <path d="M226 160 C276 140 290 116 282 96 C282 126 258 140 230 146 Z" fill="#7d7d7d"/>
+    <!-- body -->
+    <ellipse cx="166" cy="176" rx="76" ry="62" fill="#e6e6e6"/>
+    <!-- head -->
+    <circle cx="112" cy="104" r="40" fill="#f2f2f2"/>
+    <!-- comb -->
+    <path d="M90 70 q4 -22 16 -8 q6 -22 18 -4 q10 -18 16 2 q-20 4 -50 10 Z" fill="#555"/>
+    <!-- beak -->
+    <path d="M74 104 L52 112 L74 118 Z" fill="#b5b5b5"/>
+    <!-- wattle -->
+    <path d="M78 120 q-6 18 6 22 q10 -4 4 -20 Z" fill="#555"/>
+    <!-- glasses -->
+    <circle cx="96" cy="100" r="11" fill="#fff"/>
+    <circle cx="124" cy="98" r="11" fill="#fff"/>
+    <path d="M107 99 L113 98 M135 97 L150 92" fill="none"/>
+    <circle cx="97" cy="101" r="3.5" fill="#222" stroke="none"/>
+    <circle cx="125" cy="99" r="3.5" fill="#222" stroke="none"/>
+    <!-- smile -->
+    <path d="M84 126 q8 6 16 2" fill="none" stroke-width="2.5"/>
+    <!-- clipboard -->
+    <rect x="58" y="156" width="70" height="88" rx="6" fill="#fff" transform="rotate(-8 93 200)"/>
+    <rect x="80" y="150" width="26" height="12" rx="3" fill="#888" transform="rotate(-8 93 200)"/>
+    <g stroke-width="2.5" transform="rotate(-8 93 200)">
+      <path d="M70 178 l6 6 l10 -12 M92 180 h26 M70 200 l6 6 l10 -12 M92 202 h26 M70 222 l6 6 l10 -12 M92 224 h26" fill="none"/>
+    </g>
+    <!-- wing holding clipboard -->
+    <path d="M150 160 C130 170 118 196 124 214 C140 206 160 192 176 172 Z" fill="#cfcfcf"/>
+  </g>
+</svg>

@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-label="Presentation slide: Who is studying who? A phone covered in notifications such as You're about to lose your streak!">
+  <rect width="640" height="360" fill="#f4f4f4"/>
+  <rect x="0" y="0" width="640" height="10" fill="#333"/>
+  <g font-family="Arial, Helvetica, sans-serif" fill="#111">
+    <text x="36" y="86" font-size="38" font-weight="900">Who is</text>
+    <text x="36" y="132" font-size="38" font-weight="900">studying</text>
+    <text x="36" y="178" font-size="38" font-weight="900">who?</text>
+    <rect x="36" y="200" width="70" height="5" fill="#333"/>
+    <text x="36" y="240" font-size="16" fill="#444">Points for speed.</text>
+    <text x="36" y="264" font-size="16" fill="#444">Badges for logging in.</text>
+    <text x="36" y="288" font-size="16" fill="#444">Guilt for logging out.</text>
+    <text x="36" y="338" font-size="12" fill="#777">Dr H. Varga · Northcliff SC parent evening</text>
+  </g>
+  <!-- phone -->
+  <rect x="356" y="34" width="168" height="300" rx="22" fill="#222"/>
+  <rect x="366" y="52" width="148" height="262" rx="8" fill="#dcdcdc"/>
+  <rect x="418" y="40" width="44" height="6" rx="3" fill="#555"/>
+  <!-- app tiles -->
+  <g fill="#bdbdbd">
+    <rect x="378" y="240" width="30" height="30" rx="7"/><rect x="418" y="240" width="30" height="30" rx="7"/>
+    <rect x="458" y="240" width="30" height="30" rx="7"/><rect x="378" y="278" width="30" height="30" rx="7"/>
+    <rect x="418" y="278" width="30" height="30" rx="7"/><rect x="458" y="278" width="30" height="30" rx="7"/>
+  </g>
+  <!-- notification bubbles spilling off the phone -->
+  <g font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700">
+    <rect x="282" y="66" width="246" height="38" rx="10" fill="#fff" stroke="#333" stroke-width="2"/>
+    <text x="296" y="90" fill="#111">You're about to lose your streak!</text>
+    <rect x="392" y="116" width="226" height="38" rx="10" fill="#fff" stroke="#333" stroke-width="2"/>
+    <text x="406" y="140" fill="#111">+50 points! Answer faster!</text>
+    <rect x="330" y="166" width="196" height="38" rx="10" fill="#fff" stroke="#333" stroke-width="2"/>
+    <text x="344" y="190" fill="#111">Don't stop now, Sam!</text>
+    <circle cx="524" cy="40" r="15" fill="#333"/>
+    <text x="524" y="45" text-anchor="middle" fill="#fff" font-size="12">99+</text>
+  </g>
+</svg>

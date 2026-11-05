@@ -977,6 +977,11 @@ for _k, _f in list(CHAR_PHOTOS.items()):
         _im = Image.open(_src).convert("RGB"); _im.thumbnail((900, 900)); _im.save(_dst, quality=82)
     CHAR_PHOTOS[_k] = _out
 os.makedirs(os.path.join(PUBLIC, "assets", "pdf"), exist_ok=True)
+_sc = os.path.join(PUBLIC, "assets", "img", "sectionc")
+os.makedirs(_sc, exist_ok=True)
+for _f in os.listdir(os.path.join(BUILD, "sectionc")):
+    if _f.endswith(".svg"):
+        shutil.copy(os.path.join(BUILD, "sectionc", _f), os.path.join(_sc, _f))
 copy_if_changed(os.path.join(BUILD, "localpdf", "persuasive-techniques-reference.pdf"),
                 os.path.join(PUBLIC, "assets", "pdf", "persuasive-techniques-reference.pdf"))
 copy_if_changed(os.path.join(BUILD, "examgen", "web-template.docx"), os.path.join(_ed, "web-template.docx"))
@@ -1054,7 +1059,7 @@ def shell(title, active_nav, active_file, main_html, prevnext=""):
 <meta property="og:description" content="South Oakleigh College Units 3/4 English exam preparation guide - texts, essays, practice exams and study tools.">
 <meta property="og:image" content="https://nmo-soc.github.io/VCE-English-Guide/assets/img/soc-logo.png">
 <script>try{if(localStorage.getItem('siteTheme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}</script>
-<link rel="stylesheet" href="assets/style.css?v=48">
+<link rel="stylesheet" href="assets/style.css?v=49">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -1203,6 +1208,13 @@ for k, pg in enumerate(all_pages):
                 if _img:
                     _h.insert_after(BeautifulSoup('<figure class="char-photo"><img src="assets/img/picnic/%s" alt="%s" loading="lazy"></figure>'
                                                   % (_img, html.escape(_clean(_h.get_text()))), "html.parser"))
+        if pg["file"] == "p06-practice-articles-for-analysis.html":
+            # original Section C practice tasks live in sectionc/ (web only)
+            for _p in sec.find_all("p"):
+                if "Resources upcoming" in _p.get_text():
+                    _p.decompose()
+            sec.append(BeautifulSoup(open(os.path.join(BUILD, "sectionc", "practice-articles.html"),
+                                          encoding="utf-8").read(), "html.parser"))
         if pg["file"] == "p02-symbols.html":
             _ul = sec.find("ul")
             if _ul:
