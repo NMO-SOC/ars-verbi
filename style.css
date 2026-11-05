@@ -701,3 +701,43 @@ mark.anno .anno-cat{font-size:var(--fs-xs)}
 .theme-grid td:first-child{padding-top:8px;padding-bottom:8px}
 .content .home-meta{max-width:none}
 [data-theme="dark"] #menu-toggle,[data-theme="dark"] #to-top{color:#1d1112}
+
+/* ---------- home: laid out like the exam ---------- */
+.home-head{margin:0 0 36px}
+.home-head .home-title{margin-bottom:10px}
+.home-head .home-meta{font-size:var(--fs-md);font-family:var(--serif);color:var(--muted);max-width:var(--measure);margin:0 0 14px}
+.home-head .resume-chip{margin:0}
+.exam-band{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:2px solid var(--ink);border-bottom:1px solid var(--line);margin:0 0 44px}
+.exam-sec{padding:22px 22px 26px;border-left:1px solid var(--line)}
+.exam-sec:first-child{border-left:0;padding-left:0}
+.exam-sec:last-child{padding-right:0}
+.es-letter{font-family:var(--serif);font-size:4.5rem;line-height:.9;color:var(--accent);font-weight:600;margin:0 0 10px}
+.content .exam-sec h2{font-size:var(--fs-lg);line-height:1.2;margin:0 0 8px;border:0;padding:0}
+.exam-sec h2 span{display:block;font-weight:600}
+.exam-sec h2{font-size:var(--fs-sm)!important;font-family:var(--sans);font-weight:600;color:var(--muted)}
+.exam-sec h2 span{font-family:var(--serif);font-size:var(--fs-lg);color:var(--ink);font-weight:700;margin-top:2px}
+.content .es-asks{font-family:var(--sans);font-size:var(--fs-sm);color:var(--muted);line-height:1.45;margin:0 0 14px}
+.content .exam-sec ul{list-style:none;padding:0;margin:0}
+.content .exam-sec li{margin:0;border-top:1px solid var(--line)}
+.exam-sec li a{display:block;padding:9px 0;font-size:var(--fs-ui);color:var(--ink);line-height:1.35}
+.exam-sec li a:hover{color:var(--accent);text-decoration:none}
+.before-exam{margin:0 0 40px}
+.content .before-exam h2,.content .all-parts h2{font-size:var(--fs-lg);border:0;padding:0;margin:0 0 10px}
+.content .before-exam ul{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:8px 10px;max-width:none}
+.content .before-exam li{margin:0;max-width:none}
+.before-exam a{display:inline-block;font-family:var(--sans);font-size:var(--fs-ui);font-weight:600;padding:6px 14px;border:1px solid var(--line);border-radius:999px;color:var(--ink)}
+.before-exam a:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
+.content .parts-list{list-style:none;padding:0;margin:0 0 48px;columns:2;column-gap:40px}
+.content .parts-list li{margin:0;break-inside:avoid;border-top:1px solid var(--line);max-width:none}
+.parts-list a{display:flex;gap:12px;padding:8px 0;font-family:var(--sans);font-size:var(--fs-ui);color:var(--ink)}
+.parts-list a:hover{color:var(--accent);text-decoration:none}
+.parts-list .cl-num{font-family:var(--serif);font-size:var(--fs-ui);color:var(--accent);min-width:20px;grid-row:auto;line-height:inherit}
+@media(max-width:860px){
+  .exam-band{grid-template-columns:1fr}
+  .exam-sec,.exam-sec:first-child,.exam-sec:last-child{border-left:0;border-top:1px solid var(--line);padding:20px 0 22px}
+  .exam-sec:first-child{border-top:0}
+  .es-letter{font-size:3.4rem}
+  .content .parts-list{columns:1}
+}
+.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.content .exam-sec h2{font-family:var(--serif);font-size:var(--fs-lg)!important;color:var(--ink);font-weight:700}

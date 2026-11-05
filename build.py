@@ -1060,7 +1060,7 @@ def shell(title, active_nav, active_file, main_html, prevnext=""):
 <meta property="og:description" content="South Oakleigh College Units 3/4 English exam preparation guide - texts, essays, practice exams and study tools.">
 <meta property="og:image" content="https://nmo-soc.github.io/VCE-English-Guide/assets/img/soc-logo.png">
 <script>try{var _t=localStorage.getItem('siteTheme');if(_t==='dark'||(!_t&&window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.setAttribute('data-theme','dark');}catch(e){}</script>
-<link rel="stylesheet" href="assets/style.css?v=52">
+<link rel="stylesheet" href="assets/style.css?v=54">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -1334,33 +1334,65 @@ BLURB = {
  "Key Takeaways from the 2025 Assessment Report": "What VCAA assessors flagged in 2025 — topic verbs, Framework choices and the interplay discriminator.",
  "Effectively Studying For Exams": "Study habits, schedules, recall and wellbeing.",
 }
-contents = "".join('<li><a href="%s"><span class="cl-num">%d</span><span class="cl-title">%s</span><span class="cl-blurb">%s</span></a></li>'
-                   % (it["file"], it["num"], html.escape(it["title"]), html.escape(BLURB.get(it["title"], "")))
-                   for it in nav_items)
+contents = "".join('<li><a href="%s"><span class="cl-num">%d</span>%s</a></li>'
+                   % (it["file"], it["num"], html.escape(it["title"])) for it in nav_items)
+
+def _sec(letter, name, asks, links):
+    lis = "".join('<li><a href="%s">%s</a></li>' % (f, t) for f, t in links)
+    return ('<section class="exam-sec" aria-labelledby="sec-%s"><div class="es-letter" aria-hidden="true">%s</div>'
+            '<h2 id="sec-%s"><span class="vh">Section %s: </span>%s</h2><p class="es-asks">%s</p><ul>%s</ul></section>'
+            % (letter.lower(), letter, letter.lower(), letter, name, asks, lis))
+
+exam_band = "".join([
+    _sec("A", "Analytical response to a text",
+         "An essay on one of your two texts. About an hour.",
+         [("part-02-picnic-at-hanging-rock.html", "<i>Picnic at Hanging Rock</i>"),
+          ("part-03-the-lottery-and-other-stories.html", "<i>The Lottery and Other Stories</i>"),
+          ("p02-sequence-and-theme-grid.html", "Picnic sequence and theme grid"),
+          ("p03-story-and-theme-grid.html", "Lottery story and theme grid"),
+          ("practice-topics.html", "Practice topics and essay timer"),
+          ("part-04-analytical-text-response-essays.html", "Writing a text response")]),
+    _sec("B", "Creating a text",
+         "A piece of your own, built from stimulus material and the Framework of Ideas. About an hour.",
+         [("p05-personal-journeys.html", "Personal journeys"),
+          ("p05-practice-stimuli.html", "Practice stimuli"),
+          ("p05-section-b-under-exam-conditions.html", "Writing under exam conditions"),
+          ("p05-sample-creating-texts-piece-19-20.html", "Sample pieces"),
+          ("p05-audience.html", "Audience and purpose")]),
+    _sec("C", "Analysis of argument and language",
+         "An analysis of an unseen persuasive text and its visuals. About an hour.",
+         [("p06-practice-articles-for-analysis.html", "Practice articles"),
+          ("p06-sample-analysing-argument-essays.html", "Sample essays, low to high"),
+          ("p06-section-c-from-previous-exams.html", "Section C from previous exams"),
+          ("p06-essay-structure.html", "Essay structure"),
+          ("p06-analysing-written-language.html", "Analysing written language"),
+          ("p06-analysing-visual-language.html", "Analysing visual language")]),
+])
+
+before_links = "".join('<li><a href="%s">%s</a></li>' % (f, t) for f, t in [
+    ("part-07-the-exam.html", "Exam format and timing"),
+    ("part-09-exam-assessment-criteria.html", "How it&rsquo;s marked"),
+    ("part-10-exam-checklists.html", "Checklists"),
+    ("part-13-key-takeaways-from-the-2025-assessment-report.html", "2025 assessors&rsquo; report"),
+    ("part-11-key-takeaways-from-the-2024-assessment-report.html", "2024 assessors&rsquo; report"),
+    ("part-08-practice-exams.html", "Practice exams"),
+    ("revision-program.html", "Week-by-week revision"),
+    ("study-tools.html", "Study tools")])
 
 landing = """
-<div class="home-top"><img src="assets/img/SOC%%20LOGO_VERTICAL.png" alt="">South Oakleigh College, VCE English Units 3 and 4</div>
-<section class="home-quote" aria-label="Opening quotation">
-  <div>
-    <blockquote>&lsquo;What we see and what we seem are but a dream, a dream within a dream.&rsquo;</blockquote>
-    <cite>Miranda, <i>Picnic at Hanging Rock</i></cite>
-  </div>
-  <p class="margin-note">The gap between how things seem and what they are runs through both of your texts. Keep an eye on it.</p>
-</section>
-<h1 class="home-title">VCE English Exam Preparation Guide</h1>
-<p class="home-meta">For students sitting the English exam in 2027. Compiled by Mr Morlin. Version Sapere 8.1.</p>
-<p class="home-lede">Notes and quote banks for <i>Picnic at Hanging Rock</i> and <i>The Lottery and Other Stories</i>, annotated sample responses for all three sections, practice tasks, what the assessors said in 2024 and 2025, and tools for revising.</p>
-<div class="home-actions"><a class="btn" href="%s">Start reading</a><span id="resume-slot"></span></div>
-<h2 class="home-h2">Contents</h2>
-<ol class="contents-list">%s</ol>
-<h2 class="home-h2">Sample responses</h2>
-%s
+<header class="home-head">
+  <h1 class="home-title">VCE English Exam Preparation Guide</h1>
+  <p class="home-meta">For students sitting the English exam in 2027. Three sections, three hours of writing: start with the one you&rsquo;re working on.</p>
+  <span id="resume-slot"></span>
+</header>
+<div class="exam-band">%s</div>
+<section class="before-exam" aria-labelledby="before-h"><h2 id="before-h">Before the exam</h2><ul>%s</ul></section>
+<section class="all-parts" aria-labelledby="parts-h"><h2 id="parts-h">All parts of the guide</h2><ol class="parts-list">%s</ol></section>
 <div class="site-foot">
   <div class="sf-motto">Sapere aude</div>
-  <div class="sf-sub">This site is provided free and as-is for study purposes, without warranty of any kind. Content is offered in good faith but may contain errors &mdash; verify anything high-stakes with your teacher. External links lead to sites not controlled by the author, and no liability is accepted for their content or for any loss arising from use of this site.</div>
+  <div class="sf-sub">South Oakleigh College. Compiled by Mr Morlin, version Sapere 8.1. This site is provided free and as-is for study purposes, without warranty of any kind. Content is offered in good faith but may contain errors &mdash; check anything high-stakes with your teacher. External links lead to sites not controlled by the author, and no liability is accepted for their content or for any loss arising from use of this site.</div>
 </div>
-""" % (nav_items[0]["file"], contents,
-       exemplar_groups_html(exemplars))
+""" % (exam_band, before_links, contents)
 open(os.path.join(PUBLIC, "index.html"), "w", encoding="utf-8").write(shell("Home", "", "index.html", landing))
 
 nf = """
