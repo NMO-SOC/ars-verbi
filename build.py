@@ -158,8 +158,8 @@ for _t in soup.find_all("table"):
 SAML_HTML = """<div class="saml">
 <div class="saml-item"><span class="saml-badge">Th</span><div class="saml-body"><b>Thematic-based topic sentence</b>
 <p>Your topic sentence needs to be based upon a theme in the text, not a character.</p>
-<div class="saml-ex"><span class="saml-no">&#10007;</span> &lsquo;Norma Desmond&rsquo;s obsession with herself ultimately leads to her downfall.&rsquo;<br>
-<span class="saml-yes">&#10003;</span> &lsquo;Obsession with self is what ultimately leads to the downfall of characters.&rsquo;</div></div></div>
+<div class="saml-ex"><span class="saml-no">&#10007;</span> &lsquo;Tessie Hutchinson is stoned to death by the villagers.&rsquo;<br>
+<span class="saml-yes">&#10003;</span> &lsquo;Jackson suggests that blind loyalty to tradition allows ordinary people to commit extraordinary cruelty.&rsquo;</div></div></div>
 <div class="saml-item"><span class="saml-badge">E</span><div class="saml-body"><b>Evidence</b>
 <p>Quotes and scenes from the text that support the theme.</p></div></div>
 <div class="saml-item"><span class="saml-badge">S</span><div class="saml-body"><b>Symbols</b>
@@ -174,10 +174,35 @@ SAML_HTML = """<div class="saml">
 </div>"""
 
 exp_pat = re.compile(r"ZZEXP\s+(.+?)\s+ZZEXPEND")
+_TOPIC = ("<p class=\"saml-topic\"><b>Topic:</b> &lsquo;The desire for social acceptance shapes the behaviour of many of "
+          "Jackson&rsquo;s characters.&rsquo; Do you agree?</p>")
+_STEPS = ('<div class="saml-item"><span class="saml-badge">1</span><div class="saml-body"><b>Text, author and form</b>'
+          '<p>Name the text, its author (or director) and its form: novel, film, play, short story collection.</p></div></div>'
+          '<div class="saml-item"><span class="saml-badge">2</span><div class="saml-body"><b>Contention</b>'
+          '<p>%s</p></div></div>'
+          '<div class="saml-item"><span class="saml-badge">3</span><div class="saml-body"><b>Three arguments</b>'
+          '<p>%s</p></div></div>')
+INTRO_HTML = ('<div class="saml">' + _STEPS % (
+    "Your answer to the topic, in one clear sentence.",
+    "Outline the argument of each body paragraph, in the order they will appear.") +
+    _TOPIC + '<div class="saml-model"><p class="saml-model-label">Model introduction</p><p>'
+    '<span class="mv">1</span>In her 1949 short story collection <i>The Lottery and Other Stories</i>, Shirley Jackson exposes the quiet pressures that sit beneath ordinary American life. '
+    '<span class="mv">2</span>Jackson suggests that the desire for social acceptance shapes much of her characters&rsquo; behaviour, although it is often the fear of exclusion, rather than a wish to belong, that drives them. '
+    '<span class="mv">3</span>Her characters conform to avoid the judgement of their communities, construct false versions of themselves in order to appear successful, and, at their worst, take part in cruelty so that they are not the ones left outside.'
+    '</p></div></div>')
+CONC_HTML = ('<div class="saml">' + _STEPS % (
+    "Restate your contention, in fresh words.",
+    "Sum up what each body paragraph proved, in the same order.") +
+    '<div class="saml-model"><p class="saml-model-label">Model conclusion</p><p>'
+    '<span class="mv">1</span>Across <i>The Lottery and Other Stories</i>, Shirley Jackson presents a world in which belonging is never guaranteed. '
+    '<span class="mv">2</span>The need to be accepted is one of the most powerful forces in her characters&rsquo; lives, and fear of exclusion, more than a wish to belong, is what drives them. '
+    '<span class="mv">3</span>They conform to escape judgement, invent more impressive versions of themselves, and join in cruelty rather than become its target, revealing how fragile, and how dangerous, the desire for acceptance can be.'
+    '</p></div></div>')
+_MARKERS = {"ZZSAML": SAML_HTML, "ZZINTRO": INTRO_HTML, "ZZCONC": CONC_HTML}
 for _p in soup.find_all("p"):
-    if "ZZSAML" in _p.get_text():
-        _p.replace_with(BeautifulSoup(SAML_HTML, "html.parser"))
-        break
+    _k = _p.get_text().strip()
+    if _k in _MARKERS:
+        _p.replace_with(BeautifulSoup(_MARKERS[_k], "html.parser"))
 
 exemplars = []
 for _p in soup.find_all("p"):
@@ -1060,7 +1085,7 @@ def shell(title, active_nav, active_file, main_html, prevnext=""):
 <meta property="og:description" content="South Oakleigh College Units 3/4 English exam preparation guide - texts, essays, practice exams and study tools.">
 <meta property="og:image" content="https://nmo-soc.github.io/VCE-English-Guide/assets/img/soc-logo.png">
 <script>try{var _t=localStorage.getItem('siteTheme');if(_t==='dark'||(!_t&&window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.setAttribute('data-theme','dark');}catch(e){}</script>
-<link rel="stylesheet" href="assets/style.css?v=62">
+<link rel="stylesheet" href="assets/style.css?v=63">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>

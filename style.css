@@ -764,3 +764,10 @@ mark.anno .anno-cat{font-size:var(--fs-xs)}
 .content .sc-article img.content-img,.content .sc-article figure img{max-width:min(100%,520px);display:block;margin:0 auto}
 .content .sc-footnote{font-size:var(--fs-sm);color:#444;margin-top:1.2em}
 .sc-instructions > p > em:only-child{font-style:normal}
+/* introduction / conclusion structure blocks */
+.saml-topic{font-family:var(--sans);font-size:var(--fs-ui);margin:1.2em 0 .4em}
+.saml-model{border-left:2px solid var(--accent);padding:4px 0 4px 16px;margin:.6em 0 0}
+.content .saml-model-label{font-family:var(--sans);font-size:var(--fs-sm);font-weight:600;color:var(--muted);margin:0 0 .3em}
+.mv{display:inline-block;min-width:1.35em;height:1.35em;line-height:1.35em;margin:0 .35em 0 .15em;border-radius:50%;
+  background:var(--accent);color:#fff;font-family:var(--sans);font-size:.7em;font-weight:700;text-align:center;vertical-align:.15em}
+[data-theme="dark"] .mv{color:#1d1112}
