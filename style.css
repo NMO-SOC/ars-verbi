@@ -779,3 +779,20 @@ mark.anno .anno-cat{font-size:var(--fs-xs)}
 .home-cover img{aspect-ratio:16/7}
 .home-cover img{object-position:50% 40%}
 .cover img[src*="lottery-hyman"]{object-position:50% 0}
+/* home hero: title box sits over the Hanging Rock still */
+.home-hero{margin:0 0 40px}
+.hero-media{position:relative;border-radius:var(--r);overflow:hidden}
+.hero-media img{display:block;width:100%;height:auto;aspect-ratio:16/8.5;object-fit:cover;object-position:50% 35%}
+.home-box{position:absolute;left:24px;bottom:24px;max-width:540px;background:var(--bg);border-radius:var(--r);
+  padding:22px 26px 20px;box-shadow:var(--shadow-pop)}
+.home-box .home-title{font-size:2rem;line-height:1.12;margin:0 0 10px}
+.content .home-box .home-meta{font-size:var(--fs-ui);margin:0 0 12px;max-width:none}
+.home-box #resume-slot:empty{display:none}
+.home-box .resume-chip{margin:0}
+.content .hero-credit{font-family:var(--sans);font-size:var(--fs-xs);color:var(--muted);margin:6px 0 0;max-width:none}
+@media(max-width:760px){
+  .hero-media{overflow:visible}
+  .hero-media img{aspect-ratio:16/10;border-radius:var(--r)}
+  .home-box{position:relative;left:auto;bottom:auto;margin:-48px 12px 0;max-width:none;padding:18px 18px 16px}
+  .home-box .home-title{font-size:1.6rem}
+}

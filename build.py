@@ -1102,7 +1102,7 @@ def shell(title, active_nav, active_file, main_html, prevnext=""):
 <meta property="og:description" content="South Oakleigh College Units 3/4 English exam preparation guide - texts, essays, practice exams and study tools.">
 <meta property="og:image" content="https://nmo-soc.github.io/VCE-English-Guide/assets/img/soc-logo.png">
 <script>try{var _t=localStorage.getItem('siteTheme');if(_t==='dark'||(!_t&&window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.setAttribute('data-theme','dark');}catch(e){}</script>
-<link rel="stylesheet" href="assets/style.css?v=66">
+<link rel="stylesheet" href="assets/style.css?v=67">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -1502,12 +1502,17 @@ before_links = "".join('<li><a href="%s">%s</a></li>' % (f, t) for f, t in [
     ("study-tools.html", "Study tools")])
 
 landing = """
-<header class="home-head">
-  <h1 class="home-title">VCE English Exam Preparation Guide</h1>
-  <p class="home-meta">For students sitting the English exam in 2027. Three sections, three hours of writing: start with the one you&rsquo;re working on.</p>
-  <span id="resume-slot"></span>
-</header>
-%s
+<section class="home-hero">
+  <div class="hero-media">
+    <img src="assets/img/covers/home-hanging-rock.jpg" alt="Hanging Rock rising above Michael Fitzhubert in a still from the film">
+    <header class="home-box">
+      <h1 class="home-title">VCE English Exam Preparation Guide</h1>
+      <p class="home-meta">For students sitting the English exam in 2027. Three sections, three hours of writing: start with the one you&rsquo;re working on.</p>
+      <span id="resume-slot"></span>
+    </header>
+  </div>
+  <p class="hero-credit"><i>Picnic at Hanging Rock</i> (dir. Peter Weir, 1975)</p>
+</section>
 <div class="exam-band">%s</div>
 <section class="before-exam" aria-labelledby="before-h"><h2 id="before-h">Before the exam</h2><ul>%s</ul></section>
 <section class="all-parts" aria-labelledby="parts-h"><h2 id="parts-h">All parts of the guide</h2><ol class="parts-list">%s</ol></section>
@@ -1515,9 +1520,7 @@ landing = """
   <div class="sf-motto">Sapere aude</div>
   <div class="sf-sub">South Oakleigh College. Compiled by Mr Morlin, version Sapere 8.1. This site is provided free and as-is for study purposes, without warranty of any kind. Content is offered in good faith but may contain errors &mdash; check anything high-stakes with your teacher. External links lead to sites not controlled by the author, and no liability is accepted for their content or for any loss arising from use of this site.</div>
 </div>
-""" % (cover_html("home-hanging-rock.jpg", "Hanging Rock rising above Michael Fitzhubert in a still from the film",
-                  "<i>Picnic at Hanging Rock</i> (dir. Peter Weir, 1975)", "cover home-cover"),
-       exam_band, before_links, contents)
+""" % (exam_band, before_links, contents)
 open(os.path.join(PUBLIC, "index.html"), "w", encoding="utf-8").write(shell("Home", "", "index.html", landing))
 
 nf = """
