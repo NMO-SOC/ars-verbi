@@ -1211,6 +1211,15 @@ for k, pg in enumerate(all_pages):
                     _p.decompose()
             sec.append(BeautifulSoup(open(os.path.join(BUILD, "sectionc", "practice-articles.html"),
                                           encoding="utf-8").read(), "html.parser"))
+        if pg["file"] == "p06-sample-analysing-argument-essays.html":
+            # show Scenario 3 (task + letter) from the Section C practice tasks above the sample essays
+            _sc3 = BeautifulSoup(open(os.path.join(BUILD, "sectionc", "practice-articles.html"),
+                                      encoding="utf-8").read(), "html.parser").find(id="scenario-3-regional-trains")
+            _h = sec.find(lambda tag: tag.name in ("h3", "h4") and tag.get_text(strip=True) == "The Task and Letter")
+            if _sc3 and _h:
+                _p = _h.find_next_sibling("p")
+                for _div in reversed(_sc3.find_all("div", recursive=False)):
+                    (_p or _h).insert_after(_div)
         if pg["file"] == "p02-symbols.html":
             _ul = sec.find("ul")
             if _ul:
