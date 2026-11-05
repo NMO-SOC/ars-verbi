@@ -1,40 +1,42 @@
 # Graph Report - ars-verbi  (2026-11-05)
 
 ## Corpus Check
-- 12 files · ~489,051 words
+- 12 files · ~506,742 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 494 nodes · 757 edges · 24 communities (21 shown, 3 thin omitted)
+- 495 nodes · 758 edges · 26 communities (23 shown, 3 thin omitted)
 - Extraction: 89% EXTRACTED · 11% INFERRED · 0% AMBIGUOUS · INFERRED: 80 edges (avg confidence: 0.7)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `bac3f51d`
+- Built from commit: `07afb12b`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
-- Exam Assessment Criteria (Part 09)
+- Sample Analysing Argument Essays
 - Language and Word Choice
 - Symbols and Motifs (Rainbow's End)
-- Appeals to Emotion and Values
+- Visual Language
 - Joe Gillis
 - Language and Word Choice
-- Analysing Argument (Part 06 hub)
+- Analysing Written Language
 - jszip.min.js
 - assets/site.js
 - Rhetorical and Structural Devices
 - VCAA 2025 English Examination Report
-- Visual Language
+- Appeals to Emotion and Values
 - Appeals to Emotion and Values
 - Rhetorical and Structural Devices
-- Practice Topics & Essay Timer
+- Introduction and Context (Rainbow's End)
+- Section C from Previous Exams
 - Visual Language
 - Week-by-Week Revision Program
 - build.py
 - site.js
 - Rainbow's End Quote Table
+- Creating Texts (Part 05 hub)
 - VCE English Exam Prep Guide (site)
 - Deploy site to GitHub Pages (workflow)
 - 404 Page Not Found
@@ -77,11 +79,11 @@
 - **2025 Assessment Report section chain (hub + General/A/B/C + checklist)** — public_part_13_key_takeaways_from_the_2025_assessment_report, public_r25_general, public_r25_section_a, public_r25_section_b, public_r25_section_c, public_r25_checklist [EXTRACTED 1.00]
 - **2025 Assessment Report Chapter Cluster** — snippets_r25_hub, snippets_r25_general, snippets_r25_section_a, snippets_r25_section_b, snippets_r25_section_c, snippets_r25_checklist, snippets_report2025 [INFERRED 0.85]
 
-## Communities (24 total, 3 thin omitted)
+## Communities (26 total, 3 thin omitted)
 
-### Community 0 - "Exam Assessment Criteria (Part 09)"
-Cohesion: 0.11
-Nodes (41): Framework of Ideas (Section B), VCAA (Victorian Curriculum and Assessment Authority), VCAA 2024 English Assessment Report, VCAA 2025 English Examination Report, VCE English and EAL Study Design 2024–2027, Essay Proofreading Checklist, VCE English Exam Preparation Guide (homepage), Introduction (Analytical Text Response Essays) (+33 more)
+### Community 0 - "Sample Analysing Argument Essays"
+Cohesion: 0.18
+Nodes (26): VCAA 2024 English Assessment Report, Sample Analysing Argument Essays, Section C Annotation Categories (Structure & evidence, Audience positioning, Language & technique, Ideas & interpretation), I started using heroin decades ago. The rejection of a Melbourne CBD injecting room feels like a rejection of me (The Guardian), Sample Essay I (injecting room analysis), Sample Essay II (injecting room analysis), Sample Essay III (injecting room analysis), Exam Format (+18 more)
 
 ### Community 1 - "Language and Word Choice"
 Cohesion: 0.10
@@ -91,21 +93,21 @@ Nodes (21): Allusion, Language and Word Choice, Cliche, Colloquial language, Con
 Cohesion: 0.07
 Nodes (38): Assimilation Policy (1950s Australia), Bank Manager, Dolly Banks, Errol Fisher, Ester, Gladys Banks, Leon (Cousin), Mr. Coody (Rent Collector) (+30 more)
 
-### Community 3 - "Appeals to Emotion and Values"
-Cohesion: 0.11
-Nodes (18): Appeal to authority / expert opinion, Appeal to common sense, Appeal to family values, Appeal to fear, Appeal to freedom and individual rights, Appeal to group loyalty / belonging, Appeal to guilt or shame, Appeal to hope / optimism (+10 more)
+### Community 3 - "Visual Language"
+Cohesion: 0.13
+Nodes (15): Caption, Caricature and exaggeration, Visual Language, Colour, Facial expression and body language, Gaze and vectors, Graphs and infographics, Labelling in cartoons (+7 more)
 
 ### Community 4 - "Joe Gillis"
-Cohesion: 0.11
-Nodes (42): America in the 1950s, Artie Green, Betty Schaefer, Cecil B. deMille, Chiaroscuro (film technique), Close-up Shot (film technique), Fame and Obsession (theme), Film Noir (+34 more)
+Cohesion: 0.10
+Nodes (43): America in the 1950s, Artie Green, Betty Schaefer, Cecil B. deMille, Chiaroscuro (film technique), Close-up Shot (film technique), Fame and Obsession (theme), Film Noir (+35 more)
 
 ### Community 5 - "Language and Word Choice"
 Cohesion: 0.10
 Nodes (21): Allusion, Language and Word Choice, Cliche, Colloquial language, Connotation, Dysphemism, Emotive language, Euphemism (+13 more)
 
-### Community 6 - "Analysing Argument (Part 06 hub)"
-Cohesion: 0.09
-Nodes (30): Analysing Visual Language, Analysing Written Language, Table of Linking Words and Phrases, Persuasive Techniques Reference (PDF), Table of Common Persuasive Techniques, Table of Adjectives Describing Tone, Table of Verbs for Authorial Intent, Essay Structure (+22 more)
+### Community 6 - "Analysing Written Language"
+Cohesion: 0.18
+Nodes (12): Analysing Visual Language, Analysing Written Language, Table of Linking Words and Phrases, Persuasive Techniques Reference (PDF), Table of Common Persuasive Techniques, Table of Adjectives Describing Tone, Table of Verbs for Authorial Intent, Essay Structure (+4 more)
 
 ### Community 7 - "jszip.min.js"
 Cohesion: 0.26
@@ -123,9 +125,9 @@ Nodes (24): Alliteration, Analogy, Anaphora, Anecdote, Antithesis, Call to actio
 Cohesion: 0.71
 Nodes (8): VCAA 2025 English Examination Report, Priority Checklist for 2026, 2025 Report: General Exam Advice, Key Takeaways from the 2025 Assessment Report (hub intro), 2025 Report Section A: Analytical Response to a Text, 2025 Report Section B: Creating a Text, 2025 Report Section C: Analysis of Argument and Language, Key Takeaways from the 2025 Assessment Report (full assembled page)
 
-### Community 11 - "Visual Language"
-Cohesion: 0.05
-Nodes (42): Analysing Argument: Persuasive Techniques (VCE Reference Table), Attack / ad hominem, Bandwagon, Caption, Caricature and exaggeration, Evidence and Support, Reasoning, Logic and Logical Fallacies, Tone (+34 more)
+### Community 11 - "Appeals to Emotion and Values"
+Cohesion: 0.04
+Nodes (45): Analysing Argument: Persuasive Techniques (VCE Reference Table), Appeal to authority / expert opinion, Appeal to common sense, Appeal to family values, Appeal to fear, Appeal to freedom and individual rights, Appeal to group loyalty / belonging, Appeal to guilt or shame (+37 more)
 
 ### Community 12 - "Appeals to Emotion and Values"
 Cohesion: 0.11
@@ -135,9 +137,13 @@ Nodes (18): Appeal to authority / expert opinion, Appeal to common sense, Appeal
 Cohesion: 0.08
 Nodes (24): Alliteration, Analogy, Anaphora, Anecdote, Antithesis, Call to action, Rhetorical and Structural Devices, Climactic ordering (+16 more)
 
-### Community 14 - "Practice Topics & Essay Timer"
-Cohesion: 0.25
-Nodes (9): Rainbow's End (VCE text), Cummeragunja (Aboriginal settlement), Jane Harrison (playwright), Papa Dear, Introduction and Context (Rainbow's End), Practice Analytical Text Response Topics (Rainbow's End), Practice Topics & Essay Timer, Rainbow's End (play) (+1 more)
+### Community 14 - "Introduction and Context (Rainbow's End)"
+Cohesion: 0.33
+Nodes (7): Cummeragunja (Aboriginal settlement), Jane Harrison (playwright), Papa Dear, Introduction and Context (Rainbow's End), Practice Analytical Text Response Topics (Rainbow's End), Rainbow's End (play), Stolen Generations
+
+### Community 15 - "Section C from Previous Exams"
+Cohesion: 0.18
+Nodes (11): Practice Articles for Analysis, This Book Week, let's celebrate the power of reading (not just the costumes), Confession of a Knox Grammar old boy: my son won't lose sleep as I have, I'm Melbourne Grammar's school captain and I'm gay. The Presbyterian Church would have me sacked, Don't ask me to give the Queen a minute's silence, ask me for the truth about British colonialism, Section C from Previous Exams, Hapsey Happenings - Transcript of podcast, episode 32, Lighting the way: a new year, a new celebration (+3 more)
 
 ### Community 16 - "Visual Language"
 Cohesion: 0.05
@@ -145,15 +151,19 @@ Nodes (42): Analysing Argument: Persuasive Techniques (VCE Reference Table), Att
 
 ### Community 17 - "Week-by-Week Revision Program"
 Cohesion: 0.08
-Nodes (41): Th.E.S.A.M.L. essay structure method, Errol (Rainbow's End), JSZip library (bundled locally), Exam Generator tool, Quote Flashcards tool, Micro-Drills tool, Essay Outline Builder tool, Audience (Creating Texts) (+33 more)
+Nodes (55): Framework of Ideas (Section B), Rainbow's End (VCE text), Th.E.S.A.M.L. essay structure method, VCAA (Victorian Curriculum and Assessment Authority), VCAA 2025 English Examination Report, VCE English and EAL Study Design 2024–2027, Errol (Rainbow's End), Essay Proofreading Checklist (+47 more)
 
 ### Community 18 - "build.py"
-Cohesion: 0.18
+Cohesion: 0.16
 Nodes (5): _clean(), fix_quotes(), _heading_chain(), nav_html(), shell()
 
 ### Community 19 - "site.js"
 Cohesion: 0.31
 Nodes (5): esc(), load(), pad(), run(), tick()
+
+### Community 21 - "Creating Texts (Part 05 hub)"
+Cohesion: 0.39
+Nodes (9): Audience (Creating Texts), Personal Journeys, Practice Stimuli, Purpose (Creating Texts), Sample Creating Texts Piece: 'The Path Less Taken' (19/20), Sample Creating Texts Piece: 'Finding My Way' (10/10), Sample Creating Texts Piece: 'This is Me' (10/10), Creating Texts (Part 05 hub) (+1 more)
 
 ### Community 22 - "VCE English Exam Prep Guide (site)"
 Cohesion: 0.18
@@ -167,17 +177,17 @@ Nodes (12): api.anthropic.com (Essay Marker's AI backend, teacher-supplied key),
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `Week-by-Week Revision Program` connect `Week-by-Week Revision Program` to `Exam Assessment Criteria (Part 09)`, `Symbols and Motifs (Rainbow's End)`, `Joe Gillis`, `Analysing Argument (Part 06 hub)`, `Practice Topics & Essay Timer`?**
+- **Why does `Week-by-Week Revision Program` connect `Week-by-Week Revision Program` to `Sample Analysing Argument Essays`, `Symbols and Motifs (Rainbow's End)`, `Joe Gillis`, `Creating Texts (Part 05 hub)`?**
   _High betweenness centrality (0.094) - this node is a cross-community bridge._
 - **Why does `Written Exemplars (Rainbow's End)` connect `Symbols and Motifs (Rainbow's End)` to `Week-by-Week Revision Program`?**
-  _High betweenness centrality (0.049) - this node is a cross-community bridge._
-- **Why does `Analysing Argument: Persuasive Techniques (VCE Reference Table)` connect `Visual Language` to `Language and Word Choice`, `Appeals to Emotion and Values`, `Rhetorical and Structural Devices`?**
+  _High betweenness centrality (0.048) - this node is a cross-community bridge._
+- **Why does `Analysing Argument: Persuasive Techniques (VCE Reference Table)` connect `Appeals to Emotion and Values` to `Language and Word Choice`, `Visual Language`, `Rhetorical and Structural Devices`?**
   _High betweenness centrality (0.037) - this node is a cross-community bridge._
 - **What connects `Deploy site to GitHub Pages (workflow)`, `GitLab Pages job`, `JSZip library (bundled locally in assets/vendor/)` to the rest of the system?**
   _255 weakly-connected nodes found - possible documentation gaps or missing edges._
-- **Should `Exam Assessment Criteria (Part 09)` be split into smaller, more focused modules?**
-  _Cohesion score 0.11341463414634147 - nodes in this community are weakly interconnected._
 - **Should `Language and Word Choice` be split into smaller, more focused modules?**
   _Cohesion score 0.09523809523809523 - nodes in this community are weakly interconnected._
 - **Should `Symbols and Motifs (Rainbow's End)` be split into smaller, more focused modules?**
   _Cohesion score 0.07112375533428165 - nodes in this community are weakly interconnected._
+- **Should `Visual Language` be split into smaller, more focused modules?**
+  _Cohesion score 0.13333333333333333 - nodes in this community are weakly interconnected._

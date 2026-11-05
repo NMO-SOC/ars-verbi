@@ -167,10 +167,22 @@
       "norm_label": "copy_if_changed()"
     },
     {
+      "label": "cover_html()",
+      "file_type": "code",
+      "source_file": "build.py",
+      "source_location": "L159",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "build_cover_html",
+      "community": 18,
+      "community_name": "build.py",
+      "norm_label": "cover_html()"
+    },
+    {
       "label": "slugify()",
       "file_type": "code",
       "source_file": "build.py",
-      "source_location": "L216",
+      "source_location": "L229",
       "_callable": true,
       "_origin": "ast",
       "id": "build_slugify",
@@ -182,7 +194,7 @@
       "label": "_clean()",
       "file_type": "code",
       "source_file": "build.py",
-      "source_location": "L339",
+      "source_location": "L352",
       "_callable": true,
       "_origin": "ast",
       "id": "build_clean",
@@ -194,7 +206,7 @@
       "label": "_heading_chain()",
       "file_type": "code",
       "source_file": "build.py",
-      "source_location": "L341",
+      "source_location": "L354",
       "_callable": true,
       "_origin": "ast",
       "id": "build_heading_chain",
@@ -206,7 +218,7 @@
       "label": "rewrite_anchors()",
       "file_type": "code",
       "source_file": "build.py",
-      "source_location": "L1016",
+      "source_location": "L1033",
       "_callable": true,
       "_origin": "ast",
       "id": "build_rewrite_anchors",
@@ -218,7 +230,7 @@
       "label": "nav_html()",
       "file_type": "code",
       "source_file": "build.py",
-      "source_location": "L1025",
+      "source_location": "L1042",
       "_callable": true,
       "_origin": "ast",
       "id": "build_nav_html",
@@ -230,7 +242,7 @@
       "label": "apply_annotations()",
       "file_type": "code",
       "source_file": "build.py",
-      "source_location": "L1045",
+      "source_location": "L1062",
       "_callable": true,
       "_origin": "ast",
       "id": "build_apply_annotations",
@@ -242,7 +254,7 @@
       "label": "fix_quotes()",
       "file_type": "code",
       "source_file": "build.py",
-      "source_location": "L1068",
+      "source_location": "L1085",
       "_callable": true,
       "_origin": "ast",
       "id": "build_fix_quotes",
@@ -254,7 +266,7 @@
       "label": "shell()",
       "file_type": "code",
       "source_file": "build.py",
-      "source_location": "L1071",
+      "source_location": "L1088",
       "_callable": true,
       "_origin": "ast",
       "id": "build_shell",
@@ -266,7 +278,7 @@
       "label": "page_toc()",
       "file_type": "code",
       "source_file": "build.py",
-      "source_location": "L1119",
+      "source_location": "L1136",
       "_callable": true,
       "_origin": "ast",
       "id": "build_page_toc",
@@ -278,7 +290,7 @@
       "label": "exemplar_groups_html()",
       "file_type": "code",
       "source_file": "build.py",
-      "source_location": "L1383",
+      "source_location": "L1404",
       "_callable": true,
       "_origin": "ast",
       "id": "build_exemplar_groups_html",
@@ -290,7 +302,7 @@
       "label": "icon_svg()",
       "file_type": "code",
       "source_file": "build.py",
-      "source_location": "L1418",
+      "source_location": "L1439",
       "_callable": true,
       "_origin": "ast",
       "id": "build_icon_svg",
@@ -302,7 +314,7 @@
       "label": "_sec()",
       "file_type": "code",
       "source_file": "build.py",
-      "source_location": "L1441",
+      "source_location": "L1462",
       "_callable": true,
       "_origin": "ast",
       "id": "build_sec",
@@ -1114,10 +1126,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 4,
       "norm_label": "vce english exam preparation guide (homepage)",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Joe Gillis",
       "id": "public_index"
     },
     {
@@ -1837,7 +1849,7 @@
       "community": 14,
       "norm_label": "introduction and context (rainbow's end)",
       "_origin": "semantic",
-      "community_name": "Practice Topics & Essay Timer",
+      "community_name": "Introduction and Context (Rainbow's End)",
       "id": "public_p03_introduction_and_context"
     },
     {
@@ -1852,7 +1864,7 @@
       "community": 14,
       "norm_label": "practice analytical text response topics (rainbow's end)",
       "_origin": "semantic",
-      "community_name": "Practice Topics & Essay Timer",
+      "community_name": "Introduction and Context (Rainbow's End)",
       "id": "public_p03_practice_analytical_text_response_topics"
     },
     {
@@ -1924,10 +1936,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 17,
       "norm_label": "introduction (analytical text response essays)",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Week-by-Week Revision Program",
       "id": "public_p04_introduction"
     },
     {
@@ -1939,10 +1951,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 17,
       "norm_label": "proofreading",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Week-by-Week Revision Program",
       "id": "public_p04_proofreading"
     },
     {
@@ -1954,10 +1966,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 17,
       "norm_label": "what is needed in an essay",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Week-by-Week Revision Program",
       "id": "public_p04_what_is_needed_in_an_essay"
     },
     {
@@ -1969,10 +1981,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 17,
+      "community": 21,
       "norm_label": "audience (creating texts)",
       "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
+      "community_name": "Creating Texts (Part 05 hub)",
       "id": "public_p05_audience"
     },
     {
@@ -1984,10 +1996,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 17,
+      "community": 21,
       "norm_label": "personal journeys",
       "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
+      "community_name": "Creating Texts (Part 05 hub)",
       "id": "public_p05_personal_journeys"
     },
     {
@@ -1999,10 +2011,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 17,
+      "community": 21,
       "norm_label": "practice stimuli",
       "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
+      "community_name": "Creating Texts (Part 05 hub)",
       "id": "public_p05_practice_stimuli"
     },
     {
@@ -2014,10 +2026,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 17,
+      "community": 21,
       "norm_label": "purpose (creating texts)",
       "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
+      "community_name": "Creating Texts (Part 05 hub)",
       "id": "public_p05_purpose"
     },
     {
@@ -2029,10 +2041,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 17,
+      "community": 21,
       "norm_label": "sample creating texts piece: 'the path less taken' (19/20)",
       "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
+      "community_name": "Creating Texts (Part 05 hub)",
       "id": "public_p05_sample_creating_texts_piece_19_20"
     },
     {
@@ -2044,10 +2056,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 17,
+      "community": 21,
       "norm_label": "sample creating texts piece: 'finding my way' (10/10)",
       "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
+      "community_name": "Creating Texts (Part 05 hub)",
       "id": "public_p05_sample_creating_texts_piece_finding_my_way_10_10"
     },
     {
@@ -2059,10 +2071,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 17,
+      "community": 21,
       "norm_label": "sample creating texts piece: 'this is me' (10/10)",
       "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
+      "community_name": "Creating Texts (Part 05 hub)",
       "id": "public_p05_sample_creating_texts_piece_this_is_me_10_10"
     },
     {
@@ -2077,7 +2089,7 @@
       "community": 6,
       "norm_label": "analysing visual language",
       "_origin": "semantic",
-      "community_name": "Analysing Argument (Part 06 hub)",
+      "community_name": "Analysing Written Language",
       "id": "public_p06_analysing_visual_language"
     },
     {
@@ -2092,7 +2104,7 @@
       "community": 14,
       "norm_label": "rainbow's end (play)",
       "_origin": "semantic",
-      "community_name": "Practice Topics & Essay Timer",
+      "community_name": "Introduction and Context (Rainbow's End)",
       "id": "rainbows_end"
     },
     {
@@ -2107,7 +2119,7 @@
       "community": 14,
       "norm_label": "jane harrison (playwright)",
       "_origin": "semantic",
-      "community_name": "Practice Topics & Essay Timer",
+      "community_name": "Introduction and Context (Rainbow's End)",
       "id": "jane_harrison"
     },
     {
@@ -2197,7 +2209,7 @@
       "community": 14,
       "norm_label": "papa dear",
       "_origin": "semantic",
-      "community_name": "Practice Topics & Essay Timer",
+      "community_name": "Introduction and Context (Rainbow's End)",
       "id": "papa_dear"
     },
     {
@@ -2287,7 +2299,7 @@
       "community": 14,
       "norm_label": "cummeragunja (aboriginal settlement)",
       "_origin": "semantic",
-      "community_name": "Practice Topics & Essay Timer",
+      "community_name": "Introduction and Context (Rainbow's End)",
       "id": "cummeragunja"
     },
     {
@@ -2317,7 +2329,7 @@
       "community": 14,
       "norm_label": "stolen generations",
       "_origin": "semantic",
-      "community_name": "Practice Topics & Essay Timer",
+      "community_name": "Introduction and Context (Rainbow's End)",
       "id": "stolen_generations"
     },
     {
@@ -2660,10 +2672,10 @@
       "author": null,
       "contributor": null,
       "rationale": "Stepping away from a finished essay for 10-15 minutes before proofreading counters over-familiarity with the text, allowing structural, clarity, grammar, and repetition issues to be caught with fresh eyes.",
-      "community": 0,
+      "community": 17,
       "norm_label": "essay proofreading checklist",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Week-by-Week Revision Program",
       "id": "essay_proofreading_checklist"
     },
     {
@@ -2678,7 +2690,7 @@
       "community": 6,
       "norm_label": "analysing written language",
       "_origin": "semantic",
-      "community_name": "Analysing Argument (Part 06 hub)",
+      "community_name": "Analysing Written Language",
       "id": "public_p06_analysing_written_language"
     },
     {
@@ -2693,7 +2705,7 @@
       "community": 6,
       "norm_label": "essay structure",
       "_origin": "semantic",
-      "community_name": "Analysing Argument (Part 06 hub)",
+      "community_name": "Analysing Written Language",
       "id": "public_p06_essay_structure"
     },
     {
@@ -2705,10 +2717,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 15,
       "norm_label": "practice articles for analysis",
       "_origin": "semantic",
-      "community_name": "Analysing Argument (Part 06 hub)",
+      "community_name": "Section C from Previous Exams",
       "id": "public_p06_practice_articles_for_analysis"
     },
     {
@@ -2720,10 +2732,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 0,
       "norm_label": "sample analysing argument essays",
       "_origin": "semantic",
-      "community_name": "Analysing Argument (Part 06 hub)",
+      "community_name": "Sample Analysing Argument Essays",
       "id": "public_p06_sample_analysing_argument_essays"
     },
     {
@@ -2735,10 +2747,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 15,
       "norm_label": "section c from previous exams",
       "_origin": "semantic",
-      "community_name": "Analysing Argument (Part 06 hub)",
+      "community_name": "Section C from Previous Exams",
       "id": "public_p06_section_c_from_previous_exams"
     },
     {
@@ -2753,7 +2765,7 @@
       "community": 0,
       "norm_label": "exam format",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Sample Analysing Argument Essays",
       "id": "public_p07_exam_format"
     },
     {
@@ -2768,7 +2780,7 @@
       "community": 0,
       "norm_label": "strategies for addressing the requirements",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Sample Analysing Argument Essays",
       "id": "public_p07_strategies_for_addressing_the_requirements"
     },
     {
@@ -2783,7 +2795,7 @@
       "community": 0,
       "norm_label": "section a mark allocation",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Sample Analysing Argument Essays",
       "id": "public_p09_section_a_mark_allocation"
     },
     {
@@ -2798,7 +2810,7 @@
       "community": 0,
       "norm_label": "section b mark allocation",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Sample Analysing Argument Essays",
       "id": "public_p09_section_b_mark_allocation"
     },
     {
@@ -2813,7 +2825,7 @@
       "community": 0,
       "norm_label": "section c mark allocation",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Sample Analysing Argument Essays",
       "id": "public_p09_section_c_mark_allocation"
     },
     {
@@ -2828,7 +2840,7 @@
       "community": 0,
       "norm_label": "general checklist for section a response",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Sample Analysing Argument Essays",
       "id": "public_p10_general_checklist_for_section_a_response"
     },
     {
@@ -2843,7 +2855,7 @@
       "community": 0,
       "norm_label": "general checklist for section b response",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Sample Analysing Argument Essays",
       "id": "public_p10_general_checklist_for_section_b_response"
     },
     {
@@ -2858,7 +2870,7 @@
       "community": 0,
       "norm_label": "general checklist for section c response",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Sample Analysing Argument Essays",
       "id": "public_p10_general_checklist_for_section_c_response"
     },
     {
@@ -2873,7 +2885,7 @@
       "community": 0,
       "norm_label": "final advice",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Sample Analysing Argument Essays",
       "id": "public_p11_final_advice"
     },
     {
@@ -2888,7 +2900,7 @@
       "community": 0,
       "norm_label": "final exam checklist",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Sample Analysing Argument Essays",
       "id": "public_p11_final_exam_checklist"
     },
     {
@@ -2903,7 +2915,7 @@
       "community": 0,
       "norm_label": "general exam advice",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Sample Analysing Argument Essays",
       "id": "public_p11_general_exam_advice"
     },
     {
@@ -2918,7 +2930,7 @@
       "community": 0,
       "norm_label": "section a: analytical response to a text",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Sample Analysing Argument Essays",
       "id": "public_p11_section_a_analytical_response_to_a_text"
     },
     {
@@ -2933,7 +2945,7 @@
       "community": 0,
       "norm_label": "section b - creating a text (framework of ideas)",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Sample Analysing Argument Essays",
       "id": "public_p11_section_b_creating_a_text_framework_of_ideas"
     },
     {
@@ -2948,7 +2960,7 @@
       "community": 0,
       "norm_label": "section c - analysing argument",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Sample Analysing Argument Essays",
       "id": "public_p11_section_c_analysing_argument"
     },
     {
@@ -3053,7 +3065,7 @@
       "community": 0,
       "norm_label": "section a: analytical response to a text (exam component, 20 marks)",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Sample Analysing Argument Essays",
       "id": "public_p07_exam_format_section_a"
     },
     {
@@ -3068,7 +3080,7 @@
       "community": 0,
       "norm_label": "section b: creating a text (exam component, 20 marks)",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Sample Analysing Argument Essays",
       "id": "public_p07_exam_format_section_b"
     },
     {
@@ -3083,7 +3095,7 @@
       "community": 0,
       "norm_label": "section c: analysis of argument and language (exam component, 20 marks)",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Sample Analysing Argument Essays",
       "id": "public_p07_exam_format_section_c"
     },
     {
@@ -3098,7 +3110,7 @@
       "community": 6,
       "norm_label": "table of common persuasive techniques",
       "_origin": "semantic",
-      "community_name": "Analysing Argument (Part 06 hub)",
+      "community_name": "Analysing Written Language",
       "id": "public_p06_analysing_written_language_persuasive_techniques_table"
     },
     {
@@ -3113,7 +3125,7 @@
       "community": 6,
       "norm_label": "table of verbs for authorial intent",
       "_origin": "semantic",
-      "community_name": "Analysing Argument (Part 06 hub)",
+      "community_name": "Analysing Written Language",
       "id": "public_p06_analysing_written_language_verbs_authorial_intent"
     },
     {
@@ -3128,7 +3140,7 @@
       "community": 6,
       "norm_label": "table of adjectives describing tone",
       "_origin": "semantic",
-      "community_name": "Analysing Argument (Part 06 hub)",
+      "community_name": "Analysing Written Language",
       "id": "public_p06_analysing_written_language_tone_adjectives_table"
     },
     {
@@ -3143,7 +3155,7 @@
       "community": 6,
       "norm_label": "table of linking words and phrases",
       "_origin": "semantic",
-      "community_name": "Analysing Argument (Part 06 hub)",
+      "community_name": "Analysing Written Language",
       "id": "public_p06_analysing_written_language_linking_words_table"
     },
     {
@@ -3158,7 +3170,7 @@
       "community": 6,
       "norm_label": "persuasive techniques reference (pdf)",
       "_origin": "semantic",
-      "community_name": "Analysing Argument (Part 06 hub)",
+      "community_name": "Analysing Written Language",
       "id": "public_p06_analysing_written_language_persuasive_techniques_pdf"
     },
     {
@@ -3173,7 +3185,7 @@
       "community": 6,
       "norm_label": "analysing argument introduction framework",
       "_origin": "semantic",
-      "community_name": "Analysing Argument (Part 06 hub)",
+      "community_name": "Analysing Written Language",
       "id": "public_p06_essay_structure_introduction_framework"
     },
     {
@@ -3188,7 +3200,7 @@
       "community": 6,
       "norm_label": "what/how/why body paragraph framework",
       "_origin": "semantic",
-      "community_name": "Analysing Argument (Part 06 hub)",
+      "community_name": "Analysing Written Language",
       "id": "public_p06_essay_structure_body_paragraph_framework"
     },
     {
@@ -3203,7 +3215,7 @@
       "community": 6,
       "norm_label": "w.a.s.t.e.: f.a.t. sentence-building technique",
       "_origin": "semantic",
-      "community_name": "Analysing Argument (Part 06 hub)",
+      "community_name": "Analysing Written Language",
       "id": "public_p06_essay_structure_waste_fat_technique"
     },
     {
@@ -3218,7 +3230,7 @@
       "community": 6,
       "norm_label": "positive/neutral/negative tone vocabulary banks",
       "_origin": "semantic",
-      "community_name": "Analysing Argument (Part 06 hub)",
+      "community_name": "Analysing Written Language",
       "id": "public_p06_essay_structure_tone_vocabulary_banks"
     },
     {
@@ -3230,10 +3242,10 @@
       "captured_at": null,
       "author": "Tracey Cheung",
       "contributor": null,
-      "community": 6,
+      "community": 15,
       "norm_label": "this book week, let's celebrate the power of reading (not just the costumes)",
       "_origin": "semantic",
-      "community_name": "Analysing Argument (Part 06 hub)",
+      "community_name": "Section C from Previous Exams",
       "id": "public_p06_practice_articles_for_analysis_book_week_article"
     },
     {
@@ -3245,10 +3257,10 @@
       "captured_at": null,
       "author": "Daniel Cash",
       "contributor": null,
-      "community": 6,
+      "community": 15,
       "norm_label": "i'm melbourne grammar's school captain and i'm gay. the presbyterian church would have me sacked",
       "_origin": "semantic",
-      "community_name": "Analysing Argument (Part 06 hub)",
+      "community_name": "Section C from Previous Exams",
       "id": "public_p06_practice_articles_for_analysis_melbourne_grammar_article"
     },
     {
@@ -3260,10 +3272,10 @@
       "captured_at": null,
       "author": "Malcolm Knox",
       "contributor": null,
-      "community": 6,
+      "community": 15,
       "norm_label": "confession of a knox grammar old boy: my son won't lose sleep as i have",
       "_origin": "semantic",
-      "community_name": "Analysing Argument (Part 06 hub)",
+      "community_name": "Section C from Previous Exams",
       "id": "public_p06_practice_articles_for_analysis_knox_grammar_article"
     },
     {
@@ -3275,10 +3287,10 @@
       "captured_at": null,
       "author": "Lidia Thorpe",
       "contributor": null,
-      "community": 6,
+      "community": 15,
       "norm_label": "don't ask me to give the queen a minute's silence, ask me for the truth about british colonialism",
       "_origin": "semantic",
-      "community_name": "Analysing Argument (Part 06 hub)",
+      "community_name": "Section C from Previous Exams",
       "id": "public_p06_practice_articles_for_analysis_queen_colonialism_article"
     },
     {
@@ -3290,10 +3302,10 @@
       "captured_at": null,
       "author": "Anonymous",
       "contributor": null,
-      "community": 6,
+      "community": 0,
       "norm_label": "i started using heroin decades ago. the rejection of a melbourne cbd injecting room feels like a rejection of me (the guardian)",
       "_origin": "semantic",
-      "community_name": "Analysing Argument (Part 06 hub)",
+      "community_name": "Sample Analysing Argument Essays",
       "id": "public_p06_sample_analysing_argument_essays_heroin_injecting_room_article"
     },
     {
@@ -3305,10 +3317,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 0,
       "norm_label": "sample essay i (injecting room analysis)",
       "_origin": "semantic",
-      "community_name": "Analysing Argument (Part 06 hub)",
+      "community_name": "Sample Analysing Argument Essays",
       "id": "public_p06_sample_analysing_argument_essays_sample_essay_i"
     },
     {
@@ -3320,10 +3332,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 0,
       "norm_label": "sample essay ii (injecting room analysis)",
       "_origin": "semantic",
-      "community_name": "Analysing Argument (Part 06 hub)",
+      "community_name": "Sample Analysing Argument Essays",
       "id": "public_p06_sample_analysing_argument_essays_sample_essay_ii"
     },
     {
@@ -3335,10 +3347,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 0,
       "norm_label": "sample essay iii (injecting room analysis)",
       "_origin": "semantic",
-      "community_name": "Analysing Argument (Part 06 hub)",
+      "community_name": "Sample Analysing Argument Essays",
       "id": "public_p06_sample_analysing_argument_essays_sample_essay_iii"
     },
     {
@@ -3350,10 +3362,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 0,
       "norm_label": "section c annotation categories (structure & evidence, audience positioning, language & technique, ideas & interpretation)",
       "_origin": "semantic",
-      "community_name": "Analysing Argument (Part 06 hub)",
+      "community_name": "Sample Analysing Argument Essays",
       "id": "public_p06_sample_analysing_argument_essays_annotation_categories"
     },
     {
@@ -3365,10 +3377,10 @@
       "captured_at": null,
       "author": "Daphne Lower",
       "contributor": null,
-      "community": 6,
+      "community": 15,
       "norm_label": "strapleton community voice: public post by daphne lower",
       "_origin": "semantic",
-      "community_name": "Analysing Argument (Part 06 hub)",
+      "community_name": "Section C from Previous Exams",
       "id": "public_p06_section_c_from_previous_exams_strapleton_community_voice"
     },
     {
@@ -3380,10 +3392,10 @@
       "captured_at": null,
       "author": "Sandy Gestalt",
       "contributor": null,
-      "community": 6,
+      "community": 15,
       "norm_label": "our local gym: emergency meeting speech by sandy gestalt",
       "_origin": "semantic",
-      "community_name": "Analysing Argument (Part 06 hub)",
+      "community_name": "Section C from Previous Exams",
       "id": "public_p06_section_c_from_previous_exams_our_local_gym_speech"
     },
     {
@@ -3395,10 +3407,10 @@
       "captured_at": null,
       "author": "Jack Adut",
       "contributor": null,
-      "community": 6,
+      "community": 15,
       "norm_label": "lighting the way: a new year, a new celebration",
       "_origin": "semantic",
-      "community_name": "Analysing Argument (Part 06 hub)",
+      "community_name": "Section C from Previous Exams",
       "id": "public_p06_section_c_from_previous_exams_lighting_the_way_article"
     },
     {
@@ -3410,10 +3422,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 15,
       "norm_label": "an open letter from the student music leadership group, narrow valley",
       "_origin": "semantic",
-      "community_name": "Analysing Argument (Part 06 hub)",
+      "community_name": "Section C from Previous Exams",
       "id": "public_p06_section_c_from_previous_exams_narrow_valley_open_letter"
     },
     {
@@ -3425,10 +3437,10 @@
       "captured_at": null,
       "author": "Janelle Tanley",
       "contributor": null,
-      "community": 6,
+      "community": 15,
       "norm_label": "hapsey happenings - transcript of podcast, episode 32",
       "_origin": "semantic",
-      "community_name": "Analysing Argument (Part 06 hub)",
+      "community_name": "Section C from Previous Exams",
       "id": "public_p06_section_c_from_previous_exams_hapsey_happenings_podcast"
     },
     {
@@ -3545,10 +3557,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 17,
       "norm_label": "how to use this site (part 01)",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Week-by-Week Revision Program",
       "id": "public_part_01_preface"
     },
     {
@@ -3560,10 +3572,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 17,
       "norm_label": "analytical text response essays (part 04 hub)",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Week-by-Week Revision Program",
       "id": "public_part_04_analytical_text_response_essays"
     },
     {
@@ -3575,10 +3587,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 17,
+      "community": 21,
       "norm_label": "creating texts (part 05 hub)",
       "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
+      "community_name": "Creating Texts (Part 05 hub)",
       "id": "public_part_05_creating_texts"
     },
     {
@@ -3590,10 +3602,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 17,
       "norm_label": "analysing argument (part 06 hub)",
       "_origin": "semantic",
-      "community_name": "Analysing Argument (Part 06 hub)",
+      "community_name": "Week-by-Week Revision Program",
       "id": "public_part_06_analysing_argument"
     },
     {
@@ -3608,7 +3620,7 @@
       "community": 0,
       "norm_label": "the exam (part 07 hub)",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Sample Analysing Argument Essays",
       "id": "public_part_07_the_exam"
     },
     {
@@ -3620,10 +3632,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 17,
       "norm_label": "practice exams (part 08)",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Week-by-Week Revision Program",
       "id": "public_part_08_practice_exams"
     },
     {
@@ -3635,10 +3647,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 17,
       "norm_label": "exam assessment criteria (part 09)",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Week-by-Week Revision Program",
       "id": "public_part_09_exam_assessment_criteria"
     },
     {
@@ -3650,10 +3662,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 17,
       "norm_label": "exam checklists (part 10 hub)",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Week-by-Week Revision Program",
       "id": "public_part_10_exam_checklists"
     },
     {
@@ -3668,7 +3680,7 @@
       "community": 0,
       "norm_label": "key takeaways from the 2024 assessment report (part 11 hub)",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Sample Analysing Argument Essays",
       "id": "public_part_11_key_takeaways_from_the_2024_assessment_report"
     },
     {
@@ -3695,10 +3707,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 17,
       "norm_label": "key takeaways from the 2025 assessment report (hub, displayed as part 12)",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Week-by-Week Revision Program",
       "id": "public_part_13_key_takeaways_from_the_2025_assessment_report"
     },
     {
@@ -3710,10 +3722,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 14,
+      "community": 17,
       "norm_label": "practice topics & essay timer",
       "_origin": "semantic",
-      "community_name": "Practice Topics & Essay Timer",
+      "community_name": "Week-by-Week Revision Program",
       "id": "public_practice_topics"
     },
     {
@@ -3725,10 +3737,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 17,
       "norm_label": "priority checklist for 2026",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Week-by-Week Revision Program",
       "id": "public_r25_checklist"
     },
     {
@@ -3740,10 +3752,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 17,
       "norm_label": "2025 report: general exam advice",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Week-by-Week Revision Program",
       "id": "public_r25_general"
     },
     {
@@ -3755,10 +3767,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 17,
       "norm_label": "2025 report: section a \u2013 analytical response to a text",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Week-by-Week Revision Program",
       "id": "public_r25_section_a"
     },
     {
@@ -3770,10 +3782,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 17,
       "norm_label": "2025 report: section b \u2013 creating a text",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Week-by-Week Revision Program",
       "id": "public_r25_section_b"
     },
     {
@@ -3785,10 +3797,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 17,
       "norm_label": "2025 report: section c \u2013 analysis of argument and language",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Week-by-Week Revision Program",
       "id": "public_r25_section_c"
     },
     {
@@ -3830,10 +3842,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 14,
+      "community": 17,
       "norm_label": "rainbow's end (vce text)",
       "_origin": "semantic",
-      "community_name": "Practice Topics & Essay Timer",
+      "community_name": "Week-by-Week Revision Program",
       "id": "concept_rainbows_end_text"
     },
     {
@@ -3845,10 +3857,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 17,
       "norm_label": "vcaa (victorian curriculum and assessment authority)",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Week-by-Week Revision Program",
       "id": "concept_vcaa"
     },
     {
@@ -3860,10 +3872,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 17,
       "norm_label": "vcaa 2025 english examination report",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Week-by-Week Revision Program",
       "id": "concept_vcaa_2025_examiners_report"
     },
     {
@@ -3878,7 +3890,7 @@
       "community": 0,
       "norm_label": "vcaa 2024 english assessment report",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Sample Analysing Argument Essays",
       "id": "concept_vcaa_2024_examiners_report"
     },
     {
@@ -3890,10 +3902,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 17,
       "norm_label": "vce english and eal study design 2024\u20132027",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Week-by-Week Revision Program",
       "id": "concept_vce_english_study_design_2024_2027"
     },
     {
@@ -3905,10 +3917,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 17,
       "norm_label": "framework of ideas (section b)",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Week-by-Week Revision Program",
       "id": "concept_framework_of_ideas"
     },
     {
@@ -4010,10 +4022,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 17,
       "norm_label": "how to use this site",
       "_origin": "semantic",
-      "community_name": "Exam Assessment Criteria (Part 09)",
+      "community_name": "Week-by-Week Revision Program",
       "id": "snippets_howto"
     },
     {
@@ -4025,10 +4037,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 17,
+      "community": 21,
       "norm_label": "personal journeys writing tasks (stimulus set)",
       "_origin": "semantic",
-      "community_name": "Week-by-Week Revision Program",
+      "community_name": "Creating Texts (Part 05 hub)",
       "id": "snippets_pj1"
     },
     {
@@ -4239,7 +4251,7 @@
       "community": 11,
       "norm_label": "analysing argument: persuasive techniques (vce reference table)",
       "_origin": "semantic",
-      "community_name": "Visual Language",
+      "community_name": "Appeals to Emotion and Values",
       "id": "localpdf_persuasive_techniques_reference"
     },
     {
@@ -4251,7 +4263,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 11,
       "norm_label": "appeals to emotion and values",
       "_origin": "semantic",
       "community_name": "Appeals to Emotion and Values",
@@ -4266,7 +4278,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 11,
       "norm_label": "appeal to fear",
       "_origin": "semantic",
       "community_name": "Appeals to Emotion and Values",
@@ -4281,7 +4293,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 11,
       "norm_label": "appeal to family values",
       "_origin": "semantic",
       "community_name": "Appeals to Emotion and Values",
@@ -4296,7 +4308,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 11,
       "norm_label": "appeal to patriotism / national pride",
       "_origin": "semantic",
       "community_name": "Appeals to Emotion and Values",
@@ -4311,7 +4323,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 11,
       "norm_label": "appeal to self-interest",
       "_origin": "semantic",
       "community_name": "Appeals to Emotion and Values",
@@ -4326,7 +4338,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 11,
       "norm_label": "appeal to the hip-pocket nerve",
       "_origin": "semantic",
       "community_name": "Appeals to Emotion and Values",
@@ -4341,7 +4353,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 11,
       "norm_label": "appeal to tradition / nostalgia",
       "_origin": "semantic",
       "community_name": "Appeals to Emotion and Values",
@@ -4356,7 +4368,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 11,
       "norm_label": "appeal to justice and fairness",
       "_origin": "semantic",
       "community_name": "Appeals to Emotion and Values",
@@ -4371,7 +4383,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 11,
       "norm_label": "appeal to common sense",
       "_origin": "semantic",
       "community_name": "Appeals to Emotion and Values",
@@ -4386,7 +4398,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 11,
       "norm_label": "appeal to authority / expert opinion",
       "_origin": "semantic",
       "community_name": "Appeals to Emotion and Values",
@@ -4401,7 +4413,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 11,
       "norm_label": "appeal to group loyalty / belonging",
       "_origin": "semantic",
       "community_name": "Appeals to Emotion and Values",
@@ -4416,7 +4428,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 11,
       "norm_label": "appeal to pity / compassion",
       "_origin": "semantic",
       "community_name": "Appeals to Emotion and Values",
@@ -4431,7 +4443,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 11,
       "norm_label": "appeal to responsibility / duty",
       "_origin": "semantic",
       "community_name": "Appeals to Emotion and Values",
@@ -4446,7 +4458,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 11,
       "norm_label": "appeal to hope / optimism",
       "_origin": "semantic",
       "community_name": "Appeals to Emotion and Values",
@@ -4461,7 +4473,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 11,
       "norm_label": "appeal to guilt or shame",
       "_origin": "semantic",
       "community_name": "Appeals to Emotion and Values",
@@ -4476,7 +4488,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 11,
       "norm_label": "appeal to modernity / progress",
       "_origin": "semantic",
       "community_name": "Appeals to Emotion and Values",
@@ -4491,7 +4503,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 11,
       "norm_label": "appeal to freedom and individual rights",
       "_origin": "semantic",
       "community_name": "Appeals to Emotion and Values",
@@ -4506,7 +4518,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 11,
       "norm_label": "appeal to security and safety",
       "_origin": "semantic",
       "community_name": "Appeals to Emotion and Values",
@@ -5199,7 +5211,7 @@
       "community": 11,
       "norm_label": "evidence and support",
       "_origin": "semantic",
-      "community_name": "Visual Language",
+      "community_name": "Appeals to Emotion and Values",
       "id": "localpdf_persuasive_techniques_reference_category_evidence_and_support"
     },
     {
@@ -5214,7 +5226,7 @@
       "community": 11,
       "norm_label": "statistics",
       "_origin": "semantic",
-      "community_name": "Visual Language",
+      "community_name": "Appeals to Emotion and Values",
       "id": "localpdf_persuasive_techniques_reference_statistics"
     },
     {
@@ -5229,7 +5241,7 @@
       "community": 11,
       "norm_label": "research and studies",
       "_origin": "semantic",
-      "community_name": "Visual Language",
+      "community_name": "Appeals to Emotion and Values",
       "id": "localpdf_persuasive_techniques_reference_research_and_studies"
     },
     {
@@ -5244,7 +5256,7 @@
       "community": 11,
       "norm_label": "expert testimony",
       "_origin": "semantic",
-      "community_name": "Visual Language",
+      "community_name": "Appeals to Emotion and Values",
       "id": "localpdf_persuasive_techniques_reference_expert_testimony"
     },
     {
@@ -5259,7 +5271,7 @@
       "community": 11,
       "norm_label": "eyewitness or vox pop quotation",
       "_origin": "semantic",
-      "community_name": "Visual Language",
+      "community_name": "Appeals to Emotion and Values",
       "id": "localpdf_persuasive_techniques_reference_eyewitness_or_vox_pop_quotation"
     },
     {
@@ -5274,7 +5286,7 @@
       "community": 11,
       "norm_label": "personal experience and credentials",
       "_origin": "semantic",
-      "community_name": "Visual Language",
+      "community_name": "Appeals to Emotion and Values",
       "id": "localpdf_persuasive_techniques_reference_personal_experience_and_credentials"
     },
     {
@@ -5289,7 +5301,7 @@
       "community": 11,
       "norm_label": "historical precedent",
       "_origin": "semantic",
-      "community_name": "Visual Language",
+      "community_name": "Appeals to Emotion and Values",
       "id": "localpdf_persuasive_techniques_reference_historical_precedent"
     },
     {
@@ -5304,7 +5316,7 @@
       "community": 11,
       "norm_label": "comparison to other jurisdictions",
       "_origin": "semantic",
-      "community_name": "Visual Language",
+      "community_name": "Appeals to Emotion and Values",
       "id": "localpdf_persuasive_techniques_reference_comparison_to_other_jurisdictions"
     },
     {
@@ -5319,7 +5331,7 @@
       "community": 11,
       "norm_label": "official documentation",
       "_origin": "semantic",
-      "community_name": "Visual Language",
+      "community_name": "Appeals to Emotion and Values",
       "id": "localpdf_persuasive_techniques_reference_official_documentation"
     },
     {
@@ -5334,7 +5346,7 @@
       "community": 11,
       "norm_label": "reasoning, logic and logical fallacies",
       "_origin": "semantic",
-      "community_name": "Visual Language",
+      "community_name": "Appeals to Emotion and Values",
       "id": "localpdf_persuasive_techniques_reference_category_reasoning_logic_and_logical_fallacies"
     },
     {
@@ -5349,7 +5361,7 @@
       "community": 11,
       "norm_label": "logical reasoning / cause and effect",
       "_origin": "semantic",
-      "community_name": "Visual Language",
+      "community_name": "Appeals to Emotion and Values",
       "id": "localpdf_persuasive_techniques_reference_logical_reasoning_cause_and_effect"
     },
     {
@@ -5364,7 +5376,7 @@
       "community": 11,
       "norm_label": "generalisation",
       "_origin": "semantic",
-      "community_name": "Visual Language",
+      "community_name": "Appeals to Emotion and Values",
       "id": "localpdf_persuasive_techniques_reference_generalisation"
     },
     {
@@ -5379,7 +5391,7 @@
       "community": 11,
       "norm_label": "slippery slope",
       "_origin": "semantic",
-      "community_name": "Visual Language",
+      "community_name": "Appeals to Emotion and Values",
       "id": "localpdf_persuasive_techniques_reference_slippery_slope"
     },
     {
@@ -5394,7 +5406,7 @@
       "community": 11,
       "norm_label": "false dichotomy (either-or)",
       "_origin": "semantic",
-      "community_name": "Visual Language",
+      "community_name": "Appeals to Emotion and Values",
       "id": "localpdf_persuasive_techniques_reference_false_dichotomy_either_or"
     },
     {
@@ -5409,7 +5421,7 @@
       "community": 11,
       "norm_label": "bandwagon",
       "_origin": "semantic",
-      "community_name": "Visual Language",
+      "community_name": "Appeals to Emotion and Values",
       "id": "localpdf_persuasive_techniques_reference_bandwagon"
     },
     {
@@ -5424,7 +5436,7 @@
       "community": 11,
       "norm_label": "attack / ad hominem",
       "_origin": "semantic",
-      "community_name": "Visual Language",
+      "community_name": "Appeals to Emotion and Values",
       "id": "localpdf_persuasive_techniques_reference_attack_ad_hominem"
     },
     {
@@ -5439,7 +5451,7 @@
       "community": 11,
       "norm_label": "straw man",
       "_origin": "semantic",
-      "community_name": "Visual Language",
+      "community_name": "Appeals to Emotion and Values",
       "id": "localpdf_persuasive_techniques_reference_straw_man"
     },
     {
@@ -5454,7 +5466,7 @@
       "community": 11,
       "norm_label": "circular reasoning",
       "_origin": "semantic",
-      "community_name": "Visual Language",
+      "community_name": "Appeals to Emotion and Values",
       "id": "localpdf_persuasive_techniques_reference_circular_reasoning"
     },
     {
@@ -5469,7 +5481,7 @@
       "community": 11,
       "norm_label": "reductio ad absurdum",
       "_origin": "semantic",
-      "community_name": "Visual Language",
+      "community_name": "Appeals to Emotion and Values",
       "id": "localpdf_persuasive_techniques_reference_reductio_ad_absurdum"
     },
     {
@@ -5484,7 +5496,7 @@
       "community": 11,
       "norm_label": "post hoc reasoning",
       "_origin": "semantic",
-      "community_name": "Visual Language",
+      "community_name": "Appeals to Emotion and Values",
       "id": "localpdf_persuasive_techniques_reference_post_hoc_reasoning"
     },
     {
@@ -5499,7 +5511,7 @@
       "community": 11,
       "norm_label": "red herring",
       "_origin": "semantic",
-      "community_name": "Visual Language",
+      "community_name": "Appeals to Emotion and Values",
       "id": "localpdf_persuasive_techniques_reference_red_herring"
     },
     {
@@ -5514,7 +5526,7 @@
       "community": 11,
       "norm_label": "tone",
       "_origin": "semantic",
-      "community_name": "Visual Language",
+      "community_name": "Appeals to Emotion and Values",
       "id": "localpdf_persuasive_techniques_reference_category_tone_section"
     },
     {
@@ -5529,7 +5541,7 @@
       "community": 11,
       "norm_label": "tone",
       "_origin": "semantic",
-      "community_name": "Visual Language",
+      "community_name": "Appeals to Emotion and Values",
       "id": "localpdf_persuasive_techniques_reference_tone"
     },
     {
@@ -5544,7 +5556,7 @@
       "community": 11,
       "norm_label": "tone shift",
       "_origin": "semantic",
-      "community_name": "Visual Language",
+      "community_name": "Appeals to Emotion and Values",
       "id": "localpdf_persuasive_techniques_reference_tone_shift"
     },
     {
@@ -5559,7 +5571,7 @@
       "community": 11,
       "norm_label": "outraged / indignant tone",
       "_origin": "semantic",
-      "community_name": "Visual Language",
+      "community_name": "Appeals to Emotion and Values",
       "id": "localpdf_persuasive_techniques_reference_outraged_indignant_tone"
     },
     {
@@ -5574,7 +5586,7 @@
       "community": 11,
       "norm_label": "reasonable / conciliatory tone",
       "_origin": "semantic",
-      "community_name": "Visual Language",
+      "community_name": "Appeals to Emotion and Values",
       "id": "localpdf_persuasive_techniques_reference_reasonable_conciliatory_tone"
     },
     {
@@ -5586,7 +5598,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 3,
       "norm_label": "visual language",
       "_origin": "semantic",
       "community_name": "Visual Language",
@@ -5601,7 +5613,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 3,
       "norm_label": "political cartoon",
       "_origin": "semantic",
       "community_name": "Visual Language",
@@ -5616,7 +5628,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 3,
       "norm_label": "caricature and exaggeration",
       "_origin": "semantic",
       "community_name": "Visual Language",
@@ -5631,7 +5643,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 3,
       "norm_label": "symbolism",
       "_origin": "semantic",
       "community_name": "Visual Language",
@@ -5646,7 +5658,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 3,
       "norm_label": "labelling in cartoons",
       "_origin": "semantic",
       "community_name": "Visual Language",
@@ -5661,7 +5673,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 3,
       "norm_label": "facial expression and body language",
       "_origin": "semantic",
       "community_name": "Visual Language",
@@ -5676,7 +5688,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 3,
       "norm_label": "photograph",
       "_origin": "semantic",
       "community_name": "Visual Language",
@@ -5691,7 +5703,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 3,
       "norm_label": "gaze and vectors",
       "_origin": "semantic",
       "community_name": "Visual Language",
@@ -5706,7 +5718,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 3,
       "norm_label": "salience and size",
       "_origin": "semantic",
       "community_name": "Visual Language",
@@ -5721,7 +5733,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 3,
       "norm_label": "colour",
       "_origin": "semantic",
       "community_name": "Visual Language",
@@ -5736,7 +5748,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 3,
       "norm_label": "caption",
       "_origin": "semantic",
       "community_name": "Visual Language",
@@ -5751,7 +5763,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 3,
       "norm_label": "graphs and infographics",
       "_origin": "semantic",
       "community_name": "Visual Language",
@@ -5766,7 +5778,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 3,
       "norm_label": "layout, subheadings and pull quotes",
       "_origin": "semantic",
       "community_name": "Visual Language",
@@ -5781,7 +5793,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 3,
       "norm_label": "logos and branding",
       "_origin": "semantic",
       "community_name": "Visual Language",
@@ -5796,7 +5808,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 3,
       "norm_label": "visual juxtaposition",
       "_origin": "semantic",
       "community_name": "Visual Language",
@@ -7384,7 +7396,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "build.py",
-      "source_location": "L1045",
+      "source_location": "L1062",
       "weight": 1.0,
       "_origin": "ast",
       "source": "build",
@@ -7395,7 +7407,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "build.py",
-      "source_location": "L339",
+      "source_location": "L352",
       "weight": 1.0,
       "_origin": "ast",
       "source": "build",
@@ -7417,7 +7429,18 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "build.py",
-      "source_location": "L1383",
+      "source_location": "L159",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "build",
+      "target": "build_cover_html",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "build.py",
+      "source_location": "L1404",
       "weight": 1.0,
       "_origin": "ast",
       "source": "build",
@@ -7428,7 +7451,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "build.py",
-      "source_location": "L1068",
+      "source_location": "L1085",
       "weight": 1.0,
       "_origin": "ast",
       "source": "build",
@@ -7439,7 +7462,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "build.py",
-      "source_location": "L341",
+      "source_location": "L354",
       "weight": 1.0,
       "_origin": "ast",
       "source": "build",
@@ -7450,7 +7473,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "build.py",
-      "source_location": "L1418",
+      "source_location": "L1439",
       "weight": 1.0,
       "_origin": "ast",
       "source": "build",
@@ -7461,7 +7484,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "build.py",
-      "source_location": "L1025",
+      "source_location": "L1042",
       "weight": 1.0,
       "_origin": "ast",
       "source": "build",
@@ -7472,7 +7495,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "build.py",
-      "source_location": "L1119",
+      "source_location": "L1136",
       "weight": 1.0,
       "_origin": "ast",
       "source": "build",
@@ -7483,7 +7506,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "build.py",
-      "source_location": "L1016",
+      "source_location": "L1033",
       "weight": 1.0,
       "_origin": "ast",
       "source": "build",
@@ -7494,7 +7517,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "build.py",
-      "source_location": "L1441",
+      "source_location": "L1462",
       "weight": 1.0,
       "_origin": "ast",
       "source": "build",
@@ -7505,7 +7528,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "build.py",
-      "source_location": "L1071",
+      "source_location": "L1088",
       "weight": 1.0,
       "_origin": "ast",
       "source": "build",
@@ -7516,7 +7539,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "build.py",
-      "source_location": "L216",
+      "source_location": "L229",
       "weight": 1.0,
       "_origin": "ast",
       "source": "build",
@@ -7528,7 +7551,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "build.py",
-      "source_location": "L346",
+      "source_location": "L359",
       "weight": 1.0,
       "_origin": "ast",
       "source": "build_heading_chain",
@@ -7540,7 +7563,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "build.py",
-      "source_location": "L1116",
+      "source_location": "L1133",
       "weight": 1.0,
       "_origin": "ast",
       "source": "build_shell",
@@ -7552,7 +7575,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "build.py",
-      "source_location": "L1116",
+      "source_location": "L1133",
       "weight": 1.0,
       "_origin": "ast",
       "source": "build_shell",
@@ -15909,5 +15932,5 @@
       "source_file": "snippets/report2025.html"
     }
   ],
-  "built_at_commit": "bac3f51d3e0a033a385577f64ab5cba5aff6d7f4"
+  "built_at_commit": "07afb12b8c8097cca9b8d91dadd76756c14e7498"
 }

@@ -482,7 +482,7 @@ TOOL_LABEL = '<div class="part-label">Study Tools</div>'
 fc_page = TOOL_LABEL + """<h1>Quote Flashcards</h1>
 <p class="lede">Test yourself on the quote banks. Read the quote, recall who says it and which theme it serves, then flip.</p>
 <div class="tool-bar">
-  <select id="fc-text"><option value="">Both texts</option></select>
+  <select aria-label="Which text" id="fc-text"><option value="">Both texts</option></select>
   <button id="fc-shuffle">Shuffle</button>
   <span class="tool-count" id="fc-count"></span>
 </div>
@@ -529,14 +529,14 @@ fc_page = TOOL_LABEL + """<h1>Quote Flashcards</h1>
 tp_page = TOOL_LABEL + """<h1>Practice Topics &amp; Essay Timer</h1>
 <p class="lede">Draw a random analytical topic and write against the clock, exam-style.</p>
 <div class="tool-bar">
-  <select id="tp-text"></select>
+  <select aria-label="Which text" id="tp-text"></select>
   <button id="tp-draw">Draw a topic</button>
 </div>
 <div class="tp-topic" id="tp-topic">Press &ldquo;Draw a topic&rdquo; to begin.</div>
 <div class="timer-wrap">
   <div class="timer" id="timer">60:00</div>
   <div class="tool-bar">
-    <select id="t-mins"><option value="60">60 min (exam section)</option><option value="45">45 min</option><option value="30">30 min</option><option value="20">20 min (plan only)</option></select>
+    <select aria-label="Timer length" id="t-mins"><option value="60">60 min (exam section)</option><option value="45">45 min</option><option value="30">30 min</option><option value="20">20 min (plan only)</option></select>
     <button id="t-start">Start</button>
     <button id="t-pause" disabled>Pause</button>
     <button id="t-reset">Reset</button>
@@ -581,7 +581,7 @@ gl_items = "".join('<div class="gl-item" data-term="%s"><b>%s</b> <span class="g
                    for g in glossary)
 gl_page = TOOL_LABEL + """<h1>Glossary of Techniques</h1>
 <p class="lede">Every film and persuasive technique from the guide in one alphabetical reference.</p>
-<div class="tool-bar"><input id="gl-filter" type="search" placeholder="Filter terms&hellip;" style="flex:1;max-width:340px"></div>
+<div class="tool-bar"><input aria-label="Filter terms" id="gl-filter" type="search" placeholder="Filter terms&hellip;" style="flex:1;max-width:340px"></div>
 <div class="gl-list" id="gl-list">%s</div>
 <script>
 (function(){
@@ -736,7 +736,7 @@ ob_page = TOOL_LABEL + """<h1>Essay Outline Builder</h1>
   <button type="button" class="ob-mode" data-m="a">Section A &mdash; Th.E.S.A.M.L.</button>
   <button type="button" class="ob-mode" data-m="c">Section C &mdash; What &middot; How &middot; Why</button>
 </div>
-<div class="ob-field"><label id="ob-cont-label">Contention (your essay&rsquo;s overall argument)</label><textarea id="ob-contention" rows="2" placeholder="e.g. Obsession with self is what ultimately leads to the downfall of characters."></textarea></div>
+<div class="ob-field"><label id="ob-cont-label">Contention (your essay&rsquo;s overall argument)</label><textarea aria-labelledby="ob-cont-label" id="ob-contention" rows="2" placeholder="e.g. Jackson suggests that blind loyalty to tradition allows ordinary people to commit extraordinary cruelty."></textarea></div>
 <div id="ob-paras"></div>
 <div class="tool-bar">
   <button id="ob-add">+ Add paragraph</button>
@@ -764,7 +764,7 @@ ob_page = TOOL_LABEL + """<h1>Essay Outline Builder</h1>
     ]
   };
   var CONT = {
-    a: ['Contention (your essay\u2019s overall argument)', 'e.g. Obsession with self is what ultimately leads to the downfall of characters.'],
+    a: ['Contention (your essay\u2019s overall argument)', 'e.g. Jackson suggests that blind loyalty to tradition allows ordinary people to commit extraordinary cruelty.'],
     c: ['Opening overview \u2014 author, form, contention, tone, audience', 'e.g. In her opinion piece, [author] contends that\u2026 in a [tone] tone, targeting\u2026']
   };
   var FIELDS;
@@ -866,7 +866,7 @@ VOCAB_SWAPS = {
 }
 vu_page = TOOL_LABEL + """<h1>Vocabulary Upgrader</h1>
 <p class="lede">Paste a paragraph and it flags the words that flatten analytical writing &mdash; <em>shows, says, does, very, thing</em> and friends &mdash; with stronger swaps from the vocabulary bank. Pick a suggestion to replace it.</p>
-<textarea id="vu-text" rows="8" style="width:100%%;font-family:var(--serif);font-size:16.5px;line-height:1.6;padding:16px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink)" placeholder="Paste your paragraph here&hellip;"></textarea>
+<textarea aria-label="Your paragraph" id="vu-text" rows="8" style="width:100%%;font-family:var(--serif);font-size:16.5px;line-height:1.6;padding:16px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink)" placeholder="Paste your paragraph here&hellip;"></textarea>
 <div class="tool-bar">
   <button id="vu-check">Check my writing</button>
   <span class="tool-count" id="vu-count"></span>
@@ -913,7 +913,7 @@ vu_page = TOOL_LABEL + """<h1>Vocabulary Upgrader</h1>
 dr_page = TOOL_LABEL + """<h1>Micro-Drills</h1>
 <p class="lede">Five-minute bursts that build one skill at a time. Draw a drill, write against the clock.</p>
 <div class="tool-bar">
-  <select id="dr-type">
+  <select aria-label="Drill type" id="dr-type">
     <option value="topics">Three topic sentences (5 min)</option>
     <option value="plan">Plan an essay \u2014 no prose (5 min)</option>
     <option value="contention">Contention in one sentence (2 min)</option>
@@ -923,7 +923,7 @@ dr_page = TOOL_LABEL + """<h1>Micro-Drills</h1>
   <span class="tool-count timer" id="dr-timer" style="font-size:28px"></span>
 </div>
 <div class="tp-topic" id="dr-topic" style="display:none"></div>
-<textarea id="dr-pad" style="display:none;width:100%%;min-height:200px;font-family:var(--serif);font-size:16.5px;line-height:1.6;padding:16px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);margin-top:10px" placeholder="Write here&hellip;"></textarea>
+<textarea aria-label="Your drill answer" id="dr-pad" style="display:none;width:100%%;min-height:200px;font-family:var(--serif);font-size:16.5px;line-height:1.6;padding:16px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);margin-top:10px" placeholder="Write here&hellip;"></textarea>
 <div class="tool-bar"><span class="tool-count" id="dr-wc" style="margin-left:0"></span></div>
 <script>window.DRT = %s;</script>
 <script>
@@ -1077,9 +1077,71 @@ def apply_annotations(page_file, body):
             if c not in used: used.append(c)
     if hit:
         legend = "".join('<button class="lg lg-%s" data-cat="%s">%s</button>' % (c, c, CAT_LABEL[c]) for c in used)
-        body = ('<div class="anno-hint">Hover over a highlighted passage (or tap, on touch screens) to see '
-                'what earns marks in that moment.<div class="anno-legend">%s</div></div>' % legend) + body
+        body = ('<div class="anno-hint">Select a highlighted passage to see what earns marks in that moment. '
+                'Use the buttons to show one category at a time.<div class="anno-legend">%s</div></div>' % legend) + body
     return body, hit
+
+
+def shift_headings(sec):
+    """Sub-headings start at h2 under the page h1; keep their original look via an hl<n> class."""
+    import re as _re
+    hs = [h for h in sec.find_all(_re.compile("^h[2-6]$"))]
+    if not hs:
+        return
+    delta = min(int(h.name[1]) for h in hs) - 2
+    if delta <= 0:
+        return
+    for h in hs:
+        n = int(h.name[1])
+        h["class"] = h.get("class", []) + ["hl%d" % n]
+        h.name = "h%d" % (n - delta)
+
+IMG_ALT = {
+    "Screenshot 2025-07-24 105659.png": "Proofreading checklist: varied vocabulary, varied sentences, formal style, no first person, linking words, textual evidence, links to the topic, a clear conclusion, and correct spelling, grammar and punctuation",
+    "aud.png": "Mind map: young adults branching to working (pay, roster) and studying at uni (student politics, grades), each with further sub-topics",
+    "image.png": "Mind map: young adults branching to working (pay, roster) and studying at uni (student politics, grades), each with further sub-topics",
+    "Screenshot 2025-07-24 105411.png": "Table of text types and what each is good for, from blog post (reflecting on a topic) to feature article (exploring a topic in detail)",
+    "2024ExamSectionB.png": "2024 exam Framework 3, Writing about personal journeys: the title Finding My Way and three stimuli, including a photo of feet standing among painted arrows",
+    "aud2.png": "Scale from formal to standard to casual language, matched to how well the author knows the audience",
+    "Screenshot 2025-07-24 105039.png": "Annotated cartoon of a tank at a petrol station, with five numbered notes on colour, speech bubbles, placement, contrast and metaphor",
+    "Screenshot 2025-07-23 161319.png": "Long Live Lollies poster: a cartoon chocolate bar and heart arm in arm under the words Focus on the good",
+    "Screenshot 2025-07-25 085732.png": "Cartoon: a woman throws bread to ducks by a park bench while a duck asks, How about going easy on the carbs?",
+    "Screenshot 2025-07-25 085941.png": "Hands holding up musical items against a white wall: a guitar, a cymbal, maracas, a vinyl record and drumsticks",
+    "Screenshot 2025-07-25 090126.png": "A heron in shallow wetland water pecking at floating plastic rubbish",
+}
+
+def polish_images(body):
+    """Alt text for known images, lazy loading below the first image, WebP for large PNGs."""
+    from urllib.parse import unquote as _uq
+    soup_ = BeautifulSoup(body, "html.parser")
+    for i, img in enumerate(soup_.find_all("img")):
+        src = img.get("src", "")
+        name = _uq(src.split("/")[-1])
+        if img.get("alt") is None:
+            img["alt"] = IMG_ALT.get(name, "")
+        if i > 0 and not img.get("loading"):
+            img["loading"] = "lazy"
+        img["decoding"] = "async"
+        if src.startswith("assets/img/") and name.lower().endswith(".png"):
+            path = os.path.join(PUBLIC, *_uq(src).split("/"))
+            if os.path.exists(path) and os.path.getsize(path) > 120000:
+                webp = path[:-4] + ".webp"
+                if not os.path.exists(webp) or os.path.getmtime(webp) < os.path.getmtime(path):
+                    from PIL import Image as _Im
+                    _Im.open(path).save(webp, "WEBP", quality=82, method=6)
+                img["src"] = src[:-4] + ".webp"
+    # no heading-level jumps: a heading never sits more than one level below the one before it
+    import re as _re
+    prev = 0
+    for h in soup_.find_all(_re.compile("^h[1-6]$")):
+        n = int(h.name[1])
+        if prev and n > prev + 1:
+            if not h.get("class") and h.parent is not None and h.parent.name == "section":
+                h["class"] = ["hl%d" % n]
+            h.name = "h%d" % (prev + 1)
+            n = prev + 1
+        prev = n
+    return str(soup_)
 
 QUOTE_FIX = re.compile(r"(^|[\s\(\[\u2014\u2013>])\u2019(?=\S)")
 def fix_quotes(html_str):
@@ -1102,7 +1164,7 @@ def shell(title, active_nav, active_file, main_html, prevnext=""):
 <meta property="og:description" content="South Oakleigh College Units 3/4 English exam preparation guide - texts, essays, practice exams and study tools.">
 <meta property="og:image" content="https://nmo-soc.github.io/VCE-English-Guide/assets/img/soc-logo.png">
 <script>try{var _t=localStorage.getItem('siteTheme');if(_t==='dark'||(!_t&&window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.setAttribute('data-theme','dark');}catch(e){}</script>
-<link rel="stylesheet" href="assets/style.css?v=67">
+<link rel="stylesheet" href="assets/style.css?v=70">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -1115,7 +1177,7 @@ def shell(title, active_nav, active_file, main_html, prevnext=""):
       <span class="brand-sub">Exam Prep Guide</span>
     </a>
     <div class="search-wrap">
-      <input id="search" type="search" placeholder="Search the guide&hellip;" autocomplete="off">
+      <label for="search" class="vh">Search the guide</label><input id="search" type="search" placeholder="Search the guide&hellip;" autocomplete="off" aria-controls="search-results" aria-autocomplete="list">
       <div id="search-results"></div>
     </div>
     <nav class="toc"><ol>%s</ol></nav>
@@ -1127,7 +1189,7 @@ def shell(title, active_nav, active_file, main_html, prevnext=""):
   </main>
 </div>
 %s
-<script src="assets/site.js?v=48"></script>
+<script src="assets/site.js?v=49"></script>
 <script data-goatcounter="https://nmo.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>""" % (html.escape(title), SITE_TITLE, html.escape(title), nav_html(active_nav, active_file), fix_quotes(main_html), fix_quotes(prevnext),
@@ -1366,6 +1428,7 @@ for k, pg in enumerate(all_pages):
         pos = ('<span class="ch-pos">Chapter %d of %d</span>' % (pg["chidx"], pg["chtotal"])) if pg.get("chidx") else ""
         crumb = ('<div class="part-label"><a href="%s">Part %d: %s</a>%s</div>'
                  % (pg["part"]["file"], num, html.escape(pg["part"]["title"]), pos))
+        shift_headings(sec)
         _toc = page_toc(sec)
         _h1 = sec.find("h1")
         if _h1 and _toc:
@@ -1378,6 +1441,7 @@ for k, pg in enumerate(all_pages):
         rewrite_anchors(sec, pg["file"])
         h1 = sec.find("h1")
         if h1: h1.insert_before(BeautifulSoup('<div class="part-label">Part %d</div>' % num, "html.parser"))
+        shift_headings(sec)
         body = page_toc(sec) + sec.decode()
 
     if pg["file"] == "p06-analysing-written-language.html":
@@ -1389,7 +1453,7 @@ for k, pg in enumerate(all_pages):
   <a class="pdf-dl" href="assets/pdf/persuasive-techniques-reference.pdf" download>Download &#8595;</a></div>
   <iframe class="pdf-frame" src="assets/pdf/persuasive-techniques-reference.pdf#view=FitH" loading="lazy" title="Persuasive Techniques Reference"></iframe>
 </div>"""
-    body = fix_quotes(body)
+    body = polish_images(fix_quotes(body))
     body, _ah = apply_annotations(pg["file"], body)
     if pg["file"] == "part-08-practice-exams.html":
         _g = re.search(r'(<section[^>]*id="english-exam-generator".*?</section>)', body, re.S)

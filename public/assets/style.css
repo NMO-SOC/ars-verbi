@@ -796,3 +796,33 @@ mark.anno .anno-cat{font-size:var(--fs-xs)}
   .home-box{position:relative;left:auto;bottom:auto;margin:-48px 12px 0;max-width:none;padding:18px 18px 16px}
   .home-box .home-title{font-size:1.6rem}
 }
+/* ---- UX pass ---- */
+/* headings shifted up a level keep their original look */
+.content .hl3{font-size:1.375rem;margin:1.7em 0 .4em;color:var(--ink);font-weight:700;border:0;padding:0}
+.content .hl4{font-size:1.125rem;margin:1.4em 0 .3em;color:var(--accent);font-weight:700;border:0;padding:0}
+.content .hl5{font-size:1rem;margin:1.2em 0 .2em;color:var(--muted);font-weight:700;border:0;padding:0}
+.content .exam-sec h2.hl4,.content .sc-scenario > h2{color:var(--accent)}
+.page-toc li.lvl3{padding-left:14px}.page-toc li.lvl4{padding-left:24px}
+/* larger tap targets in the contents box */
+.page-toc li a{display:inline-block;padding:3px 0;min-height:24px}
+/* search: keyboard-highlighted result */
+#search-results a.kb{background:var(--accent-soft)}
+#search-results .nores{line-height:1.45}
+/* floating "On this page" */
+#toc-fab{position:fixed;right:76px;bottom:22px;z-index:120;height:44px;padding:0 16px;border-radius:999px;border:1px solid var(--line);
+  background:var(--panel);color:var(--ink);font-family:var(--sans);font-size:var(--fs-ui);font-weight:600;cursor:pointer;
+  box-shadow:var(--shadow-pop);opacity:0;pointer-events:none;transition:opacity .2s}
+#toc-fab.show{opacity:1;pointer-events:auto}
+#toc-fab:hover{border-color:var(--accent);color:var(--accent)}
+#toc-pop{position:fixed;right:22px;bottom:76px;z-index:130;width:min(360px,calc(100vw - 32px));max-height:60vh;overflow:auto;
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow-pop);padding:10px 16px;font-family:var(--sans)}
+#toc-pop ul{list-style:none;margin:0;padding:0}
+#toc-pop li a{display:block;padding:8px 0;border-bottom:1px solid var(--line);font-size:var(--fs-ui);color:var(--ink)}
+#toc-pop li:last-child a{border-bottom:0}
+#toc-pop li.lvl3 a{padding-left:12px}#toc-pop li.lvl4 a{padding-left:22px}
+@media (prefers-reduced-motion:reduce){#toc-fab{transition:none}}
+@media print{#toc-fab,#toc-pop{display:none!important}}
+.how-card h2{margin:.4em 0 .3em;font-size:1.125rem;border:0;padding:0}
+.route h3{margin:0 0 .4em;color:var(--ink);font-size:1rem}
+.content .note-card h2,.content .note-card h3{border:0;padding:0}
+.quotes-page .page-toc li{border:0;background:none;padding:0;margin:3px 0;border-radius:0}

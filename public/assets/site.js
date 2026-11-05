@@ -1,7 +1,19 @@
 (function(){
   var toggle=document.getElementById('menu-toggle'),sb=document.getElementById('sidebar');
-  if(toggle&&sb){toggle.addEventListener('click',function(){sb.classList.toggle('open');});
-    document.querySelector('.content').addEventListener('click',function(){sb.classList.remove('open');});}
+  if(toggle&&sb){
+    // mobile menu: announces its state, moves focus in, closes on Escape and returns focus to the button
+    toggle.setAttribute('aria-controls','sidebar');toggle.setAttribute('aria-expanded','false');
+    function setMenu(open,refocus){
+      sb.classList.toggle('open',open);toggle.setAttribute('aria-expanded',String(open));
+      toggle.setAttribute('aria-label',open?'Close menu':'Open menu');
+      if(open){var f=sb.querySelector('#search')||sb.querySelector('a');if(f)f.focus();}
+      else if(refocus){toggle.focus();}
+    }
+    toggle.addEventListener('click',function(){setMenu(!sb.classList.contains('open'),false);});
+    document.querySelector('.content').addEventListener('click',function(){if(sb.classList.contains('open'))setMenu(false,false);});
+    document.addEventListener('keydown',function(e){
+      if(e.key==='Escape'&&sb.classList.contains('open')&&getComputedStyle(toggle).display!=='none')setMenu(false,true);});
+  }
 
   var box=document.getElementById('search'),out=document.getElementById('search-results'),idx=null;
   if(box){
@@ -21,7 +33,7 @@
             if(hit===2){var k=b.indexOf(q);r.s=(k>40?'\u2026':'')+((data[i].b||'').substring(Math.max(0,k-40),k+60))+'\u2026';}
             res.push(r);}
         }
-        if(!res.length){out.innerHTML='<div class="nores">No matches for &ldquo;'+esc(box.value)+'&rdquo;</div>';out.classList.add('show');return;}
+        if(!res.length){out.innerHTML='<div class="nores" role="status">No matches for &ldquo;'+esc(box.value)+'&rdquo;. Try a shorter word, a character or story name (Tessie, Miranda, &lsquo;The Witch&rsquo;) or a skill (symbols, contention, Section C).</div>';out.classList.add('show');return;}
         function hl(s){var e=esc(s),i=e.toLowerCase().indexOf(q);if(i<0)return e;
           return e.substring(0,i)+'<b>'+e.substring(i,i+q.length)+'</b>'+e.substring(i+q.length);}
         out.innerHTML=res.map(function(r){
@@ -34,6 +46,20 @@
     box.addEventListener('focus',run);
     document.addEventListener('click',function(e){
       if(!out.contains(e.target)&&e.target!==box)out.classList.remove('show');});
+    // keyboard: arrow keys move through results, Enter opens the highlighted (or first) result, Escape closes
+    var cur=-1;
+    function items(){return [].slice.call(out.querySelectorAll('a'));}
+    function mark(i){var a=items();a.forEach(function(x,j){x.classList.toggle('kb',j===i);x.setAttribute('aria-selected',String(j===i));});
+      if(a[i])a[i].scrollIntoView({block:'nearest'});cur=i;}
+    out.setAttribute('role','listbox');
+    box.addEventListener('input',function(){cur=-1;});
+    box.addEventListener('keydown',function(e){
+      var a=items();
+      if(e.key==='ArrowDown'&&a.length){e.preventDefault();mark(Math.min(cur+1,a.length-1));}
+      else if(e.key==='ArrowUp'&&a.length){e.preventDefault();mark(Math.max(cur-1,0));}
+      else if(e.key==='Enter'&&a.length){e.preventDefault();location.href=(a[cur]||a[0]).getAttribute('href');}
+      else if(e.key==='Escape'){out.classList.remove('show');cur=-1;}
+    });
   }
 })();
 (function(){
@@ -137,6 +163,7 @@
       var cat=lg.dataset.cat,was=lg.classList.contains('active');
       document.querySelectorAll('.lg').forEach(function(b){b.classList.remove('active');});
       document.querySelectorAll('mark.anno').forEach(function(m){m.classList.remove('anno-match');});
+      document.querySelectorAll('.lg').forEach(function(b){b.setAttribute('aria-pressed',String(b===lg&&!was));});
       if(was){document.body.classList.remove('anno-filtered');}
       else{
         lg.classList.add('active');
@@ -248,7 +275,7 @@
   var view=document.createElement('div'); view.className='qb-by-story'; view.hidden=true;
   ORDER.concat(Object.keys(groups).filter(function(k){return ORDER.indexOf(k)<0;})).forEach(function(s){
     if(!groups[s]) return;
-    var h=document.createElement('h4'); var em=document.createElement('em'); em.textContent=s; h.appendChild(em);
+    var h=document.createElement('h2'); h.className='hl4'; var em=document.createElement('em'); em.textContent=s; h.appendChild(em);
     var ul=document.createElement('ul'); groups[s].forEach(function(li){ul.appendChild(li);});
     view.appendChild(h); view.appendChild(ul);
   });
@@ -265,4 +292,26 @@
   }
   bar.addEventListener('click',function(e){var b=e.target.closest('button'); if(b) show(b.dataset.v);});
   try{ if(localStorage.getItem('qb-sort')==='story') show('story'); }catch(e){}
+})();
+
+/* Long pages: an "On this page" button appears once the inline contents box has scrolled away */
+(function(){
+  var toc=document.querySelector('.content .page-toc');
+  if(!toc||document.documentElement.scrollHeight<window.innerHeight*3) return;
+  var links=toc.querySelector('ul'); if(!links) return;
+  var btn=document.createElement('button');btn.id='toc-fab';btn.type='button';
+  btn.textContent='On this page';btn.setAttribute('aria-expanded','false');btn.setAttribute('aria-controls','toc-pop');
+  var pop=document.createElement('nav');pop.id='toc-pop';pop.setAttribute('aria-label','On this page');pop.hidden=true;
+  pop.appendChild(links.cloneNode(true));
+  document.body.appendChild(pop);document.body.appendChild(btn);
+  function set(open,refocus){pop.hidden=!open;btn.setAttribute('aria-expanded',String(open));
+    if(open){var a=pop.querySelector('a');if(a)a.focus();}else if(refocus){btn.focus();}}
+  btn.addEventListener('click',function(){set(pop.hidden,false);});
+  pop.addEventListener('click',function(e){if(e.target.closest('a'))set(false,false);});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!pop.hidden)set(false,true);});
+  document.addEventListener('click',function(e){if(!pop.hidden&&!pop.contains(e.target)&&e.target!==btn)set(false,false);});
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(en){btn.classList.toggle('show',!en[0].isIntersecting&&en[0].boundingClientRect.top<0);
+      if(en[0].isIntersecting)set(false,false);}).observe(toc);
+  }else{btn.classList.add('show');}
 })();
