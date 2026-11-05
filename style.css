@@ -775,6 +775,7 @@ mark.anno .anno-cat{font-size:var(--fs-xs)}
 .content figure.cover{margin:8px 0 36px;text-align:left}
 .cover img{display:block;width:100%;height:auto;aspect-ratio:16/7;object-fit:cover;border-radius:var(--r)}
 .content .cover figcaption{font-family:var(--sans);font-size:var(--fs-xs);color:var(--muted);margin-top:6px;text-align:left}
-.home-cover{margin-top:0}
-.home-cover img{aspect-ratio:16/6.5;object-position:50% 40%}
+.home-cover{margin-top:-12px}
+.home-cover img{aspect-ratio:16/7}
+.home-cover img{object-position:50% 40%}
 .cover img[src*="lottery-hyman"]{object-position:50% 0}

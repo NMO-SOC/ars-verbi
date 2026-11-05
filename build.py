@@ -1102,7 +1102,7 @@ def shell(title, active_nav, active_file, main_html, prevnext=""):
 <meta property="og:description" content="South Oakleigh College Units 3/4 English exam preparation guide - texts, essays, practice exams and study tools.">
 <meta property="og:image" content="https://nmo-soc.github.io/VCE-English-Guide/assets/img/soc-logo.png">
 <script>try{var _t=localStorage.getItem('siteTheme');if(_t==='dark'||(!_t&&window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.setAttribute('data-theme','dark');}catch(e){}</script>
-<link rel="stylesheet" href="assets/style.css?v=65">
+<link rel="stylesheet" href="assets/style.css?v=66">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -1502,12 +1502,12 @@ before_links = "".join('<li><a href="%s">%s</a></li>' % (f, t) for f, t in [
     ("study-tools.html", "Study tools")])
 
 landing = """
-%s
 <header class="home-head">
   <h1 class="home-title">VCE English Exam Preparation Guide</h1>
   <p class="home-meta">For students sitting the English exam in 2027. Three sections, three hours of writing: start with the one you&rsquo;re working on.</p>
   <span id="resume-slot"></span>
 </header>
+%s
 <div class="exam-band">%s</div>
 <section class="before-exam" aria-labelledby="before-h"><h2 id="before-h">Before the exam</h2><ul>%s</ul></section>
 <section class="all-parts" aria-labelledby="parts-h"><h2 id="parts-h">All parts of the guide</h2><ol class="parts-list">%s</ol></section>
