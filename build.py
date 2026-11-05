@@ -1060,7 +1060,7 @@ def shell(title, active_nav, active_file, main_html, prevnext=""):
 <meta property="og:description" content="South Oakleigh College Units 3/4 English exam preparation guide - texts, essays, practice exams and study tools.">
 <meta property="og:image" content="https://nmo-soc.github.io/VCE-English-Guide/assets/img/soc-logo.png">
 <script>try{var _t=localStorage.getItem('siteTheme');if(_t==='dark'||(!_t&&window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.setAttribute('data-theme','dark');}catch(e){}</script>
-<link rel="stylesheet" href="assets/style.css?v=54">
+<link rel="stylesheet" href="assets/style.css?v=55">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -1339,13 +1339,14 @@ contents = "".join('<li><a href="%s"><span class="cl-num">%d</span>%s</a></li>'
 
 def _sec(letter, name, asks, links):
     lis = "".join('<li><a href="%s">%s</a></li>' % (f, t) for f, t in links)
-    return ('<section class="exam-sec" aria-labelledby="sec-%s"><div class="es-letter" aria-hidden="true">%s</div>'
+    return ('<section class="exam-sec" aria-labelledby="sec-%s"><div class="es-head"><div class="es-letter" aria-hidden="true">%s</div>'
+            '<p class="es-meta">One third of the marks<br>About 60 minutes</p></div>'
             '<h2 id="sec-%s"><span class="vh">Section %s: </span>%s</h2><p class="es-asks">%s</p><ul>%s</ul></section>'
             % (letter.lower(), letter, letter.lower(), letter, name, asks, lis))
 
 exam_band = "".join([
     _sec("A", "Analytical response to a text",
-         "An essay on one of your two texts. About an hour.",
+         "An essay on one of your two texts.",
          [("part-02-picnic-at-hanging-rock.html", "<i>Picnic at Hanging Rock</i>"),
           ("part-03-the-lottery-and-other-stories.html", "<i>The Lottery and Other Stories</i>"),
           ("p02-sequence-and-theme-grid.html", "Picnic sequence and theme grid"),
@@ -1353,14 +1354,14 @@ exam_band = "".join([
           ("practice-topics.html", "Practice topics and essay timer"),
           ("part-04-analytical-text-response-essays.html", "Writing a text response")]),
     _sec("B", "Creating a text",
-         "A piece of your own, built from stimulus material and the Framework of Ideas. About an hour.",
+         "A piece of your own, built from stimulus material and the Framework of Ideas.",
          [("p05-personal-journeys.html", "Personal journeys"),
           ("p05-practice-stimuli.html", "Practice stimuli"),
           ("p05-section-b-under-exam-conditions.html", "Writing under exam conditions"),
           ("p05-sample-creating-texts-piece-19-20.html", "Sample pieces"),
           ("p05-audience.html", "Audience and purpose")]),
     _sec("C", "Analysis of argument and language",
-         "An analysis of an unseen persuasive text and its visuals. About an hour.",
+         "An analysis of an unseen persuasive text and its visuals.",
          [("p06-practice-articles-for-analysis.html", "Practice articles"),
           ("p06-sample-analysing-argument-essays.html", "Sample essays, low to high"),
           ("p06-section-c-from-previous-exams.html", "Section C from previous exams"),
