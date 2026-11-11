@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Build a multi-page static website (part hubs + chapter subpages) from the VCE booklet."""
-import os, re, shutil, json, html, urllib.parse
+import os, re, shutil, json, html, urllib.parse, sys
 from bs4 import BeautifulSoup
 
 SRC = r"C:\Users\NMO\Claude\Projects\VCE Textbook\2027 Yr12 Booklet\12 Booklet 2027"
@@ -1018,6 +1018,7 @@ nav_items.append({"num": tools_num, "title": "Study Tools", "file": "study-tools
                                {"title": "Essay Outline Builder", "file": "outline-builder.html"},
                                {"title": "Vocabulary Upgrader", "file": "vocab-upgrader.html"},
                                {"title": "Micro-Drills", "file": "micro-drills.html"}]})
+nav_items.append({"num": tools_num + 1, "title": "Downloads", "file": "downloads.html", "chapters": []})
 all_pages.append({"file": "study-tools.html", "title": "Study Tools", "html": hub_tools, "nav": "study-tools.html"})
 all_pages.append({"file": "flashcards.html", "title": "Quote Flashcards", "html": fc_page, "nav": "study-tools.html"})
 all_pages.append({"file": "practice-topics.html", "title": "Practice Topics & Essay Timer", "html": tp_page, "nav": "study-tools.html"})
@@ -1536,6 +1537,18 @@ for k, pg in enumerate(all_pages):
     if _cls:
         _html = _html.replace("<body>", '<body class="%s">' % _cls, 1)
     open(os.path.join(PUBLIC, pg["file"]), "w", encoding="utf-8").write(_html)
+
+# Downloads: a PDF and a LaTeX zip for each part and the whole guide (make_downloads.py).
+# They are slow to build and change the repo, so they are only rebuilt with `python build.py --downloads`.
+import make_downloads as _mdl
+_dl_dir = os.path.join(PUBLIC, "downloads")
+if "--downloads" in sys.argv:
+    _dl_entries = _mdl.make_downloads(PUBLIC)
+    json.dump(_dl_entries, open(os.path.join(_dl_dir, "index.json"), "w", encoding="utf-8"))
+else:
+    _dl_entries = json.load(open(os.path.join(_dl_dir, "index.json"), encoding="utf-8"))
+open(os.path.join(PUBLIC, "downloads.html"), "w", encoding="utf-8").write(
+    shell("Downloads", "downloads.html", "downloads.html", _mdl.downloads_body(_dl_entries)))
 
 # ---------------- landing ----------------
 def exemplar_groups_html(exemplars):
