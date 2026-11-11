@@ -424,6 +424,56 @@
    "q": "they are singing happily",
    "c": "structure",
    "n": "Three plain words of scene evidence before interpretation — image first, meaning second."
+  },
+  {
+   "q": "This shows the college wants to control the girls.",
+   "n": "Labelled as analysis but it only restates the rule. Say how the instruction controls the girls: what they are expected to do, and what would happen if they did not.",
+   "c": "ideas"
+  },
+  {
+   "q": "However, when they get to the Rock the rules do not work anymore",
+   "n": "The instinct to turn to a counter-point is right, but 'however' is a signpost with no argument behind it. Explain why the rules fail, not just that they do.",
+   "c": "structure"
+  },
+  {
+   "q": "The music is calm at first, then there is a scary noise.",
+   "n": "Describes what happens without naming the technique or what it does to the audience. Name the soundtrack element and the effect.",
+   "c": "language"
+  },
+  {
+   "q": "Therefore I agree with the statement.",
+   "n": "The conclusion repeats the contention with no new idea. The question asks 'to what extent', and no degree of agreement is given.",
+   "c": "structure"
+  },
+  {
+   "q": "The college lives by the clock, and the picnic is planned around it",
+   "n": "A clear topic sentence that makes a claim about the topic, not just a description of the setting.",
+   "c": "ideas"
+  },
+  {
+   "q": "The mechanical measures of the college become meaningless",
+   "n": "Precise word choice that turns the stopped watches into a claim about the college's whole way of life.",
+   "c": "language"
+  },
+  {
+   "q": "The girls are not conquered so much as taken",
+   "n": "A qualified conclusion: it accepts the statement while pointing out what the film does instead. This is what 'to what extent' rewards.",
+   "c": "ideas"
+  },
+  {
+   "q": "Weir inverts the usual hierarchy",
+   "n": "A precise reading of the opening: the film reverses the expected order of authority between society and nature.",
+   "c": "language"
+  },
+  {
+   "q": "it is revealed as a fiction the moment it meets the bush",
+   "n": "The contention goes beyond 'the college fails'. It argues the order was never real, which makes the answer more than a yes.",
+   "c": "ideas"
+  },
+  {
+   "q": "the film offers only sensation",
+   "n": "A closing point that ties the argument to the film's refusal to explain the disappearance.",
+   "c": "language"
   }
  ],
  "p03-written-exemplars.html": [
