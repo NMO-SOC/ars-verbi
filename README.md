@@ -1,5 +1,8 @@
 # Ars Verbi — VCE English Exam Preparation Guide (2027)
 
+[![Deploy site to GitHub Pages](https://github.com/NMO-SOC/ars-verbi/actions/workflows/pages.yml/badge.svg)](https://github.com/NMO-SOC/ars-verbi/actions/workflows/pages.yml)
+[![Live site](https://img.shields.io/badge/site-nmo--soc.github.io%2Fars--verbi-7a1f2b)](https://nmo-soc.github.io/ars-verbi/)
+
 A free study website for VCE Units 3/4 English (2027 texts: *Picnic at Hanging Rock* and
 *The Lottery and Other Stories*), built by an English teacher for his Year 12 cohort at
 South Oakleigh College. Live site:
