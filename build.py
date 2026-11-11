@@ -1465,6 +1465,10 @@ for k, pg in enumerate(all_pages):
             # one more Personal Journeys sample piece (web only, from sectionc/)
             sec.append(BeautifulSoup(open(os.path.join(BUILD, "sectionc", "personal-journeys-sample.html"),
                                           encoding="utf-8").read(), "html.parser"))
+        if pg["file"] == "p04-what-is-needed-in-an-essay.html":
+            # mark bands for Section A, quoted from the Section A descriptors (web only, from sectionc/)
+            sec.append(BeautifulSoup(open(os.path.join(BUILD, "sectionc", "mark-bands-section-a.html"),
+                                          encoding="utf-8").read(), "html.parser"))
         if pg["file"] == "p06-sample-analysing-argument-essays.html":
             # show Scenario 3 (task + letter) from the Section C practice tasks above the sample essays
             _sc3 = BeautifulSoup(open(os.path.join(BUILD, "sectionc", "practice-articles.html"),
