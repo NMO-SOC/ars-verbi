@@ -864,3 +864,11 @@ h2:hover>.anchor-link,h3:hover>.anchor-link,.anchor-link:focus-visible{opacity:1
 .done-count{margin-left:auto;padding-left:8px;font-size:var(--fs-xs);color:var(--accent);font-weight:600}
 @media print{.done-btn,.anchor-link,#search-toggle{display:none!important}}
 .fc-judge .tool-count{margin-left:8px}
+
+/* section colours: each exam section's pages use that section's colour */
+body.sec-a{--accent:var(--sec-a);--accent-soft:#f5eaea}
+body.sec-b{--accent:var(--sec-b);--accent-soft:#e8f1ea}
+body.sec-c{--accent:var(--sec-c);--accent-soft:#f8f0dd}
+[data-theme="dark"] body.sec-a{--accent-soft:#33211e}
+[data-theme="dark"] body.sec-b{--accent-soft:#1d2e22}
+[data-theme="dark"] body.sec-c{--accent-soft:#33291a}
