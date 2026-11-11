@@ -29,3 +29,10 @@ links lead to third-party sites outside the author's control. To the maximum
 extent permitted by law, the author accepts **no liability** for any loss or
 damage arising from use of this site, its tools,
 or any linked content.
+
+## Building the site
+
+`build.py` converts the LaTeX booklet (`main.tex`, kept outside this
+repository) to HTML with pandoc, adds the extra pages and fragments from
+`snippets/` and `sectionc/`, and writes the finished site to `public/`.
+Pushing to `main` deploys `public/` to GitHub Pages.
