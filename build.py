@@ -5,6 +5,18 @@ from bs4 import BeautifulSoup
 
 SRC = r"C:\Users\NMO\Claude\Projects\VCE Textbook\2027 Yr12 Booklet\12 Booklet 2027"
 BUILD = r"C:\Users\NMO\Claude\Projects\VCE Textbook\ars-verbi"
+
+def section_class(fname):
+    # Section A = part 4 and its chapters, Section B = part 5, Section C = part 6, plus the matching
+    # marking-criteria and checklist pages. Text parts (Picnic, Lottery) keep the default colour.
+    if fname.startswith(("part-04-", "p04-", "p09-section-a-", "p10-general-checklist-for-section-a", "p11-section-a-")):
+        return "sec-a"
+    if fname.startswith(("part-05-", "p05-", "p09-section-b-", "p10-general-checklist-for-section-b", "p11-section-b-")):
+        return "sec-b"
+    if fname.startswith(("part-06-", "p06-", "p09-section-c-", "p10-general-checklist-for-section-c", "p11-section-c-")):
+        return "sec-c"
+    return ""
+
 PUBLIC = os.path.join(BUILD, "public")
 IMG_DIR = os.path.join(PUBLIC, "assets", "img")
 PDF_DIR = os.path.join(PUBLIC, "assets", "pdf")
@@ -1515,8 +1527,12 @@ for k, pg in enumerate(all_pages):
             body = body.replace(_g.group(1), "", 1) + PRACTICE_LINKS + _g.group(1)
         else:
             body += PRACTICE_LINKS
-    open(os.path.join(PUBLIC, pg["file"]), "w", encoding="utf-8").write(
-        shell(pg["title"], pg["nav"], pg["file"], body, pn))
+    _html = shell(pg["title"], pg["nav"], pg["file"], body, pn)
+    # colour each exam section's pages with that section's colour (see style.css body.sec-a/b/c)
+    _cls = section_class(pg["file"])
+    if _cls:
+        _html = _html.replace("<body>", '<body class="%s">' % _cls, 1)
+    open(os.path.join(PUBLIC, pg["file"]), "w", encoding="utf-8").write(_html)
 
 # ---------------- landing ----------------
 def exemplar_groups_html(exemplars):
