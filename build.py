@@ -1445,6 +1445,10 @@ for k, pg in enumerate(all_pages):
             # Section A low/medium/high sample essays on Picnic (web only, from sectionc/)
             sec.append(BeautifulSoup(open(os.path.join(BUILD, "sectionc", "picnic-section-a-essays.html"),
                                           encoding="utf-8").read(), "html.parser"))
+        if pg["file"] == "p03-written-exemplars.html":
+            # Section A low/medium/high sample essays on The Lottery (web only, from sectionc/)
+            sec.append(BeautifulSoup(open(os.path.join(BUILD, "sectionc", "lottery-section-a-essays.html"),
+                                          encoding="utf-8").read(), "html.parser"))
         if pg["file"] == "p06-sample-analysing-argument-essays.html":
             # show Scenario 3 (task + letter) from the Section C practice tasks above the sample essays
             _sc3 = BeautifulSoup(open(os.path.join(BUILD, "sectionc", "practice-articles.html"),
