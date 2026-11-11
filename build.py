@@ -257,9 +257,8 @@ for i, sec in enumerate(parts, 1):
     part_meta.append({"idx": i, "title": title, "slug": slugify(title),
                       "file": "part-%02d-%s.html" % (i, slugify(title)), "sec": sec})
 
-# chapters left out of the site: their worked examples are built on the 2026 texts
-DROP_CHAPTERS = {"p04-planning.html", "p04-the-dynamics-of-a-text.html",
-                 "p04-analytical-text-response-structure.html"}
+# chapters left out of the site (none now: all worked examples use the 2027 texts)
+DROP_CHAPTERS = set()
 
 display_num = 0
 for pm in part_meta:
