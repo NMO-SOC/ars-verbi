@@ -382,7 +382,10 @@ mark.anno .anno-tip{display:none;position:absolute;left:0;top:calc(100% + 10px);
 mark.anno.open .anno-tip,mark.anno:hover .anno-tip,mark.anno:focus .anno-tip{display:block}
 mark.anno.tip-up .anno-tip{top:auto;bottom:calc(100% + 10px)}
 mark.anno .anno-cat{display:block;font-size:var(--fs-xs);font-weight:800;letter-spacing:0;margin-bottom:5px}
-.anno-ideas .anno-cat{color:#ba7517}.anno-structure .anno-cat{color:#378add}.anno-language .anno-cat{color:#7f77dd}.anno-audience .anno-cat{color:#1d9e75}.anno-voice .anno-cat{color:#d4537e}
+.anno-ideas .anno-cat{color:#8a5a0f}.anno-structure .anno-cat{color:#1d5fa6}.anno-language .anno-cat{color:#5b52b0}.anno-audience .anno-cat{color:#0f7a58}.anno-voice .anno-cat{color:#b03a66}
+[data-theme="dark"] .anno-ideas .anno-cat{color:#ba7517}[data-theme="dark"] .anno-structure .anno-cat{color:#378add}[data-theme="dark"] .anno-language .anno-cat{color:#7f77dd}[data-theme="dark"] .anno-audience .anno-cat{color:#1d9e75}[data-theme="dark"] .anno-voice .anno-cat{color:#d4537e}
+/* dark mode: text on the accent-coloured chips and buttons must be dark (2.3 to 2.6:1 with white) */
+[data-theme="dark"] .saml-badge,[data-theme="dark"] a.btn-inline,[data-theme="dark"] .qb-sort button[aria-pressed="true"]{color:#1d1112}
 .anno-legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
 .lg{font-family:var(--sans);font-size:var(--fs-xs);font-weight:700;padding:4px 12px;border-radius:999px;border:1.5px solid transparent;cursor:pointer}
 .lg.active{border-color:currentColor}
