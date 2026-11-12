@@ -915,6 +915,7 @@ vu_page = TOOL_LABEL + """<h1>Vocabulary Upgrader</h1>
 (function(){
   var SW = window.VU, out = document.getElementById('vu-out'), ta = document.getElementById('vu-text');
   var keys = Object.keys(SW).sort(function(a, b){ return b.length - a.length; });
+  var kept = {};
   function esc(s){ return s.replace(/[&<>]/g, function(c){ return { '&':'&amp;','<':'&lt;','>':'&gt;' }[c]; }); }
   function check(){
     var text = ta.value;
@@ -925,9 +926,11 @@ vu_page = TOOL_LABEL + """<h1>Vocabulary Upgrader</h1>
     while ((m = pattern.exec(text)) !== null){
       html += esc(text.slice(last, m.index));
       var word = m[0], sugg = SW[word.toLowerCase()] || [];
+      if (kept[m.index]) { html += esc(word); last = m.index + word.length; continue; }
       if (word.charAt(0) !== word.charAt(0).toLowerCase()) sugg = sugg.map(function(s){ return s.charAt(0).toUpperCase() + s.slice(1); });
       n++;
       html += '<span class="vu-flag" tabindex="0">' + esc(word) + '<span class="vu-pop">' +
+        '<button class="vu-sw vu-keep" data-i="' + m.index + '">Keep as written</button>' +
         sugg.map(function(s){ return '<button class="vu-sw" data-i="' + m.index + '" data-len="' + word.length + '">' + esc(s) + '</button>'; }).join('') +
         '</span></span>';
       last = m.index + word.length;
@@ -937,13 +940,17 @@ vu_page = TOOL_LABEL + """<h1>Vocabulary Upgrader</h1>
     document.getElementById('vu-count').textContent = n ? n + ' word' + (n > 1 ? 's' : '') + ' to strengthen' : 'Nothing flagged \u2014 strong vocabulary throughout.';
     out.querySelectorAll('.vu-sw').forEach(function(b){
       b.addEventListener('click', function(){
-        var i = parseInt(b.dataset.i, 10), len = parseInt(b.dataset.len, 10);
+        var i = parseInt(b.dataset.i, 10);
+        if (b.classList.contains('vu-keep')) { kept[i] = true; check(); return; }
+        var len = parseInt(b.dataset.len, 10), shift = b.textContent.length - len, moved = {};
+        Object.keys(kept).forEach(function(k){ var j = parseInt(k, 10); moved[j > i ? j + shift : j] = true; });
+        kept = moved;
         ta.value = ta.value.slice(0, i) + b.textContent + ta.value.slice(i + len);
         check();
       });
     });
   }
-  ta.addEventListener('input', check);
+  ta.addEventListener('input', function(){ kept = {}; check(); });
   document.getElementById('vu-check').addEventListener('click', check);
 })();
 </script>""" % json.dumps(VOCAB_SWAPS, ensure_ascii=False)
