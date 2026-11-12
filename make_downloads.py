@@ -187,7 +187,7 @@ def downloads_body(entries):
         rows.append('<tr><td>%s</td><td>%s</td><td><a href="%s">LaTeX zip (.tex + images)</a> (%d KB)</td></tr>'
                     % (htmllib.escape(e["title"]), pdf, e["zip"], e["zip_kb"]))
     return (
-        '<h1>Downloads</h1>'
+        '<h1>Offline version of this site</h1>'
         '<p>Each part of the guide is available as a PDF for reading or printing, or as a LaTeX zip if you want to '
         'edit it. The LaTeX zip contains the .tex file and the images it uses. Compile it with pdfLaTeX or XeLaTeX.</p>'
         '<p>The Section C past-exam papers are not included, because they are the VCAA&rsquo;s material.</p>'
