@@ -1018,7 +1018,7 @@ nav_items.append({"num": tools_num, "title": "Study Tools", "file": "study-tools
                                {"title": "Essay Outline Builder", "file": "outline-builder.html"},
                                {"title": "Vocabulary Upgrader", "file": "vocab-upgrader.html"},
                                {"title": "Micro-Drills", "file": "micro-drills.html"}]})
-nav_items.append({"num": tools_num + 1, "title": "Downloads", "file": "downloads.html", "chapters": []})
+nav_items.append({"num": tools_num + 1, "title": "Offline version of this site", "file": "downloads.html", "chapters": []})
 all_pages.append({"file": "study-tools.html", "title": "Study Tools", "html": hub_tools, "nav": "study-tools.html"})
 all_pages.append({"file": "flashcards.html", "title": "Quote Flashcards", "html": fc_page, "nav": "study-tools.html"})
 all_pages.append({"file": "practice-topics.html", "title": "Practice Topics & Essay Timer", "html": tp_page, "nav": "study-tools.html"})
@@ -1548,7 +1548,7 @@ if "--downloads" in sys.argv:
 else:
     _dl_entries = json.load(open(os.path.join(_dl_dir, "index.json"), encoding="utf-8"))
 open(os.path.join(PUBLIC, "downloads.html"), "w", encoding="utf-8").write(
-    shell("Downloads", "downloads.html", "downloads.html", _mdl.downloads_body(_dl_entries)))
+    shell("Offline version of this site", "downloads.html", "downloads.html", _mdl.downloads_body(_dl_entries)))
 
 # ---------------- landing ----------------
 def exemplar_groups_html(exemplars):
