@@ -887,8 +887,6 @@ VOCAB_SWAPS = {
   "says": ["asserts", "contends", "argues", "maintains", "suggests", "posits", "claims", "declares", "implies"],
   "say": ["assert", "contend", "argue", "maintain", "suggest", "claim"],
   "said": ["asserted", "contended", "argued", "maintained", "suggested", "claimed"],
-  "does": ["constructs", "orchestrates", "positions", "cultivates", "reinforces", "subverts", "foregrounds", "amplifies"],
-  "did": ["constructed", "orchestrated", "positioned", "reinforced", "subverted"],
   "likes": ["favours", "endorses", "embraces", "advocates for"],
   "liked": ["favoured", "endorsed", "embraced"],
   "doesn't like": ["rejects", "condemns", "critiques", "denounces", "repudiates"],
@@ -897,8 +895,11 @@ VOCAB_SWAPS = {
   "gets": ["compels", "positions", "prompts", "invites"],
   "thing": ["element", "idea", "notion", "concern"],
   "things": ["elements", "ideas", "notions", "concerns"],
-  "a lot": ["considerably", "extensively", "markedly"],
+  "a lot": ["a great deal"],
   "very": ["profoundly", "distinctly", "markedly"],
+  "important": ["crucial", "vital", "significant", "central"],
+  "really": ["genuinely", "distinctly"],
+  "big": ["substantial", "considerable", "vast"],
 }
 vu_page = TOOL_LABEL + """<h1>Vocabulary Upgrader</h1>
 <p class="lede">Paste a paragraph and it flags the words that flatten analytical writing &mdash; <em>shows, says, does, very, thing</em> and friends &mdash; with stronger swaps from the vocabulary bank. Pick a suggestion to replace it.</p>
@@ -924,6 +925,7 @@ vu_page = TOOL_LABEL + """<h1>Vocabulary Upgrader</h1>
     while ((m = pattern.exec(text)) !== null){
       html += esc(text.slice(last, m.index));
       var word = m[0], sugg = SW[word.toLowerCase()] || [];
+      if (word.charAt(0) !== word.charAt(0).toLowerCase()) sugg = sugg.map(function(s){ return s.charAt(0).toUpperCase() + s.slice(1); });
       n++;
       html += '<span class="vu-flag" tabindex="0">' + esc(word) + '<span class="vu-pop">' +
         sugg.map(function(s){ return '<button class="vu-sw" data-i="' + m.index + '" data-len="' + word.length + '">' + esc(s) + '</button>'; }).join('') +
@@ -941,6 +943,7 @@ vu_page = TOOL_LABEL + """<h1>Vocabulary Upgrader</h1>
       });
     });
   }
+  ta.addEventListener('input', check);
   document.getElementById('vu-check').addEventListener('click', check);
 })();
 </script>""" % json.dumps(VOCAB_SWAPS, ensure_ascii=False)
