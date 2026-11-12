@@ -58,7 +58,7 @@
 </div>
 <div class="vu-out" id="vu-out"></div>
 <p style="font-family:var(--sans);font-size:13.5px;color:var(--muted)">See the full <a href="vocabulary.html">Vocabulary Bank</a> for the complete lists.</p>
-<script>window.VU = {"shows": ["demonstrates", "illustrates", "reveals", "highlights", "conveys", "depicts", "exposes", "emphasises", "underscores"], "show": ["demonstrate", "illustrate", "reveal", "highlight", "convey", "depict", "expose", "emphasise"], "showed": ["demonstrated", "illustrated", "revealed", "highlighted", "conveyed", "depicted"], "shown": ["demonstrated", "illustrated", "revealed", "conveyed"], "says": ["asserts", "contends", "argues", "maintains", "suggests", "posits", "claims", "declares", "implies"], "say": ["assert", "contend", "argue", "maintain", "suggest", "claim"], "said": ["asserted", "contended", "argued", "maintained", "suggested", "claimed"], "does": ["constructs", "orchestrates", "positions", "cultivates", "reinforces", "subverts", "foregrounds", "amplifies"], "did": ["constructed", "orchestrated", "positioned", "reinforced", "subverted"], "likes": ["favours", "endorses", "embraces", "advocates for"], "liked": ["favoured", "endorsed", "embraced"], "doesn't like": ["rejects", "condemns", "critiques", "denounces", "repudiates"], "good": ["effective", "compelling", "powerful", "persuasive"], "bad": ["destructive", "corrosive", "damaging", "flawed"], "gets": ["compels", "positions", "prompts", "invites"], "thing": ["element", "idea", "notion", "concern"], "things": ["elements", "ideas", "notions", "concerns"], "a lot": ["considerably", "extensively", "markedly"], "very": ["profoundly", "distinctly", "markedly"]};</script>
+<script>window.VU = {"shows": ["demonstrates", "illustrates", "reveals", "highlights", "conveys", "depicts", "exposes", "emphasises", "underscores"], "show": ["demonstrate", "illustrate", "reveal", "highlight", "convey", "depict", "expose", "emphasise"], "showed": ["demonstrated", "illustrated", "revealed", "highlighted", "conveyed", "depicted"], "shown": ["demonstrated", "illustrated", "revealed", "conveyed"], "says": ["asserts", "contends", "argues", "maintains", "suggests", "posits", "claims", "declares", "implies"], "say": ["assert", "contend", "argue", "maintain", "suggest", "claim"], "said": ["asserted", "contended", "argued", "maintained", "suggested", "claimed"], "likes": ["favours", "endorses", "embraces", "advocates for"], "liked": ["favoured", "endorsed", "embraced"], "doesn't like": ["rejects", "condemns", "critiques", "denounces", "repudiates"], "good": ["effective", "compelling", "powerful", "persuasive"], "bad": ["destructive", "corrosive", "damaging", "flawed"], "gets": ["compels", "positions", "prompts", "invites"], "thing": ["element", "idea", "notion", "concern"], "things": ["elements", "ideas", "notions", "concerns"], "a lot": ["a great deal"], "very": ["profoundly", "distinctly", "markedly"], "important": ["crucial", "vital", "significant", "central"], "really": ["genuinely", "distinctly"], "big": ["substantial", "considerable", "vast"]};</script>
 <script>
 (function(){
   var SW = window.VU, out = document.getElementById('vu-out'), ta = document.getElementById('vu-text');
@@ -73,6 +73,7 @@
     while ((m = pattern.exec(text)) !== null){
       html += esc(text.slice(last, m.index));
       var word = m[0], sugg = SW[word.toLowerCase()] || [];
+      if (word.charAt(0) !== word.charAt(0).toLowerCase()) sugg = sugg.map(function(s){ return s.charAt(0).toUpperCase() + s.slice(1); });
       n++;
       html += '<span class="vu-flag" tabindex="0">' + esc(word) + '<span class="vu-pop">' +
         sugg.map(function(s){ return '<button class="vu-sw" data-i="' + m.index + '" data-len="' + word.length + '">' + esc(s) + '</button>'; }).join('') +
@@ -90,6 +91,7 @@
       });
     });
   }
+  ta.addEventListener('input', check);
   document.getElementById('vu-check').addEventListener('click', check);
 })();
 </script>
