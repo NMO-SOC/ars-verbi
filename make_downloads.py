@@ -22,9 +22,11 @@ EDGE_CANDIDATES = [
     r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe",
     r"C:\Program Files\Microsoft\Edge\Application\msedge.exe",
 ]
-DROP_SELECTORS = [".part-label", ".page-toc", ".prevnext", ".done-btn", "button", "script", "style",
+DROP_SELECTORS = [".part-label", ".page-toc", ".prevnext", ".done-btn", "script", "style",
                   "nav", ".anchor-link", ".ch-pos", "form", ".tool-bar", ".exam-banner", "#toc-fab",
-                  "object", "iframe", "embed", ".pdf-embed-bar"]
+                  ".qb-sort", ".pdf-embed-bar"]
+# documents embedded in a page are printed separately, at the end of their part (see make_downloads)
+EMBEDS = []
 
 # print layout for the PDFs: a cover for the whole guide, a title page for each part,
 # and each chapter starts on a new page
@@ -37,9 +39,13 @@ PRINT_CSS = """
 .dl-cover p, .dl-part-title p { color: #6b665e; margin: 0 0 .6em; font-size: 1.05rem; }
 .dl-chapter { page-break-before: always; }
 .dl-part-title + .dl-chapter { page-break-before: auto; }
+.dl-part-title { page-break-before: always; }
+.dl-cover + .dl-part-title { page-break-before: auto; }
 .dl-chapter h1 { margin-top: 0; }
 /* the site's print stylesheet hides every h1; the offline copies need their headings */
 .content .dl-cover h1, .content .dl-part-title h1, .content .dl-chapter h1 { display: block !important; }
+/* the site's print stylesheet also hides the introductory paragraph of each page (.lede) */
+.content .lede { display: block !important; }
 """
 
 
@@ -79,6 +85,17 @@ def chapter_fragment(public, href):
     for sel in DROP_SELECTORS:
         for el in main.select(sel):
             el.decompose()
+    # the site's buttons in a chapter are content labels (sentence starters, vocabulary chips): keep their text
+    for b in main.select("button"):
+        if b.get_text(strip=True):
+            b.name = "span"
+        else:
+            b.decompose()
+    for e in main.select("object,iframe,embed"):
+        src = (e.get("data") or e.get("src") or "").split("#")[0]
+        if src:
+            EMBEDS.append(os.path.join(public, src))
+        e.replace_with(BeautifulSoup('<p><em>The document below is printed at the end of this part.</em></p>', "html.parser"))
     # internal links become plain text
     for a in main.find_all("a"):
         h = a.get("href", "")
@@ -180,13 +197,27 @@ def zip_tex(work, public, stem, tex_text, out_zip):
                 z.write(src, rel)
 
 
-def build_one(edge, public, work, out_dir, slug, title, groups, cover, subtitle=None):
+def append_pdfs(pdf_path, extra):
+    """Add the pages of the documents embedded in a part to the end of its PDF."""
+    import fitz
+    doc = fitz.open(pdf_path)
+    for src in extra:
+        if os.path.exists(src):
+            doc.insert_pdf(fitz.open(src))
+    doc.save(pdf_path + ".tmp", garbage=3, deflate=True)
+    doc.close()
+    os.replace(pdf_path + ".tmp", pdf_path)
+
+
+def build_one(edge, public, work, out_dir, slug, title, groups, cover, subtitle=None, embeds=None):
     html_pdf = os.path.join(work, slug + ".html")
     html_tex = os.path.join(work, slug + "-latex.html")
     open(html_pdf, "w", encoding="utf-8").write(pdf_document(title, groups, public, cover))
     open(html_tex, "w", encoding="utf-8").write(latex_document(title, groups, public))
     pdf = os.path.join(out_dir, slug + ".pdf")
     ok_pdf = print_pdf(edge, html_pdf, pdf) if edge else False
+    if ok_pdf and embeds:
+        append_pdfs(pdf, embeds)
     tex_text = make_tex(work, slug, title, subtitle)
     zip_path = os.path.join(out_dir, slug + "-latex.zip")
     zip_tex(work, public, slug, tex_text, zip_path)
@@ -211,6 +242,7 @@ def make_downloads(public):
     everything = []
     for p in read_structure(public):
         chapters = []
+        EMBEDS.clear()
         for href, label in p["chapters"]:
             frag = chapter_fragment(public, href)
             if frag:
@@ -219,7 +251,8 @@ def make_downloads(public):
             continue
         slug = p["file"][:-5]  # e.g. part-02-picnic-at-hanging-rock
         groups = [(p["title"], chapters)]
-        entries.append(build_one(edge, public, work, out_dir, slug, p["title"], groups, cover=False))
+        entries.append(build_one(edge, public, work, out_dir, slug, p["title"], groups, cover=False,
+                                 embeds=list(EMBEDS)))
         everything.append((p["title"], chapters))
     entries.append(build_one(edge, public, work, out_dir, "whole-guide", GUIDE_TITLE, everything, cover=True,
                              subtitle=GUIDE_SUBTITLE))

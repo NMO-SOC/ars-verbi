@@ -1678,7 +1678,7 @@ landing = """
 <section class="all-parts" aria-labelledby="parts-h"><h2 id="parts-h">All parts of the guide</h2><ol class="parts-list">%s</ol></section>
 <div class="site-foot">
   <div class="sf-motto">Sapere aude</div>
-  <div class="sf-sub">South Oakleigh College. Compiled by Mr Morlin, version Incipit 9.0.1. This site is provided free and as-is for study purposes, without warranty of any kind. Content is offered in good faith but may contain errors &mdash; check anything high-stakes with your teacher. External links lead to sites not controlled by the author, and no liability is accepted for their content or for any loss arising from use of this site.</div>
+  <div class="sf-sub">South Oakleigh College. Compiled by Mr Morlin, version Lux 672.2.4. This site is provided free and as-is for study purposes, without warranty of any kind. Content is offered in good faith but may contain errors &mdash; check anything high-stakes with your teacher. External links lead to sites not controlled by the author, and no liability is accepted for their content or for any loss arising from use of this site.</div>
 </div>
 """ % (exam_band, before_links, contents)
 open(os.path.join(PUBLIC, "index.html"), "w", encoding="utf-8").write(shell("Home", "", "index.html", landing))
