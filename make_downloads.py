@@ -1,11 +1,11 @@
-"""Build the downloadable copies of the guide: one PDF and one LaTeX zip per part, and one of each for the whole guide.
+"""Build the offline copies of the guide: a PDF and a LaTeX zip for each part, and for the whole guide.
 
-Run from build.py after the pages are written. Reads the finished HTML pages in public/, so it needs no
-LaTeX install: PDFs are printed by headless Microsoft Edge, and LaTeX is converted by pandoc.
+Run from build.py after the pages are written (python build.py --downloads). Reads the finished HTML pages
+in public/, so it needs no LaTeX install: PDFs are printed by headless Microsoft Edge, and LaTeX is
+converted by pandoc.
 
 Left out on purpose: the Section C past-exam papers (VCAA material) - the page p06-section-c-from-previous-exams.html.
 """
-import glob
 import html as htmllib
 import os
 import re
@@ -15,6 +15,8 @@ import zipfile
 
 from bs4 import BeautifulSoup
 
+GUIDE_TITLE = "VCE English Exam Preparation Guide"
+GUIDE_SUBTITLE = "Offline version of this site"
 EXCLUDE_PAGES = {"p06-section-c-from-previous-exams.html"}
 EDGE_CANDIDATES = [
     r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe",
@@ -23,6 +25,22 @@ EDGE_CANDIDATES = [
 DROP_SELECTORS = [".part-label", ".page-toc", ".prevnext", ".done-btn", "button", "script", "style",
                   "nav", ".anchor-link", ".ch-pos", "form", ".tool-bar", ".exam-banner", "#toc-fab",
                   "object", "iframe", "embed", ".pdf-embed-bar"]
+
+# print layout for the PDFs: a cover for the whole guide, a title page for each part,
+# and each chapter starts on a new page
+PRINT_CSS = """
+@page { size: A4; margin: 2.2cm 2cm; }
+.dl-cover, .dl-part-title { page-break-after: always; height: 23cm; display: flex; flex-direction: column;
+  justify-content: center; }
+.dl-cover h1 { font-size: 2.8rem; margin: 0 0 .3em; }
+.dl-part-title h1 { font-size: 2.4rem; margin: 0 0 .3em; }
+.dl-cover p, .dl-part-title p { color: #6b665e; margin: 0 0 .6em; font-size: 1.05rem; }
+.dl-chapter { page-break-before: always; }
+.dl-part-title + .dl-chapter { page-break-before: auto; }
+.dl-chapter h1 { margin-top: 0; }
+/* the site's print stylesheet hides every h1; the offline copies need their headings */
+.content .dl-cover h1, .content .dl-part-title h1, .content .dl-chapter h1 { display: block !important; }
+"""
 
 
 def slugify(s):
@@ -41,8 +59,7 @@ def read_structure(public):
         href = a["href"]
         if not href.startswith("part-"):  # Study Tools is interactive, not a part
             continue
-        title = a.get_text(" ", strip=True)
-        title = re.sub(r"^\d+\s*", "", title)
+        title = re.sub(r"^\d+\s*", "", a.get_text(" ", strip=True))
         chapters = []
         for ca in li.select("ul.subnav a"):
             ch = ca["href"]
@@ -62,7 +79,7 @@ def chapter_fragment(public, href):
     for sel in DROP_SELECTORS:
         for el in main.select(sel):
             el.decompose()
-    # the chapter's own heading stays; internal links become plain text
+    # internal links become plain text
     for a in main.find_all("a"):
         h = a.get("href", "")
         if h.endswith(".html") or h.startswith("#"):
@@ -70,28 +87,55 @@ def chapter_fragment(public, href):
     return "".join(str(c) for c in main.children)
 
 
-def image_list(fragment):
-    return re.findall(r'<img[^>]+src="([^"]+)"', fragment)
+def fix_latex_images(body, public):
+    """LaTeX copies drop SVG images and use the PNG where a WebP was made."""
+    def fix(m):
+        tag = m.group(0)
+        src = re.search(r'src="([^"]+)"', tag).group(1)
+        if src.endswith(".svg"):
+            return ""
+        if src.endswith(".webp"):
+            png = src[:-5] + ".png"
+            if os.path.exists(os.path.join(public, png)):
+                tag = tag.replace(src, png)
+        return tag
+    return re.sub(r"<img[^>]+>", fix, body)
 
 
-def to_document(title, body, latex=False, public=None):
-    """Full HTML document. LaTeX copies drop SVG images and use PNGs where a WebP was made."""
-    if latex:
-        def fix(m):
-            tag = m.group(0)
-            src = re.search(r'src="([^"]+)"', tag).group(1)
-            if src.endswith(".svg"):
-                return ""
-            if src.endswith(".webp"):
-                png = src[:-5] + ".png"
-                if os.path.exists(os.path.join(public, png)):
-                    tag = tag.replace(src, png)
-            return tag
-        body = re.sub(r"<img[^>]+>", fix, body)
-    body = body.replace('src="assets/', 'src="../assets/')
+def chapter_html(label, frag):
+    inner = frag if "<h1" in frag[:400] else "<h1>%s</h1>%s" % (htmllib.escape(label), frag)
+    return '<section class="dl-chapter">%s</section>' % inner
+
+
+def pdf_document(title, groups, public, cover):
+    """groups: [(part title, [(chapter label, fragment)])]"""
+    parts = []
+    if cover:
+        parts.append('<section class="dl-cover"><p>%s</p><h1>%s</h1>'
+                     '<p>Units 3/4 English &middot; 2027 examination &middot; South Oakleigh College</p></section>'
+                     % (htmllib.escape(GUIDE_SUBTITLE), htmllib.escape(GUIDE_TITLE)))
+    for part_title, chapters in groups:
+        parts.append('<section class="dl-part-title"><p>Part</p><h1>%s</h1></section>'
+                     % htmllib.escape(part_title))
+        for label, frag in chapters:
+            parts.append(chapter_html(label, frag))
+    body = "".join(parts).replace('src="assets/', 'src="../assets/')
     return ('<!doctype html><html lang="en-AU"><head><meta charset="utf-8"><title>%s</title>'
-            '<link rel="stylesheet" href="../assets/style.css"></head><body><main class="content">%s</main>'
-            '</body></html>') % (htmllib.escape(title), body)
+            '<link rel="stylesheet" href="../assets/style.css"><style>%s</style></head>'
+            '<body><main class="content">%s</main></body></html>') % (htmllib.escape(title), PRINT_CSS, body)
+
+
+def latex_document(title, groups, public):
+    """Parts become chapters and their chapter headings become sections, so each starts on a new page."""
+    parts = []
+    for part_title, chapters in groups:
+        parts.append("<h1>%s</h1>" % htmllib.escape(part_title))
+        for label, frag in chapters:
+            inner = frag if "<h1" in frag[:400] else "<h1>%s</h1>%s" % (htmllib.escape(label), frag)
+            parts.append(inner.replace("<h1", "<h2").replace("</h1>", "</h2>"))
+    body = fix_latex_images("".join(parts), public).replace('src="assets/', 'src="../assets/')
+    return ('<!doctype html><html lang="en-AU"><head><meta charset="utf-8"><title>%s</title></head>'
+            '<body><main class="content">%s</main></body></html>') % (htmllib.escape(title), body)
 
 
 def find_edge():
@@ -111,13 +155,16 @@ def print_pdf(edge, html_path, pdf_path):
     return os.path.exists(pdf_path)
 
 
-def make_tex(work, public, stem):
-    """pandoc: <stem>-latex.html -> <stem>.tex, then zip the .tex with the images it uses."""
+def make_tex(work, stem, title, subtitle=None):
+    """pandoc: <stem>-latex.html -> <stem>.tex (report class, parts as chapters, title page)."""
     src = "%s-latex.html" % stem
     tex = "%s.tex" % stem
-    subprocess.run(["pandoc", "-s", "-f", "html", "-t", "latex", "--wrap=none",
-                    "-V", "geometry:margin=2.2cm", "-V", "fontsize=11pt", "-V", "papersize=a4",
-                    "-o", tex, src], cwd=work, check=True)
+    args = ["pandoc", "-s", "-f", "html", "-t", "latex", "--wrap=none",
+            "-V", "documentclass=report", "-V", "geometry:margin=2.2cm", "-V", "fontsize=11pt",
+            "-V", "papersize=a4", "--top-level-division=chapter", "-M", "title=" + title]
+    if subtitle:
+        args += ["-M", "subtitle=" + subtitle]
+    subprocess.run(args + ["-o", tex, src], cwd=work, check=True)
     text = open(os.path.join(work, tex), encoding="utf-8").read().replace("../assets/", "assets/")
     open(os.path.join(work, tex), "w", encoding="utf-8").write(text)
     return text
@@ -133,15 +180,14 @@ def zip_tex(work, public, stem, tex_text, out_zip):
                 z.write(src, rel)
 
 
-def build_one(edge, public, work, out_dir, slug, title, fragments):
-    body = "".join("<h1>%s</h1>%s" % (htmllib.escape(t), f) for t, f in fragments)
+def build_one(edge, public, work, out_dir, slug, title, groups, cover, subtitle=None):
     html_pdf = os.path.join(work, slug + ".html")
     html_tex = os.path.join(work, slug + "-latex.html")
-    open(html_pdf, "w", encoding="utf-8").write(to_document(title, body, latex=False, public=public))
-    open(html_tex, "w", encoding="utf-8").write(to_document(title, body, latex=True, public=public))
+    open(html_pdf, "w", encoding="utf-8").write(pdf_document(title, groups, public, cover))
+    open(html_tex, "w", encoding="utf-8").write(latex_document(title, groups, public))
     pdf = os.path.join(out_dir, slug + ".pdf")
     ok_pdf = print_pdf(edge, html_pdf, pdf) if edge else False
-    tex_text = make_tex(work, public, slug)
+    tex_text = make_tex(work, slug, title, subtitle)
     zip_path = os.path.join(out_dir, slug + "-latex.zip")
     zip_tex(work, public, slug, tex_text, zip_path)
     return {"title": title, "slug": slug,
@@ -161,21 +207,22 @@ def make_downloads(public):
     edge = find_edge()
     if not edge:
         print("downloads: Microsoft Edge not found, PDFs will be skipped")
-    parts = read_structure(public)
     entries = []
     everything = []
-    for p in parts:
-        frags = []
+    for p in read_structure(public):
+        chapters = []
         for href, label in p["chapters"]:
             frag = chapter_fragment(public, href)
             if frag:
-                frags.append((label, frag))
-        if not frags:
+                chapters.append((label, frag))
+        if not chapters:
             continue
         slug = p["file"][:-5]  # e.g. part-02-picnic-at-hanging-rock
-        entries.append(build_one(edge, public, work, out_dir, slug, p["title"], frags))
-        everything.extend(frags)
-    entries.append(build_one(edge, public, work, out_dir, "whole-guide", "VCE English Exam Preparation Guide", everything))
+        groups = [(p["title"], chapters)]
+        entries.append(build_one(edge, public, work, out_dir, slug, p["title"], groups, cover=False))
+        everything.append((p["title"], chapters))
+    entries.append(build_one(edge, public, work, out_dir, "whole-guide", GUIDE_TITLE, everything, cover=True,
+                             subtitle=GUIDE_SUBTITLE))
     shutil.rmtree(work, ignore_errors=True)
     return entries
 
