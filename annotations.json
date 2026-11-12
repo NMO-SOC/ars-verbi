@@ -101,6 +101,36 @@
    "q": "turns fairness into a matter of who is willing to play along",
    "n": "Precise word choice that turns a phrase into an argument about power.",
    "c": "language"
+  },
+  {
+   "q": "The claim is a warning rather than an argument",
+   "n": "Says what kind of claim it is, and what that does to the question. Naming the move is what lifts the paragraph.",
+   "c": "ideas"
+  },
+  {
+   "q": "Reason has no hearing once the crowd has decided",
+   "n": "A clear thematic topic sentence about reason and the group, not about a single character.",
+   "c": "structure"
+  },
+  {
+   "q": "This shows tradition is stronger than the people",
+   "n": "Asserted rather than shown: say how the ending makes tradition stronger, using the crowd's actions.",
+   "c": "ideas"
+  },
+  {
+   "q": "The black box shows how far the village has let tradition outlast its meaning",
+   "n": "The object is used as evidence for the idea, which is the step the medium band needs.",
+   "c": "structure"
+  },
+  {
+   "q": "tradition gains its power by seeming practical",
+   "n": "Precise language for how the proverb works: it sounds sensible even though its reason is never tested.",
+   "c": "language"
+  },
+  {
+   "q": "So tradition wins not by being right but by being shared",
+   "n": "A confident conclusion to the argument. It answers the question by saying what kind of power tradition has.",
+   "c": "ideas"
   }
  ],
  "p06-sample-analysing-argument-essays.html": [

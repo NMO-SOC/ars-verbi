@@ -1480,8 +1480,8 @@ for k, pg in enumerate(all_pages):
                                           encoding="utf-8").read(), "html.parser"))
         if pg["file"] == "p03-written-exemplars.html":
             # Section A low/medium/high sample essays on The Lottery (web only, from sectionc/)
-            sec.append(BeautifulSoup(open(os.path.join(BUILD, "sectionc", "lottery-section-a-essays.html"),
-                                          encoding="utf-8").read(), "html.parser"))
+            for _f in ("lottery-section-a-essays.html", "lottery-section-a-essays-2.html"):
+                sec.append(BeautifulSoup(open(os.path.join(BUILD, "sectionc", _f), encoding="utf-8").read(), "html.parser"))
         if pg["file"] == "p05-personal-journeys.html":
             # one more Personal Journeys sample piece (web only, from sectionc/)
             sec.append(BeautifulSoup(open(os.path.join(BUILD, "sectionc", "personal-journeys-sample.html"),
