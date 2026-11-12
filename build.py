@@ -900,6 +900,17 @@ VOCAB_SWAPS = {
   "important": ["crucial", "vital", "significant", "central"],
   "really": ["genuinely", "distinctly"],
   "big": ["substantial", "considerable", "vast"],
+  "interesting": ["compelling", "striking", "provocative"],
+  "scary": ["unsettling", "disquieting", "menacing"],
+  "creepy": ["unsettling", "eerie", "disquieting"],
+  "weird": ["unsettling", "peculiar", "incongruous"],
+  "huge": ["substantial", "vast", "considerable"],
+  "small": ["minor", "modest", "limited"],
+  "sad": ["melancholy", "sombre", "distressed"],
+  "lots": ["numerous"],
+  "stuff": ["material", "elements", "details"],
+  "nice": ["appealing", "pleasing", "agreeable"],
+  "a bit": ["somewhat"],
 }
 vu_page = TOOL_LABEL + """<h1>Vocabulary Upgrader</h1>
 <p class="lede">Paste a paragraph and it flags the words that flatten analytical writing &mdash; <em>shows, says, does, very, thing</em> and friends &mdash; with stronger swaps from the vocabulary bank. Pick a suggestion to replace it.</p>
