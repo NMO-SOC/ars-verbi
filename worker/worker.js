@@ -36,26 +36,26 @@ export default {
 
       const content = String((body.messages && body.messages[0] && body.messages[0].content) || '').slice(0, 60000);
       if (!content) return reply({ error: { message: 'Empty question' } }, 400);
-      if (env.LOG) {
-        // the page discloses this: question + network address, kept 400 days (past the 2027 exam)
-        const q = content.split('STUDENT QUESTION: ').pop().slice(0, 1000);
-        const ip = req.headers.get('CF-Connecting-IP') || '';
-        ctx.waitUntil(env.LOG.put(new Date().toISOString() + '-' + crypto.randomUUID().slice(0, 8),
-          JSON.stringify({ ip, q }), { expirationTtl: 400 * 86400 }));
-      }
       const args = { messages: [{ role: 'user', content }], max_tokens: Math.min(Number(body.max_tokens) || 700, 1000) };
       // a model that errors OR answers with nothing hands over to the next one
-      let text = '', lastErr = new Error('No answer from any model');
+      let text = '', used = '', lastErr = new Error('No answer from any model');
       for (const m of CHAT_MODELS) {
         try {
           const r = await env.AI.run(m, args);
           // older models return {response}, newer ones OpenAI-style {choices}; drop any reasoning block
           const raw = r.response || (r.choices && r.choices[0] && r.choices[0].message && r.choices[0].message.content) || '';
           text = String(raw).replace(/<think>[\s\S]*?<\/think>/g, '').trim();
-          if (text) break;
+          if (text) { used = m; break; }
         } catch (e) { lastErr = e; }
       }
       if (!text) throw lastErr;
+      if (env.LOG) {
+        // the page discloses this: question + network address (and now the answer), kept 400 days (past the 2027 exam)
+        const q = content.split('STUDENT QUESTION: ').pop().slice(0, 1000);
+        const ip = req.headers.get('CF-Connecting-IP') || '';
+        ctx.waitUntil(env.LOG.put(new Date().toISOString() + '-' + crypto.randomUUID().slice(0, 8),
+          JSON.stringify({ ip, q, a: text.slice(0, 4000), model: used.split('/').pop() }), { expirationTtl: 400 * 86400 }));
+      }
       return reply({ choices: [{ message: { content: text } }] });
     } catch (e) {
       return reply({ error: { message: String((e && e.message) || e).slice(0, 200) } }, 502);
