@@ -1253,7 +1253,7 @@ def shell(title, active_nav, active_file, main_html, prevnext=""):
 <meta property="og:description" content="South Oakleigh College Units 3/4 English exam preparation guide - texts, essays, practice exams and study tools.">
 <meta property="og:image" content="https://nmo-soc.github.io/VCE-English-Guide/assets/img/soc-logo.png">
 <script>try{var _t=localStorage.getItem('siteTheme');if(_t==='dark'||(!_t&&window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.setAttribute('data-theme','dark');}catch(e){}</script>
-<link rel="stylesheet" href="assets/style.css?v=73">
+<link rel="stylesheet" href="assets/style.css?v=74">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -1283,7 +1283,7 @@ def shell(title, active_nav, active_file, main_html, prevnext=""):
 <script data-goatcounter="https://nmo.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>""" % (html.escape(title), SITE_TITLE, html.escape(title), nav_html(active_nav, active_file), fix_quotes(main_html), fix_quotes(prevnext),
-       '' if not AA_ON or active_file == 'ask-appleyard.html' else '<a id="max-fab" href="ask-appleyard.html?from=' + active_file + '" aria-label="Ask Mrs Appleyard a question"><img src="assets/img/picnic/mrs-appleyard.jpg" alt=""><span>Ask Appleyard</span></a>')
+       '' if not AA_ON or active_file == 'ask-appleyard.html' else '<a id="max-fab" href="ask-appleyard.html?from=' + active_file + '" aria-label="Ask Mrs Appleyard a question"><img src="assets/img/ask-appleyard.jpg" alt=""><span>Ask Appleyard</span></a>')
 
 def page_toc(scope):
     lis = []
@@ -1716,7 +1716,7 @@ landing = """
 </div>
 """ % (exam_band, before_links, contents)
 if AA_ON:
-    landing = landing.replace('<span id="resume-slot"></span>', '<span id="resume-slot"></span>\n      <p><a class="btn btn-max" href="ask-appleyard.html"><img src="assets/img/picnic/mrs-appleyard.jpg" alt="">Ask Appleyard</a></p>', 1)
+    landing = landing.replace('<span id="resume-slot"></span>', '<span id="resume-slot"></span>\n      <p><a class="btn btn-max" href="ask-appleyard.html"><img src="assets/img/ask-appleyard.jpg" alt="">Ask Appleyard</a></p>', 1)
 open(os.path.join(PUBLIC, "index.html"), "w", encoding="utf-8").write(shell("Home", "", "index.html", landing))
 
 nf = """

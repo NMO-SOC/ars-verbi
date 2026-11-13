@@ -484,13 +484,13 @@ body.closeup-zoom{transition:transform 1.6s ease-in-out;transform:scale(1.18)}
 
 /* ---- Ask Max aesthetics ---- */
 /* 4: cinematic header */
-.max-head{background:linear-gradient(rgba(12,10,8,.58),rgba(12,10,8,.72)),url(img/max-wide.jpg) center 30%/cover no-repeat;border-radius:var(--r);padding:30px 30px 26px;border-top:7px solid #0c0a08;border-bottom:7px solid #0c0a08;box-shadow:var(--shadow-pop)}
+.max-head{background:linear-gradient(rgba(12,10,8,.58),rgba(12,10,8,.72));border-radius:var(--r);padding:30px 30px 26px;border-top:7px solid #0c0a08;border-bottom:7px solid #0c0a08;box-shadow:var(--shadow-pop)}
 .max-head h1{color:#d4a94e;margin-top:0}
 .max-head .lede{color:#ece5d6}
 .max-head .max-avatar{margin-top:2px;box-shadow:var(--shadow-pop)}
 /* 1: Max's portrait beside each reply */
 .ac-bot{margin-left:48px;position:relative;overflow:visible}
-.ac-bot::before{content:'';position:absolute;left:-48px;top:2px;width:36px;height:36px;border-radius:50%;background:url(img/max.jpg) center/cover;border:2px solid var(--gold);box-shadow:var(--shadow-pop)}
+.ac-bot::before{content:'';position:absolute;left:-48px;top:2px;width:36px;height:36px;border-radius:50%;background:url(img/ask-appleyard.jpg) center/cover;border:2px solid var(--gold);box-shadow:var(--shadow-pop)}
 /* 5: correspondence feel */
 .ac-bot{border-left:4px solid var(--gold);line-height:1.68;padding-left:16px}
 /* 2: consulting dots */
@@ -502,7 +502,7 @@ body.closeup-zoom{transition:transform 1.6s ease-in-out;transform:scale(1.18)}
 /* 3: empty-state watermark */
 .ac-log{position:relative}
 .ac-log:empty{min-height:190px}
-.ac-log:empty::before{content:'';position:absolute;inset:0;background:url(img/max.jpg) center/180px no-repeat;opacity:.06;filter:grayscale(1)}
+.ac-log:empty::before{content:'';position:absolute;inset:0;background:url(img/ask-appleyard.jpg) center/180px no-repeat;opacity:.06;filter:grayscale(1)}
 /* 6: silver-nitrate dark mode */
 [data-theme="dark"] .ac-bot{background:#1b1d20;border-color:#34373b;border-left-color:var(--gold)}
 [data-theme="dark"] .ac-log:empty::before{opacity:.09}
