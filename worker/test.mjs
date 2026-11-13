@@ -36,12 +36,16 @@ assert.equal((await call('http://localhost', 'POST', { messages: [] })).status, 
 // first chat model retired: the next one answers
 const realRun = env.AI.run;
 env.AI.run = async (model, args) => {
-  if (model.includes('gemma')) throw new Error('model not found');
+  if (model.includes('llama-3.1')) throw new Error('model not found');
   return realRun(model, args);
 };
 const fb = await (await call('https://nmo-soc.github.io', 'POST',
   { messages: [{ role: 'user', content: 'STUDENT QUESTION: Again' }] })).json();
 assert.equal(fb.choices[0].message.content, 'Answer to: Again');
+// first model answers with nothing (as Gemma 4 did): the next one answers
+env.AI.run = async (model) => model.includes('llama-3.1') ? { response: '' } : { response: 'Backup answer' };
+const em = await (await call('https://nmo-soc.github.io', 'POST', { messages: [{ role: 'user', content: 'x' }] })).json();
+assert.equal(em.choices[0].message.content, 'Backup answer');
 // OpenAI-style reply with a reasoning block is unwrapped
 env.AI.run = async () => ({ choices: [{ message: { content: '<think>hmm</think> Tidy answer' } }] });
 const oa = await (await call('https://nmo-soc.github.io', 'POST', { messages: [{ role: 'user', content: 'x' }] })).json();
