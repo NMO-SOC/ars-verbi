@@ -502,10 +502,8 @@ body.closeup-zoom{transition:transform 1.6s ease-in-out;transform:scale(1.18)}
 /* 3: empty-state watermark */
 .ac-log{position:relative}
 .ac-log:empty{min-height:190px}
-.ac-log:empty::before{content:'';position:absolute;inset:0;background:url(img/ask-appleyard.jpg) center/180px no-repeat;opacity:.06;filter:grayscale(1)}
 /* 6: silver-nitrate dark mode */
 [data-theme="dark"] .ac-bot{background:#1b1d20;border-color:#34373b;border-left-color:var(--gold)}
-[data-theme="dark"] .ac-log:empty::before{opacity:.09}
 
 /* ---- Ask Max critique fixes ---- */
 /* 1: no nested scroll; input sticks to viewport bottom */
