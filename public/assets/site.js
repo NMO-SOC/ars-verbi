@@ -135,14 +135,15 @@
 
   try{
     var here=location.pathname.split('/').pop()||'index.html';
-    if(here!=='index.html'&&here!=='404.html'){
+    var okPage=/^[A-Za-z0-9._-]+\.html$/; // plain page names only: a crafted URL must never reach an href
+    if(here!=='index.html'&&here!=='404.html'&&okPage.test(here)){
       var tt=(document.title||'').split(' · ')[0];
       localStorage.setItem('lastPage',JSON.stringify({u:here,t:tt}));
     }else if(here==='index.html'){
       var lp=JSON.parse(localStorage.getItem('lastPage')||'null');
       var slot=document.getElementById('resume-slot');
       var hero=document.querySelector('.hero');
-      if(lp&&lp.u&&(slot||hero)){
+      if(lp&&lp.u&&okPage.test(lp.u)&&(slot||hero)){
         var a=document.createElement('a');a.className='resume-chip';a.href=lp.u;
         a.innerHTML='<span class="rc-label">Resume</span> '+lp.t.replace(/[<>&]/g,'')+' →';
         if(slot){slot.appendChild(a);}else{hero.parentNode.insertBefore(a,hero.nextSibling);}
