@@ -1253,7 +1253,7 @@ def shell(title, active_nav, active_file, main_html, prevnext=""):
 <meta property="og:description" content="South Oakleigh College Units 3/4 English exam preparation guide - texts, essays, practice exams and study tools.">
 <meta property="og:image" content="https://nmo-soc.github.io/VCE-English-Guide/assets/img/soc-logo.png">
 <script>try{var _t=localStorage.getItem('siteTheme');if(_t==='dark'||(!_t&&window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.setAttribute('data-theme','dark');}catch(e){}</script>
-<link rel="stylesheet" href="assets/style.css?v=77">
+<link rel="stylesheet" href="assets/style.css?v=80">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
