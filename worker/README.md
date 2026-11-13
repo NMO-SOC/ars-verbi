@@ -4,19 +4,27 @@ The site is static, so the AI calls go through this Cloudflare Worker. It uses
 Workers AI (Cloudflare's own models), so there is no API key to store. Ask
 Appleyard stays hidden on the site until `AA_WORKER` is set in `build.py`.
 
-Last year's Worker (`jolly-waterfall-d01a…workers.dev`) no longer exists
-(it returns Cloudflare error 1042), so this is a fresh one.
+Last year's Ask Max Worker (`jolly-waterfall-d01a…workers.dev`) was deleted,
+so this is a fresh one, set up in the Cloudflare dashboard the same way.
 
-## One-off setup
+## One-off setup (Cloudflare dashboard)
 
-1. **Log in** (opens a browser): `npx wrangler login`
-2. **Create the question log** (the chat page tells students questions are logged):
-   `npx wrangler kv namespace create LOG`
-   and paste the `id` it prints into `wrangler.toml` in place of `PASTE_KV_ID_HERE`.
-3. **Deploy**, from this `worker/` folder: `npx wrangler deploy`
-   It prints the Worker URL, e.g. `https://ask-appleyard.<subdomain>.workers.dev`.
-4. **Check it** (should print a JSON `data` array):
+1. **Workers & Pages → Create → Create Worker.** Name it `ask-appleyard`, then **Deploy**.
+2. **Edit code**: replace everything with the contents of `worker.js`, then **Deploy**.
+3. **Settings → Bindings → Add → Workers AI**, variable name `AI`.
+4. **Storage & Databases → KV → Create** a namespace called `ask-appleyard-log`.
+   Back in the Worker: **Settings → Bindings → Add → KV namespace**, variable
+   name `LOG`, pointing at that namespace. This is the question log the chat
+   page tells students about.
+5. **Settings → Variables and Secrets → Add** (type Text): `ALLOWED_ORIGINS` =
+   `https://nmo-soc.github.io,http://localhost,http://localhost:8000`
+6. Copy the Worker's address, e.g. `https://ask-appleyard.<subdomain>.workers.dev`.
+7. **Check it** (should print a JSON `data` array):
    `curl -X POST <url> -H "Origin: http://localhost" -H "Content-Type: application/json" -d "{\"embed\":true,\"input\":[\"test\"]}"`
+
+When you change `worker.js` later, paste it into **Edit code** again and **Deploy**.
+(`wrangler.toml` is the same setup for the command line, `npx wrangler deploy`,
+if you ever want it; the dashboard doesn't need it.)
 
 ## Switch it on in the site
 
