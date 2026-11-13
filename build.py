@@ -1715,8 +1715,6 @@ landing = """
   <div class="sf-sub">South Oakleigh College. Compiled by Mr Morlin, version Lux 672.2.4. This site is provided free and as-is for study purposes, without warranty of any kind. Content is offered in good faith but may contain errors &mdash; check anything high-stakes with your teacher. External links lead to sites not controlled by the author, and no liability is accepted for their content or for any loss arising from use of this site.</div>
 </div>
 """ % (exam_band, before_links, contents)
-if AA_ON:
-    landing = landing.replace('<span id="resume-slot"></span>', '<span id="resume-slot"></span>\n      <p><a class="btn btn-max" href="ask-appleyard.html"><img src="assets/img/ask-appleyard.jpg" alt="">Ask Appleyard</a></p>', 1)
 open(os.path.join(PUBLIC, "index.html"), "w", encoding="utf-8").write(shell("Home", "", "index.html", landing))
 
 nf = """
