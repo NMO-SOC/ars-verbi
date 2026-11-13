@@ -16,6 +16,9 @@ const call = (origin, method, body) => worker.fetch(new Request('https://w.test/
   body: body && JSON.stringify(body) }), env, ctx);
 
 assert.equal((await call('https://evil.example', 'POST', { embed: true, input: ['x'] })).status, 403);
+// no Origin (direct visit, curl) or ALLOWED_ORIGINS unset: always refused
+assert.equal((await worker.fetch(new Request('https://w.test/'), env, ctx)).status, 403);
+assert.equal((await worker.fetch(new Request('https://w.test/'), { ...env, ALLOWED_ORIGINS: undefined }, ctx)).status, 403);
 const pre = await call('https://nmo-soc.github.io', 'OPTIONS');
 assert.equal(pre.headers.get('Access-Control-Allow-Origin'), 'https://nmo-soc.github.io');
 

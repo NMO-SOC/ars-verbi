@@ -9,7 +9,7 @@ const EMBED_MODEL = '@cf/baai/bge-base-en-v1.5'; // 768 dimensions, as make-embe
 export default {
   async fetch(req, env, ctx) {
     const origin = req.headers.get('Origin') || '';
-    const allowed = (env.ALLOWED_ORIGINS || '').split(',').map(s => s.trim());
+    const allowed = (env.ALLOWED_ORIGINS || '').split(',').map(s => s.trim()).filter(Boolean);
     if (!allowed.includes(origin)) return new Response('Forbidden', { status: 403 });
     const cors = { 'Access-Control-Allow-Origin': origin, 'Access-Control-Allow-Methods': 'POST, OPTIONS',
                    'Access-Control-Allow-Headers': 'Content-Type', 'Vary': 'Origin' };
