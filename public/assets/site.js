@@ -377,6 +377,42 @@
   paint();
 })();
 
+/* Ask Appleyard bubble: the floating button (and the highlight button) open the chat in a panel on this page. */
+(function(){
+  var fab = document.getElementById('max-fab');
+  if (!fab || document.documentElement.classList.contains('ac-embed')) return;
+  var box = null, frame = null, lastFocus = null;
+  var page = location.pathname.split('/').pop() || 'index.html';
+  function build(){
+    box = document.createElement('div'); box.id = 'aa-bubble'; box.hidden = true;
+    box.setAttribute('role', 'dialog'); box.setAttribute('aria-label', 'Ask Appleyard');
+    box.innerHTML = '<div class="aa-head"><b>Ask Appleyard</b><a href="ask-appleyard.html?from=' + encodeURIComponent(page) + '">Open full page</a>' +
+      '<button type="button" aria-label="Close chat">&times;</button></div><iframe title="Ask Appleyard chat"></iframe>';
+    frame = box.querySelector('iframe');
+    box.querySelector('button').addEventListener('click', close);
+    document.body.appendChild(box);
+  }
+  function open(q){
+    if (!box) build();
+    lastFocus = document.activeElement;
+    var url = 'ask-appleyard.html?embed=1&from=' + encodeURIComponent(page) + (q ? '&q=' + encodeURIComponent(q) : '');
+    if (q || !frame.getAttribute('src')) frame.setAttribute('src', url);
+    box.hidden = false; box.querySelector('button').focus();
+  }
+  function close(){ box.hidden = true; if (lastFocus && lastFocus.focus) lastFocus.focus(); }
+  fab.addEventListener('click', function(e){
+    if (e.ctrlKey || e.metaKey || e.shiftKey || e.button) return;
+    e.preventDefault(); if (box && !box.hidden) close(); else open();
+  });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && box && !box.hidden) close(); });
+  document.addEventListener('click', function(e){
+    var a = e.target.closest && e.target.closest('#max-sel');
+    if (!a) return;
+    e.preventDefault();
+    open(new URL(a.href, location.href).searchParams.get('q'));
+  });
+})();
+
 /* Ask Appleyard about selected text (as Ask Max did). Only where the bot is on: pages with its button. */
 (function(){
   if (!document.getElementById('max-fab')) return;
