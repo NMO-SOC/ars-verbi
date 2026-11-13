@@ -33,3 +33,6 @@ __pycache__/
 # Ask Appleyard question-log exports hold network addresses
 question-log*.csv
 *-log.csv
+
+# wrangler login/export scratch
+.wrangler/
