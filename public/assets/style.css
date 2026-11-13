@@ -509,6 +509,20 @@ body.closeup-zoom{transition:transform 1.6s ease-in-out;transform:scale(1.18)}
 /* 1: no nested scroll; input sticks to viewport bottom */
 .ac-log{max-height:none;overflow-y:visible}
 .ac-user{scroll-margin-top:76px}
+/* Ask Appleyard bubble (opened from the floating button) and the chat page inside it */
+#aa-bubble{position:fixed;right:22px;bottom:84px;z-index:250;width:min(400px,calc(100vw - 24px));height:min(620px,calc(100vh - 110px));display:flex;flex-direction:column;background:var(--bg);border:1px solid var(--gold);border-radius:var(--r);box-shadow:var(--shadow-pop);overflow:hidden}
+#aa-bubble[hidden]{display:none}
+.aa-head{display:flex;align-items:center;gap:10px;padding:8px 8px 8px 14px;background:#1a1612;color:#ece5d6;font-family:var(--sans);font-size:var(--fs-ui)}
+.aa-head b{flex:1;color:#d4a94e}
+.aa-head a{color:#ece5d6;font-size:var(--fs-sm);text-decoration:underline}
+.aa-head button{width:44px;height:44px;border:0;border-radius:var(--r);background:transparent;color:#ece5d6;font-size:22px;line-height:1;cursor:pointer}
+.aa-head button:hover{background:rgba(255,255,255,.12)}
+#aa-bubble iframe{flex:1;width:100%;border:0;background:var(--bg)}
+@media (max-width:600px){#aa-bubble{right:12px;left:12px;width:auto;bottom:80px;height:calc(100vh - 100px)}}
+html.ac-embed .sidebar,html.ac-embed #menu-toggle,html.ac-embed #search-toggle,html.ac-embed #max-fab,html.ac-embed #max-sel,html.ac-embed .prevnext,html.ac-embed .part-label,html.ac-embed .max-head,html.ac-embed .site-foot,html.ac-embed #to-top,html.ac-embed #cd-chip{display:none !important}
+html.ac-embed .layout{display:block}
+html.ac-embed .content{padding:12px 14px 16px;max-width:none}
+html.ac-embed .ac-log{max-height:none}
 #ac-log:empty ~ #ac-bar #ac-clear{display:none}
 #ac-bar{flex-wrap:nowrap}
 #ac-bar #ac-q{min-width:0}
