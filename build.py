@@ -641,67 +641,125 @@ gl_page = TOOL_LABEL + """<h1>Glossary of Techniques</h1>
 })();
 </script>""" % gl_items
 
+def _quiz_split(d):
+    """glossary text is '<definition> [e.g. <example>] [ - <effect>]': pull the three parts apart."""
+    before, _, eff = d.partition(" — ")
+    if not (eff[:1].isupper() and len(eff) >= 30):   # a continuation of the sentence, or too thin to ask about
+        before, eff = d, ""
+    main, _, ex = before.partition(" e.g. ")
+    return main.strip() or d, ex.strip(), eff.strip()
+QUIZ_TERMS = []
+for _g in glossary:
+    _m, _x, _e = _quiz_split(_g["def"])
+    QUIZ_TERMS.append({"term": _g["term"], "main": _m, "ex": _x, "eff": _e, "full": _g["def"], "group": _g["src"]})
+
 qz_page = TOOL_LABEL + """<h1>Technique Quiz</h1>
-<p class="lede">A definition appears &mdash; pick the technique it describes. Ten questions per round, drawn from the glossary.</p>
+<p class="lede">Ten questions per round, drawn from the glossary: name a technique from its definition, an example or its effect, or pick the definition or effect of a technique. Every new round uses cards you have not seen yet.</p>
 <div class="tool-bar">
   <span class="tool-count" id="qz-progress" style="margin-left:0"></span>
   <span class="tool-count" id="qz-score"></span>
+  <span class="tool-count" id="qz-pool"></span>
 </div>
 <div class="qz-box">
+  <div class="qz-kind" id="qz-kind"></div>
   <div class="qz-def" id="qz-def"></div>
   <div class="qz-opts" id="qz-opts"></div>
-  <div class="qz-feedback" id="qz-feedback"></div>
+  <div class="qz-feedback" id="qz-feedback" aria-live="polite"></div>
+  <div class="qz-more" id="qz-more"></div>
 </div>
 <div class="tool-bar">
   <button id="qz-next" style="display:none">Next question &#8594;</button>
   <button id="qz-restart" style="display:none">New round</button>
 </div>
-<script>window.QUIZ = %s;</script>
+<script>window.QUIZ_TERMS = %s;</script>
 <script>
 (function(){
-  var all = window.QUIZ, round = [], qi = 0, score = 0, answered = false;
+  var T = window.QUIZ_TERMS, cards = [], KEY = 'quizSeen', ROUND = 10;
+  // five kinds of card per technique where the glossary has the material: about 260 in all
+  T.forEach(function(t, i){
+    cards.push({ k: 'd2t', i: i }, { k: 't2d', i: i });
+    if (t.ex) cards.push({ k: 'e2t', i: i });
+    if (t.eff) cards.push({ k: 'f2t', i: i }, { k: 't2f', i: i });
+  });
+  cards.forEach(function(c){ c.id = c.k + '|' + T[c.i].term; });
+  var round = [], qi = 0, score = 0, answered = false;
   function shuffle(a){ for (var j = a.length - 1; j > 0; j--){ var k = Math.floor(Math.random() * (j + 1)); var t = a[j]; a[j] = a[k]; a[k] = t; } return a; }
+  function $(id){ return document.getElementById(id); }
+  function loadSeen(){ try{ var s = JSON.parse(localStorage.getItem(KEY) || '[]'); return Array.isArray(s) ? s : []; }catch(e){ return []; } }
+  function saveSeen(a){ try{ localStorage.setItem(KEY, JSON.stringify(a)); }catch(e){} }
+  function mask(text, term){   // hide the answer if the prompt happens to contain the technique's name
+    var low = text.toLowerCase(), t = term.toLowerCase(), out = '', pos = 0, at;
+    while ((at = low.indexOf(t, pos)) > -1){ out += text.slice(pos, at) + '_____'; pos = at + t.length; }
+    return out + text.slice(pos);
+  }
   function start(){
-    round = shuffle(all.slice()).slice(0, 10); qi = 0; score = 0;
-    document.getElementById('qz-restart').style.display = 'none';
+    var seen = loadSeen(), seenSet = {}, chosen = [], termsUsed = {};
+    seen.forEach(function(id){ seenSet[id] = 1; });
+    function take(list){
+      for (var n = 0; n < list.length && chosen.length < ROUND; n++){
+        var tm = T[list[n].i].term;
+        if (!termsUsed[tm]){ termsUsed[tm] = 1; chosen.push(list[n]); }   // one card per technique per round, so none gives another away
+      }
+    }
+    take(shuffle(cards.filter(function(c){ return !seenSet[c.id]; })));
+    if (chosen.length < ROUND){ seen = []; take(shuffle(cards.slice())); }   // pool used up: start a new cycle
+    round = shuffle(chosen); qi = 0; score = 0;
+    saveSeen(seen.concat(chosen.map(function(c){ return c.id; })));
+    $('qz-restart').style.display = 'none';
     ask();
+  }
+  function poolLine(){ var left = cards.length - loadSeen().length; $('qz-pool').textContent = cards.length + ' cards in the pool, ' + left + ' still new'; }
+  function options(c, field, text){   // the right answer plus three others, from the same kind of technique where possible
+    var t = T[c.i], right = text(t), seen = {}, others = [];
+    seen[right] = 1;
+    shuffle(T.filter(function(o){ return o.term !== t.term && text(o); })).sort(function(a, b){ return (b.group === t.group) - (a.group === t.group); })
+      .forEach(function(o){ var s = text(o); if (!seen[s] && others.length < 3){ seen[s] = 1; others.push(s); } });
+    return { right: right, list: shuffle(others.concat([right])) };
   }
   function ask(){
     answered = false;
-    var q = round[qi];
-    var pool = shuffle(all.filter(function(g){ return g.term !== q.term; })).slice(0, 3);
-    var opts = shuffle(pool.concat([q]));
-    document.getElementById('qz-progress').textContent = 'Question ' + (qi + 1) + ' of ' + round.length;
-    document.getElementById('qz-score').textContent = 'Score: ' + score;
-    document.getElementById('qz-def').textContent = q.def;
-    document.getElementById('qz-feedback').textContent = '';
-    document.getElementById('qz-next').style.display = 'none';
-    var box = document.getElementById('qz-opts'); box.innerHTML = '';
-    opts.forEach(function(o){
-      var b = document.createElement('button'); b.className = 'qz-opt'; b.textContent = o.term;
-      b.addEventListener('click', function(){ pick(b, o, q); });
+    var c = round[qi], t = T[c.i], kind, prompt, o;
+    var term = function(x){ return x.term; }, main = function(x){ return x.main; }, eff = function(x){ return x.eff; };
+    if (c.k === 'd2t'){ kind = 'Which technique is this?'; prompt = mask(t.main, t.term); o = options(c, 'term', term); }
+    else if (c.k === 'e2t'){ kind = 'Which technique does this example show?'; prompt = mask(t.ex, t.term); o = options(c, 'term', term); }
+    else if (c.k === 'f2t'){ kind = 'Which technique has this effect?'; prompt = mask(t.eff, t.term); o = options(c, 'term', term); }
+    else if (c.k === 't2d'){ kind = 'Which definition fits?'; prompt = '“' + t.term + '”'; o = options(c, 'main', main); }
+    else { kind = 'What effect does it have?'; prompt = '“' + t.term + '”'; o = options(c, 'eff', eff); }
+    $('qz-progress').textContent = 'Question ' + (qi + 1) + ' of ' + round.length;
+    $('qz-score').textContent = 'Score: ' + score;
+    poolLine();
+    $('qz-kind').textContent = kind;
+    $('qz-def').textContent = prompt;
+    $('qz-feedback').textContent = ''; $('qz-more').textContent = '';
+    $('qz-next').style.display = 'none';
+    var box = $('qz-opts'); box.innerHTML = '';
+    o.list.forEach(function(text){
+      var b = document.createElement('button'); b.className = 'qz-opt'; b.textContent = text;
+      if (text === o.right) b.setAttribute('data-right', '1');
+      b.addEventListener('click', function(){ pick(b, t); });
       box.appendChild(b);
     });
   }
-  function pick(btn, o, q){
+  function pick(btn, t){
     if (answered) return;
     answered = true;
-    var btns = document.querySelectorAll('.qz-opt');
-    btns.forEach(function(b){ b.disabled = true; if (b.textContent === q.term) b.classList.add('qz-right'); });
-    if (o.term === q.term){ score++; document.getElementById('qz-feedback').textContent = 'Correct.'; }
-    else { btn.classList.add('qz-wrong'); document.getElementById('qz-feedback').textContent = 'Not quite \u2014 this one is \u201c' + q.term + '\u201d.'; }
-    document.getElementById('qz-score').textContent = 'Score: ' + score;
-    if (qi < round.length - 1){ document.getElementById('qz-next').style.display = ''; }
+    var ok = !!btn.getAttribute('data-right');
+    document.querySelectorAll('.qz-opt').forEach(function(b){ b.disabled = true; if (b.getAttribute('data-right')) b.classList.add('qz-right'); });
+    if (ok){ score++; $('qz-feedback').textContent = 'Correct.'; }
+    else { btn.classList.add('qz-wrong'); $('qz-feedback').textContent = 'Not quite — this is “' + t.term + '”.'; }
+    $('qz-more').textContent = t.term + ': ' + t.full;
+    $('qz-score').textContent = 'Score: ' + score;
+    if (qi < round.length - 1){ $('qz-next').style.display = ''; }
     else {
-      document.getElementById('qz-feedback').textContent += ' Round over: ' + score + ' / ' + round.length + '.';
-      document.getElementById('qz-restart').style.display = '';
+      $('qz-feedback').textContent += ' Round over: ' + score + ' / ' + round.length + '.';
+      $('qz-restart').style.display = '';
     }
   }
-  document.getElementById('qz-next').addEventListener('click', function(){ qi++; ask(); });
-  document.getElementById('qz-restart').addEventListener('click', start);
+  $('qz-next').addEventListener('click', function(){ qi++; ask(); });
+  $('qz-restart').addEventListener('click', start);
   start();
 })();
-</script>""" % json.dumps([{"term": g["term"], "def": g["def"]} for g in glossary], ensure_ascii=False)
+</script>""" % json.dumps(QUIZ_TERMS, ensure_ascii=False)
 
 EXAMGEN = json.load(open(os.path.join(BUILD, "examgen", "examgen.json"), encoding="utf-8"))
 # template slots: sb = text 2 (Picnic at Hanging Rock), re = text 1 (The Lottery and Other Stories)
