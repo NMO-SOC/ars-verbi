@@ -48,9 +48,12 @@ works on keyword search alone, just less well on paraphrased questions.
   ceiling: when a busy day spends it, the bot shows an error until 00:00 UTC
   (10am Melbourne, 11am in daylight saving). On a paid plan the same traffic is billed instead.
 - **Logs:** `npx wrangler kv key list --binding LOG`, or the KV page in the
-  Cloudflare dashboard. Entries expire after 180 days.
-- **Model:** `CHAT_MODEL` in `worker.js`. Check the Workers AI model list if
-  Cloudflare retires it.
+  Cloudflare dashboard. Entries expire after 400 days, so the whole 2027 exam year stays visible.
+- **Model:** `CHAT_MODELS` in `worker.js` is tried in order, so if Cloudflare
+  retires the first model, the backup answers. If both go, pick a current
+  one from the Workers AI model list. If the embedding model is ever retired,
+  the bot falls back to keyword search until you switch the model and
+  re-run `make-embeddings.ps1`.
 - **New site address** (e.g. the school intranet): add its origin to
   `ALLOWED_ORIGINS` in `wrangler.toml` and redeploy. The school web filter
   must also allow `workers.dev`.
