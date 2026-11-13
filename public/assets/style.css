@@ -227,6 +227,8 @@ a.inpath{text-decoration:underline}
 .qz-opt.qz-right{background:#eaf3de;border-color:#639922;color:#27500a}
 .qz-opt.qz-wrong{background:#fcebeb;border-color:#a32d2d;color:#791f1f}
 .qz-feedback{font-family:var(--sans);font-size:var(--fs-ui);font-weight:600;margin-top:14px;min-height:1.4em}
+.qz-kind{font-family:var(--sans);font-size:var(--fs-sm);font-weight:700;color:var(--muted);margin-bottom:8px}
+.qz-more{font-family:var(--sans);font-size:var(--fs-sm);color:var(--muted);margin-top:6px;line-height:1.5}
 
 /* ---- dark mode ---- */
 [data-theme="dark"]{
