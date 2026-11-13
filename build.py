@@ -1490,6 +1490,9 @@ for k, pg in enumerate(all_pages):
             # mark bands for Section A, quoted from the Section A descriptors (web only, from sectionc/)
             sec.append(BeautifulSoup(open(os.path.join(BUILD, "sectionc", "mark-bands-section-a.html"),
                                           encoding="utf-8").read(), "html.parser"))
+        if pg["file"] == "p03-symbols-and-motifs.html":
+            # the motif of children, which the other motifs in this chapter do not cover (web only, from sectionc/)
+            sec.append(BeautifulSoup(open(os.path.join(BUILD, "sectionc", "motif-children.html"), encoding="utf-8").read(), "html.parser"))
         if pg["file"] == "p06-sample-analysing-argument-essays.html":
             # show Scenario 3 (task + letter) from the Section C practice tasks above the sample essays
             _sc3 = BeautifulSoup(open(os.path.join(BUILD, "sectionc", "practice-articles.html"),
