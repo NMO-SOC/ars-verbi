@@ -1029,7 +1029,7 @@ hub_tools = TOOL_LABEL + """<h1>Study Tools</h1>
 </div>"""
 
 # Ask Appleyard (AI study assistant). Stays hidden until AA_WORKER is set: see worker/README.md.
-AA_WORKER = ""   # e.g. "https://ask-appleyard.<your-subdomain>.workers.dev/"
+AA_WORKER = "https://ask-appleyard.nicholas-morlin.workers.dev/"   # blank = bot hidden
 AA_EXAM = ""     # 2027 English exam start, e.g. "2027-10-26T09:00"; blank = no countdown in answers
 AA_V = "1"       # bump after regenerating search.json / embeddings.json
 AA_ON = bool(AA_WORKER)
@@ -1330,6 +1330,8 @@ for pg in all_pages:
 json.dump(search, open(os.path.join(PUBLIC, "assets", "search.json"), "w", encoding="utf-8"), ensure_ascii=False)
 
 # ---------------- write pages ----------------
+# Hand fixes to generated pages that the booklet can't express (PRs #27, #28): [old, new] per page.
+PAGE_FIXES = json.load(open(os.path.join(BUILD, "snippets", "page-fixes.json"), encoding="utf-8"))
 PRACTICE_LINKS = """
 <p>Official past VCE English examinations and examiner reports are published by the VCAA:</p>
 <p><a class="btn-inline" href="https://www.vcaa.vic.edu.au/assessment/vce/examination-specifications-past-examinations-and-examination-reports/english" target="_blank" rel="noopener">Past VCE English examinations (VCAA)</a></p>
@@ -1575,6 +1577,9 @@ for k, pg in enumerate(all_pages):
     _cls = section_class(pg["file"])
     if _cls:
         _html = _html.replace("<body>", '<body class="%s">' % _cls, 1)
+    for _old, _new in PAGE_FIXES.get(pg["file"], []):
+        if _old in _html: _html = _html.replace(_old, _new, 1)
+        else: print("PAGE FIX NOT APPLIED (booklet changed?):", pg["file"], _old[:70].strip())
     open(os.path.join(PUBLIC, pg["file"]), "w", encoding="utf-8").write(_html)
 
 # Downloads: a PDF and a LaTeX zip for each part and the whole guide (make_downloads.py).

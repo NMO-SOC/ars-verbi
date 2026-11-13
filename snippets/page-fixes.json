@@ -1,0 +1,46 @@
+{
+ "p02-background-and-context.html": [
+  [
+   "<p>A transcript of the film’s dialogue is available online: <a href=\"http://www.script-o-rama.com/movie_scripts/p/picnic-at-hanging-rock-script.html\"><u>Picnic at Hanging Rock</u> film transcript (script-o-rama)</a>. Use it to check the exact wording of quotes, which can differ from the published screenplay. The transcript leaves out numbers (times and dates), so check those against the film.<span class=\"pbr\"></span>\nThe full script is also available to read online at <a href=\"https://www.scriptslug.com/script/picnic-at-hanging-rock-1975\">ScriptSlug: <u>Picnic at Hanging Rock</u> (1975)</a>.<span class=\"pbr\"></span>\n",
+   "<p>A transcript of the film’s dialogue is available online: <a href=\"http://www.script-o-rama.com/movie_scripts/p/picnic-at-hanging-rock-script.html\"><u>Picnic at Hanging Rock</u> film transcript (script-o-rama)</a>. Use it to check the exact wording of quotes, which can differ from the published screenplay. The transcript leaves out numbers (times and dates), so check those against the film.</p>\n<p>The full script is also available to read online at <a href=\"https://www.scriptslug.com/script/picnic-at-hanging-rock-1975\"><u>ScriptSlug: Picnic at Hanging Rock (1975)</u></a>.<span class=\"pbr\"></span>\n"
+  ]
+ ],
+ "p02-film-techniques.html": [
+  [
+   "<table>\n<caption>Sounds in <em>Picnic at Hanging Rock</em> and the ideas they connect to</caption>\n",
+   "<table class=\"sound-table\">\n<caption>Sounds in <u>Picnic at Hanging Rock</u> and the ideas they connect to</caption>\n"
+  ],
+  [
+   "<th style=\"text-align: left;\"><strong>Sound</strong></th>\n<th style=\"text-align: left;\"><strong>What it connects to</strong></th>\n",
+   "<th scope=\"col\" style=\"text-align: left;\">Sound</th>\n<th scope=\"col\" style=\"text-align: left;\">What it connects to</th>\n"
+  ],
+  [
+   "<td style=\"text-align: left;\">Classical music (such as Beethoven)</td>\n<td style=\"text-align: left;\">The human construct of measurable time; European order imposed on beauty</td>\n",
+   "<th scope=\"row\" style=\"text-align: left;\">Classical music (such as Beethoven)</th>\n<td style=\"text-align: left;\"><ul><li>The human construct of measurable time</li><li>European order imposed on beauty</li></ul></td>\n"
+  ],
+  [
+   "<td style=\"text-align: left;\">Pan pipes</td>\n<td style=\"text-align: left;\">The timelessness and haunting allure of nature; liberation from social convention</td>\n",
+   "<th scope=\"row\" style=\"text-align: left;\">Pan pipes</th>\n<td style=\"text-align: left;\"><ul><li>The timelessness and haunting allure of nature</li><li>Liberation from social convention</li></ul></td>\n"
+  ],
+  [
+   "<td style=\"text-align: left;\">String quartet and parlour music</td>\n<td style=\"text-align: left;\">The constraints of etiquette; the preservation of social hierarchy</td>\n",
+   "<th scope=\"row\" style=\"text-align: left;\">String quartet and parlour music</th>\n<td style=\"text-align: left;\"><ul><li>The constraints of etiquette</li><li>The preservation of social hierarchy</li></ul></td>\n"
+  ],
+  [
+   "<td style=\"text-align: left;\">Thrumming of the Rock</td>\n<td style=\"text-align: left;\">The inexplicable power of the natural world; its ancient rhythms</td>\n",
+   "<th scope=\"row\" style=\"text-align: left;\">Thrumming of the Rock</th>\n<td style=\"text-align: left;\"><ul><li>The inexplicable power of the natural world</li><li>Its ancient rhythms</li></ul></td>\n"
+  ],
+  [
+   "<td style=\"text-align: left;\">Shrieking, insistent noise</td>\n<td style=\"text-align: left;\">Human horror and discomfort in the face of the unknowable</td>\n",
+   "<th scope=\"row\" style=\"text-align: left;\">Shrieking, insistent noise</th>\n<td style=\"text-align: left;\"><ul><li>Human horror and discomfort in the face of the unknowable</li></ul></td>\n"
+  ],
+  [
+   "<td style=\"text-align: left;\">Ticking clocks</td>\n<td style=\"text-align: left;\">Humanity’s desire to measure, schedule and control</td>\n",
+   "<th scope=\"row\" style=\"text-align: left;\">Ticking clocks</th>\n<td style=\"text-align: left;\"><ul><li>Humanity’s desire to measure, schedule and control</li></ul></td>\n"
+  ],
+  [
+   "<td style=\"text-align: left;\">Science-fiction-like beeping</td>\n<td style=\"text-align: left;\">Nature governed by incomprehensible forces; the transcendence of conventional time</td>\n",
+   "<th scope=\"row\" style=\"text-align: left;\">Science-fiction-like beeping</th>\n<td style=\"text-align: left;\"><ul><li>Nature governed by incomprehensible forces</li><li>The transcendence of conventional time</li></ul></td>\n"
+  ]
+ ]
+}
