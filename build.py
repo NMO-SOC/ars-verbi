@@ -27,6 +27,18 @@ def copy_if_changed(a, b):
     except OSError: pass
     shutil.copy(a, b)
 
+# Cache-busting versions come from file contents, so a changed style.css/site.js/search index always reaches
+# students and nobody bumps ?v= numbers by hand. style.css and site.js live in the repo root and are copied
+# to public/assets here (always: copy_if_changed compares sizes only, which can miss an edit).
+import hashlib
+def file_ver(path):
+    try: return hashlib.md5(open(path, 'rb').read()).hexdigest()[:8]
+    except OSError: return '0'
+for _f in ("style.css", "site.js"):
+    shutil.copyfile(os.path.join(BUILD, _f), os.path.join(PUBLIC, "assets", _f))
+CSS_V = file_ver(os.path.join(PUBLIC, "assets", "style.css"))
+JS_V = file_ver(os.path.join(PUBLIC, "assets", "site.js"))
+
 SITE_TITLE = "VCE English Exam Preparation Guide"
 
 for d in (PUBLIC, IMG_DIR, PDF_DIR, FILES_DIR):
@@ -1031,10 +1043,9 @@ hub_tools = TOOL_LABEL + """<h1>Study Tools</h1>
 # Ask Appleyard (AI study assistant). Stays hidden until AA_WORKER is set: see worker/README.md.
 AA_WORKER = "https://ask-appleyard.nicholas-morlin.workers.dev/"   # blank = bot hidden
 AA_EXAM = ""     # 2027 English exam start, e.g. "2027-10-26T09:00"; blank = no countdown in answers
-AA_V = "1"       # bump after regenerating search.json / embeddings.json
 AA_ON = bool(AA_WORKER)
 aa_page = TOOL_LABEL + (open(os.path.join(BUILD, "snippets", "ask-appleyard.html"), encoding="utf-8").read()
-                        .replace("__AA_WORKER__", AA_WORKER).replace("__AA_EXAM__", AA_EXAM).replace("__AA_V__", AA_V))
+                        .replace("__AA_WORKER__", AA_WORKER).replace("__AA_EXAM__", AA_EXAM))
 if AA_ON:
     hub_tools = hub_tools.replace("<span>Micro-Drills</span></a>\n",
         '<span>Micro-Drills</span></a>\n  <a class="ch-card" href="ask-appleyard.html"><span>Ask Appleyard</span></a>\n')
@@ -1254,7 +1265,7 @@ def shell(title, active_nav, active_file, main_html, prevnext=""):
 <meta property="og:image" content="https://nmo-soc.github.io/VCE-English-Guide/assets/img/soc-logo.png">
 <script>try{var _t=localStorage.getItem('siteTheme');if(_t==='dark'||(!_t&&window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.setAttribute('data-theme','dark');}catch(e){}</script>
 <script>if(/[?&]embed=1/.test(location.search)){document.documentElement.className+=' ac-embed';document.write('<base target="_top">');}</script>
-<link rel="stylesheet" href="assets/style.css?v=82">
+<link rel="stylesheet" href="assets/style.css?v=__CSS_V__">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -1280,11 +1291,15 @@ def shell(title, active_nav, active_file, main_html, prevnext=""):
   </main>
 </div>
 %s
-<script src="assets/site.js?v=54"></script>
+<script src="assets/site.js?v=__JS_V__"></script>
 <script data-goatcounter="https://nmo.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>""" % (html.escape(title), SITE_TITLE, html.escape(title), nav_html(active_nav, active_file), fix_quotes(main_html), fix_quotes(prevnext),
        '' if not AA_ON or active_file == 'ask-appleyard.html' else '<a id="max-fab" href="ask-appleyard.html?from=' + active_file + '" aria-label="Ask Mrs Appleyard a question"><img src="assets/img/ask-appleyard.jpg" alt=""><span>Ask Appleyard</span></a>')
+
+_shell_raw = shell
+def shell(*a, **k):   # every page, including home/404/downloads, gets the content-based asset versions
+    return _shell_raw(*a, **k).replace('__CSS_V__', CSS_V).replace('__JS_V__', JS_V)
 
 def page_toc(scope):
     lis = []
@@ -1581,6 +1596,8 @@ for k, pg in enumerate(all_pages):
     for _old, _new in PAGE_FIXES.get(pg["file"], []):
         if _old in _html: _html = _html.replace(_old, _new, 1)
         else: print("PAGE FIX NOT APPLIED (booklet changed?):", pg["file"], _old[:70].strip())
+    _html = (_html.replace('__AA_VI__', file_ver(os.path.join(PUBLIC, "assets", "search.json")))
+             .replace('__AA_VE__', file_ver(os.path.join(PUBLIC, "assets", "embeddings.json"))))
     open(os.path.join(PUBLIC, pg["file"]), "w", encoding="utf-8").write(_html)
 
 # Downloads: a PDF and a LaTeX zip for each part and the whole guide (make_downloads.py).

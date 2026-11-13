@@ -29,3 +29,7 @@ Section C/
 worker/.wrangler/
 worker/node_modules/
 __pycache__/
+
+# Ask Appleyard question-log exports hold network addresses
+question-log*.csv
+*-log.csv
