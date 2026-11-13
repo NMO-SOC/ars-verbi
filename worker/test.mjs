@@ -29,7 +29,7 @@ assert.deepEqual(emb.data[0].embedding, [0.1, 0.2]);
 const chat = await (await call('https://nmo-soc.github.io', 'POST',
   { messages: [{ role: 'user', content: 'rules... STUDENT QUESTION: Hello' }], max_tokens: 700 })).json();
 assert.equal(chat.choices[0].message.content, 'Answer to: Hello');
-assert.deepEqual(logged, [{ ip: '1.2.3.4', q: 'Hello', a: 'Answer to: Hello', model: 'llama-3.3-70b-instruct-fp8-fast' }]);
+assert.deepEqual(logged, [{ q: 'Hello', a: 'Answer to: Hello', model: 'llama-3.3-70b-instruct-fp8-fast' }]);   // no ip
 
 assert.equal((await call('http://localhost', 'POST', { messages: [] })).status, 400);
 
@@ -55,4 +55,7 @@ env.AI.run = async () => { throw new Error('allowance spent'); };
 const bad = await call('https://nmo-soc.github.io', 'POST', { messages: [{ role: 'user', content: 'x' }] });
 assert.equal(bad.status, 502);
 assert.equal((await bad.json()).error.message, 'allowance spent');
+env.AI.run = async () => { throw new Error('4006: you have used up your daily free allocation of 10,000 neurons'); };
+const q2 = await (await call('https://nmo-soc.github.io', 'POST', { messages: [{ role: 'user', content: 'x' }] })).json();
+assert.equal(q2.error.code, 'quota');
 console.log('worker ok');

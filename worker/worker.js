@@ -50,15 +50,15 @@ export default {
       }
       if (!text) throw lastErr;
       if (env.LOG) {
-        // the page discloses this: question + network address (and now the answer), kept 400 days (past the 2027 exam)
+        // the page discloses this: question and answer only (no name, no network address), kept 400 days (past the 2027 exam)
         const q = content.split('STUDENT QUESTION: ').pop().slice(0, 1000);
-        const ip = req.headers.get('CF-Connecting-IP') || '';
         ctx.waitUntil(env.LOG.put(new Date().toISOString() + '-' + crypto.randomUUID().slice(0, 8),
-          JSON.stringify({ ip, q, a: text.slice(0, 4000), model: used.split('/').pop() }), { expirationTtl: 400 * 86400 }));
+          JSON.stringify({ q, a: text.slice(0, 4000), model: used.split('/').pop() }), { expirationTtl: 400 * 86400 }));
       }
       return reply({ choices: [{ message: { content: text } }] });
     } catch (e) {
-      return reply({ error: { message: String((e && e.message) || e).slice(0, 200) } }, 502);
+      const msg = String((e && e.message) || e).slice(0, 200);   // 'quota' lets the page say the day's questions are used up
+      return reply({ error: { message: msg, code: /allocation|neurons|daily|quota|rate limit|too many/i.test(msg) ? 'quota' : undefined } }, 502);
     }
   }
 };

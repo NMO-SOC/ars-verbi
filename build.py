@@ -1133,9 +1133,12 @@ def nav_html(active_nav, active_file):
             subs = "".join('<li%s><a href="%s">%s</a></li>' %
                            (' class="active"' if c["file"] == active_file else "", c["file"], html.escape(c["title"]))
                            for c in it["chapters"])
-            out.append('<li class="grp"><details%s><summary><a%s href="%s"><span class="num">%s</span>%s</a></summary>'
-                       '<ul class="subnav">%s</ul></details></li>'
-                       % (is_open, cls, it["file"], num, html.escape(NAV_SHORT.get(it["title"], it["title"])), subs))
+            short = html.escape(NAV_SHORT.get(it["title"], it["title"]))
+            gid = "nav-g%d" % it["num"]
+            out.append('<li class="grp"><div class="grp-row"><a%s href="%s"><span class="num">%s</span>%s</a>'
+                       '<button type="button" class="grp-toggle" aria-expanded="%s" aria-controls="%s" aria-label="Pages in %s"></button></div>'
+                       '<ul class="subnav" id="%s"%s>%s</ul></li>'
+                       % (cls, it["file"], num, short, "true" if is_open else "false", gid, short, gid, "" if is_open else " hidden", subs))
         else:
             cls = ' class="active"' if it["file"] == active_file else ""
             out.append('<li%s><a href="%s"><span class="num">%s</span>%s</a></li>'
@@ -1295,7 +1298,7 @@ def shell(title, active_nav, active_file, main_html, prevnext=""):
 <script data-goatcounter="https://nmo.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>""" % (html.escape(title), SITE_TITLE, html.escape(title), nav_html(active_nav, active_file), fix_quotes(main_html), fix_quotes(prevnext),
-       '' if not AA_ON or active_file == 'ask-appleyard.html' else '<a id="max-fab" href="ask-appleyard.html?from=' + active_file + '" aria-label="Ask Mrs Appleyard a question"><img src="assets/img/ask-appleyard.jpg" alt=""><span>Ask Appleyard</span></a>')
+       '' if not AA_ON or active_file == 'ask-appleyard.html' else '<aside aria-label="Ask Appleyard"><a id="max-fab" href="ask-appleyard.html?from=' + active_file + '" aria-label="Ask Mrs Appleyard a question"><img src="assets/img/ask-appleyard.jpg" alt=""><span>Ask Appleyard</span></a></aside>')
 
 _shell_raw = shell
 def shell(*a, **k):   # every page, including home/404/downloads, gets the content-based asset versions

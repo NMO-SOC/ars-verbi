@@ -7,7 +7,8 @@ Usage:  python export_log.py                      -> question-log.csv
 
 Columns: time (UTC), ip, question, model, flag, answer. `flag` marks answers where Mrs Appleyard declined or said
 the guide doesn't cover it: sort by it to see what students want that the site lacks. Entries logged before
-replies were saved have no answer. The file holds network addresses, so it is git-ignored: keep it off the site.
+replies were saved have no answer, and entries before 13 Nov 2026 still carry a network address (new ones have none), so
+the file is git-ignored: keep it off the site.
 """
 import csv, json, re, subprocess, sys
 

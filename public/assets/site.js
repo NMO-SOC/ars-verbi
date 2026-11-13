@@ -362,7 +362,7 @@
       var links=g.querySelectorAll('.subnav a'),n=0;
       links.forEach(function(a){if(done[(a.getAttribute('href')||'').split('#')[0]])n++;});
       var b=g.querySelector('.done-count');
-      if(!b){b=document.createElement('span');b.className='done-count';var s=g.querySelector('summary a');if(s)s.appendChild(b);}
+      if(!b){b=document.createElement('span');b.className='done-count';var s=g.querySelector('.grp-row a');if(s)s.appendChild(b);}
       b.textContent=n?n+'/'+links.length:'';
       if(n)b.setAttribute('aria-label',n+' of '+links.length+' chapters done');else b.removeAttribute('aria-label');
     });
@@ -445,3 +445,11 @@
   document.addEventListener('touchend', show);
   document.addEventListener('mousedown', function(e){ if (btn && e.target !== btn) hide(); });
 })();
+
+/* Sidebar sections: the arrow button expands or collapses a section's pages; the title is a plain link. */
+document.querySelectorAll('.toc .grp-toggle').forEach(function(b){
+  b.addEventListener('click',function(){
+    var ul=document.getElementById(b.getAttribute('aria-controls')),open=b.getAttribute('aria-expanded')==='true';
+    b.setAttribute('aria-expanded',String(!open));if(ul)ul.hidden=open;
+  });
+});
