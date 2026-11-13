@@ -29,7 +29,7 @@ assert.deepEqual(emb.data[0].embedding, [0.1, 0.2]);
 const chat = await (await call('https://nmo-soc.github.io', 'POST',
   { messages: [{ role: 'user', content: 'rules... STUDENT QUESTION: Hello' }], max_tokens: 700 })).json();
 assert.equal(chat.choices[0].message.content, 'Answer to: Hello');
-assert.deepEqual(logged, [{ ip: '1.2.3.4', q: 'Hello' }]);
+assert.deepEqual(logged, [{ ip: '1.2.3.4', q: 'Hello', a: 'Answer to: Hello', model: 'llama-3.3-70b-instruct-fp8-fast' }]);
 
 assert.equal((await call('http://localhost', 'POST', { messages: [] })).status, 400);
 
