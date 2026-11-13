@@ -50,10 +50,12 @@ export default {
       }
       if (!text) throw lastErr;
       if (env.LOG) {
-        // the page discloses this: question and answer only (no name, no network address), kept 400 days (past the 2027 exam)
+        // the page discloses this: question, answer and network address, kept 400 days (past the 2027 exam).
+        // The address is kept on purpose: if a student writes something that must be reported, staff can trace it.
         const q = content.split('STUDENT QUESTION: ').pop().slice(0, 1000);
+        const ip = req.headers.get('CF-Connecting-IP') || '';
         ctx.waitUntil(env.LOG.put(new Date().toISOString() + '-' + crypto.randomUUID().slice(0, 8),
-          JSON.stringify({ q, a: text.slice(0, 4000), model: used.split('/').pop() }), { expirationTtl: 400 * 86400 }));
+          JSON.stringify({ ip, q, a: text.slice(0, 4000), model: used.split('/').pop() }), { expirationTtl: 400 * 86400 }));
       }
       return reply({ choices: [{ message: { content: text } }] });
     } catch (e) {
