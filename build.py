@@ -1253,7 +1253,7 @@ def shell(title, active_nav, active_file, main_html, prevnext=""):
 <meta property="og:description" content="South Oakleigh College Units 3/4 English exam preparation guide - texts, essays, practice exams and study tools.">
 <meta property="og:image" content="https://nmo-soc.github.io/VCE-English-Guide/assets/img/soc-logo.png">
 <script>try{var _t=localStorage.getItem('siteTheme');if(_t==='dark'||(!_t&&window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.setAttribute('data-theme','dark');}catch(e){}</script>
-<link rel="stylesheet" href="assets/style.css?v=74">
+<link rel="stylesheet" href="assets/style.css?v=75">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -1270,7 +1270,7 @@ def shell(title, active_nav, active_file, main_html, prevnext=""):
       <label for="search" class="vh">Search the guide</label><input id="search" type="search" placeholder="Search the guide&hellip;" autocomplete="off" aria-controls="search-results" aria-autocomplete="list">
       <div id="search-results"></div>
     </div>
-    <nav class="toc"><ol>%s</ol></nav>
+    <nav class="toc" aria-label="Guide contents"><ol>%s</ol></nav>
     <div class="side-foot">South Oakleigh College, 2027</div>
   </aside>
   <main class="content" id="main">
@@ -1279,7 +1279,7 @@ def shell(title, active_nav, active_file, main_html, prevnext=""):
   </main>
 </div>
 %s
-<script src="assets/site.js?v=51"></script>
+<script src="assets/site.js?v=52"></script>
 <script data-goatcounter="https://nmo.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>""" % (html.escape(title), SITE_TITLE, html.escape(title), nav_html(active_nav, active_file), fix_quotes(main_html), fix_quotes(prevnext),
@@ -1359,7 +1359,7 @@ for k, pg in enumerate(all_pages):
               % (all_pages[k-1]["file"], html.escape(all_pages[k-1]["title"]))) if k else "<span></span>"
     next_a = ('<a class="pn next" href="%s"><span>Next &#8594;</span><b>%s</b></a>'
               % (all_pages[k+1]["file"], html.escape(all_pages[k+1]["title"]))) if k < len(all_pages)-1 else "<span></span>"
-    pn = '<nav class="prevnext">%s%s</nav>' % (prev_a, next_a)
+    pn = '<nav class="prevnext" aria-label="Previous and next pages">%s%s</nav>' % (prev_a, next_a)
     num = next(it["num"] for it in nav_items if it["file"] == pg["nav"])
 
     if "html" in pg:

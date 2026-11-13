@@ -382,7 +382,9 @@
   if (!document.getElementById('max-fab')) return;
   var btn = null;
   function hide(){ if (btn){ btn.remove(); btn = null; } }
-  document.addEventListener('mouseup', function(){
+  function show(e){
+    if (btn && e.target === btn) return;
+    var touch = e.type === 'touchend';
     setTimeout(function(){
       hide();
       var sel = window.getSelection();
@@ -397,10 +399,12 @@
       btn.textContent = 'Ask Appleyard about this';
       btn.href = 'ask-appleyard.html?from=' + encodeURIComponent(page) +
         '&q=' + encodeURIComponent('From the guide: "' + txt + '" - can you explain this?');
-      btn.style.top = (window.scrollY + rect.top - 42) + 'px';
-      btn.style.left = Math.max(10, window.scrollX + rect.left + rect.width / 2 - 90) + 'px';
+      btn.style.top = (window.scrollY + (touch ? rect.bottom + 12 : rect.top - 42)) + 'px';
+      btn.style.left = Math.min(window.innerWidth - 200, Math.max(10, rect.left + rect.width / 2 - 90)) + window.scrollX + 'px';
       document.body.appendChild(btn);
-    }, 10);
-  });
+    }, touch ? 400 : 10);
+  }
+  document.addEventListener('mouseup', show);
+  document.addEventListener('touchend', show);
   document.addEventListener('mousedown', function(e){ if (btn && e.target !== btn) hide(); });
 })();
