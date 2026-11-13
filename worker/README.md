@@ -38,8 +38,8 @@ if you ever want it; the dashboard doesn't need it.)
 
 ## After every content change
 
-Re-run `build.py`, then `make-embeddings.ps1`, and bump `AA_V` in `build.py`
-so browsers fetch the new index. Without the embeddings file the bot still
+Re-run `build.py`, then `make-embeddings.ps1`, then `build.py` once more so the
+page picks up the new embeddings. Version numbers are automatic (from file contents). Without the embeddings file the bot still
 works on keyword search alone, just less well on paraphrased questions.
 
 ## Running it

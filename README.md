@@ -39,3 +39,10 @@ or any linked content.
 repository) to HTML with pandoc, adds the extra pages and fragments from
 `snippets/` and `sectionc/`, and writes the finished site to `public/`.
 Pushing to `main` deploys `public/` to GitHub Pages.
+
+## Before shipping, and looking after the site
+
+- `python build.py` rebuilds the site. Cache-busting `?v=` numbers come from file contents, so there is nothing to bump by hand.
+- `python check_links.py` finds dead links and broken `#section` anchors (add `--offline` to skip the network). Sites that refuse automated checks (Studocu, the school SharePoint, the VCAA) show up as "blocked" or "broken": open those once in a browser.
+- `python export_log.py` saves the Ask Appleyard question log to a spreadsheet, flagging answers that declined or said the guide doesn't cover it (needs `npx wrangler login` once). The file holds network addresses and is git-ignored.
+- Self-checks: `python test_check_links.py`, `python test_export_log.py`, `node worker/test.mjs`.
