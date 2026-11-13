@@ -1,0 +1,17 @@
+name = "ask-appleyard"
+main = "worker.js"
+compatibility_date = "2026-10-01"
+
+[ai]
+binding = "AI"
+
+[vars]
+# Browser origins allowed to call the Worker (scheme + host [+ port], no path).
+ALLOWED_ORIGINS = "https://nmo-soc.github.io,http://localhost,http://localhost:8000"
+
+# Question log (disclosed on the page). Create it with:
+#   npx wrangler kv namespace create LOG
+# then paste the id it prints below.
+[[kv_namespaces]]
+binding = "LOG"
+id = "PASTE_KV_ID_HERE"

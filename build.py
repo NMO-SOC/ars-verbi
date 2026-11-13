@@ -1028,6 +1028,17 @@ hub_tools = TOOL_LABEL + """<h1>Study Tools</h1>
   <a class="ch-card" href="micro-drills.html"><span>Micro-Drills</span></a>
 </div>"""
 
+# Ask Appleyard (AI study assistant). Stays hidden until AA_WORKER is set: see worker/README.md.
+AA_WORKER = ""   # e.g. "https://ask-appleyard.<your-subdomain>.workers.dev/"
+AA_EXAM = ""     # 2027 English exam start, e.g. "2027-10-26T09:00"; blank = no countdown in answers
+AA_V = "1"       # bump after regenerating search.json / embeddings.json
+AA_ON = bool(AA_WORKER)
+aa_page = TOOL_LABEL + (open(os.path.join(BUILD, "snippets", "ask-appleyard.html"), encoding="utf-8").read()
+                        .replace("__AA_WORKER__", AA_WORKER).replace("__AA_EXAM__", AA_EXAM).replace("__AA_V__", AA_V))
+if AA_ON:
+    hub_tools = hub_tools.replace("<span>Micro-Drills</span></a>\n",
+        '<span>Micro-Drills</span></a>\n  <a class="ch-card" href="ask-appleyard.html"><span>Ask Appleyard</span></a>\n')
+
 display_num += 1
 tools_num = display_num
 nav_items.append({"num": tools_num, "title": "Study Tools", "file": "study-tools.html",
@@ -1039,6 +1050,8 @@ nav_items.append({"num": tools_num, "title": "Study Tools", "file": "study-tools
                                {"title": "Essay Outline Builder", "file": "outline-builder.html"},
                                {"title": "Vocabulary Upgrader", "file": "vocab-upgrader.html"},
                                {"title": "Micro-Drills", "file": "micro-drills.html"}]})
+if AA_ON:
+    nav_items[-1]["chapters"].append({"title": "Ask Appleyard", "file": "ask-appleyard.html"})
 nav_items.append({"num": tools_num + 1, "title": "Offline version of this site", "file": "downloads.html", "chapters": []})
 all_pages.append({"file": "study-tools.html", "title": "Study Tools", "html": hub_tools, "nav": "study-tools.html"})
 all_pages.append({"file": "flashcards.html", "title": "Quote Flashcards", "html": fc_page, "nav": "study-tools.html"})
@@ -1049,6 +1062,8 @@ all_pages.append({"file": "exam-generator.html", "title": "Exam Generator", "htm
 all_pages.append({"file": "outline-builder.html", "title": "Essay Outline Builder", "html": ob_page, "nav": "study-tools.html"})
 all_pages.append({"file": "vocab-upgrader.html", "title": "Vocabulary Upgrader", "html": vu_page, "nav": "study-tools.html"})
 all_pages.append({"file": "micro-drills.html", "title": "Micro-Drills", "html": dr_page, "nav": "study-tools.html"})
+if AA_ON:
+    all_pages.append({"file": "ask-appleyard.html", "title": "Ask Appleyard", "html": aa_page, "nav": "study-tools.html"})
 _ed = os.path.join(PUBLIC, "assets", "exam")
 for _sub in ("b", "c"):
     os.makedirs(os.path.join(_ed, _sub), exist_ok=True)
@@ -1268,7 +1283,7 @@ def shell(title, active_nav, active_file, main_html, prevnext=""):
 <script data-goatcounter="https://nmo.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>""" % (html.escape(title), SITE_TITLE, html.escape(title), nav_html(active_nav, active_file), fix_quotes(main_html), fix_quotes(prevnext),
-       '')
+       '' if not AA_ON or active_file == 'ask-appleyard.html' else '<a id="max-fab" href="ask-appleyard.html?from=' + active_file + '" aria-label="Ask Mrs Appleyard a question"><img src="assets/img/picnic/mrs-appleyard.jpg" alt=""><span>Ask Appleyard</span></a>')
 
 def page_toc(scope):
     lis = []
@@ -1490,9 +1505,9 @@ for k, pg in enumerate(all_pages):
             # mark bands for Section A, quoted from the Section A descriptors (web only, from sectionc/)
             sec.append(BeautifulSoup(open(os.path.join(BUILD, "sectionc", "mark-bands-section-a.html"),
                                           encoding="utf-8").read(), "html.parser"))
-        if pg["file"] == "p03-symbols-and-motifs.html":
-            # the motif of children, which the other motifs in this chapter do not cover (web only, from sectionc/)
-            sec.append(BeautifulSoup(open(os.path.join(BUILD, "sectionc", "motif-children.html"), encoding="utf-8").read(), "html.parser"))
+        if pg["file"] == "p03-symbols-and-motifs.html":
+            # the motif of children, which the other motifs in this chapter do not cover (web only, from sectionc/)
+            sec.append(BeautifulSoup(open(os.path.join(BUILD, "sectionc", "motif-children.html"), encoding="utf-8").read(), "html.parser"))
         if pg["file"] == "p06-sample-analysing-argument-essays.html":
             # show Scenario 3 (task + letter) from the Section C practice tasks above the sample essays
             _sc3 = BeautifulSoup(open(os.path.join(BUILD, "sectionc", "practice-articles.html"),
@@ -1695,6 +1710,8 @@ landing = """
   <div class="sf-sub">South Oakleigh College. Compiled by Mr Morlin, version Lux 672.2.4. This site is provided free and as-is for study purposes, without warranty of any kind. Content is offered in good faith but may contain errors &mdash; check anything high-stakes with your teacher. External links lead to sites not controlled by the author, and no liability is accepted for their content or for any loss arising from use of this site.</div>
 </div>
 """ % (exam_band, before_links, contents)
+if AA_ON:
+    landing = landing.replace('<span id="resume-slot"></span>', '<span id="resume-slot"></span>\n      <p><a class="btn btn-max" href="ask-appleyard.html"><img src="assets/img/picnic/mrs-appleyard.jpg" alt="">Ask Appleyard</a></p>', 1)
 open(os.path.join(PUBLIC, "index.html"), "w", encoding="utf-8").write(shell("Home", "", "index.html", landing))
 
 nf = """

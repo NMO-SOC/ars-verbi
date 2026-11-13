@@ -24,3 +24,8 @@ texts/
 
 # licensed source material - never publish
 Section C/
+
+# Cloudflare Worker local state
+worker/.wrangler/
+worker/node_modules/
+__pycache__/
