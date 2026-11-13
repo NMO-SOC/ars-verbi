@@ -1280,7 +1280,7 @@ def shell(title, active_nav, active_file, main_html, prevnext=""):
   </main>
 </div>
 %s
-<script src="assets/site.js?v=53"></script>
+<script src="assets/site.js?v=54"></script>
 <script data-goatcounter="https://nmo.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>""" % (html.escape(title), SITE_TITLE, html.escape(title), nav_html(active_nav, active_file), fix_quotes(main_html), fix_quotes(prevnext),
