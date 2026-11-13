@@ -39,7 +39,7 @@
   function add(cls, html){
     var d = document.createElement('div'); d.className = 'ac-msg ' + cls; d.innerHTML = html;
     log.appendChild(d); log.scrollTop = log.scrollHeight;
-    try{ d.scrollIntoView({ block: 'nearest' }); }catch(sie){}
+    if (cls === 'ac-user'){ try{ d.scrollIntoView({ block: 'start' }); }catch(sie){} }
     return d;
   }
   function norm(s){
