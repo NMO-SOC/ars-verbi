@@ -32,4 +32,23 @@ assert.equal(chat.choices[0].message.content, 'Answer to: Hello');
 assert.deepEqual(logged, [{ ip: '1.2.3.4', q: 'Hello' }]);
 
 assert.equal((await call('http://localhost', 'POST', { messages: [] })).status, 400);
+
+// first chat model retired: the next one answers
+const realRun = env.AI.run;
+env.AI.run = async (model, args) => {
+  if (model.includes('gemma')) throw new Error('model not found');
+  return realRun(model, args);
+};
+const fb = await (await call('https://nmo-soc.github.io', 'POST',
+  { messages: [{ role: 'user', content: 'STUDENT QUESTION: Again' }] })).json();
+assert.equal(fb.choices[0].message.content, 'Answer to: Again');
+// OpenAI-style reply with a reasoning block is unwrapped
+env.AI.run = async () => ({ choices: [{ message: { content: '<think>hmm</think> Tidy answer' } }] });
+const oa = await (await call('https://nmo-soc.github.io', 'POST', { messages: [{ role: 'user', content: 'x' }] })).json();
+assert.equal(oa.choices[0].message.content, 'Tidy answer');
+// every model failing (e.g. daily allowance spent): an error the page can show
+env.AI.run = async () => { throw new Error('allowance spent'); };
+const bad = await call('https://nmo-soc.github.io', 'POST', { messages: [{ role: 'user', content: 'x' }] });
+assert.equal(bad.status, 502);
+assert.equal((await bad.json()).error.message, 'allowance spent');
 console.log('worker ok');
