@@ -1522,7 +1522,13 @@ for pg in all_pages:
                 _t = _pt + " - " + _t
         search.append({"t": _t, "p": part_title, "g": pg["title"] if pg["title"] not in (_t, part_title) else "",
                        "u": pg["file"] + ("#" + hid if hid else ""), "b": body})
-json.dump(search, open(os.path.join(PUBLIC, "assets", "search.json"), "w", encoding="utf-8"), ensure_ascii=False)
+with open(os.path.join(PUBLIC, "assets", "search.json"), "w", encoding="utf-8") as _f:
+    json.dump(search, _f, ensure_ascii=False)
+# Ask Appleyard: re-embed any chunks whose text changed, so the bot's vectors always match the index
+# (cached in worker/embed-cache.json; the Pages workflow runs the same step again on every push).
+if AA_ON:
+    import make_embeddings
+    make_embeddings.run(AA_WORKER)
 
 # ---------------- write pages ----------------
 # Hand fixes to generated pages that the booklet can't express (PRs #27, #28): [old, new] per page.
