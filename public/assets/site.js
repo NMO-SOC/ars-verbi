@@ -68,34 +68,42 @@
     if(k<0)return '';var st=Math.max(k>=from?from:0,k-60);
     if(st>from){var sp=b.indexOf(' ',st);if(sp>-1&&sp<k)st=sp+1;}   // start on a whole word
     while(st<k&&b.charAt(st)===' ')st++;
-    return (st>0?'\u2026':'')+b.substring(st,k+len)+(k+len<b.length?'\u2026':'');}
+    return (st>from?'\u2026':'')+b.substring(st,k+len)+(k+len<b.length?'\u2026':'');}
+  // where a result lives: the part, then the page when it differs from the heading (several pages have a 'The Lottery' section)
+  function where(e){return e.p+(e.g?' › '+e.g:'');}
   function goAll(q){location.href='search.html?q='+encodeURIComponent(q);}
   var HINT='Try a shorter word, a character or story name (Tessie, Miranda, &lsquo;The Witch&rsquo;) or a skill (symbols, contention, Section C).';
 
   if(box&&out){
+    // ARIA combobox: the box owns the suggestion list; the highlighted option is announced via aria-activedescendant
+    box.setAttribute('role','combobox');box.setAttribute('aria-expanded','false');
+    out.setAttribute('role','listbox');out.setAttribute('aria-label','Search suggestions');
+    function show(on){out.classList.toggle('show',on);box.setAttribute('aria-expanded',String(on));
+      if(!on){box.removeAttribute('aria-activedescendant');cur=-1;}}
     function run(){
       var q=box.value.trim();
-      if(q.length<2){out.classList.remove('show');out.innerHTML='';return;}
+      if(q.length<2){show(false);out.innerHTML='';return;}
       load().then(function(data){
         if(box.value.trim()!==q)return;
         var ts=terms(q),res=find(data,q);
-        if(!res.length){out.innerHTML='<div class="nores" role="status">No matches for &ldquo;'+esc(q)+'&rdquo;. '+HINT+'</div>';out.classList.add('show');return;}
-        out.innerHTML=res.slice(0,8).map(function(r){var s=snip(r,ts,70);
-          return '<a href="'+esc(r.e.u)+'">'+hl(r.e.t,ts)+'<small>'+esc(r.e.p)+(s?' \u2014 '+hl(s,ts):'')+'</small></a>';
-        }).join('')+'<a class="sr-all" href="search.html?q='+encodeURIComponent(q)+'">See all '+res.length+' result'+(res.length>1?'s':'')+' for &ldquo;'+esc(q)+'&rdquo; &rarr;</a>';
-        out.classList.add('show');
+        if(!res.length){out.innerHTML='<div class="nores" role="status">No matches for &ldquo;'+esc(q)+'&rdquo;. '+HINT+'</div>';show(true);return;}
+        // the full-results link goes first so it is always visible, even when the list scrolls
+        out.innerHTML='<a class="sr-all" role="option" id="sg-all" href="search.html?q='+encodeURIComponent(q)+'">See all '+res.length+' result'+(res.length>1?'s':'')+'</a>'+
+          res.slice(0,8).map(function(r,i){var s=snip(r,ts,60);
+          return '<a role="option" id="sg-'+i+'" href="'+esc(r.e.u)+'">'+hl(r.e.t,ts)+'<small class="sg-where">'+esc(where(r.e))+'</small>'+(s?'<small class="sg-snip">'+hl(s,ts)+'</small>':'')+'</a>';
+        }).join('');
+        cur=-1;show(true);
       });
     }
     box.addEventListener('input',run);
     box.addEventListener('focus',run);
     document.addEventListener('click',function(e){
-      if(!out.contains(e.target)&&e.target!==box)out.classList.remove('show');});
+      if(!out.contains(e.target)&&e.target!==box)show(false);});
     // keyboard: arrows move through results; Enter opens the highlighted result, or the full results page; Escape closes
     var cur=-1;
     function items(){return [].slice.call(out.querySelectorAll('a'));}
     function mark(i){var a=items();a.forEach(function(x,j){x.classList.toggle('kb',j===i);x.setAttribute('aria-selected',String(j===i));});
-      if(a[i])a[i].scrollIntoView({block:'nearest'});cur=i;}
-    out.setAttribute('role','listbox');
+      if(a[i]){a[i].scrollIntoView({block:'nearest'});box.setAttribute('aria-activedescendant',a[i].id);}cur=i;}
     box.addEventListener('input',function(){cur=-1;});
     box.addEventListener('keydown',function(e){
       var a=items();
@@ -104,7 +112,7 @@
       else if(e.key==='Enter'){e.preventDefault();
         if(cur>-1&&a[cur])location.href=a[cur].getAttribute('href');
         else if(box.value.trim())goAll(box.value.trim());}
-      else if(e.key==='Escape'){out.classList.remove('show');cur=-1;}
+      else if(e.key==='Escape'){show(false);}
     });
   }
 
@@ -121,7 +129,7 @@
       if(!res.length){cnt.innerHTML='No results for &ldquo;'+esc(q0)+'&rdquo;. '+HINT;return;}
       cnt.innerHTML=res.length+' result'+(res.length>1?'s':'')+' for &ldquo;'+esc(q0)+'&rdquo;';
       list.innerHTML=res.slice(0,200).map(function(r){var s=snip(r,ts,180);
-        return '<li><a href="'+esc(r.e.u)+'">'+hl(r.e.t,ts)+'</a><span class="sr-part">'+esc(r.e.p)+'</span>'+(s?'<p>'+hl(s,ts)+'</p>':'')+'</li>';
+        return '<li><a href="'+esc(r.e.u)+'">'+hl(r.e.t,ts)+'</a><span class="sr-part">'+esc(where(r.e))+'</span>'+(s?'<p>'+hl(s,ts)+'</p>':'')+'</li>';
       }).join('');
     }).catch(function(){cnt.textContent='Search could not load. Check your connection and try again.';});
   }

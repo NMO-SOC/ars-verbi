@@ -1509,7 +1509,7 @@ for pg in all_pages:
             _pt = _ph.get_text(" ", strip=True) if _ph else ""
             if _pt and _pt != _t and _pt != pg["title"] and _pt != part_title and len(_pt) < 60:
                 _t = _pt + " - " + _t
-        search.append({"t": _t, "p": part_title,
+        search.append({"t": _t, "p": part_title, "g": pg["title"] if pg["title"] not in (_t, part_title) else "",
                        "u": pg["file"] + ("#" + hid if hid else ""), "b": body})
 json.dump(search, open(os.path.join(PUBLIC, "assets", "search.json"), "w", encoding="utf-8"), ensure_ascii=False)
 
