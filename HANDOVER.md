@@ -43,3 +43,11 @@ supplies a fresh zip.
 - GoatCounter records anonymous page-view counts only.
 
 Contact: Mr Morlin, English faculty.
+
+## Usage and search data
+
+- **Page views:** GoatCounter dashboard at https://nmo.goatcounter.com (log in with the site owner's account). It shows the most and least visited pages.
+- **What students search for:** each search on the results page is logged there as an event. `search/<words>` found results; `search-no-results/<words>` found nothing, which is the best list of content to add next. Searches are anonymous: GoatCounter stores no names or IP addresses.
+- **Broken links:** `.github/workflows/link-check.yml` runs `check_links.py` on the 1st of each month and opens a GitHub issue if anything is broken. Run it any time from the Actions tab ("Monthly link check" → Run workflow).
+- **What's new on the home page:** edit the `WHATS_NEW` list in `build.py` (newest first; the top 4 show).
+- **Booklet source:** `main.tex` is backed up in the private repo NMO-SOC/yr12-english-booklet-2027. Commit and push there after editing it.

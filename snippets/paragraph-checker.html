@@ -1,0 +1,52 @@
+<h1>Paragraph Checker</h1>
+<p class="lede">Paste one body paragraph from a Section A essay. The checker looks for the parts a strong paragraph usually has and tells you what to look at again. It reads patterns, not meaning, so it can&rsquo;t mark your work: use it as a second pair of eyes before you ask your teacher.</p>
+<label for="pc-topic" class="tu-label">Topic (optional, helps check the link back)</label>
+<input id="pc-topic" type="text" class="tool-input" placeholder="Paste the essay topic">
+<label for="pc-text" class="tu-label">Your paragraph</label>
+<textarea id="pc-text" rows="10" class="tool-area" placeholder="Paste one body paragraph here&hellip;"></textarea>
+<div class="tool-bar"><button id="pc-go" type="button">Check my paragraph</button></div>
+<div id="pc-out" class="tool-out" aria-live="polite"></div>
+<script>
+(function(){
+  var ta=document.getElementById('pc-text'),tp=document.getElementById('pc-topic'),out=document.getElementById('pc-out');
+  var TECH=['setting','symbol','symbolism','motif','irony','ironic','juxtaposition','juxtaposes','contrast','framing','frame','close-up',
+    'slow motion','sound','soundtrack','music','score','narrator','narration','foreshadow','dialogue','imagery','image','characterisation',
+    'structure','tone','costume','lighting','camera','shot','perspective','point of view','repetition','repeated','metaphor','simile',
+    'title','ending','opening','voice-over','third person','first person','understatement','twist'];
+  var VERBS=['suggests','reveals','exposes','highlights','conveys','implies','underscores','emphasises','evokes','positions',
+    'invites','encourages','challenges','critiques','questions','undercuts','dramatises','establishes','reinforces','illustrates','depicts','portrays'];
+  var LINK=['thus','therefore','ultimately','consequently','in this way','by doing so','as a result','this shows how','which suggests','in doing so'];
+  function esc(s){return s.replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function sentences(t){return t.replace(/\s+/g,' ').match(/[^.!?]+[.!?]+[\u2019'"\u201d]?|[^.!?]+$/g)||[];}
+  function has(s,list){return list.filter(function(w){return new RegExp('\\b'+w.replace(/ /g,'\\s+')+'\\b','i').test(s);});}
+  function row(ok,title,note){return '<li class="'+(ok?'pc-ok':'pc-look')+'"><span class="pc-mark">'+(ok?'Looks good':'Look again')+'</span><strong>'+title+'</strong>'+(note?'<span class="pc-note">'+note+'</span>':'')+'</li>';}
+  function go(){
+    var t=ta.value.trim();
+    if(t.split(/\s+/).length<25){out.innerHTML='<p>Paste a full body paragraph (at least a few sentences) to check.</p>';return;}
+    var ss=sentences(t),first=ss[0]||'',last=ss[ss.length-1]||'',words=t.split(/\s+/).length;
+    var quotes=(t.match(/[\u2018\u201c"'][^\u2018\u2019\u201c\u201d"']{2,}[\u2019\u201d"']/g)||[]).length;
+    var techs=has(t,TECH),verbs=has(t,VERBS),shows=(t.match(/\bshows?\b/gi)||[]).length;
+    var author=/\b(weir|jackson)\b/i.test(first);
+    var firstQuote=/[\u2018\u201c"]/.test(first);
+    var retell=ss.filter(function(s){return /^\s*(then|after (this|that)|next|later|at the (start|beginning|end))\b/i.test(s);}).length;
+    var informal=t.match(/\b(I think|I believe|you|your|don't|can't|won't|isn't|doesn't|didn't|gonna|stuff|things)\b/gi)||[];
+    var topicWords=(tp.value.toLowerCase().match(/[a-z]{5,}/g)||[]).filter(function(w){return !/^(discuss|agree|extent|picnic|hanging|jackson|stories|lottery|suggests|explore|portray|whether)$/.test(w);});
+    var linkHit=has(last,LINK).length>0||topicWords.some(function(w){return last.toLowerCase().indexOf(w.slice(0,6))>-1;});
+    var h='<p class="pc-sum">'+ss.length+' sentences, '+words+' words, '+quotes+' quotation'+(quotes===1?'':'s')+'.</p><ul class="pc-list">';
+    h+=row(author&&!firstQuote&&first.split(/\s+/).length>=8,'Topic sentence',
+      !author?'Your first sentence doesn\u2019t name the author or director. Start with what Weir or Jackson is doing, as an idea, not a plot event.':
+      firstQuote?'Your first sentence contains a quotation. Save evidence for the second sentence; open with your idea.':
+      first.split(/\s+/).length<8?'Your first sentence is very short. Make it state the paragraph\u2019s whole idea.':'It names the author and states an idea.');
+    h+=row(quotes>=2,'Evidence',quotes===0?'No quotations found. Add at least two short quotations woven into your sentences.':quotes===1?'Only one quotation. Two or three short ones usually make a stronger case.':'');
+    h+=row(techs.length>0,'Technique',techs.length?'You mention: '+esc(techs.slice(0,5).join(', '))+'. Check you say what each one does.':'No technique named. Say how the text creates the idea: setting, narration, sound, structure, a symbol.');
+    h+=row(verbs.length>=2&&shows<=2,'Analysis words',
+      (verbs.length?'Analysis verbs: '+esc(verbs.slice(0,6).join(', '))+'. ':'Few analysis verbs. ')+(shows>2?'You use &ldquo;show&rdquo; '+shows+' times: try the <a href="vocab-upgrader.html">Vocabulary Upgrader</a>.':''));
+    h+=row(retell===0,'Analysis, not retelling',retell?retell+' sentence'+(retell>1?'s start':' starts')+' like a story summary (then, next, after that). Turn events into evidence for your idea.':'');
+    h+=row(linkHit,'Link back',linkHit?'Your last sentence seems to tie back to the idea.':'Your last sentence doesn\u2019t clearly link back. End by saying what the evidence proves about the topic.');
+    h+=row(!informal.length,'Formal voice',informal.length?'Check: '+esc(informal.slice(0,5).join(', '))+'. Avoid first person, &ldquo;you&rdquo;, contractions and vague words.':'');
+    h+=row(words>=120&&words<=260,'Length',words<120?'Short for a body paragraph. Most strong ones are 150 to 250 words.':words>260?'Long. Check that it covers one idea only.':'');
+    out.innerHTML=h+'</ul><p class="pc-foot">Next: compare with the checklists in <a href="p04-writing-body-paragraphs.html">Writing Body Paragraphs</a>.</p>';
+  }
+  document.getElementById('pc-go').addEventListener('click',go);
+})();
+</script>

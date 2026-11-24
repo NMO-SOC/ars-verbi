@@ -1,0 +1,48 @@
+<h1>Essay Self-Assessment</h1>
+<p class="lede">Have a Section A essay in front of you. Tick only what is true of <em>every</em> body paragraph. The checklist tells you roughly which band you are working in and the next things to change. The steps come from <a href="p04-what-is-needed-in-an-essay.html#moving-up-the-mark-bands">Moving Up the Mark Bands</a>; your teacher&rsquo;s marking is what counts.</p>
+<form id="sa-form" class="sa-form">
+  <fieldset><legend>Foundations</legend>
+    <label><input type="checkbox" data-l="0"> Each topic sentence states an idea, not a character or plot event</label>
+    <label><input type="checkbox" data-l="0"> Each paragraph quotes the text at least once</label>
+    <label><input type="checkbox" data-l="0"> Each paragraph names a technique and what it does</label>
+    <label><input type="checkbox" data-l="0"> Each paragraph ends by linking back to my contention</label>
+  </fieldset>
+  <fieldset><legend>Towards 7</legend>
+    <label><input type="checkbox" data-l="1"> There is evidence from the text in every body paragraph</label>
+    <label><input type="checkbox" data-l="1"> I describe effects, not just name techniques (&ldquo;the calm voice makes the violence sound ordinary&rdquo;)</label>
+    <label><input type="checkbox" data-l="1"> No paragraph ends on plot summary</label>
+  </fieldset>
+  <fieldset><legend>Towards 8</legend>
+    <label><input type="checkbox" data-l="2"> I explain in order: technique, effect on the reader, idea about the topic</label>
+    <label><input type="checkbox" data-l="2"> The essay reads as one argument: each paragraph builds on my contention</label>
+    <label><input type="checkbox" data-l="2"> I have cut sentences that repeat each other</label>
+  </fieldset>
+  <fieldset><legend>Towards 9 and 10</legend>
+    <label><input type="checkbox" data-l="3"> I deal with at least one piece of evidence that complicates my view</label>
+    <label><input type="checkbox" data-l="3"> My verbs say exactly what the text does (silences, exposes, normalises)</label>
+    <label><input type="checkbox" data-l="3"> Every claim points to something a marker can find in the text</label>
+  </fieldset>
+</form>
+<div class="tool-bar"><button id="sa-reset" type="button">Clear ticks</button></div>
+<div id="sa-out" class="tool-out" aria-live="polite"></div>
+<script>
+(function(){
+  var KEY='selfAssessA',boxes=[].slice.call(document.querySelectorAll('#sa-form input')),out=document.getElementById('sa-out');
+  var BANDS=['below 6','about 6','about 7','about 8','9 or 10'];
+  try{var s=JSON.parse(localStorage.getItem(KEY)||'[]');boxes.forEach(function(b,i){b.checked=!!s[i];});}catch(e){}
+  function upd(){
+    try{localStorage.setItem(KEY,JSON.stringify(boxes.map(function(b){return b.checked;})));}catch(e){}
+    var level=0;
+    for(var l=0;l<4;l++){var g=boxes.filter(function(b){return +b.dataset.l===l;});
+      if(g.every(function(b){return b.checked;}))level=l+1;else break;}
+    var next=boxes.filter(function(b){return +b.dataset.l===level&&!b.checked;});
+    var h='<p class="sa-band">On these ticks you are working at <strong>'+BANDS[level]+'</strong> out of 10.</p>';
+    if(next.length)h+='<p>Change these next:</p><ul>'+next.map(function(b){return '<li>'+b.parentNode.textContent.trim()+'</li>';}).join('')+'</ul>';
+    else h+='<p>Every step is ticked. Ask your teacher to check the essay against the descriptors on the <a href="p09-section-a-mark-allocation.html">Section A Mark Allocation</a> page.</p>';
+    out.innerHTML=h;
+  }
+  boxes.forEach(function(b){b.addEventListener('change',upd);});
+  document.getElementById('sa-reset').addEventListener('click',function(){boxes.forEach(function(b){b.checked=false;});upd();});
+  upd();
+})();
+</script>

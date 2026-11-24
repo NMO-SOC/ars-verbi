@@ -1,0 +1,39 @@
+# Monthly check for broken links on the built site (public/).
+# Opens a GitHub issue when a link is broken (404, DNS failure, refused) or a page/anchor is missing.
+# Sites that block automated checks (Studocu, school SharePoint) are reported as BLOCKED and do not fail the run.
+name: Monthly link check
+on:
+  schedule:
+    - cron: "0 21 1 * *"   # 21:00 UTC on the 1st = 8am on the 2nd in Melbourne (AEDT)
+  workflow_dispatch:
+permissions:
+  contents: read
+  issues: write
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - id: run
+        run: |
+          set +e
+          python check_links.py > report.txt 2>&1
+          echo "code=$?" >> "$GITHUB_OUTPUT"
+          cat report.txt
+      - if: steps.run.outputs.code != '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          {
+            echo "The monthly link check found broken links on the site."
+            echo
+            echo "Fix them in \`build.py\` or the booklet source, rebuild, and run \`python check_links.py\` to confirm."
+            echo
+            echo '```'
+            tail -n 80 report.txt
+            echo '```'
+          } > body.md
+          gh issue create --title "Broken links found ($(date +%Y-%m))" --body-file body.md

@@ -1201,7 +1201,12 @@ hub_tools = TOOL_LABEL + """<h1>Study Tools</h1>
   <a class="ch-card" href="outline-builder.html"><span>Essay Outline Builder</span></a>
   <a class="ch-card" href="vocab-upgrader.html"><span>Vocabulary Upgrader</span></a>
   <a class="ch-card" href="micro-drills.html"><span>Micro-Drills</span></a>
+  <a class="ch-card" href="topic-unpacker.html"><span>Topic Unpacker</span></a>
+  <a class="ch-card" href="paragraph-checker.html"><span>Paragraph Checker</span></a>
+  <a class="ch-card" href="self-assessment.html"><span>Essay Self-Assessment</span></a>
 </div>"""
+_snip = lambda f: TOOL_LABEL + open(os.path.join(BUILD, "snippets", f), encoding="utf-8").read()
+tu_page, pc_page, sa_page = _snip("topic-unpacker.html"), _snip("paragraph-checker.html"), _snip("self-assessment.html")
 
 # Ask Appleyard (AI study assistant). Stays hidden until AA_WORKER is set: see worker/README.md.
 AA_WORKER = "https://ask-appleyard.nicholas-morlin.workers.dev/"   # blank = bot hidden
@@ -1223,7 +1228,10 @@ nav_items.append({"num": tools_num, "title": "Study Tools", "file": "study-tools
                                {"title": "Exam Generator", "file": "exam-generator.html"},
                                {"title": "Essay Outline Builder", "file": "outline-builder.html"},
                                {"title": "Vocabulary Upgrader", "file": "vocab-upgrader.html"},
-                               {"title": "Micro-Drills", "file": "micro-drills.html"}]})
+                               {"title": "Micro-Drills", "file": "micro-drills.html"},
+                               {"title": "Topic Unpacker", "file": "topic-unpacker.html"},
+                               {"title": "Paragraph Checker", "file": "paragraph-checker.html"},
+                               {"title": "Essay Self-Assessment", "file": "self-assessment.html"}]})
 if AA_ON:
     nav_items[-1]["chapters"].append({"title": "Ask Appleyard", "file": "ask-appleyard.html"})
 nav_items.append({"num": tools_num + 1, "title": "Offline version of this site", "file": "downloads.html", "chapters": []})
@@ -1236,6 +1244,9 @@ all_pages.append({"file": "exam-generator.html", "title": "Exam Generator", "htm
 all_pages.append({"file": "outline-builder.html", "title": "Essay Outline Builder", "html": ob_page, "nav": "study-tools.html"})
 all_pages.append({"file": "vocab-upgrader.html", "title": "Vocabulary Upgrader", "html": vu_page, "nav": "study-tools.html"})
 all_pages.append({"file": "micro-drills.html", "title": "Micro-Drills", "html": dr_page, "nav": "study-tools.html"})
+all_pages.append({"file": "topic-unpacker.html", "title": "Topic Unpacker", "html": tu_page, "nav": "study-tools.html"})
+all_pages.append({"file": "paragraph-checker.html", "title": "Paragraph Checker", "html": pc_page, "nav": "study-tools.html"})
+all_pages.append({"file": "self-assessment.html", "title": "Essay Self-Assessment", "html": sa_page, "nav": "study-tools.html"})
 if AA_ON:
     all_pages.append({"file": "ask-appleyard.html", "title": "Ask Appleyard", "html": aa_page, "nav": "study-tools.html"})
 _ed = os.path.join(PUBLIC, "assets", "exam")
@@ -1901,6 +1912,17 @@ before_links = "".join('<li><a href="%s">%s</a></li>' % (f, t) for f, t in [
     ("revision-program.html", "Week-by-week revision"),
     ("study-tools.html", "Study tools")])
 
+# What's new: newest first; add a line whenever something students should notice goes live. The home page shows the top 4.
+WHATS_NEW = [
+    ("Nov 2026", "Three new study tools: Topic Unpacker, Paragraph Checker and Essay Self-Assessment", "study-tools.html"),
+    ("Nov 2026", "Search: press Enter for a full page of results", "search.html"),
+    ("Nov 2026", "A second set of Picnic at Hanging Rock sample essays, on convention and freedom", "p02-written-exemplars.html"),
+    ("Nov 2026", "The Vocabulary Upgrader now suggests words that fit your sentence", "vocab-upgrader.html"),
+    ("Nov 2026", "The VCE English and EAL Study Design, on the offline page", "downloads.html"),
+]
+whats_new_html = ('<section class="whats-new" aria-labelledby="new-h"><h2 id="new-h">What&rsquo;s new</h2><ul>%s</ul></section>\n'
+                  % "".join('<li><a href="%s">%s</a> <span class="wn-date">%s</span></li>' % (u, html.escape(t), d)
+                            for d, t, u in WHATS_NEW[:4]))
 landing = """
 <section class="home-hero">
   <div class="hero-media">
@@ -1914,13 +1936,13 @@ landing = """
   <p class="hero-credit"><i>Picnic at Hanging Rock</i> (dir. Peter Weir, 1975)</p>
 </section>
 <div class="exam-band">%s</div>
-<section class="before-exam" aria-labelledby="before-h"><h2 id="before-h">Before the exam</h2><ul>%s</ul></section>
+%s<section class="before-exam" aria-labelledby="before-h"><h2 id="before-h">Before the exam</h2><ul>%s</ul></section>
 <section class="all-parts" aria-labelledby="parts-h"><h2 id="parts-h">All parts of the guide</h2><ol class="parts-list">%s</ol></section>
 <div class="site-foot">
   <div class="sf-motto">Sapere aude</div>
   <div class="sf-sub">South Oakleigh College. Compiled by Mr Morlin, version Lux 672.2.4. This site is provided free and as-is for study purposes, without warranty of any kind. Content is offered in good faith but may contain errors &mdash; check anything high-stakes with your teacher. External links lead to sites not controlled by the author, and no liability is accepted for their content or for any loss arising from use of this site.</div>
 </div>
-""" % (exam_band, before_links, contents)
+""" % (exam_band, whats_new_html, before_links, contents)
 open(os.path.join(PUBLIC, "index.html"), "w", encoding="utf-8").write(shell("Home", "", "index.html", landing))
 
 nf = """
@@ -1933,6 +1955,65 @@ nf = """
 </div>
 """
 open(os.path.join(PUBLIC, "404.html"), "w", encoding="utf-8").write(shell("Page not found", "", "404.html", nf))
+
+# ---------------- quote banks: link each quotation to the analysis that uses it ----------------
+# A final pass over the built pages: for every quotation in a quote bank, find sections elsewhere in the guide that
+# quote the same words and add "Used in: ..." links under it, so students can see how a quotation works in analysis.
+import copy
+QB_PAGES = ["p02-character-quote-bank.html", "p02-thematic-quote-bank.html",
+            "p03-character-quote-bank.html", "p03-quote-banks.html"]
+def _qwords(s):
+    s = s.replace("’", "'").replace("‘", "'").lower()
+    # strip apostrophes at word edges so an opening quote mark doesn't glue onto the first word
+    return " ".join(w.strip("'") for w in re.findall(r"[a-z0-9']+", s) if w.strip("'"))
+_QUOTE_RE = re.compile(r"‘(.+?)’(?=[\s.,;:!?)–—-]|$)")
+_sections = []   # (file, section id, page title, heading, words)
+for _fn in sorted(os.listdir(PUBLIC)):
+    if not re.match(r"p0[23]-.*\.html$", _fn) or _fn in QB_PAGES:
+        continue
+    _sp = BeautifulSoup(open(os.path.join(PUBLIC, _fn), encoding="utf-8").read(), "html.parser")
+    _main = _sp.find("main")
+    if not _main:
+        continue
+    _ptitle = (_sp.title.get_text() if _sp.title else _fn).split(" · ")[0]
+    for _sec in _main.find_all("section", id=True):
+        _cl = copy.copy(_sec)
+        for _sub in _cl.find_all("section"): _sub.decompose()
+        _h = _cl.find(["h1", "h2", "h3", "h4", "h5"])
+        _sections.append((_fn, _sec["id"], _ptitle, _h.get_text(" ", strip=True) if _h else _ptitle,
+                          " " + _qwords(_cl.get_text(" ")) + " "))
+_qb_links = 0
+for _fn in QB_PAGES:
+    _path = os.path.join(PUBLIC, _fn)
+    if not os.path.exists(_path):
+        continue
+    _sp = BeautifulSoup(open(_path, encoding="utf-8").read(), "html.parser")
+    _changed = False
+    for _li in _sp.select("main li"):
+        if _li.find(class_="qb-uses"):
+            continue
+        _hits, _seen = [], set()
+        for _q in _QUOTE_RE.findall(_li.get_text(" ")):
+            _w = _qwords(_q).split()
+            if len(_w) < 5:
+                continue
+            _probe = " " + " ".join(_w[:7]) + " "
+            for _s in _sections:
+                if _probe in _s[4] and _s[0] not in _seen:
+                    _seen.add(_s[0]); _hits.append(_s)
+                if len(_hits) >= 3: break
+        if _hits:
+            _span = _sp.new_tag("span", attrs={"class": "qb-uses"})
+            _span.append("Used in: ")
+            for _i, _s in enumerate(_hits):
+                _a = _sp.new_tag("a", href="%s#%s" % (_s[0], _s[1]))
+                _a.string = _s[2] if _s[3] in (_s[2], "") else "%s › %s" % (_s[2], _s[3])
+                _span.append(_a)
+                if _i < len(_hits) - 1: _span.append("; ")
+            _li.append(_span); _changed = True; _qb_links += 1
+    if _changed:
+        open(_path, "w", encoding="utf-8").write(str(_sp))
+print("QUOTE LINKS:", _qb_links)
 
 print("PAGES:", len(all_pages) + 1, "| PARTS:", len(nav_items), "| IMGS:", n_imgs, "| PDFS:", len(copied_pdfs),
       "| SEARCH:", len(search), "| EXEMPLARS:", len(exemplars))
