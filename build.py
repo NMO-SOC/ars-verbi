@@ -1445,7 +1445,7 @@ def shell(title, active_nav, active_file, main_html, prevnext=""):
       <span class="brand-sub">Exam Prep Guide</span>
     </a>
     <div class="search-wrap">
-      <label for="search" class="vh">Search the guide</label><input id="search" type="search" placeholder="Search the guide&hellip;" autocomplete="off" aria-controls="search-results" aria-autocomplete="list">
+      <form action="search.html" method="get" role="search"><label for="search" class="vh">Search the guide</label><input id="search" name="q" type="search" placeholder="Search the guide&hellip;" autocomplete="off" aria-controls="search-results" aria-autocomplete="list" data-v="__SI_V__"></form>
       <div id="search-results"></div>
     </div>
     <nav class="toc" aria-label="Guide contents"><ol>%s</ol></nav>
@@ -1465,7 +1465,9 @@ def shell(title, active_nav, active_file, main_html, prevnext=""):
 
 _shell_raw = shell
 def shell(*a, **k):   # every page, including home/404/downloads, gets the content-based asset versions
-    return _shell_raw(*a, **k).replace('__CSS_V__', CSS_V).replace('__JS_V__', JS_V)
+    _si = os.path.join(PUBLIC, "assets", "search.json")
+    _siv = file_ver(_si) if os.path.exists(_si) else "0"
+    return _shell_raw(*a, **k).replace('__CSS_V__', CSS_V).replace('__JS_V__', JS_V).replace('__SI_V__', _siv)
 
 def page_toc(scope):
     lis = []
@@ -1485,7 +1487,7 @@ for pg in all_pages:
     elif "part" in pg:
         scope, part_title = pg["part"]["sec"], pg["part"]["title"]
     else:
-        _txt = re.sub(r"\s+", " ", BeautifulSoup(pg["html"], "html.parser").get_text(" "))[:1500]
+        _txt = re.sub(r"\s+", " ", BeautifulSoup(pg["html"], "html.parser").get_text(" "))[:6000]
         search.append({"t": pg["title"], "p": pg["title"], "u": pg["file"], "b": _txt.strip()})
         continue
     if "chapters" in pg and pg["chapters"]:
@@ -1499,7 +1501,7 @@ for pg in all_pages:
             import copy as _copy
             _cl = _copy.copy(anc)
             for _sub in _cl.find_all("section"): _sub.decompose()
-            body = re.sub(r"\s+", " ", _cl.get_text(" "))[:1500].strip()
+            body = re.sub(r"\s+", " ", _cl.get_text(" "))[:6000].strip()
         _t = h.get_text(" ", strip=True)
         _par = anc.find_parent("section") if anc else None
         if _par is not None:
@@ -1785,6 +1787,16 @@ if os.path.exists(_sd_src):
                 % urllib.parse.quote(_sd_name))
 else:
     _sd_html = ""
+# Search results page: the sidebar search form submits here (?q=...); site.js fills in the results.
+open(os.path.join(PUBLIC, "search.html"), "w", encoding="utf-8").write(shell("Search", "", "search.html",
+    '<h1>Search</h1>'
+    '<form class="sr-form" action="search.html" method="get" role="search">'
+    '<label for="sr-q" class="vh">Search the guide</label>'
+    '<input id="sr-q" name="q" type="search" placeholder="Search the guide&hellip;" autocomplete="off">'
+    '<button type="submit">Search</button></form>'
+    '<p class="sr-count" id="sr-count" role="status" aria-live="polite"></p>'
+    '<ol class="sr-list" id="sr-list"></ol>'
+    '<noscript><p>Search needs JavaScript. Use the contents in the sidebar instead.</p></noscript>'))
 open(os.path.join(PUBLIC, "downloads.html"), "w", encoding="utf-8").write(
     shell("Offline version of this site", "downloads.html", "downloads.html", _mdl.downloads_body(_dl_entries) + _sd_html))
 
