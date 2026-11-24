@@ -50,4 +50,5 @@ Contact: Mr Morlin, English faculty.
 - **What students search for:** each search on the results page is logged there as an event. `search/<words>` found results; `search-no-results/<words>` found nothing, which is the best list of content to add next. Searches are anonymous: GoatCounter stores no names or IP addresses.
 - **Broken links:** `.github/workflows/link-check.yml` runs `check_links.py` on the 1st of each month and opens a GitHub issue if anything is broken. Run it any time from the Actions tab ("Monthly link check" → Run workflow).
 - **What's new on the home page:** edit the `WHATS_NEW` list in `build.py` (newest first; the top 4 show).
+- **Ask Appleyard embeddings:** updated automatically by `make_embeddings.py` on every build and push; `make-embeddings.ps1` is no longer needed.
 - **Booklet source:** `main.tex` is backed up in the private repo NMO-SOC/yr12-english-booklet-2027. Commit and push there after editing it.
