@@ -1516,7 +1516,7 @@ json.dump(search, open(os.path.join(PUBLIC, "assets", "search.json"), "w", encod
 PAGE_FIXES = json.load(open(os.path.join(BUILD, "snippets", "page-fixes.json"), encoding="utf-8"))
 PRACTICE_LINKS = """
 <p>Official past VCE English examinations and examiner reports are published by the VCAA:</p>
-<p><a class="btn-inline" href="https://www.vcaa.vic.edu.au/assessment/vce/examination-specifications-past-examinations-and-examination-reports/english" target="_blank" rel="noopener">Past VCE English examinations (VCAA)</a></p>
+<p><a class="btn-inline" href="https://www.vic.gov.au/vcaa-examinations-2026" target="_blank" rel="noopener">Past VCE examinations and reports (VCAA)</a></p>
 <h2>Practice exams</h2>
 <p>The following practice exams are hosted externally (a free account may be required to view them). They open in a new tab.</p>
 <ul class="exp-list exam-links">
