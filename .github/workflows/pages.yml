@@ -20,6 +20,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
+      # Ask Appleyard: make sure the bot's embeddings match the search index being deployed. Only changed chunks
+      # are re-embedded (cache in worker/embed-cache.json). If the Worker is down, deploy with the previous ones.
+      - name: Update Ask Appleyard embeddings
+        run: python3 make_embeddings.py || echo "::warning::Embeddings not updated (Worker unavailable); deploying the previous ones"
       - uses: actions/upload-pages-artifact@v3
         with:
           path: public

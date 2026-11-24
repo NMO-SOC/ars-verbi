@@ -225,7 +225,8 @@
     Promise.all([pIdx, pEmb, pQvec])
     .then(function(res){
       var qvec = null;
-      if (res[2] && EMB){
+      // vectors are matched to the index by position; if the two files ever disagree, use keyword matching only
+      if (res[2] && EMB && INDEX && EMB.vecs.length === INDEX.length){
         var dm = EMB.dim, v = res[2].slice(0, dm), nn = 0;
         for (var i = 0; i < dm; i++){ nn += v[i] * v[i]; }
         nn = Math.sqrt(nn) || 1;
