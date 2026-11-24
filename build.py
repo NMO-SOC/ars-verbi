@@ -1670,8 +1670,18 @@ if "--downloads" in sys.argv:
     json.dump(_dl_entries, open(os.path.join(_dl_dir, "index.json"), "w", encoding="utf-8"))
 else:
     _dl_entries = json.load(open(os.path.join(_dl_dir, "index.json"), encoding="utf-8"))
+# VCAA English study design: quiet reference link at the foot of the downloads page
+_sd_name = "2023EnglishEALSD (3).docx"
+_sd_src = os.path.join(BUILD, _sd_name)
+if os.path.exists(_sd_src):
+    copy_if_changed(_sd_src, os.path.join(FILES_DIR, _sd_name))
+    _sd_html = ('<p class="study-design-ref" style="margin-top:3rem;font-size:0.9em;opacity:0.8">'
+                'Reference: <a href="assets/files/%s" download>VCAA English and EAL Study Design (2023) (Word) &#8595;</a></p>'
+                % urllib.parse.quote(_sd_name))
+else:
+    _sd_html = ""
 open(os.path.join(PUBLIC, "downloads.html"), "w", encoding="utf-8").write(
-    shell("Offline version of this site", "downloads.html", "downloads.html", _mdl.downloads_body(_dl_entries)))
+    shell("Offline version of this site", "downloads.html", "downloads.html", _mdl.downloads_body(_dl_entries) + _sd_html))
 
 # ---------------- landing ----------------
 def exemplar_groups_html(exemplars):
