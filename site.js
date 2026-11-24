@@ -69,6 +69,14 @@
     if(st>from){var sp=b.indexOf(' ',st);if(sp>-1&&sp<k)st=sp+1;}   // start on a whole word
     while(st<k&&b.charAt(st)===' ')st++;
     return (st>from?'\u2026':'')+b.substring(st,k+len)+(k+len<b.length?'\u2026':'');}
+  // Record each search as an anonymous GoatCounter event (no names, no IPs stored by us), so the teacher can see
+  // what students look for, and especially what finds nothing. Shows in the GoatCounter dashboard under "search/..."
+  function logSearch(q,n,tries){
+    tries=tries||0;
+    var gc=window.goatcounter;
+    if(!gc||!gc.count){if(tries<10)setTimeout(function(){logSearch(q,n,tries+1);},700);return;}
+    try{gc.count({path:(n?'search/':'search-no-results/')+norm(q).slice(0,60),title:n+' results',event:true});}catch(e){}
+  }
   // where a result lives: the part, then the page when it differs from the heading (several pages have a 'The Lottery' section)
   function where(e){return e.p+(e.g?' › '+e.g:'');}
   function goAll(q){location.href='search.html?q='+encodeURIComponent(q);}
@@ -125,6 +133,7 @@
     if(q0.length<2){cnt.textContent=q0?'Type at least two letters.':'Type a word or phrase and press Enter.';}
     else load().then(function(data){
       var ts=terms(q0),res=find(data,q0);
+      logSearch(q0,res.length);
       document.title='Search: '+q0+' \u00b7 '+document.title.split(' \u00b7 ').pop();
       if(!res.length){cnt.innerHTML='No results for &ldquo;'+esc(q0)+'&rdquo;. '+HINT;return;}
       cnt.innerHTML=res.length+' result'+(res.length>1?'s':'')+' for &ldquo;'+esc(q0)+'&rdquo;';
@@ -204,9 +213,12 @@
   try{
     var here=location.pathname.split('/').pop()||'index.html';
     var okPage=/^[A-Za-z0-9._-]+\.html$/; // plain page names only: a crafted URL must never reach an href
-    if(here!=='index.html'&&here!=='404.html'&&okPage.test(here)){
+    if(here!=='index.html'&&here!=='404.html'&&here!=='search.html'&&okPage.test(here)){
       var tt=(document.title||'').split(' · ')[0];
       localStorage.setItem('lastPage',JSON.stringify({u:here,t:tt}));
+      // the last few pages, newest first, for the home page's "recently viewed" line
+      var rp=JSON.parse(localStorage.getItem('recentPages')||'[]').filter(function(x){return x&&x.u!==here;});
+      rp.unshift({u:here,t:tt});localStorage.setItem('recentPages',JSON.stringify(rp.slice(0,5)));
     }else if(here==='index.html'){
       var lp=JSON.parse(localStorage.getItem('lastPage')||'null');
       var slot=document.getElementById('resume-slot');
@@ -215,6 +227,12 @@
         var a=document.createElement('a');a.className='resume-chip';a.href=lp.u;
         a.innerHTML='<span class="rc-label">Resume</span> '+lp.t.replace(/[<>&]/g,'')+' →';
         if(slot){slot.appendChild(a);}else{hero.parentNode.insertBefore(a,hero.nextSibling);}
+        var more=JSON.parse(localStorage.getItem('recentPages')||'[]').filter(function(x){return x&&x.u!==lp.u&&okPage.test(x.u);}).slice(0,3);
+        if(slot&&more.length){var p=document.createElement('p');p.className='recent-line';
+          p.appendChild(document.createTextNode('Also recently: '));
+          more.forEach(function(x,i){var l=document.createElement('a');l.href=x.u;l.textContent=String(x.t||x.u);p.appendChild(l);
+            if(i<more.length-1)p.appendChild(document.createTextNode(', '));});
+          slot.appendChild(p);}
       }
     }
   }catch(e){}

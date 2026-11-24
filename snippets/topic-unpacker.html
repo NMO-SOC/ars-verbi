@@ -1,0 +1,65 @@
+<h1>Topic Unpacker</h1>
+<p class="lede">Paste a Section A topic. The unpacker tells you what kind of topic it is, picks out the words you need to define and the qualifiers you need to weigh, and suggests where to look in this guide. It follows simple rules, so treat it as a starting point for your own reading of the topic.</p>
+<label for="tu-topic" class="tu-label">Your topic</label>
+<textarea id="tu-topic" rows="3" class="tool-area" placeholder="e.g. In Picnic at Hanging Rock, the desire for certainty creates more problems than it solves. Discuss."></textarea>
+<div class="tool-bar">
+  <button id="tu-go" type="button">Unpack this topic</button>
+  <button id="tu-eg" type="button">Try an example</button>
+</div>
+<div id="tu-out" class="tool-out" aria-live="polite"></div>
+<script>
+(function(){
+  var ta=document.getElementById('tu-topic'),out=document.getElementById('tu-out');
+  var EG=["In Picnic at Hanging Rock, the desire for certainty creates more problems than it solves. Discuss.",
+    "How does Jackson use everyday settings to make violence and cruelty more disturbing?",
+    "‘Nothing changed – ever.’ Picnic at Hanging Rock suggests that nature is both timeless and disruptive. To what extent do you agree?",
+    "In Jackson's stories, the price of belonging is often someone else's exclusion. Discuss."];
+  var STOP=('a an the of in on to and or but is are was were be been it its this that these those as by for with at from into '+
+    'how does do did what why which who whom whose discuss agree extent you your their there they them his her he she '+
+    'picnic hanging rock weir jackson jackson\'s shirley stories story lottery other film text texts suggests suggest '+
+    'explore explores portray portrays depict depicts present presents use uses show shows reveal reveals challenge '+
+    'challenges highlight highlights can not no than so such through about within').split(' ');
+  var QUAL=['always','never','only','rarely','often','ultimately','most','more','less','greatest','both','all','every',
+    'necessarily','merely','simply','entirely','completely','largely','mainly','solely','inevitably','truly','sometimes'];
+  var REL=[/\b(more|less|greater|fewer)( \w+){0,3} than\b/,/rather than/,/as much as/,/both .+ and/,/despite/,/leads? to/,/causes?/,/shapes?/,/at the cost of/,
+    /comes? from/,/driven by/,/instead of/,/not .+ but/,/in response to/,/because/];
+  function esc(s){return s.replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function go(){
+    var t=ta.value.trim();
+    if(!t){out.innerHTML='<p>Paste or type a topic first.</p>';return;}
+    var low=t.toLowerCase().replace(/[‘’]/g,"'");
+    var types=[];
+    if(/^\s*how (does|do|is|are)|^\s*in what ways/.test(low)||/how does (weir|jackson)/.test(low))
+      types.push(['Construction','It asks how the text is built: name the techniques (setting, sound, narration, structure, symbols) and explain what each one does to the idea.']);
+    if(REL.some(function(r){return r.test(low);}))
+      types.push(['Relationship','It links two ideas. Decide how they connect (cause, contrast, balance, cost) and make that connection the spine of every paragraph.']);
+    if(/discuss\.?\s*$|do you agree\??\s*$|to what extent|is this (true|the case)/.test(low))
+      types.push(['Idea / message','It makes a claim about the text. Decide how far you agree, and plan at least one paragraph that limits or complicates the claim.']);
+    if(!types.length)types.push(['Idea / message','It reads as a claim about the text. Decide how far you agree before you plan.']);
+    var quote=(t.match(/^[‘'"“]([^’'"”]{3,120})[’'"”]/)||[])[1];
+    var text=/weir|picnic|hanging rock|miranda|appleyard/.test(low)?'Picnic at Hanging Rock':/jackson|lottery|stories|tessie/.test(low)?'The Lottery and Other Stories':'';
+    var words=low.replace(/^[‘'"“][^’'"”]*[’'"”]/,'').replace(/[^a-z' -]/g,' ').split(/\s+/);
+    var key=[],qual=[];
+    words.forEach(function(w){w=w.replace(/^'+|'+$/g,'');if(!w)return;
+      if(QUAL.indexOf(w)>-1){if(qual.indexOf(w)<0)qual.push(w);return;}
+      if(w.length>3&&STOP.indexOf(w)<0&&key.indexOf(w)<0)key.push(w);});
+    var h='<h2>What kind of topic is it?</h2><ul>'+types.map(function(x){return '<li><strong>'+x[0]+'.</strong> '+x[1]+'</li>';}).join('')+'</ul>';
+    if(quote)h+='<p><strong>It opens with a quotation</strong> (&lsquo;'+esc(quote)+'&rsquo;). Find where it comes from and what it means in context. You don’t have to agree with it, but your essay must respond to it.</p>';
+    if(text)h+='<p>Text: <strong>'+text+'</strong>.</p>';
+    if(key.length)h+='<h2>Key words to define</h2><p>Write a sentence on what each word means <em>in this text</em>. A good definition often becomes your contention.</p><ul class="tu-chips">'+
+      key.map(function(w){return '<li><a href="search.html?q='+encodeURIComponent(w)+'">'+esc(w)+'</a></li>';}).join('')+'</ul>';
+    if(qual.length)h+='<h2>Qualifiers to weigh</h2><p>These words make the claim stronger or narrower. Most good essays push back on at least one of them.</p><ul class="tu-chips">'+
+      qual.map(function(w){return '<li><span>'+esc(w)+'</span></li>';}).join('')+'</ul>';
+    var q=key.slice(0,3).join(' ');
+    h+='<h2>Next steps</h2><ol>'+
+      (q?'<li><a href="search.html?q='+encodeURIComponent(q)+'">Search this guide for &ldquo;'+esc(q)+'&rdquo;</a> to find evidence.</li>':'')+
+      '<li>Write a one-sentence contention that answers the topic in your own words.</li>'+
+      '<li>Plan three paragraphs, each with its own idea and evidence, in the <a href="outline-builder.html">Essay Outline Builder</a>.</li>'+
+      '<li>Check your planning against <a href="p04-interrogating-the-topic.html">Interrogating the Topic</a>.</li></ol>';
+    out.innerHTML=h;
+  }
+  document.getElementById('tu-go').addEventListener('click',go);
+  document.getElementById('tu-eg').addEventListener('click',function(){ta.value=EG[Math.floor(Math.random()*EG.length)];go();});
+  ta.addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();go();}});
+})();
+</script>
