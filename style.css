@@ -905,3 +905,17 @@ body.sec-c{--accent:var(--sec-c);--accent-soft:#f8f0dd}
   .ac-copy{padding:2px 16px}
   .aa-head a{padding:14px 6px}
 }
+
+/* search: "see all" link in the dropdown, and the full results page */
+#search-results a.sr-all{font-weight:600;color:var(--accent);border-bottom:0}
+.sr-form{display:flex;gap:8px;margin:0 0 6px;max-width:560px}
+.sr-form input{flex:1;min-width:0;font:inherit;font-family:var(--sans);font-size:16px;padding:10px 13px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink)}
+.sr-count{font-family:var(--sans);font-size:var(--fs-sm);color:var(--muted);margin:6px 0 18px}
+.sr-form button{font-family:var(--sans);font-size:var(--fs-ui);font-weight:700;padding:9px 16px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);cursor:pointer}
+.sr-form button:hover{border-color:var(--accent);background:var(--accent-soft)}
+.content .sr-list{list-style:none;padding:0;margin:0}
+.sr-list li{padding:14px 0;border-bottom:1px solid var(--line)}
+.sr-list li a{font-family:var(--sans);font-weight:600;font-size:17px}
+.sr-list .sr-part{display:block;font-family:var(--sans);font-size:var(--fs-xs);color:var(--muted);margin-top:2px}
+.sr-list p{margin:6px 0 0;font-size:15.5px;line-height:1.55}
+.sr-list b{color:var(--accent)}

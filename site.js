@@ -17,32 +17,72 @@
       if(e.key==='Escape'&&sb.classList.contains('open')&&getComputedStyle(toggle).display!=='none')setMenu(false,true);});
   }
 
+  // ---------- search: shared engine for the sidebar dropdown and the search.html results page ----------
   var box=document.getElementById('search'),out=document.getElementById('search-results'),idx=null;
-  if(box){
-    function load(){if(idx)return Promise.resolve(idx);
-      return fetch('assets/search.json?v=36').then(function(r){return r.json();}).then(function(d){idx=d;return d;});}
-    function esc(s){return s.replace(/[&<>]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;'}[c];});}
+  var SV=(box&&box.getAttribute('data-v'))||'0';
+  function load(){if(idx)return Promise.resolve(idx);
+    return fetch('assets/search.json?v='+SV).then(function(r){return r.json();}).then(function(d){
+      // pre-normalise once: lower case, straight quotes, no accents (so `fiance' finds fianc\u00e9)
+      d.forEach(function(e){e._t=norm(e.t);e._p=norm(e.p);e._b=norm(e.b||'');});idx=d;return d;});}
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function norm(s){s=String(s).toLowerCase().replace(/[\u2018\u2019\u02bc]/g,"'").replace(/[\u201c\u201d]/g,'"');
+    // strip accents one character at a time so positions still line up with the original text
+    return s.normalize?s.replace(/[^\u0000-~]/g,function(c){return c.normalize('NFD').charAt(0);}):s;}
+  var STOP={the:1,a:1,an:1,of:1,and:1,'in':1,to:1,is:1,on:1,'for':1,at:1,by:1,with:1};
+  // plural search words also find the singular (symbols -> symbol, which still matches symbols)
+  function stem(w){return w.length>4&&/s$/.test(w)&&!/ss$/.test(w)?w.replace(/(ies)$/,'y').replace(/s$/,''):w;}
+  function terms(q){var t=norm(q).replace(/["']/g,' ').split(/[^a-z0-9]+/).filter(function(w){return w.length>1&&!STOP[w];}).map(stem);
+    return t.length?t:norm(q).split(/\s+/).filter(Boolean);}
+  // matches at the start of a word count fully; matches inside a word (fiance in defiance) count a little
+  function count(h,w){var n=0,i=h.indexOf(w);while(i>-1&&n<20){n+=(i===0||!/[a-z0-9]/.test(h.charAt(i-1)))?1:0.2;i=h.indexOf(w,i+w.length);}return n;}
+  // every term must appear somewhere (title, part or text); titles count most, then the whole phrase, then frequency
+  function find(data,q){
+    var ts=terms(q),phrase=norm(q).trim(),res=[],seen={};
+    if(!ts.length)return res;
+    for(var i=0;i<data.length;i++){
+      var e=data[i],sc=0,ok=true;
+      for(var j=0;j<ts.length;j++){
+        var w=ts[j],inT=e._t.indexOf(w)>-1,inP=e._p.indexOf(w)>-1,nb=count(e._b,w);
+        if(!inT&&!inP&&!nb){ok=false;break;}
+        sc+=(inT?12:0)+(e._t.indexOf(w)===0?4:0)+(inP?3:0)+Math.min(nb,8)+(nb>=1?3:0);
+      }
+      if(!ok||seen[e.u])continue;
+      if(ts.length>1&&e._t.indexOf(phrase)>-1)sc+=20;
+      if(ts.length>1&&e._b.indexOf(phrase)>-1)sc+=10;
+      seen[e.u]=1;res.push({e:e,s:sc,o:i});
+    }
+    res.sort(function(a,b){return b.s-a.s||a.o-b.o;});
+    return res;
+  }
+  function hl(s,ts){var e=esc(s),n=norm(e);var marks=[];
+    ts.forEach(function(w){var i=n.indexOf(w);while(i>-1){marks.push([i,i+w.length]);i=n.indexOf(w,i+w.length);}});
+    if(!marks.length)return e;
+    marks.sort(function(a,b){return a[0]-b[0];});
+    var o='',last=0;marks.forEach(function(m){if(m[0]<last)return;o+=e.substring(last,m[0])+'<b>'+e.substring(m[0],m[1])+'</b>';last=m[1];});
+    return o+e.substring(last);}
+  function snip(r,ts,len){var b=r.e.b||'';if(!b)return '';var n=r.e._b,k=-1;
+    // section text starts with its own heading; skip it so the snippet doesn't repeat the title
+    var h=norm(r.e.t.split(' - ').pop()),from=n.indexOf(h)===0?h.length:0;
+    for(var j=0;j<ts.length&&k<0;j++)k=n.indexOf(ts[j],from);
+    if(k<0)for(j=0;j<ts.length&&k<0;j++)k=n.indexOf(ts[j]);
+    if(k<0)return '';var st=Math.max(k>=from?from:0,k-60);
+    if(st>from){var sp=b.indexOf(' ',st);if(sp>-1&&sp<k)st=sp+1;}   // start on a whole word
+    while(st<k&&b.charAt(st)===' ')st++;
+    return (st>0?'\u2026':'')+b.substring(st,k+len)+(k+len<b.length?'\u2026':'');}
+  function goAll(q){location.href='search.html?q='+encodeURIComponent(q);}
+  var HINT='Try a shorter word, a character or story name (Tessie, Miranda, &lsquo;The Witch&rsquo;) or a skill (symbols, contention, Section C).';
+
+  if(box&&out){
     function run(){
-      var q=box.value.trim().toLowerCase();
+      var q=box.value.trim();
       if(q.length<2){out.classList.remove('show');out.innerHTML='';return;}
       load().then(function(data){
-        var res=[],seen={};
-        for(var i=0;i<data.length&&res.length<300;i++){
-          var t=data[i].t.toLowerCase(),p=data[i].p.toLowerCase(),b=(data[i].b||'').toLowerCase();
-          var ti=t.indexOf(q);
-          var hit=ti>-1||p.indexOf(q)>-1?1:(b.indexOf(q)>-1?2:0);
-          if(hit&&!seen[data[i].u]){seen[data[i].u]=1;
-            var r={t:data[i].t,p:data[i].p,u:data[i].u,s:'',o:i,rank:ti===0?0:ti>0?1:p.indexOf(q)>-1?2:3};
-            if(hit===2){var k=b.indexOf(q);r.s=(k>40?'\u2026':'')+((data[i].b||'').substring(Math.max(0,k-40),k+60))+'\u2026';}
-            res.push(r);}
-        }
-        res.sort(function(a,b){return a.rank-b.rank||a.o-b.o;});res=res.slice(0,40);
-        if(!res.length){out.innerHTML='<div class="nores" role="status">No matches for &ldquo;'+esc(box.value)+'&rdquo;. Try a shorter word, a character or story name (Tessie, Miranda, &lsquo;The Witch&rsquo;) or a skill (symbols, contention, Section C).</div>';out.classList.add('show');return;}
-        function hl(s){var e=esc(s),i=e.toLowerCase().indexOf(q);if(i<0)return e;
-          return e.substring(0,i)+'<b>'+e.substring(i,i+q.length)+'</b>'+e.substring(i+q.length);}
-        out.innerHTML=res.map(function(r){
-          return '<a href="'+r.u+'">'+hl(r.t)+'<small>'+esc(r.p)+(r.s?' \u2014 '+hl(r.s):'')+'</small></a>';
-        }).join('');
+        if(box.value.trim()!==q)return;
+        var ts=terms(q),res=find(data,q);
+        if(!res.length){out.innerHTML='<div class="nores" role="status">No matches for &ldquo;'+esc(q)+'&rdquo;. '+HINT+'</div>';out.classList.add('show');return;}
+        out.innerHTML=res.slice(0,8).map(function(r){var s=snip(r,ts,70);
+          return '<a href="'+esc(r.e.u)+'">'+hl(r.e.t,ts)+'<small>'+esc(r.e.p)+(s?' \u2014 '+hl(s,ts):'')+'</small></a>';
+        }).join('')+'<a class="sr-all" href="search.html?q='+encodeURIComponent(q)+'">See all '+res.length+' result'+(res.length>1?'s':'')+' for &ldquo;'+esc(q)+'&rdquo; &rarr;</a>';
         out.classList.add('show');
       });
     }
@@ -50,7 +90,7 @@
     box.addEventListener('focus',run);
     document.addEventListener('click',function(e){
       if(!out.contains(e.target)&&e.target!==box)out.classList.remove('show');});
-    // keyboard: arrow keys move through results, Enter opens the highlighted (or first) result, Escape closes
+    // keyboard: arrows move through results; Enter opens the highlighted result, or the full results page; Escape closes
     var cur=-1;
     function items(){return [].slice.call(out.querySelectorAll('a'));}
     function mark(i){var a=items();a.forEach(function(x,j){x.classList.toggle('kb',j===i);x.setAttribute('aria-selected',String(j===i));});
@@ -61,9 +101,29 @@
       var a=items();
       if(e.key==='ArrowDown'&&a.length){e.preventDefault();mark(Math.min(cur+1,a.length-1));}
       else if(e.key==='ArrowUp'&&a.length){e.preventDefault();mark(Math.max(cur-1,0));}
-      else if(e.key==='Enter'&&a.length){e.preventDefault();location.href=(a[cur]||a[0]).getAttribute('href');}
+      else if(e.key==='Enter'){e.preventDefault();
+        if(cur>-1&&a[cur])location.href=a[cur].getAttribute('href');
+        else if(box.value.trim())goAll(box.value.trim());}
       else if(e.key==='Escape'){out.classList.remove('show');cur=-1;}
     });
+  }
+
+  // full results page
+  var list=document.getElementById('sr-list');
+  if(list){
+    var q0=(new URLSearchParams(location.search).get('q')||'').trim(),sq=document.getElementById('sr-q'),cnt=document.getElementById('sr-count');
+    if(sq){sq.value=q0;if(!q0)sq.focus();}
+    if(box)box.value=q0;
+    if(q0.length<2){cnt.textContent=q0?'Type at least two letters.':'Type a word or phrase and press Enter.';}
+    else load().then(function(data){
+      var ts=terms(q0),res=find(data,q0);
+      document.title='Search: '+q0+' \u00b7 '+document.title.split(' \u00b7 ').pop();
+      if(!res.length){cnt.innerHTML='No results for &ldquo;'+esc(q0)+'&rdquo;. '+HINT;return;}
+      cnt.innerHTML=res.length+' result'+(res.length>1?'s':'')+' for &ldquo;'+esc(q0)+'&rdquo;';
+      list.innerHTML=res.slice(0,200).map(function(r){var s=snip(r,ts,180);
+        return '<li><a href="'+esc(r.e.u)+'">'+hl(r.e.t,ts)+'</a><span class="sr-part">'+esc(r.e.p)+'</span>'+(s?'<p>'+hl(s,ts)+'</p>':'')+'</li>';
+      }).join('');
+    }).catch(function(){cnt.textContent='Search could not load. Check your connection and try again.';});
   }
 })();
 (function(){
