@@ -949,84 +949,188 @@ ob_page = TOOL_LABEL + """<h1>Essay Outline Builder</h1>
 </script>"""
 
 # ---------- vocabulary upgrader ----------
-VOCAB_SWAPS = {
-  "shows": ["demonstrates", "illustrates", "reveals", "highlights", "conveys", "depicts", "exposes", "emphasises", "underscores"],
-  "show": ["demonstrate", "illustrate", "reveal", "highlight", "convey", "depict", "expose", "emphasise"],
-  "showed": ["demonstrated", "illustrated", "revealed", "highlighted", "conveyed", "depicted"],
-  "shown": ["demonstrated", "illustrated", "revealed", "conveyed"],
-  "says": ["asserts", "contends", "argues", "maintains", "suggests", "posits", "claims", "declares", "implies"],
-  "say": ["assert", "contend", "argue", "maintain", "suggest", "claim"],
-  "said": ["asserted", "contended", "argued", "maintained", "suggested", "claimed"],
-  "likes": ["favours", "endorses", "embraces", "advocates for"],
-  "liked": ["favoured", "endorsed", "embraced"],
-  "doesn't like": ["rejects", "condemns", "critiques", "denounces", "repudiates"],
-  "good": ["effective", "compelling", "powerful", "persuasive"],
-  "bad": ["destructive", "corrosive", "damaging", "flawed"],
-  "gets": ["compels", "positions", "prompts", "invites"],
-  "thing": ["element", "idea", "notion", "concern"],
-  "things": ["elements", "ideas", "notions", "concerns"],
-  "a lot": ["a great deal"],
-  "very": ["profoundly", "distinctly", "markedly"],
-  "important": ["crucial", "vital", "significant", "central"],
-  "really": ["genuinely", "distinctly"],
-  "big": ["substantial", "considerable", "vast"],
-  "interesting": ["compelling", "striking", "provocative"],
-  "scary": ["unsettling", "disquieting", "menacing"],
-  "creepy": ["unsettling", "eerie", "disquieting"],
-  "weird": ["unsettling", "peculiar", "incongruous"],
-  "huge": ["substantial", "vast", "considerable"],
-  "small": ["minor", "modest", "limited"],
-  "sad": ["melancholy", "sombre", "distressed"],
-  "lots": ["numerous"],
-  "stuff": ["material", "elements", "details"],
-  "nice": ["appealing", "pleasing", "agreeable"],
-  "a bit": ["somewhat"],
+# Each entry is a list of rules, tried in order. A rule may test the text just
+# before ("before") or just after ("after") the flagged word; the first rule that
+# matches decides. "skip" means the word is fine here (e.g. "a TV show"). Options
+# are "word|when to use it"; an empty word means "cut it".
+_THAT = r"^\s+(that|how|what|why|whether)\b"
+_QUOTE = "^\\s*[,:]?\\s*[\"\u201c\u2018']"
+_NOUN_SHOW = r"\b(a|an|the|tv|talk|game|road|light|puppet)\s+$"
+_PERSON = r"^\s+(person|man|woman|girl|boy|girls|boys|character|characters|people|mother|father|friend|teacher|child|children|citizen|citizens|neighbour|neighbours)\b"
+_WRITING = r"^\s+(example|point|idea|technique|argument|way|essay|use|reason|evidence|structure|choice|approach)\b"
+_PLURAL = r"^\s+(the\s+)?[a-z]+s\b"
+VOCAB_RULES = {
+  "shows": [
+    {"before": _NOUN_SHOW, "skip": True},
+    {"after": _THAT, "opts": ["demonstrates", "reveals", "suggests", "illustrates", "highlights", "underscores"]},
+    {"opts": ["depicts", "portrays", "presents", "reveals", "exposes", "highlights"]}],
+  "show": [
+    {"before": _NOUN_SHOW, "skip": True},
+    {"after": r"^\s+(up|off)\b", "skip": True},
+    {"after": _THAT, "opts": ["demonstrate", "reveal", "suggest", "illustrate", "highlight"]},
+    {"opts": ["depict", "portray", "present", "reveal", "highlight"]}],
+  "showed": [
+    {"after": _THAT, "opts": ["demonstrated", "revealed", "suggested", "illustrated"]},
+    {"opts": ["depicted", "portrayed", "presented", "revealed"]}],
+  "shown": [
+    {"after": _THAT, "opts": ["demonstrated", "revealed", "illustrated"]},
+    {"opts": ["depicted", "portrayed", "presented", "revealed"]}],
+  "says": [
+    {"after": _THAT, "opts": ["asserts", "contends", "argues", "suggests", "maintains", "implies"]},
+    {"after": _QUOTE, "opts": ["declares", "states", "remarks", "insists", "exclaims"]},
+    {"after": r"^\s+to\b", "skip": True},
+    {"opts": ["states", "asserts", "declares", "remarks"]}],
+  "say": [
+    {"before": r"\b(is\s+to|a|no|the|final)\s+$", "skip": True},
+    {"after": r"^\s+to\b", "skip": True},
+    {"after": _THAT, "opts": ["assert", "contend", "argue", "suggest", "maintain"]},
+    {"opts": ["state", "assert", "declare"]}],
+  "said": [
+    {"before": r"\b(the|is|are|was|were|be|been)\s+$", "skip": True},
+    {"after": r"^\s+to\b", "skip": True},
+    {"after": _THAT, "opts": ["asserted", "contended", "argued", "suggested"]},
+    {"after": _QUOTE, "opts": ["declared", "stated", "remarked", "insisted", "exclaimed"]},
+    {"opts": ["stated", "declared", "remarked"]}],
+  "likes": [
+    {"before": r"\b(the|his|her|their|our|my|your)\s+$", "skip": True},
+    {"opts": ["admires", "values", "favours", "embraces"]}],
+  "liked": [{"opts": ["admired", "valued", "favoured", "embraced"]}],
+  "doesn't like": [{"opts": ["rejects", "resents", "condemns", "disdains"]}],
+  "don't like": [{"opts": ["reject", "resent", "condemn", "disdain"]}],
+  "didn't like": [{"opts": ["rejected", "resented", "condemned", "disdained"]}],
+  "good": [
+    {"after": r"^\s+at\b", "opts": ["skilled", "adept", "accomplished"]},
+    {"after": r"^\s+for\b", "opts": ["beneficial", "valuable", "advantageous"]},
+    {"after": _PERSON, "opts": ["virtuous", "decent", "moral", "kind", "honourable"]},
+    {"after": _WRITING, "opts": ["effective", "compelling", "persuasive", "strong"]},
+    {"opts": ["effective|of a technique or argument", "virtuous|of a person or act", "positive", "beneficial|helpful to someone"]}],
+  "bad": [
+    {"after": r"^\s+for\b", "opts": ["harmful", "damaging", "detrimental"]},
+    {"after": _PERSON, "opts": ["cruel", "malicious", "immoral", "corrupt"]},
+    {"after": _WRITING, "opts": ["weak", "flawed", "unconvincing"]},
+    {"opts": ["harmful", "damaging", "destructive", "immoral|of a person or act", "flawed|of an idea or argument"]}],
+  "gets": [
+    {"after": r"^\s+(the\s+|an?\s+)?(reader|readers|audience|audiences|viewer|viewers|us|them|him|her|people|students)\s+to\b",
+     "opts": ["compels", "encourages", "invites", "prompts", "urges"]},
+    {"after": r"^\s+(killed|caught|hurt|married|taken|left|lost|stuck|trapped|punished|chosen|stoned)\b", "opts": ["is"]},
+    {"after": r"^\s+(angry|upset|worse|better|scared|afraid|frightened|confused|older|desperate|anxious|tense|quiet|dark|cold|stronger|weaker)\b",
+     "opts": ["becomes", "grows"]},
+    {"opts": ["receives", "obtains", "gains", "acquires"]}],
+  "thing": [{"opts": ["element", "idea", "notion", "concern", "aspect", "issue"]}],
+  "things": [{"opts": ["elements", "ideas", "notions", "concerns", "aspects", "issues"]}],
+  "a lot of": [
+    {"after": _PLURAL, "opts": ["many", "numerous", "countless"]},
+    {"opts": ["many|plural nouns (many ideas)", "much|uncountable nouns (much fear)", "a great deal of|uncountable nouns", "considerable|uncountable nouns (considerable tension)"]}],
+  "lots of": [
+    {"after": _PLURAL, "opts": ["many", "numerous", "countless"]},
+    {"opts": ["many|plural nouns (many ideas)", "much|uncountable nouns (much fear)", "a great deal of|uncountable nouns"]}],
+  "a lot": [{"opts": ["considerably", "greatly", "substantially", "a great deal"]}],
+  "very good": [{"after": _PERSON, "opts": ["virtuous", "deeply decent", "honourable"]}, {"opts": ["excellent", "outstanding", "highly effective"]}],
+  "very bad": [{"after": _PERSON, "opts": ["cruel", "wicked", "malevolent"]}, {"opts": ["dire", "severe", "disastrous"]}],
+  "very important": [{"opts": ["crucial", "vital", "essential", "paramount"]}],
+  "very big": [{"opts": ["immense", "enormous", "vast"]}],
+  "very small": [{"opts": ["minute", "tiny", "negligible"]}],
+  "very sad": [{"opts": ["devastated", "despairing", "sorrowful"]}],
+  "very scary": [{"opts": ["terrifying", "harrowing", "chilling"]}],
+  "very scared": [{"opts": ["terrified", "petrified"]}],
+  "very happy": [{"opts": ["elated", "joyful", "ecstatic"]}],
+  "very angry": [{"opts": ["furious", "enraged", "incensed"]}],
+  "very different": [{"opts": ["markedly different", "strikingly different", "distinct"]}],
+  "very interesting": [{"opts": ["fascinating", "intriguing", "compelling"]}],
+  "very clear": [{"opts": ["unmistakable", "evident", "explicit"]}],
+  "very strong": [{"opts": ["powerful", "formidable", "potent"]}],
+  "very weak": [{"opts": ["feeble", "fragile", "frail"]}],
+  "very hard": [{"opts": ["arduous", "gruelling", "formidable"]}],
+  "very much": [{"opts": ["greatly", "deeply", "profoundly"]}],
+  "very": [{"opts": ["|cut it and choose a stronger word", "deeply|feelings (deeply afraid)", "profoundly|effects (profoundly unsettling)",
+                     "markedly|differences or changes", "highly|qualities (highly effective)"]}],
+  "really": [{"opts": ["|cut it", "genuinely", "truly", "deeply|feelings"]}],
+  "important": [{"opts": ["crucial", "vital", "significant", "central", "pivotal"]}],
+  "big": [{"opts": ["substantial", "considerable", "vast", "significant|of an idea or change"]}],
+  "huge": [{"opts": ["substantial", "vast", "immense", "considerable"]}],
+  "small": [{"opts": ["minor", "modest", "limited", "slight"]}],
+  "interesting": [{"opts": ["compelling", "striking", "provocative", "intriguing"]}],
+  "scary": [{"opts": ["unsettling", "disquieting", "menacing", "ominous"]}],
+  "creepy": [{"opts": ["unsettling", "eerie", "disquieting", "uncanny"]}],
+  "weird": [{"opts": ["unsettling", "peculiar", "incongruous", "uncanny"]}],
+  "sad": [{"opts": ["melancholy", "sombre", "sorrowful", "distressed|of a person"]}],
+  "stuff": [{"opts": ["material", "elements", "details", "ideas"]}],
+  "nice": [{"opts": ["appealing", "pleasant", "agreeable", "kind|of a person"]}],
+  "a bit": [{"opts": ["somewhat", "slightly", "rather"]}],
 }
-vu_page = TOOL_LABEL + """<h1>Vocabulary Upgrader</h1>
-<p class="lede">Paste a paragraph and it flags the words that flatten analytical writing &mdash; <em>shows, says, does, very, thing</em> and friends &mdash; with stronger swaps from the vocabulary bank. Pick a suggestion to replace it.</p>
-<textarea aria-label="Your paragraph" id="vu-text" rows="8" style="width:100%%;font-family:var(--serif);font-size:16.5px;line-height:1.6;padding:16px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink)" placeholder="Paste your paragraph here&hellip;"></textarea>
+vu_page = (TOOL_LABEL + """<h1>Vocabulary Upgrader</h1>
+<p class="lede">Paste a paragraph and it flags the words that flatten analytical writing &mdash; <em>shows, says, gets, very, thing</em> and friends &mdash; with stronger swaps that fit the sentence. It reads the words around each one, so it leaves alone phrases like <em>a TV show</em> or <em>is said to</em>. Pick a suggestion to replace it, then reread the sentence: you are still the final judge.</p>
+<textarea aria-label="Your paragraph" id="vu-text" rows="8" style="width:100%;font-family:var(--serif);font-size:16.5px;line-height:1.6;padding:16px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink)" placeholder="Paste your paragraph here&hellip;"></textarea>
 <div class="tool-bar">
   <button id="vu-check">Check my writing</button>
   <span class="tool-count" id="vu-count"></span>
 </div>
 <div id="vu-out" class="vu-out"></div>
 <p style="font-family:var(--sans);font-size:13.5px;color:var(--muted)">See the full <a href="vocabulary.html">Vocabulary Bank</a> for the complete lists.</p>
-<script>window.VU = %s;</script>
-<script>
+<script>window.VU = __VU__;</script>
+<script>""" + r"""
 (function(){
   var SW = window.VU, out = document.getElementById('vu-out'), ta = document.getElementById('vu-text');
   var keys = Object.keys(SW).sort(function(a, b){ return b.length - a.length; });
   var kept = {};
-  function esc(s){ return s.replace(/[&<>]/g, function(c){ return { '&':'&amp;','<':'&lt;','>':'&gt;' }[c]; }); }
+  function esc(s){ return s.replace(/[&<>"]/g, function(c){ return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;' }[c]; }); }
+  var pattern = new RegExp('\\b(' + keys.map(function(k){
+    return k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/'/g, "['\u2019]").replace(/ /g, '\\s+');
+  }).join('|') + ')\\b', 'gi');
+  function pick(key, before, after){
+    var rules = SW[key] || [];
+    for (var r = 0; r < rules.length; r++){
+      var ru = rules[r];
+      if (ru.before && !new RegExp(ru.before, 'i').test(before)) continue;
+      if (ru.after && !new RegExp(ru.after, 'i').test(after)) continue;
+      return ru.skip ? null : ru.opts;
+    }
+    return null;
+  }
+  function cap(s){ return s.charAt(0).toUpperCase() + s.slice(1); }
   function check(){
     var text = ta.value;
     if (!text.trim()){ out.innerHTML = ''; document.getElementById('vu-count').textContent = ''; return; }
-    var pattern = new RegExp('\\\\b(' + keys.map(function(k){ return k.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&'); }).join('|') + ')\\\\b', 'gi');
-    var n = 0, html = '';
-    var last = 0, m;
+    var n = 0, html = '', last = 0, m;
+    pattern.lastIndex = 0;
     while ((m = pattern.exec(text)) !== null){
-      html += esc(text.slice(last, m.index));
-      var word = m[0], sugg = SW[word.toLowerCase()] || [];
-      if (kept[m.index]) { html += esc(word); last = m.index + word.length; continue; }
-      if (word.charAt(0) !== word.charAt(0).toLowerCase()) sugg = sugg.map(function(s){ return s.charAt(0).toUpperCase() + s.slice(1); });
+      var word = m[0], i = m.index;
+      var key = word.toLowerCase().replace(/\u2019/g, "'").replace(/\s+/g, ' ');
+      var opts = kept[i] ? null : pick(key, text.slice(Math.max(0, i - 30), i), text.slice(i + word.length, i + word.length + 60));
+      html += esc(text.slice(last, i));
+      last = i + word.length;
+      if (!opts){ html += esc(word); continue; }
+      var upper = word.charAt(0) !== word.charAt(0).toLowerCase();
       n++;
       html += '<span class="vu-flag" tabindex="0">' + esc(word) + '<span class="vu-pop">' +
-        '<button class="vu-sw vu-keep" data-i="' + m.index + '">Keep as written</button>' +
-        sugg.map(function(s){ return '<button class="vu-sw" data-i="' + m.index + '" data-len="' + word.length + '">' + esc(s) + '</button>'; }).join('') +
+        '<button class="vu-sw vu-keep" data-i="' + i + '">Keep as written</button>' +
+        opts.map(function(o){
+          var bar = o.indexOf('|'), w = bar < 0 ? o : o.slice(0, bar), note = bar < 0 ? '' : o.slice(bar + 1);
+          if (upper && w) w = cap(w);
+          var label = w ? esc(w) : '<em>cut it</em>';
+          if (note && w) label += ' <small style="opacity:.7">(' + esc(note) + ')</small>';
+          else if (note) label = '<em>' + esc(note) + '</em>';
+          return '<button class="vu-sw" data-i="' + i + '" data-len="' + word.length + '" data-w="' + esc(w) + '" data-up="' + (upper ? 1 : 0) + '">' + label + '</button>';
+        }).join('') +
         '</span></span>';
-      last = m.index + word.length;
     }
     html += esc(text.slice(last));
-    out.innerHTML = '<div class="vu-render">' + html.replace(/\\n/g, '<br>') + '</div>';
+    out.innerHTML = '<div class="vu-render">' + html.replace(/\n/g, '<br>') + '</div>';
     document.getElementById('vu-count').textContent = n ? n + ' word' + (n > 1 ? 's' : '') + ' to strengthen' : 'Nothing flagged \u2014 strong vocabulary throughout.';
     out.querySelectorAll('.vu-sw').forEach(function(b){
       b.addEventListener('click', function(){
         var i = parseInt(b.dataset.i, 10);
         if (b.classList.contains('vu-keep')) { kept[i] = true; check(); return; }
-        var len = parseInt(b.dataset.len, 10), shift = b.textContent.length - len, moved = {};
+        var len = parseInt(b.dataset.len, 10), w = b.dataset.w, v = ta.value, tail = v.slice(i + len);
+        if (!w){                       // cutting the word: drop one space too, keep the capital
+          if (tail.charAt(0) === ' ') { tail = tail.slice(1); len++; }
+          else if (v.charAt(i - 1) === ' ') { i--; len++; }
+          if (b.dataset.up === '1') tail = cap(tail);
+        }
+        var shift = w.length - len, moved = {};
         Object.keys(kept).forEach(function(k){ var j = parseInt(k, 10); moved[j > i ? j + shift : j] = true; });
         kept = moved;
-        ta.value = ta.value.slice(0, i) + b.textContent + ta.value.slice(i + len);
+        ta.value = v.slice(0, i) + w + tail;
         check();
       });
     });
@@ -1034,7 +1138,8 @@ vu_page = TOOL_LABEL + """<h1>Vocabulary Upgrader</h1>
   ta.addEventListener('input', function(){ kept = {}; check(); });
   document.getElementById('vu-check').addEventListener('click', check);
 })();
-</script>""" % json.dumps(VOCAB_SWAPS, ensure_ascii=False)
+</script>""").replace("__VU__", json.dumps(VOCAB_RULES, ensure_ascii=False))
+
 
 # ---------- timed micro-drills ----------
 dr_page = TOOL_LABEL + """<h1>Micro-Drills</h1>
@@ -1570,8 +1675,8 @@ for k, pg in enumerate(all_pages):
                                           encoding="utf-8").read(), "html.parser"))
         if pg["file"] == "p02-written-exemplars.html":
             # Section A low/medium/high sample essays on Picnic (web only, from sectionc/)
-            sec.append(BeautifulSoup(open(os.path.join(BUILD, "sectionc", "picnic-section-a-essays.html"),
-                                          encoding="utf-8").read(), "html.parser"))
+            for _f in ("picnic-section-a-essays.html", "picnic-section-a-essays-2.html"):
+                sec.append(BeautifulSoup(open(os.path.join(BUILD, "sectionc", _f), encoding="utf-8").read(), "html.parser"))
         if pg["file"] == "p03-written-exemplars.html":
             # Section A low/medium/high sample essays on The Lottery (web only, from sectionc/)
             for _f in ("lottery-section-a-essays.html", "lottery-section-a-essays-2.html"):

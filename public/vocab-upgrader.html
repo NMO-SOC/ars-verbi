@@ -15,7 +15,7 @@
 <meta property="og:image" content="https://nmo-soc.github.io/VCE-English-Guide/assets/img/soc-logo.png">
 <script>try{var _t=localStorage.getItem('siteTheme');if(_t==='dark'||(!_t&&window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.setAttribute('data-theme','dark');}catch(e){}</script>
 <script>if(/[?&]embed=1/.test(location.search)){document.documentElement.className+=' ac-embed';document.write('<base target="_top">');}</script>
-<link rel="stylesheet" href="assets/style.css?v=d86606b9">
+<link rel="stylesheet" href="assets/style.css?v=92ad07a0">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -51,7 +51,7 @@
   </aside>
   <main class="content" id="main">
     <div class="part-label">Study Tools</div><h1>Vocabulary Upgrader</h1>
-<p class="lede">Paste a paragraph and it flags the words that flatten analytical writing — <em>shows, says, does, very, thing</em> and friends — with stronger swaps from the vocabulary bank. Pick a suggestion to replace it.</p>
+<p class="lede">Paste a paragraph and it flags the words that flatten analytical writing — <em>shows, says, gets, very, thing</em> and friends — with stronger swaps that fit the sentence. It reads the words around each one, so it leaves alone phrases like <em>a TV show</em> or <em>is said to</em>. Pick a suggestion to replace it, then reread the sentence: you are still the final judge.</p>
 <textarea aria-label="Your paragraph" id="vu-text" placeholder="Paste your paragraph here…" rows="8" style="width:100%;font-family:var(--serif);font-size:16.5px;line-height:1.6;padding:16px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink)"></textarea>
 <div class="tool-bar">
 <button id="vu-check">Check my writing</button>
@@ -59,42 +59,70 @@
 </div>
 <div class="vu-out" id="vu-out"></div>
 <p style="font-family:var(--sans);font-size:13.5px;color:var(--muted)">See the full <a href="vocabulary.html">Vocabulary Bank</a> for the complete lists.</p>
-<script>window.VU = {"shows": ["demonstrates", "illustrates", "reveals", "highlights", "conveys", "depicts", "exposes", "emphasises", "underscores"], "show": ["demonstrate", "illustrate", "reveal", "highlight", "convey", "depict", "expose", "emphasise"], "showed": ["demonstrated", "illustrated", "revealed", "highlighted", "conveyed", "depicted"], "shown": ["demonstrated", "illustrated", "revealed", "conveyed"], "says": ["asserts", "contends", "argues", "maintains", "suggests", "posits", "claims", "declares", "implies"], "say": ["assert", "contend", "argue", "maintain", "suggest", "claim"], "said": ["asserted", "contended", "argued", "maintained", "suggested", "claimed"], "likes": ["favours", "endorses", "embraces", "advocates for"], "liked": ["favoured", "endorsed", "embraced"], "doesn't like": ["rejects", "condemns", "critiques", "denounces", "repudiates"], "good": ["effective", "compelling", "powerful", "persuasive"], "bad": ["destructive", "corrosive", "damaging", "flawed"], "gets": ["compels", "positions", "prompts", "invites"], "thing": ["element", "idea", "notion", "concern"], "things": ["elements", "ideas", "notions", "concerns"], "a lot": ["a great deal"], "very": ["profoundly", "distinctly", "markedly"], "important": ["crucial", "vital", "significant", "central"], "really": ["genuinely", "distinctly"], "big": ["substantial", "considerable", "vast"], "interesting": ["compelling", "striking", "provocative"], "scary": ["unsettling", "disquieting", "menacing"], "creepy": ["unsettling", "eerie", "disquieting"], "weird": ["unsettling", "peculiar", "incongruous"], "huge": ["substantial", "vast", "considerable"], "small": ["minor", "modest", "limited"], "sad": ["melancholy", "sombre", "distressed"], "lots": ["numerous"], "stuff": ["material", "elements", "details"], "nice": ["appealing", "pleasing", "agreeable"], "a bit": ["somewhat"]};</script>
+<script>window.VU = {"shows": [{"before": "\\b(a|an|the|tv|talk|game|road|light|puppet)\\s+$", "skip": true}, {"after": "^\\s+(that|how|what|why|whether)\\b", "opts": ["demonstrates", "reveals", "suggests", "illustrates", "highlights", "underscores"]}, {"opts": ["depicts", "portrays", "presents", "reveals", "exposes", "highlights"]}], "show": [{"before": "\\b(a|an|the|tv|talk|game|road|light|puppet)\\s+$", "skip": true}, {"after": "^\\s+(up|off)\\b", "skip": true}, {"after": "^\\s+(that|how|what|why|whether)\\b", "opts": ["demonstrate", "reveal", "suggest", "illustrate", "highlight"]}, {"opts": ["depict", "portray", "present", "reveal", "highlight"]}], "showed": [{"after": "^\\s+(that|how|what|why|whether)\\b", "opts": ["demonstrated", "revealed", "suggested", "illustrated"]}, {"opts": ["depicted", "portrayed", "presented", "revealed"]}], "shown": [{"after": "^\\s+(that|how|what|why|whether)\\b", "opts": ["demonstrated", "revealed", "illustrated"]}, {"opts": ["depicted", "portrayed", "presented", "revealed"]}], "says": [{"after": "^\\s+(that|how|what|why|whether)\\b", "opts": ["asserts", "contends", "argues", "suggests", "maintains", "implies"]}, {"after": "^\\s*[,:]?\\s*[\"“‘']", "opts": ["declares", "states", "remarks", "insists", "exclaims"]}, {"after": "^\\s+to\\b", "skip": true}, {"opts": ["states", "asserts", "declares", "remarks"]}], "say": [{"before": "\\b(is\\s+to|a|no|the|final)\\s+$", "skip": true}, {"after": "^\\s+to\\b", "skip": true}, {"after": "^\\s+(that|how|what|why|whether)\\b", "opts": ["assert", "contend", "argue", "suggest", "maintain"]}, {"opts": ["state", "assert", "declare"]}], "said": [{"before": "\\b(the|is|are|was|were|be|been)\\s+$", "skip": true}, {"after": "^\\s+to\\b", "skip": true}, {"after": "^\\s+(that|how|what|why|whether)\\b", "opts": ["asserted", "contended", "argued", "suggested"]}, {"after": "^\\s*[,:]?\\s*[\"“‘']", "opts": ["declared", "stated", "remarked", "insisted", "exclaimed"]}, {"opts": ["stated", "declared", "remarked"]}], "likes": [{"before": "\\b(the|his|her|their|our|my|your)\\s+$", "skip": true}, {"opts": ["admires", "values", "favours", "embraces"]}], "liked": [{"opts": ["admired", "valued", "favoured", "embraced"]}], "doesn't like": [{"opts": ["rejects", "resents", "condemns", "disdains"]}], "don't like": [{"opts": ["reject", "resent", "condemn", "disdain"]}], "didn't like": [{"opts": ["rejected", "resented", "condemned", "disdained"]}], "good": [{"after": "^\\s+at\\b", "opts": ["skilled", "adept", "accomplished"]}, {"after": "^\\s+for\\b", "opts": ["beneficial", "valuable", "advantageous"]}, {"after": "^\\s+(person|man|woman|girl|boy|girls|boys|character|characters|people|mother|father|friend|teacher|child|children|citizen|citizens|neighbour|neighbours)\\b", "opts": ["virtuous", "decent", "moral", "kind", "honourable"]}, {"after": "^\\s+(example|point|idea|technique|argument|way|essay|use|reason|evidence|structure|choice|approach)\\b", "opts": ["effective", "compelling", "persuasive", "strong"]}, {"opts": ["effective|of a technique or argument", "virtuous|of a person or act", "positive", "beneficial|helpful to someone"]}], "bad": [{"after": "^\\s+for\\b", "opts": ["harmful", "damaging", "detrimental"]}, {"after": "^\\s+(person|man|woman|girl|boy|girls|boys|character|characters|people|mother|father|friend|teacher|child|children|citizen|citizens|neighbour|neighbours)\\b", "opts": ["cruel", "malicious", "immoral", "corrupt"]}, {"after": "^\\s+(example|point|idea|technique|argument|way|essay|use|reason|evidence|structure|choice|approach)\\b", "opts": ["weak", "flawed", "unconvincing"]}, {"opts": ["harmful", "damaging", "destructive", "immoral|of a person or act", "flawed|of an idea or argument"]}], "gets": [{"after": "^\\s+(the\\s+|an?\\s+)?(reader|readers|audience|audiences|viewer|viewers|us|them|him|her|people|students)\\s+to\\b", "opts": ["compels", "encourages", "invites", "prompts", "urges"]}, {"after": "^\\s+(killed|caught|hurt|married|taken|left|lost|stuck|trapped|punished|chosen|stoned)\\b", "opts": ["is"]}, {"after": "^\\s+(angry|upset|worse|better|scared|afraid|frightened|confused|older|desperate|anxious|tense|quiet|dark|cold|stronger|weaker)\\b", "opts": ["becomes", "grows"]}, {"opts": ["receives", "obtains", "gains", "acquires"]}], "thing": [{"opts": ["element", "idea", "notion", "concern", "aspect", "issue"]}], "things": [{"opts": ["elements", "ideas", "notions", "concerns", "aspects", "issues"]}], "a lot of": [{"after": "^\\s+(the\\s+)?[a-z]+s\\b", "opts": ["many", "numerous", "countless"]}, {"opts": ["many|plural nouns (many ideas)", "much|uncountable nouns (much fear)", "a great deal of|uncountable nouns", "considerable|uncountable nouns (considerable tension)"]}], "lots of": [{"after": "^\\s+(the\\s+)?[a-z]+s\\b", "opts": ["many", "numerous", "countless"]}, {"opts": ["many|plural nouns (many ideas)", "much|uncountable nouns (much fear)", "a great deal of|uncountable nouns"]}], "a lot": [{"opts": ["considerably", "greatly", "substantially", "a great deal"]}], "very good": [{"after": "^\\s+(person|man|woman|girl|boy|girls|boys|character|characters|people|mother|father|friend|teacher|child|children|citizen|citizens|neighbour|neighbours)\\b", "opts": ["virtuous", "deeply decent", "honourable"]}, {"opts": ["excellent", "outstanding", "highly effective"]}], "very bad": [{"after": "^\\s+(person|man|woman|girl|boy|girls|boys|character|characters|people|mother|father|friend|teacher|child|children|citizen|citizens|neighbour|neighbours)\\b", "opts": ["cruel", "wicked", "malevolent"]}, {"opts": ["dire", "severe", "disastrous"]}], "very important": [{"opts": ["crucial", "vital", "essential", "paramount"]}], "very big": [{"opts": ["immense", "enormous", "vast"]}], "very small": [{"opts": ["minute", "tiny", "negligible"]}], "very sad": [{"opts": ["devastated", "despairing", "sorrowful"]}], "very scary": [{"opts": ["terrifying", "harrowing", "chilling"]}], "very scared": [{"opts": ["terrified", "petrified"]}], "very happy": [{"opts": ["elated", "joyful", "ecstatic"]}], "very angry": [{"opts": ["furious", "enraged", "incensed"]}], "very different": [{"opts": ["markedly different", "strikingly different", "distinct"]}], "very interesting": [{"opts": ["fascinating", "intriguing", "compelling"]}], "very clear": [{"opts": ["unmistakable", "evident", "explicit"]}], "very strong": [{"opts": ["powerful", "formidable", "potent"]}], "very weak": [{"opts": ["feeble", "fragile", "frail"]}], "very hard": [{"opts": ["arduous", "gruelling", "formidable"]}], "very much": [{"opts": ["greatly", "deeply", "profoundly"]}], "very": [{"opts": ["|cut it and choose a stronger word", "deeply|feelings (deeply afraid)", "profoundly|effects (profoundly unsettling)", "markedly|differences or changes", "highly|qualities (highly effective)"]}], "really": [{"opts": ["|cut it", "genuinely", "truly", "deeply|feelings"]}], "important": [{"opts": ["crucial", "vital", "significant", "central", "pivotal"]}], "big": [{"opts": ["substantial", "considerable", "vast", "significant|of an idea or change"]}], "huge": [{"opts": ["substantial", "vast", "immense", "considerable"]}], "small": [{"opts": ["minor", "modest", "limited", "slight"]}], "interesting": [{"opts": ["compelling", "striking", "provocative", "intriguing"]}], "scary": [{"opts": ["unsettling", "disquieting", "menacing", "ominous"]}], "creepy": [{"opts": ["unsettling", "eerie", "disquieting", "uncanny"]}], "weird": [{"opts": ["unsettling", "peculiar", "incongruous", "uncanny"]}], "sad": [{"opts": ["melancholy", "sombre", "sorrowful", "distressed|of a person"]}], "stuff": [{"opts": ["material", "elements", "details", "ideas"]}], "nice": [{"opts": ["appealing", "pleasant", "agreeable", "kind|of a person"]}], "a bit": [{"opts": ["somewhat", "slightly", "rather"]}]};</script>
 <script>
 (function(){
   var SW = window.VU, out = document.getElementById('vu-out'), ta = document.getElementById('vu-text');
   var keys = Object.keys(SW).sort(function(a, b){ return b.length - a.length; });
   var kept = {};
-  function esc(s){ return s.replace(/[&<>]/g, function(c){ return { '&':'&amp;','<':'&lt;','>':'&gt;' }[c]; }); }
+  function esc(s){ return s.replace(/[&<>"]/g, function(c){ return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;' }[c]; }); }
+  var pattern = new RegExp('\\b(' + keys.map(function(k){
+    return k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/'/g, "['\u2019]").replace(/ /g, '\\s+');
+  }).join('|') + ')\\b', 'gi');
+  function pick(key, before, after){
+    var rules = SW[key] || [];
+    for (var r = 0; r < rules.length; r++){
+      var ru = rules[r];
+      if (ru.before && !new RegExp(ru.before, 'i').test(before)) continue;
+      if (ru.after && !new RegExp(ru.after, 'i').test(after)) continue;
+      return ru.skip ? null : ru.opts;
+    }
+    return null;
+  }
+  function cap(s){ return s.charAt(0).toUpperCase() + s.slice(1); }
   function check(){
     var text = ta.value;
     if (!text.trim()){ out.innerHTML = ''; document.getElementById('vu-count').textContent = ''; return; }
-    var pattern = new RegExp('\\b(' + keys.map(function(k){ return k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }).join('|') + ')\\b', 'gi');
-    var n = 0, html = '';
-    var last = 0, m;
+    var n = 0, html = '', last = 0, m;
+    pattern.lastIndex = 0;
     while ((m = pattern.exec(text)) !== null){
-      html += esc(text.slice(last, m.index));
-      var word = m[0], sugg = SW[word.toLowerCase()] || [];
-      if (kept[m.index]) { html += esc(word); last = m.index + word.length; continue; }
-      if (word.charAt(0) !== word.charAt(0).toLowerCase()) sugg = sugg.map(function(s){ return s.charAt(0).toUpperCase() + s.slice(1); });
+      var word = m[0], i = m.index;
+      var key = word.toLowerCase().replace(/\u2019/g, "'").replace(/\s+/g, ' ');
+      var opts = kept[i] ? null : pick(key, text.slice(Math.max(0, i - 30), i), text.slice(i + word.length, i + word.length + 60));
+      html += esc(text.slice(last, i));
+      last = i + word.length;
+      if (!opts){ html += esc(word); continue; }
+      var upper = word.charAt(0) !== word.charAt(0).toLowerCase();
       n++;
       html += '<span class="vu-flag" tabindex="0">' + esc(word) + '<span class="vu-pop">' +
-        '<button class="vu-sw vu-keep" data-i="' + m.index + '">Keep as written</button>' +
-        sugg.map(function(s){ return '<button class="vu-sw" data-i="' + m.index + '" data-len="' + word.length + '">' + esc(s) + '</button>'; }).join('') +
+        '<button class="vu-sw vu-keep" data-i="' + i + '">Keep as written</button>' +
+        opts.map(function(o){
+          var bar = o.indexOf('|'), w = bar < 0 ? o : o.slice(0, bar), note = bar < 0 ? '' : o.slice(bar + 1);
+          if (upper && w) w = cap(w);
+          var label = w ? esc(w) : '<em>cut it</em>';
+          if (note && w) label += ' <small style="opacity:.7">(' + esc(note) + ')</small>';
+          else if (note) label = '<em>' + esc(note) + '</em>';
+          return '<button class="vu-sw" data-i="' + i + '" data-len="' + word.length + '" data-w="' + esc(w) + '" data-up="' + (upper ? 1 : 0) + '">' + label + '</button>';
+        }).join('') +
         '</span></span>';
-      last = m.index + word.length;
     }
     html += esc(text.slice(last));
     out.innerHTML = '<div class="vu-render">' + html.replace(/\n/g, '<br>') + '</div>';
-    document.getElementById('vu-count').textContent = n ? n + ' word' + (n > 1 ? 's' : '') + ' to strengthen' : 'Nothing flagged — strong vocabulary throughout.';
+    document.getElementById('vu-count').textContent = n ? n + ' word' + (n > 1 ? 's' : '') + ' to strengthen' : 'Nothing flagged \u2014 strong vocabulary throughout.';
     out.querySelectorAll('.vu-sw').forEach(function(b){
       b.addEventListener('click', function(){
         var i = parseInt(b.dataset.i, 10);
         if (b.classList.contains('vu-keep')) { kept[i] = true; check(); return; }
-        var len = parseInt(b.dataset.len, 10), shift = b.textContent.length - len, moved = {};
+        var len = parseInt(b.dataset.len, 10), w = b.dataset.w, v = ta.value, tail = v.slice(i + len);
+        if (!w){                       // cutting the word: drop one space too, keep the capital
+          if (tail.charAt(0) === ' ') { tail = tail.slice(1); len++; }
+          else if (v.charAt(i - 1) === ' ') { i--; len++; }
+          if (b.dataset.up === '1') tail = cap(tail);
+        }
+        var shift = w.length - len, moved = {};
         Object.keys(kept).forEach(function(k){ var j = parseInt(k, 10); moved[j > i ? j + shift : j] = true; });
         kept = moved;
-        ta.value = ta.value.slice(0, i) + b.textContent + ta.value.slice(i + len);
+        ta.value = v.slice(0, i) + w + tail;
         check();
       });
     });
