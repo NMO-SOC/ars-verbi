@@ -59,7 +59,7 @@ def read_structure(public):
     soup = BeautifulSoup(open(os.path.join(public, "index.html"), encoding="utf-8").read(), "html.parser")
     parts = []
     for li in soup.select("li.grp"):
-        a = li.select_one("summary a")
+        a = li.select_one(".grp-row > a") or li.select_one("summary a")  # sidebar markup changed from <summary> to .grp-row
         if not a:
             continue
         href = a["href"]
